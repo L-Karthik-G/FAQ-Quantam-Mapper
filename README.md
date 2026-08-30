@@ -90,16 +90,3 @@ For complete documentation, see [`reports/team_summary.md`](reports/team_summary
 
 ---
 
-## 📜 Citation & Attribution
-
-If you use this codebase for research, please cite:
-```bibtex
-@misc{faq_quantum_mapper_2026,
-  author = {Karthik, G. and collaborators},
-  title = {FAQ-Quantum-Mapper: Continuous Quadratic Assignment Pre-seeding for Quantum Compilation},
-  year = {2026},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/L-Karthik-G/FAQ-Quantam-Mapper}}
-}
-```
