@@ -8,16 +8,16 @@ A high-performance quantum compilation engine that formulates initial logical-to
 
 ---
 
-## 🌟 Key Highlights
+##  Key Highlights
 
-- 🏆 **Massive SWAP Reduction**: Eliminates up to **5,357 SWAPs (−29.3%)** on Grover’s Search ($N=12$).
-- 🎯 **Near-Zero SWAP Routing**: Achieves **88% to 100% SWAP elimination** on VQE (RealAmplitudes) and GHZ state circuits up to 50 qubits.
-- 🚀 **28.2× Hardware Fidelity Boost**: Preserves quantum state purity against depolarizing noise on IBM Heavy-Hex (115q) and Rigetti Grid (80q).
-- 🔁 **100% Replicable**: Evaluated across $K=5$ randomized multi-seed trials with 95% confidence intervals and an independent double-blind replication run.
+-  **Massive SWAP Reduction**: Eliminates up to **5,357 SWAPs (−29.3%)** on Grover’s Search ($N=12$).
+-  **Near-Zero SWAP Routing**: Achieves **88% to 100% SWAP elimination** on VQE (RealAmplitudes) and GHZ state circuits up to 50 qubits.
+-  **28.2× Hardware Fidelity Boost**: Preserves quantum state purity against depolarizing noise on IBM Heavy-Hex (115q) and Rigetti Grid (80q).
+- **100% Replicable**: Evaluated across $K=5$ randomized multi-seed trials with 95% confidence intervals and an independent double-blind replication run.
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 .
@@ -41,7 +41,7 @@ A high-performance quantum compilation engine that formulates initial logical-to
 
 ---
 
-## 🚀 Quickstart
+## Quickstart
 
 ### 1. Installation
 
@@ -75,7 +75,7 @@ python3 run_benchmark_2.py
 
 ---
 
-## 📊 Summary Results Table
+## Results Highlight Table
 
 | Benchmark Case | Scale ($N$) | SABRE Default | PyTKET Default | **FAQ + TKET (Ours)** | **SWAPs Saved** | Relative Improvement |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|
