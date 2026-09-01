@@ -1,7 +1,7 @@
 """
 Module C: Multi-Start Quadratic Assignment Problem (QAP) Pre-Placement Solver
 Solves initial logical-to-physical qubit layout over the Birkhoff polytope using
-Frank-Wolfe continuous relaxation (SciPy FAQ engine), multi-scale Gaussian perturbations,
+SciPy's FAQ heuristic (quadratic_assignment), multi-scale Gaussian perturbations,
 Sinkhorn-Knopp doubly stochastic projection, and discrete 2-opt local search refinement.
 """
 
@@ -41,7 +41,7 @@ def compute_qap_cost(A: np.ndarray, B: np.ndarray, perm: np.ndarray) -> float:
 
 def refine_2opt(A: np.ndarray, B: np.ndarray, initial_perm: np.ndarray, max_rounds: int = 5) -> Tuple[np.ndarray, float]:
     """
-    Discrete 2-opt local search refinement.
+    Discrete 2-opt pairwise local search refinement.
     Iteratively swaps pairs of physical qubit assignments if it strictly decreases QAP cost.
     
     Args:
@@ -65,14 +65,12 @@ def refine_2opt(A: np.ndarray, B: np.ndarray, initial_perm: np.ndarray, max_roun
         round_idx += 1
         for i in range(M):
             for j in range(i + 1, M):
-                # Swap i and j
                 perm[i], perm[j] = perm[j], perm[i]
                 new_cost = compute_qap_cost(A, B, perm)
                 if new_cost < best_cost - 1e-8:
                     best_cost = new_cost
                     improved = True
                 else:
-                    # Revert swap
                     perm[i], perm[j] = perm[j], perm[i]
                     
     return perm, best_cost
@@ -80,12 +78,12 @@ def refine_2opt(A: np.ndarray, B: np.ndarray, initial_perm: np.ndarray, max_roun
 
 class AdaptiveFAQSolver:
     """
-    Multi-Start Frank-Wolfe QAP Pre-Placement Solver.
+    Multi-Start QAP Pre-Placement Solver.
     
     Combines:
+      - SciPy's quadratic_assignment (FAQ method) continuous QAP relaxation.
       - 5-Start Structured Gaussian Perturbation (1 Barycenter, 2 small noise, 2 medium noise).
       - Sinkhorn-Knopp doubly stochastic projection onto the Birkhoff polytope.
-      - Continuous Frank-Wolfe relaxation via SciPy quadratic_assignment (FAQ method).
       - Discrete 2-opt pairwise local search refinement.
       - Thread-pooled multi-core parallel execution.
     """
@@ -150,7 +148,7 @@ class AdaptiveFAQSolver:
         self, A: np.ndarray, B: np.ndarray, P0: Union[str, np.ndarray]
     ) -> Tuple[np.ndarray, float]:
         """
-        Runs a single Frank-Wolfe optimization starting from P0.
+        Runs a single optimization run starting from P0 via SciPy FAQ algorithm.
         """
         options = {"P0": P0, "maxiter": 30}
         res = quadratic_assignment(A, B, method="faq", options=options)
@@ -166,7 +164,7 @@ class AdaptiveFAQSolver:
         self, matrix_a: np.ndarray, matrix_b: np.ndarray
     ) -> Tuple[Dict[int, int], float]:
         """
-        Solves QAP for interaction matrix A (N x N) and hardware distance matrix B (M x M).
+        Solves approximate QAP for interaction matrix A (N x N) and distance matrix B (M x M).
 
         Returns:
             mapping: Dict mapping logical qubit index -> physical qubit index.
@@ -189,6 +187,7 @@ class AdaptiveFAQSolver:
         p0_list = self._generate_p0_candidates(M, rng)
 
         all_results: List[Tuple[np.ndarray, float]] = []
+        failed_starts_count = 0
 
         with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
             futures = [
@@ -200,7 +199,7 @@ class AdaptiveFAQSolver:
                     perm, cost = f.result()
                     all_results.append((perm, cost))
                 except Exception:
-                    continue
+                    failed_starts_count += 1
 
         if not all_results:
             best_perm = np.arange(M)
@@ -212,7 +211,9 @@ class AdaptiveFAQSolver:
             all_costs = [cost for _, cost in all_results]
 
         self.last_run_stats = {
+            "num_starts_requested": len(p0_list),
             "num_starts_evaluated": len(all_results),
+            "failed_starts_count": failed_starts_count,
             "best_cost": float(best_cost),
             "mean_cost": float(np.mean(all_costs)),
             "std_cost": float(np.std(all_costs)),
