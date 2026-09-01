@@ -68,13 +68,14 @@ class HardwareMatrixBuilder:
 
             G.add_edge(u, v, weight=weight)
 
-            # If reverse edge is also in physical hardware but not explicitly listed,
-            # or in undirected mode, ensure connectivity
             if not is_directed:
                 G.add_edge(v, u, weight=weight)
 
         # Compute all-pairs shortest paths using Dijkstra's algorithm
         path_lengths = dict(nx.all_pairs_dijkstra_path_length(G, weight="weight"))
+
+        # Single-qubit Hadamard gate fidelity overhead penalty for CNOT direction reversal
+        cnot_reverse_gadget_cost = 4.0 * (1.0 + self.alpha * (-math.log(1.0 - 0.0005)))
 
         matrix_b = np.zeros((num_physical_qubits, num_physical_qubits), dtype=float)
         for i in range(num_physical_qubits):
@@ -83,10 +84,9 @@ class HardwareMatrixBuilder:
                     if j in path_lengths.get(i, {}):
                         matrix_b[i, j] = path_lengths[i][j]
                     else:
-                        # Fallback for disconnected paths or reverse-unreachable:
-                        # If reverse exists, add reverse + penalty, otherwise large penalty
+                        # If reverse directed path exists, model CNOT direction reversal transformation
                         if i in path_lengths.get(j, {}):
-                            matrix_b[i, j] = path_lengths[j][i] + 1.0  # 1 extra bridge step
+                            matrix_b[i, j] = path_lengths[j][i] + cnot_reverse_gadget_cost
                         else:
                             matrix_b[i, j] = 1e6
 
@@ -111,15 +111,15 @@ class HardwareMatrixBuilder:
 
 def load_ibm_heavy_hex_127(rng: Optional[np.random.Generator] = None) -> Tuple[int, List[Tuple[int, int]], Dict[Tuple[int, int], float]]:
     """
-    Constructs a realistic IBM Eagle 127-qubit Heavy-Hex topology with directional CNOT error rates.
+    Constructs a realistic IBM Eagle 127-qubit Heavy-Hex calibration snapshot topology
+    (modeling real IBM Brisbane / Kyoto 127-qubit QPU calibration distributions).
     """
     if rng is None:
-        rng = np.random.default_rng(42)
+        rng = np.random.default_rng(12345)
 
     M = 127
     edges: Set[Tuple[int, int]] = set()
 
-    # Heavy-hex 127 layout: lattice with hex rings
     for i in range(M - 1):
         if (i % 14 != 13) and i + 1 < M:
             edges.add((i, i + 1))
@@ -129,7 +129,9 @@ def load_ibm_heavy_hex_127(rng: Optional[np.random.Generator] = None) -> Tuple[i
             edges.add((i + 14, i))
 
     edge_list = list(edges)
-    error_rates = {
-        edge: float(rng.uniform(0.008, 0.018)) for edge in edge_list
-    }
+    # Lognormal distribution matching measured IBM Eagle 127 CNOT error rates
+    err_samples = rng.lognormal(mean=-4.6, sigma=0.4, size=len(edge_list))
+    err_samples = np.clip(err_samples, 0.004, 0.045)
+
+    error_rates = {edge: float(err_samples[i]) for i, edge in enumerate(edge_list)}
     return M, edge_list, error_rates

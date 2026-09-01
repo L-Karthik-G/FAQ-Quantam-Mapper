@@ -1,8 +1,8 @@
 """
-Module C: Adaptive QAP / FAQ Placement Solver (N <= M)
-Solves the Quadratic Assignment Problem over the Birkhoff polytope using
-Frank-Wolfe continuous relaxation with multi-scale Gaussian perturbations,
-Sinkhorn-Knopp doubly stochastic projection, and discrete 2-opt refinement.
+Module C: Multi-Start Quadratic Assignment Problem (QAP) Pre-Placement Solver
+Solves initial logical-to-physical qubit layout over the Birkhoff polytope using
+Frank-Wolfe continuous relaxation (SciPy FAQ engine), multi-scale Gaussian perturbations,
+Sinkhorn-Knopp doubly stochastic projection, and discrete 2-opt local search refinement.
 """
 
 from concurrent.futures import ThreadPoolExecutor
@@ -14,7 +14,7 @@ from scipy.optimize import quadratic_assignment
 def sinkhorn_knopp(matrix: np.ndarray, num_iters: int = 50, tol: float = 1e-6) -> np.ndarray:
     """
     Projects a non-negative square matrix onto the Birkhoff polytope (doubly stochastic).
-    Guarantees all row sums == 1.0 and all column sums == 1.0.
+    Guarantees row sums == 1.0 and column sums == 1.0.
     """
     P = np.copy(matrix)
     P = np.maximum(P, 1e-12)
@@ -80,38 +80,35 @@ def refine_2opt(A: np.ndarray, B: np.ndarray, initial_perm: np.ndarray, max_roun
 
 class AdaptiveFAQSolver:
     """
-    Adaptive Multi-Start Quadratic Assignment Problem (QAP) Pre-Placement Solver.
+    Multi-Start Frank-Wolfe QAP Pre-Placement Solver.
     
-    Features:
+    Combines:
       - 5-Start Structured Gaussian Perturbation (1 Barycenter, 2 small noise, 2 medium noise).
-      - Sinkhorn-Knopp doubly stochastic projection.
-      - Optional discrete 2-opt local search refinement.
-      - Multi-threaded parallel start execution.
-      - Detailed cost metrics: Best-of-K, Mean-of-K, and per-start history.
+      - Sinkhorn-Knopp doubly stochastic projection onto the Birkhoff polytope.
+      - Continuous Frank-Wolfe relaxation via SciPy quadratic_assignment (FAQ method).
+      - Discrete 2-opt pairwise local search refinement.
+      - Thread-pooled multi-core parallel execution.
     """
 
     def __init__(
         self,
         num_starts: int = 5,
-        start_mode: str = "gaussian",  # 'barycenter', 'gaussian', 'random', 'multi_scale'
+        start_mode: str = "gaussian",  # 'barycenter', 'gaussian', 'random'
         enable_2opt: bool = True,
-        momentum_beta: float = 0.9,
         seed: int = 42,
         max_workers: Optional[int] = 4,
     ):
         """
         Args:
-            num_starts: Total initialization runs (default 5).
-            start_mode: Mode of initialization ('barycenter', 'gaussian', 'random', 'multi_scale').
+            num_starts: Total multi-start initializations (default 5).
+            start_mode: Mode of initialization ('barycenter', 'gaussian', 'random').
             enable_2opt: If True, applies discrete 2-opt polishing after continuous Frank-Wolfe.
-            momentum_beta: Momentum factor for gradient smoothing (0.0 to disable).
             seed: Master random seed for reproducible perturbations.
             max_workers: Worker threads for parallel start evaluation.
         """
         self.num_starts = num_starts
         self.start_mode = start_mode
         self.enable_2opt = enable_2opt
-        self.momentum_beta = momentum_beta
         self.seed = seed
         self.max_workers = max_workers
         self.last_run_stats: Dict = {}
@@ -127,23 +124,21 @@ class AdaptiveFAQSolver:
             return ["barycenter"] * self.num_starts
 
         if self.start_mode == "random":
-            # Pure random doubly stochastic matrices
             for _ in range(self.num_starts):
                 rand_mat = rng.uniform(0.1, 1.0, size=(M, M))
                 candidates.append(sinkhorn_knopp(rand_mat))
             return candidates
 
-        # Default: Structured multi-scale Gaussian perturbation around barycenter
-        # Start 1: Exact Barycenter
+        # Default: Structured multi-scale Gaussian perturbation around barycenter J0
         candidates.append("barycenter")
 
-        # Start 2 & 3: Small adaptive noise (5% of barycenter entry)
+        # Small noise (5% entry scale relative to 1/M)
         sigma_small = 0.05 / M
         for _ in range(min(2, max(0, self.num_starts - 1))):
             noise = rng.normal(0.0, sigma_small, size=(M, M))
             candidates.append(sinkhorn_knopp(J0 + noise))
 
-        # Start 4+: Moderate adaptive noise (15% of barycenter entry)
+        # Moderate noise (15% entry scale relative to 1/M)
         sigma_med = 0.15 / M
         while len(candidates) < self.num_starts:
             noise = rng.normal(0.0, sigma_med, size=(M, M))
@@ -195,7 +190,6 @@ class AdaptiveFAQSolver:
 
         all_results: List[Tuple[np.ndarray, float]] = []
 
-        # Execute starts in parallel
         with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
             futures = [
                 executor.submit(self._solve_single_start, A_padded, matrix_b, p0)
@@ -209,7 +203,6 @@ class AdaptiveFAQSolver:
                     continue
 
         if not all_results:
-            # Fallback to identity mapping if solver fails
             best_perm = np.arange(M)
             best_cost = float(np.trace(A_padded.T @ matrix_b))
             all_costs = [best_cost]
@@ -218,7 +211,6 @@ class AdaptiveFAQSolver:
             best_perm, best_cost = all_results[0]
             all_costs = [cost for _, cost in all_results]
 
-        # Record detailed multi-start statistics
         self.last_run_stats = {
             "num_starts_evaluated": len(all_results),
             "best_cost": float(best_cost),
@@ -227,6 +219,5 @@ class AdaptiveFAQSolver:
             "all_costs": [float(c) for c in all_costs],
         }
 
-        # Map logical qubits 0..N-1 to their assigned physical qubits
         mapping = {logical_idx: int(best_perm[logical_idx]) for logical_idx in range(N)}
         return mapping, float(best_cost)
