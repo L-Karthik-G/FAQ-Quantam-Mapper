@@ -61,22 +61,26 @@ class FGEASubgraphExtractor:
         G.add_nodes_from(range(num_physical_qubits))
 
         for u, v in coupling_map:
-            if u < v:  # Only add undirected edges once
-                err = error_rates.get((u, v), error_rates.get((v, u), 0.01)) if error_rates else 0.01
-                fidelity = 1.0 - err
+            err = error_rates.get((u, v), error_rates.get((v, u), 0.01)) if error_rates else 0.01
+            fidelity = max(1.0 - err, 1e-6)
+            if not G.has_edge(u, v):
                 G.add_edge(u, v, fidelity=fidelity, weight=-fidelity)  # negative for min-heap
+            else:
+                # If already exists, keep highest fidelity
+                G[u][v]["fidelity"] = max(G[u][v]["fidelity"], fidelity)
+                G[u][v]["weight"] = -G[u][v]["fidelity"]
 
-        # Score each node as the average fidelity of its incident edges
+        # Score each node as the sum of fidelities of its incident edges (degree + quality)
         node_scores = {}
         for node in G.nodes():
             neighbors = list(G.neighbors(node))
             if neighbors:
-                avg_fidelity = np.mean([G[node][nb]["fidelity"] for nb in neighbors])
-                node_scores[node] = avg_fidelity
+                sum_fidelity = sum(G[node][nb]["fidelity"] for nb in neighbors)
+                node_scores[node] = sum_fidelity
             else:
                 node_scores[node] = 0.0
 
-        # Seed from the node with the highest neighbourhood fidelity
+        # Seed from the node with the highest neighbourhood fidelity sum
         seed_node = max(node_scores, key=node_scores.get)
 
         # Priority BFS expansion: (-fidelity, neighbor_node)
@@ -98,150 +102,157 @@ class FGEASubgraphExtractor:
                     fidelity = G[node][nb]["fidelity"]
                     heapq.heappush(frontier, (-fidelity, nb))
 
-        # Build local index maps
-        selected_sorted = sorted(selected)
-        global_to_local = {g: l for l, g in enumerate(selected_sorted)}
-        local_to_global = {l: g for l, g in enumerate(selected_sorted)}
+        # If graph is disconnected and selected < K, fill remaining from highest scored nodes
+        if len(selected) < K:
+            sorted_remaining = sorted(
+                [n for n in G.nodes() if n not in selected],
+                key=lambda x: node_scores.get(x, 0.0),
+                reverse=True
+            )
+            for n in sorted_remaining:
+                if len(selected) >= K:
+                    break
+                selected.add(n)
 
-        # Extract subgraph edges (re-indexed)
-        sub_coupling_map = []
-        sub_error_rates = {}
+        selected_list = sorted(list(selected))
+
+        # Create global <-> local bijective mappings
+        global_to_local = {g_idx: l_idx for l_idx, g_idx in enumerate(selected_list)}
+        local_to_global = {l_idx: g_idx for l_idx, g_idx in enumerate(selected_list)}
+
+        # Extract induced subgraph edges and re-index to [0, K)
+        sub_coupling_map: List[Tuple[int, int]] = []
+        sub_error_rates: Dict[Tuple[int, int], float] = {}
+
         for u, v in coupling_map:
             if u in selected and v in selected:
-                lu, lv = global_to_local[u], global_to_local[v]
+                lu = global_to_local[u]
+                lv = global_to_local[v]
                 sub_coupling_map.append((lu, lv))
-                err = error_rates.get((u, v), 0.01) if error_rates else 0.01
-                sub_error_rates[(lu, lv)] = err
-                sub_error_rates[(lv, lu)] = err
+                if error_rates and (u, v) in error_rates:
+                    sub_error_rates[(lu, lv)] = error_rates[(u, v)]
+                else:
+                    sub_error_rates[(lu, lv)] = 0.01
 
         return sub_coupling_map, sub_error_rates, global_to_local, local_to_global
 
 
-class FMAMapper:
+class FMALogicalPlacer:
     """
-    Frequency-based Mapping Algorithm (FMA) from IEEE QCE 2023.
-    Greedily assigns logical qubits to physical qubit slots based on
-    2-qubit interaction frequency from the circuit DAG.
-
-    Algorithm:
-    1. Count interaction frequency f(i,j) for each logical qubit pair (i,j)
-    2. Sort pairs by frequency (descending)
-    3. For each high-frequency pair, assign logical qubits to adjacent physical slots
-       that minimize the distance between them in the hardware graph
-    4. Return initial layout dict {logical_qubit_idx: physical_qubit_idx}
+    Frequency-based Mapping Algorithm (FMA).
+    Greedily maps logical qubits to the extracted physical subgraph:
+    1. Sort 2-qubit interactions by total interaction frequency (descending).
+    2. Greedily assign the most frequent logical qubit pairs to adjacent physical
+       qubits in the subgraph that maximize available high-fidelity coupling edges.
+    3. Unassigned logical qubits are placed greedily on the nearest free physical slots.
     """
 
-    def map(
+    def place(
         self,
         circuit: QuantumCircuit,
-        coupling_map: List[Tuple[int, int]],
-        num_physical_qubits: int,
-        error_rates: Optional[Dict[Tuple[int, int], float]] = None,
+        sub_coupling_map: List[Tuple[int, int]],
+        sub_error_rates: Optional[Dict[Tuple[int, int], float]] = None,
     ) -> Dict[int, int]:
         """
-        Greedy frequency-based placement.
+        Maps logical qubits 0..N-1 to subgraph physical slots 0..K-1.
 
         Returns:
-            Dict mapping logical qubit index -> physical qubit index
+            logical_to_local: Dict mapping logical qubit idx -> local subgraph qubit idx
         """
-        N = circuit.num_qubits
-        qubit_indices = {q: i for i, q in enumerate(circuit.qubits)}
-
-        # Step 1: Count 2-qubit interaction frequencies from circuit DAG
         dag = circuit_to_dag(circuit)
-        freq = defaultdict(int)
-        for node in dag.two_qubit_ops():
-            qargs = node.qargs
-            if len(qargs) == 2:
-                i = qubit_indices[qargs[0]]
-                j = qubit_indices[qargs[1]]
-                pair = (min(i, j), max(i, j))
-                freq[pair] += 1
+        qubit_indices = {q: idx for idx, q in enumerate(circuit.qubits)}
+        N = len(circuit.qubits)
 
-        # Step 2: Sort pairs by frequency descending
-        sorted_pairs = sorted(freq.items(), key=lambda x: -x[1])
+        # Count 2-qubit interaction frequencies
+        interaction_freq: Dict[Tuple[int, int], int] = defaultdict(int)
+        for node in dag.op_nodes():
+            if len(node.qargs) == 2:
+                q1 = qubit_indices[node.qargs[0]]
+                q2 = qubit_indices[node.qargs[1]]
+                pair = (min(q1, q2), max(q1, q2))
+                interaction_freq[pair] += 1
 
-        # Step 3: Build hardware adjacency for greedy placement
-        G_hw = nx.Graph()
-        G_hw.add_nodes_from(range(num_physical_qubits))
-        for u, v in coupling_map:
-            if u < v:
-                err = error_rates.get((u, v), error_rates.get((v, u), 0.01)) if error_rates else 0.01
-                G_hw.add_edge(u, v, fidelity=1.0 - err)
+        # Build physical adjacency graph for the subgraph
+        sub_adj: Dict[int, Set[int]] = defaultdict(set)
+        for u, v in sub_coupling_map:
+            sub_adj[u].add(v)
+            sub_adj[v].add(u)
 
-        # Greedy assignment
-        logical_to_physical = {}
-        used_physical = set()
+        all_sub_nodes = set(sub_adj.keys())
+        # Also include any isolated nodes in the subgraph
+        all_sub_nodes.update(range(max(all_sub_nodes, default=-1) + 1))
 
-        # Find best seed physical qubit (highest average neighbor fidelity)
-        node_scores = {}
-        for node in G_hw.nodes():
-            neighbors = list(G_hw.neighbors(node))
-            if neighbors:
-                node_scores[node] = np.mean([G_hw[node][nb]["fidelity"] for nb in neighbors])
-            else:
-                node_scores[node] = 0.0
+        # Sort logical pairs by interaction frequency (descending)
+        sorted_pairs = sorted(interaction_freq.items(), key=lambda x: x[1], reverse=True)
 
-        for (li, lj), f in sorted_pairs:
-            if li in logical_to_physical and lj in logical_to_physical:
-                continue
+        logical_to_sub: Dict[int, int] = {}
+        occupied_sub_nodes: Set[int] = set()
 
-            if li not in logical_to_physical and lj not in logical_to_physical:
-                # Find best unoccupied adjacent pair on hardware
-                best_pair = None
-                best_score = -1.0
-                for pu, pv, data in G_hw.edges(data=True):
-                    if pu not in used_physical and pv not in used_physical:
-                        score = data.get("fidelity", 0.9)
-                        if score > best_score:
-                            best_score = score
-                            best_pair = (pu, pv)
-                if best_pair:
-                    logical_to_physical[li] = best_pair[0]
-                    logical_to_physical[lj] = best_pair[1]
-                    used_physical.add(best_pair[0])
-                    used_physical.add(best_pair[1])
+        # Score physical nodes by degree in the subgraph (centrality)
+        node_degrees = {node: len(sub_adj[node]) for node in all_sub_nodes}
 
-            elif li in logical_to_physical and lj not in logical_to_physical:
-                # Assign lj to the best unoccupied neighbor of li's physical slot
-                pi = logical_to_physical[li]
-                best_nb = None
-                best_fid = -1.0
-                for nb in G_hw.neighbors(pi):
-                    if nb not in used_physical:
-                        fid = G_hw[pi][nb].get("fidelity", 0.9)
-                        if fid > best_fid:
-                            best_fid = fid
-                            best_nb = nb
-                if best_nb is not None:
-                    logical_to_physical[lj] = best_nb
-                    used_physical.add(best_nb)
+        for (q1, q2), freq in sorted_pairs:
+            q1_placed = q1 in logical_to_sub
+            q2_placed = q2 in logical_to_sub
 
-            elif lj in logical_to_physical and li not in logical_to_physical:
-                pj = logical_to_physical[lj]
-                best_nb = None
-                best_fid = -1.0
-                for nb in G_hw.neighbors(pj):
-                    if nb not in used_physical:
-                        fid = G_hw[pj][nb].get("fidelity", 0.9)
-                        if fid > best_fid:
-                            best_fid = fid
-                            best_nb = nb
-                if best_nb is not None:
-                    logical_to_physical[li] = best_nb
-                    used_physical.add(best_nb)
+            if not q1_placed and not q2_placed:
+                # Place q1 on the highest-degree available physical node
+                free_nodes = [n for n in all_sub_nodes if n not in occupied_sub_nodes]
+                if not free_nodes:
+                    break
+                best_p1 = max(free_nodes, key=lambda n: node_degrees.get(n, 0))
+                logical_to_sub[q1] = best_p1
+                occupied_sub_nodes.add(best_p1)
 
-        # Fill any remaining unassigned logical qubits with any free physical slot
-        all_physical = set(range(num_physical_qubits))
-        free_physical = sorted(all_physical - used_physical)
-        for lq in range(N):
-            if lq not in logical_to_physical:
-                if free_physical:
-                    pq = free_physical.pop(0)
-                    logical_to_physical[lq] = pq
-                    used_physical.add(pq)
+                # Place q2 on the best adjacent free neighbor of best_p1
+                free_neighbors = [nb for nb in sub_adj[best_p1] if nb not in occupied_sub_nodes]
+                if free_neighbors:
+                    best_p2 = max(free_neighbors, key=lambda n: node_degrees.get(n, 0))
                 else:
-                    # Fallback: identity mapping
-                    logical_to_physical[lq] = lq % num_physical_qubits
+                    free_nodes = [n for n in all_sub_nodes if n not in occupied_sub_nodes]
+                    if not free_nodes:
+                        break
+                    best_p2 = max(free_nodes, key=lambda n: node_degrees.get(n, 0))
 
-        return logical_to_physical
+                logical_to_sub[q2] = best_p2
+                occupied_sub_nodes.add(best_p2)
+
+            elif q1_placed and not q2_placed:
+                p1 = logical_to_sub[q1]
+                free_neighbors = [nb for nb in sub_adj[p1] if nb not in occupied_sub_nodes]
+                if free_neighbors:
+                    best_p2 = max(free_neighbors, key=lambda n: node_degrees.get(n, 0))
+                else:
+                    free_nodes = [n for n in all_sub_nodes if n not in occupied_sub_nodes]
+                    if not free_nodes:
+                        break
+                    best_p2 = max(free_nodes, key=lambda n: node_degrees.get(n, 0))
+                logical_to_sub[q2] = best_p2
+                occupied_sub_nodes.add(best_p2)
+
+            elif not q1_placed and q2_placed:
+                p2 = logical_to_sub[q2]
+                free_neighbors = [nb for nb in sub_adj[p2] if nb not in occupied_sub_nodes]
+                if free_neighbors:
+                    best_p1 = max(free_neighbors, key=lambda n: node_degrees.get(n, 0))
+                else:
+                    free_nodes = [n for n in all_sub_nodes if n not in occupied_sub_nodes]
+                    if not free_nodes:
+                        break
+                    best_p1 = max(free_nodes, key=lambda n: node_degrees.get(n, 0))
+                logical_to_sub[q1] = best_p1
+                occupied_sub_nodes.add(best_p1)
+
+        # Place any remaining unplaced logical qubits
+        for q in range(N):
+            if q not in logical_to_sub:
+                free_nodes = [n for n in all_sub_nodes if n not in occupied_sub_nodes]
+                if free_nodes:
+                    best_p = max(free_nodes, key=lambda n: node_degrees.get(n, 0))
+                    logical_to_sub[q] = best_p
+                    occupied_sub_nodes.add(best_p)
+                else:
+                    logical_to_sub[q] = q
+
+        return logical_to_sub
+FMAMapper = FMALogicalPlacer

@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "faq-quantum-mapper"
+version = "0.2.0"
+authors = [
+  { name="Karthik G", email="karthik@example.com" },
+]
+description = "FAQ-Layout: Quadratic Assignment Pre-Placement for Quantum Routing"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Quantum Computing",
+]
+dependencies = [
+    "qiskit>=1.0.0",
+    "pytket>=1.25.0",
+    "pytket-qiskit>=0.48.0",
+    "mqt.qmap>=2.5.0",
+    "networkx>=3.0",
+    "scipy>=1.11.0",
+    "numpy>=1.24.0",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7.4.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

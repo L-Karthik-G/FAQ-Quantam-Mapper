@@ -1,0 +1,9 @@
+qiskit>=1.0.0
+pytket>=1.25.0
+pytket-qiskit>=0.48.0
+mqt.qmap>=2.5.0
+mqt.bench>=1.0.0
+networkx>=3.0
+scipy>=1.11.0
+numpy>=1.24.0
+pytest>=7.4.0
