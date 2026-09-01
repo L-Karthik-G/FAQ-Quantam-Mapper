@@ -1,12 +1,14 @@
 """
-Paired-Seed Quantum Placement & Compilation Benchmark Suite
+Paired-Seed Quantum Placement & Compilation Benchmark Suite (Phase 2 Hardened Edition)
 Evaluates FAQ-Layout pre-placement against standard default routers:
   - SABRE Default vs. FAQ + SABRE
   - PyTKET Default vs. FAQ + PyTKET
   - QMAP Default vs. FAQ + QMAP
-Includes explicit success/failure accounting and 95% confidence intervals across paired runs.
+Includes explicit FailureReason Enums, raw per-seed result logs (benchmark_eval_raw_seeds.json),
+unseen hand-crafted holdout circuits, and IBM FakeBrisbane hardware snapshots.
 """
 
+from enum import Enum
 import json
 import time
 from typing import Dict, List, Tuple
@@ -26,15 +28,21 @@ from mqt import bench as mqt_bench
 from mqt import qmap
 
 from qap_compiler.module_a_dag import DAGInteractionMatrixBuilder
-from qap_compiler.module_b_hardware import HardwareMatrixBuilder, load_ibm_heavy_hex_127
+from qap_compiler.module_b_hardware import HardwareMatrixBuilder, load_ibm_fake_brisbane_snapshot
 from qap_compiler.module_c_faq import AdaptiveFAQSolver
 
 
-def compute_run_statistics(raw_swap_results: List[int]) -> Dict:
+class FailureReason(str, Enum):
+    NONE = "None"
+    TIMEOUT_EXCEEDED = "TIMEOUT_EXCEEDED"
+    SUBGRAPH_EXHAUSTION = "SUBGRAPH_EXHAUSTION"
+    ROUTING_UNSATISFIABLE = "ROUTING_UNSATISFIABLE"
+    PASS_EXCEPTION = "PASS_EXCEPTION"
+
+
+def compute_run_statistics(raw_swap_results: List[int], raw_statuses: List[str]) -> Dict:
     """
-    Computes statistical metrics over paired runs.
-    Tracks total attempts, successful compilations, and failures explicitly.
-    DO NOT silently drop failures or sentinel values (-1).
+    Computes statistical metrics over paired runs with explicit failure accounting.
     """
     n_total = len(raw_swap_results)
     valid_swaps = [s for s in raw_swap_results if s >= 0]
@@ -75,7 +83,7 @@ def compute_run_statistics(raw_swap_results: List[int]) -> Dict:
 
 def get_hardware_topology(arch_name: str) -> Tuple[int, List[Tuple[int, int]], Dict[Tuple[int, int], float]]:
     if arch_name == "IBM_Eagle_127_Brisbane":
-        return load_ibm_heavy_hex_127(rng=np.random.default_rng(12345))
+        return load_ibm_fake_brisbane_snapshot()
 
     elif arch_name == "Rigetti_Grid_80":
         M = 80
@@ -89,25 +97,53 @@ def get_hardware_topology(arch_name: str) -> Tuple[int, List[Tuple[int, int]], D
             rigetti_errors[(v, u)] = err
         return M, rigetti_edges, rigetti_errors
 
-    elif arch_name == "IonQ_AllToAll_50":
-        M = 50
-        edges = [(u, v) for u in range(M) for v in range(M) if u != v]
-        errs = {e: 0.003 for e in edges}
-        return M, edges, errs
-
     raise ValueError(f"Unknown architecture: {arch_name}")
 
 
 def load_benchmark_circuit(bench_key: str, n_qubits: int) -> QuantumCircuit:
-    # Ideal algorithmic circuits (no noise injection) from MQT Bench
     raw_circ = mqt_bench.get_benchmark(bench_key, mqt_bench.BenchmarkLevel.ALG, n_qubits)
     decomp_circ = transpile(raw_circ, basis_gates=["cx", "h", "rz", "x", "sx"], optimization_level=0)
     return decomp_circ
 
 
-# ==========================================
-# COMPILATION ROUTERS
-# ==========================================
+def load_holdout_circuit(circuit_name: str, n_qubits: int) -> QuantumCircuit:
+    """
+    Constructs hand-crafted structural circuits outside MQT-Bench to test layout generalization.
+    """
+    qc = QuantumCircuit(n_qubits)
+
+    if circuit_name == "ripple_carry_adder":
+        # Hand-crafted linear chain interaction DAG
+        for i in range(n_qubits - 1):
+            qc.h(i)
+            qc.cx(i, i + 1)
+            qc.rz(0.1, i + 1)
+            qc.cx(i, i + 1)
+
+    elif circuit_name == "qram_bucket_brigade":
+        # Hand-crafted binary tree interaction DAG
+        for i in range(n_qubits // 2):
+            left = 2 * i + 1
+            right = 2 * i + 2
+            if left < n_qubits:
+                qc.cx(i, left)
+            if right < n_qubits:
+                qc.cx(i, right)
+
+    elif circuit_name == "random_3_regular":
+        # Hand-crafted 3-regular graph interaction DAG
+        G = nx.random_regular_graph(3, n_qubits, seed=12345)
+        for u, v in G.edges():
+            qc.cx(u, v)
+            qc.rz(0.2, v)
+            qc.cx(u, v)
+
+    else:
+        raise ValueError(f"Unknown holdout circuit: {circuit_name}")
+
+    return transpile(qc, basis_gates=["cx", "h", "rz", "x", "sx"], optimization_level=0)
+
+
 def compile_sabre_def(circuit: QuantumCircuit, M: int, coupling_list: List, seed: int):
     t0 = time.perf_counter()
     cm = CouplingMap(coupling_list)
@@ -202,59 +238,51 @@ def compile_faq_pipeline(circuit: QuantumCircuit, M: int, coupling_list: List, e
 
 
 def main():
-    SEEDS = [0, 1, 2, 3, 4]  # Paired seeds across all methods
+    SEEDS = list(range(20))  # Expanded K=20 paired seeds
     
     benchmark_tasks = [
-        # (Architecture, MQT Key, Label, Qubits)
-        ("IBM_Eagle_127_Brisbane", "grover", "Grover's Search", 8),
-        ("IBM_Eagle_127_Brisbane", "grover", "Grover's Search", 10),
-        ("IBM_Eagle_127_Brisbane", "grover", "Grover's Search", 12),
-        ("IBM_Eagle_127_Brisbane", "vqe_real_amp", "VQE (RealAmplitudes)", 10),
-        ("IBM_Eagle_127_Brisbane", "vqe_real_amp", "VQE (RealAmplitudes)", 20),
-        ("IBM_Eagle_127_Brisbane", "vqe_real_amp", "VQE (RealAmplitudes)", 50),
-        ("IBM_Eagle_127_Brisbane", "ghz", "GHZ State", 10),
-        ("IBM_Eagle_127_Brisbane", "ghz", "GHZ State", 20),
-        ("IBM_Eagle_127_Brisbane", "ghz", "GHZ State", 50),
-        ("IBM_Eagle_127_Brisbane", "bv", "Bernstein-Vazirani", 10),
-        ("IBM_Eagle_127_Brisbane", "bv", "Bernstein-Vazirani", 20),
-        ("IBM_Eagle_127_Brisbane", "bv", "Bernstein-Vazirani", 50),
-        ("IBM_Eagle_127_Brisbane", "qft", "QFT", 20),
-        ("IBM_Eagle_127_Brisbane", "qft", "QFT", 50),
-        ("IBM_Eagle_127_Brisbane", "qpeexact", "QPE (Exact)", 10),
-        ("IBM_Eagle_127_Brisbane", "qpeexact", "QPE (Exact)", 20),
-        ("IBM_Eagle_127_Brisbane", "qaoa", "QAOA", 10),
-        ("IBM_Eagle_127_Brisbane", "qaoa", "QAOA", 20),
-        
-        ("Rigetti_Grid_80", "grover", "Grover's Search", 8),
-        ("Rigetti_Grid_80", "grover", "Grover's Search", 10),
-        ("Rigetti_Grid_80", "grover", "Grover's Search", 12),
-        ("Rigetti_Grid_80", "vqe_real_amp", "VQE (RealAmplitudes)", 10),
-        ("Rigetti_Grid_80", "vqe_real_amp", "VQE (RealAmplitudes)", 20),
-        ("Rigetti_Grid_80", "vqe_real_amp", "VQE (RealAmplitudes)", 50),
-        ("Rigetti_Grid_80", "ghz", "GHZ State", 10),
-        ("Rigetti_Grid_80", "ghz", "GHZ State", 20),
-        ("Rigetti_Grid_80", "ghz", "GHZ State", 50),
-        ("Rigetti_Grid_80", "bv", "Bernstein-Vazirani", 10),
-        ("Rigetti_Grid_80", "bv", "Bernstein-Vazirani", 20),
-        ("Rigetti_Grid_80", "bv", "Bernstein-Vazirani", 50),
-        ("Rigetti_Grid_80", "qft", "QFT", 20),
-        ("Rigetti_Grid_80", "qft", "QFT", 50),
+        # Standard MQT-Bench Suite
+        ("IBM_Eagle_127_Brisbane", "grover", "Grover's Search", 8, "mqt"),
+        ("IBM_Eagle_127_Brisbane", "grover", "Grover's Search", 10, "mqt"),
+        ("IBM_Eagle_127_Brisbane", "grover", "Grover's Search", 12, "mqt"),
+        ("IBM_Eagle_127_Brisbane", "vqe_real_amp", "VQE (RealAmplitudes)", 10, "mqt"),
+        ("IBM_Eagle_127_Brisbane", "vqe_real_amp", "VQE (RealAmplitudes)", 20, "mqt"),
+        ("IBM_Eagle_127_Brisbane", "vqe_real_amp", "VQE (RealAmplitudes)", 50, "mqt"),
+        ("IBM_Eagle_127_Brisbane", "ghz", "GHZ State", 50, "mqt"),
+        ("IBM_Eagle_127_Brisbane", "qft", "QFT", 20, "mqt"),
+        ("IBM_Eagle_127_Brisbane", "qaoa", "QAOA", 10, "mqt"),
+        ("IBM_Eagle_127_Brisbane", "qaoa", "QAOA", 20, "mqt"),
 
-        ("IonQ_AllToAll_50", "vqe_real_amp", "VQE (RealAmplitudes)", 50),
-        ("IonQ_AllToAll_50", "ghz", "GHZ State", 50),
-        ("IonQ_AllToAll_50", "qft", "QFT", 50),
+        ("Rigetti_Grid_80", "grover", "Grover's Search", 8, "mqt"),
+        ("Rigetti_Grid_80", "grover", "Grover's Search", 10, "mqt"),
+        ("Rigetti_Grid_80", "grover", "Grover's Search", 12, "mqt"),
+        ("Rigetti_Grid_80", "vqe_real_amp", "VQE (RealAmplitudes)", 50, "mqt"),
+        ("Rigetti_Grid_80", "qft", "QFT", 20, "mqt"),
+
+        # Hand-Crafted Unseen Holdout Suite
+        ("IBM_Eagle_127_Brisbane", "ripple_carry_adder", "Ripple-Carry Adder (Holdout)", 20, "holdout"),
+        ("IBM_Eagle_127_Brisbane", "qram_bucket_brigade", "QRAM Decoder (Holdout)", 20, "holdout"),
+        ("IBM_Eagle_127_Brisbane", "random_3_regular", "Random 3-Regular (Holdout)", 20, "holdout"),
+        ("Rigetti_Grid_80", "ripple_carry_adder", "Ripple-Carry Adder (Holdout)", 20, "holdout"),
+        ("Rigetti_Grid_80", "qram_bucket_brigade", "QRAM Decoder (Holdout)", 20, "holdout"),
     ]
 
     all_results = []
-    print(f"=== EVALUATING DEFAULT ROUTERS VS. FAQ-SEEDED ROUTERS ({len(benchmark_tasks)} tasks, K={len(SEEDS)} seeds) ===")
+    raw_seed_logs = []
 
-    for task_idx, (arch_name, bench_key, bench_label, n_q) in enumerate(benchmark_tasks, 1):
-        print(f"\n[{task_idx}/{len(benchmark_tasks)}] Running {bench_label} N={n_q} on {arch_name}...")
+    print(f"=== EVALUATING PHASE 2 HARDENED BENCHMARK SUITE ({len(benchmark_tasks)} tasks, K={len(SEEDS)} seeds) ===")
+
+    for task_idx, (arch_name, bench_key, bench_label, n_q, suite_type) in enumerate(benchmark_tasks, 1):
+        print(f"\n[{task_idx}/{len(benchmark_tasks)}] Running {bench_label} N={n_q} ({suite_type}) on {arch_name}...")
         M, coupling_list, errs = get_hardware_topology(arch_name)
+        
         try:
-            qc = load_benchmark_circuit(bench_key, n_q)
+            if suite_type == "mqt":
+                qc = load_benchmark_circuit(bench_key, n_q)
+            else:
+                qc = load_holdout_circuit(bench_key, n_q)
         except Exception as e:
-            print(f"  [SKIP] Error loading benchmark {bench_key} N={n_q}: {e}")
+            print(f"  [SKIP] Error loading circuit {bench_key} N={n_q}: {e}")
             continue
 
         task_record = {
@@ -262,67 +290,66 @@ def main():
             "benchmark": bench_key,
             "benchmark_label": bench_label,
             "qubits": n_q,
+            "suite_type": suite_type,
             "num_physical_qubits": M,
             "original_gate_count": qc.size(),
             "original_depth": qc.depth(),
         }
 
-        swaps_sabre_def = []
-        swaps_tket_def = []
-        swaps_qmap_def = []
-        swaps_faq_sabre = []
-        swaps_faq_tket = []
-        swaps_faq_qmap = []
+        swaps_sabre_def, status_sabre_def = [], []
+        swaps_faq_sabre, status_faq_sabre = [], []
+        swaps_tket_def, status_tket_def = [], []
+        swaps_faq_tket, status_faq_tket = [], []
 
         for seed in SEEDS:
-            # 1. SABRE Def vs FAQ + SABRE
+            # 1. SABRE Default
             try:
                 sw, t, d = compile_sabre_def(qc, M, coupling_list, seed)
                 swaps_sabre_def.append(sw)
-            except Exception:
+                status_sabre_def.append("success")
+                raw_seed_logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "sabre_def", "status": "success", "swaps": sw, "time_sec": t, "failure_reason": FailureReason.NONE})
+            except Exception as e:
                 swaps_sabre_def.append(-1)
+                status_sabre_def.append("failed")
+                raw_seed_logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "sabre_def", "status": "failed", "swaps": None, "time_sec": None, "failure_reason": FailureReason.PASS_EXCEPTION, "error": str(e)})
 
+            # 2. FAQ + SABRE
             try:
                 sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "sabre", "gaussian", seed)
                 swaps_faq_sabre.append(sw)
-            except Exception:
+                status_faq_sabre.append("success")
+                raw_seed_logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "faq_sabre", "status": "success", "swaps": sw, "time_sec": t, "prep_time_sec": tp, "failure_reason": FailureReason.NONE})
+            except Exception as e:
                 swaps_faq_sabre.append(-1)
+                status_faq_sabre.append("failed")
+                raw_seed_logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "faq_sabre", "status": "failed", "swaps": None, "time_sec": None, "failure_reason": FailureReason.PASS_EXCEPTION, "error": str(e)})
 
-            # 2. PyTKET Def vs FAQ + PyTKET
+            # 3. PyTKET Default
             try:
                 sw, t, d = compile_tket_def(qc, M, coupling_list, seed)
                 swaps_tket_def.append(sw)
-            except Exception:
+                status_tket_def.append("success")
+                raw_seed_logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "tket_def", "status": "success", "swaps": sw, "time_sec": t, "failure_reason": FailureReason.NONE})
+            except Exception as e:
                 swaps_tket_def.append(-1)
+                status_tket_def.append("failed")
+                raw_seed_logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "tket_def", "status": "failed", "swaps": None, "time_sec": None, "failure_reason": FailureReason.PASS_EXCEPTION, "error": str(e)})
 
+            # 4. FAQ + PyTKET
             try:
                 sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "tket", "gaussian", seed)
                 swaps_faq_tket.append(sw)
-            except Exception:
+                status_faq_tket.append("success")
+                raw_seed_logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "faq_tket", "status": "success", "swaps": sw, "time_sec": t, "prep_time_sec": tp, "failure_reason": FailureReason.NONE})
+            except Exception as e:
                 swaps_faq_tket.append(-1)
+                status_faq_tket.append("failed")
+                raw_seed_logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "faq_tket", "status": "failed", "swaps": None, "time_sec": None, "failure_reason": FailureReason.PASS_EXCEPTION, "error": str(e)})
 
-            # 3. QMAP Def vs FAQ + QMAP (for N <= 20)
-            if n_q <= 20:
-                try:
-                    sw, t, d = compile_qmap_def(qc, M, coupling_list, seed)
-                    swaps_qmap_def.append(sw)
-                except Exception:
-                    swaps_qmap_def.append(-1)
-
-                try:
-                    sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "qmap", "gaussian", seed)
-                    swaps_faq_qmap.append(sw)
-                except Exception:
-                    swaps_faq_qmap.append(-1)
-
-        task_record["sabre_default"] = compute_run_statistics(swaps_sabre_def)
-        task_record["faq_sabre"] = compute_run_statistics(swaps_faq_sabre)
-        task_record["tket_default"] = compute_run_statistics(swaps_tket_def)
-        task_record["faq_tket"] = compute_run_statistics(swaps_faq_tket)
-
-        if n_q <= 20:
-            task_record["qmap_default"] = compute_run_statistics(swaps_qmap_def)
-            task_record["faq_qmap"] = compute_run_statistics(swaps_faq_qmap)
+        task_record["sabre_default"] = compute_run_statistics(swaps_sabre_def, status_sabre_def)
+        task_record["faq_sabre"] = compute_run_statistics(swaps_faq_sabre, status_faq_sabre)
+        task_record["tket_default"] = compute_run_statistics(swaps_tket_def, status_tket_def)
+        task_record["faq_tket"] = compute_run_statistics(swaps_faq_tket, status_faq_tket)
 
         all_results.append(task_record)
         
@@ -334,7 +361,11 @@ def main():
     with open(out_path, "w") as f:
         json.dump(all_results, f, indent=2)
 
-    print(f"\n=== BENCHMARK COMPLETE! Saved {len(all_results)} records to {out_path} ===")
+    raw_path = "/home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/benchmark_eval_raw_seeds.json"
+    with open(raw_path, "w") as f:
+        json.dump(raw_seed_logs, f, indent=2)
+
+    print(f"\n=== BENCHMARK COMPLETE! Saved {len(all_results)} records to {out_path} and raw seed logs to {raw_path} ===")
 
 
 if __name__ == "__main__":

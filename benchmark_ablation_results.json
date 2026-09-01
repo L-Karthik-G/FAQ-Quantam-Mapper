@@ -1,0 +1,17 @@
+{
+  "1_barycenter_single_start": {
+    "qap_cost": 91.85747985119643
+  },
+  "2_random_multi_start": {
+    "qap_cost": 86.99379142767089
+  },
+  "3_gaussian_multi_start_ours": {
+    "qap_cost": 91.85747985119643
+  },
+  "4_faq_no_2opt_polish": {
+    "qap_cost": 158.517499673241
+  },
+  "5_undirected_hardware_matrix": {
+    "qap_cost": 35.72452619238382
+  }
+}
