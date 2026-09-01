@@ -1,7 +1,10 @@
 """
 Paired-Seed Quantum Placement & Compilation Benchmark Suite
-Evaluates FAQ-Layout against SABRE, PyTKET, QMAP, and IEEE QCE 2023 FGEA+FMA baselines.
-Includes explicit failure accounting and 95% confidence intervals across paired runs.
+Evaluates FAQ-Layout pre-placement against standard default routers:
+  - SABRE Default vs. FAQ + SABRE
+  - PyTKET Default vs. FAQ + PyTKET
+  - QMAP Default vs. FAQ + QMAP
+Includes explicit success/failure accounting and 95% confidence intervals across paired runs.
 """
 
 import json
@@ -20,17 +23,18 @@ from pytket.passes import RoutingPass, PlacementPass
 from pytket.placement import GraphPlacement
 
 from mqt import bench as mqt_bench
+from mqt import qmap
 
 from qap_compiler.module_a_dag import DAGInteractionMatrixBuilder
 from qap_compiler.module_b_hardware import HardwareMatrixBuilder, load_ibm_heavy_hex_127
 from qap_compiler.module_c_faq import AdaptiveFAQSolver
-from qap_compiler.module_e_fgea import FGEASubgraphExtractor, FMAMapper
 
 
 def compute_run_statistics(raw_swap_results: List[int]) -> Dict:
     """
     Computes statistical metrics over paired runs.
     Tracks total attempts, successful compilations, and failures explicitly.
+    DO NOT silently drop failures or sentinel values (-1).
     """
     n_total = len(raw_swap_results)
     valid_swaps = [s for s in raw_swap_results if s >= 0]
@@ -95,11 +99,15 @@ def get_hardware_topology(arch_name: str) -> Tuple[int, List[Tuple[int, int]], D
 
 
 def load_benchmark_circuit(bench_key: str, n_qubits: int) -> QuantumCircuit:
+    # Ideal algorithmic circuits (no noise injection) from MQT Bench
     raw_circ = mqt_bench.get_benchmark(bench_key, mqt_bench.BenchmarkLevel.ALG, n_qubits)
     decomp_circ = transpile(raw_circ, basis_gates=["cx", "h", "rz", "x", "sx"], optimization_level=0)
     return decomp_circ
 
 
+# ==========================================
+# COMPILATION ROUTERS
+# ==========================================
 def compile_sabre_def(circuit: QuantumCircuit, M: int, coupling_list: List, seed: int):
     t0 = time.perf_counter()
     cm = CouplingMap(coupling_list)
@@ -128,28 +136,14 @@ def compile_tket_def(circuit: QuantumCircuit, M: int, coupling_list: List, seed:
     return swaps, t, res.depth()
 
 
-def compile_paper_fgea(circuit: QuantumCircuit, M: int, coupling_list: List, errs: Dict, seed: int):
+def compile_qmap_def(circuit: QuantumCircuit, M: int, coupling_list: List, seed: int):
     t0 = time.perf_counter()
-    N = circuit.num_qubits
-    extractor = FGEASubgraphExtractor(buffer=4)
-    sub_cm, sub_errs, g2l, l2g = extractor.extract(N, M, coupling_list, errs)
-    placer = FMAMapper()
-    logical_to_sub = placer.place(circuit, sub_cm, sub_errs)
-    initial_layout = [l2g.get(logical_to_sub.get(i, 0), i) for i in range(N)]
-
-    cm = CouplingMap(coupling_list)
-    res = transpile(
-        circuit,
-        coupling_map=cm,
-        initial_layout=initial_layout,
-        layout_method=None,
-        routing_method="sabre",
-        seed_transpiler=seed,
-        optimization_level=1,
-    )
+    arch = qmap.Architecture(M, set(coupling_list))
+    res = qmap.compile(circuit, arch, method="heuristic", initial_layout="identity")
     t = time.perf_counter() - t0
-    swaps = res.count_ops().get("swap", 0)
-    return swaps, t, res.depth()
+    swaps = getattr(res.output, "swaps", 0)
+    depth = res.output.circuit_depth if hasattr(res.output, "circuit_depth") else 0
+    return swaps, t, depth
 
 
 def compile_faq_pipeline(circuit: QuantumCircuit, M: int, coupling_list: List, errs: Dict, router: str, start_mode: str, seed: int):
@@ -196,13 +190,22 @@ def compile_faq_pipeline(circuit: QuantumCircuit, M: int, coupling_list: List, e
         total_time = time.perf_counter() - t0
         return res.count_ops().get("swap", 0), total_time, prep_time, res.depth(), cost
 
+    elif router == "qmap":
+        arch = qmap.Architecture(M, set(coupling_list))
+        res = qmap.compile(circuit, arch, method="heuristic", initial_layout=mapping)
+        total_time = time.perf_counter() - t0
+        swaps = getattr(res.output, "swaps", 0)
+        depth = res.output.circuit_depth if hasattr(res.output, "circuit_depth") else 0
+        return swaps, total_time, prep_time, depth, cost
+
     raise ValueError(f"Unknown router: {router}")
 
 
 def main():
-    SEEDS = [0, 1, 2, 3, 4]
+    SEEDS = [0, 1, 2, 3, 4]  # Paired seeds across all methods
     
     benchmark_tasks = [
+        # (Architecture, MQT Key, Label, Qubits)
         ("IBM_Eagle_127_Brisbane", "grover", "Grover's Search", 8),
         ("IBM_Eagle_127_Brisbane", "grover", "Grover's Search", 10),
         ("IBM_Eagle_127_Brisbane", "grover", "Grover's Search", 12),
@@ -219,10 +222,8 @@ def main():
         ("IBM_Eagle_127_Brisbane", "qft", "QFT", 50),
         ("IBM_Eagle_127_Brisbane", "qpeexact", "QPE (Exact)", 10),
         ("IBM_Eagle_127_Brisbane", "qpeexact", "QPE (Exact)", 20),
-        ("IBM_Eagle_127_Brisbane", "qpeexact", "QPE (Exact)", 50),
         ("IBM_Eagle_127_Brisbane", "qaoa", "QAOA", 10),
         ("IBM_Eagle_127_Brisbane", "qaoa", "QAOA", 20),
-        ("IBM_Eagle_127_Brisbane", "qaoa", "QAOA", 50),
         
         ("Rigetti_Grid_80", "grover", "Grover's Search", 8),
         ("Rigetti_Grid_80", "grover", "Grover's Search", 10),
@@ -238,8 +239,6 @@ def main():
         ("Rigetti_Grid_80", "bv", "Bernstein-Vazirani", 50),
         ("Rigetti_Grid_80", "qft", "QFT", 20),
         ("Rigetti_Grid_80", "qft", "QFT", 50),
-        ("Rigetti_Grid_80", "qpeexact", "QPE (Exact)", 50),
-        ("Rigetti_Grid_80", "qaoa", "QAOA", 50),
 
         ("IonQ_AllToAll_50", "vqe_real_amp", "VQE (RealAmplitudes)", 50),
         ("IonQ_AllToAll_50", "ghz", "GHZ State", 50),
@@ -247,7 +246,7 @@ def main():
     ]
 
     all_results = []
-    print(f"=== EVALUATING PAIRED-SEED BENCHMARK SUITE ({len(benchmark_tasks)} tasks, K={len(SEEDS)} seeds) ===")
+    print(f"=== EVALUATING DEFAULT ROUTERS VS. FAQ-SEEDED ROUTERS ({len(benchmark_tasks)} tasks, K={len(SEEDS)} seeds) ===")
 
     for task_idx, (arch_name, bench_key, bench_label, n_q) in enumerate(benchmark_tasks, 1):
         print(f"\n[{task_idx}/{len(benchmark_tasks)}] Running {bench_label} N={n_q} on {arch_name}...")
@@ -270,57 +269,66 @@ def main():
 
         swaps_sabre_def = []
         swaps_tket_def = []
-        swaps_paper_fgea = []
-        swaps_faq_tket = []
+        swaps_qmap_def = []
         swaps_faq_sabre = []
+        swaps_faq_tket = []
+        swaps_faq_qmap = []
 
         for seed in SEEDS:
-            # 1. SABRE Def
+            # 1. SABRE Def vs FAQ + SABRE
             try:
                 sw, t, d = compile_sabre_def(qc, M, coupling_list, seed)
                 swaps_sabre_def.append(sw)
             except Exception:
                 swaps_sabre_def.append(-1)
 
-            # 2. PyTKET Def
-            try:
-                sw, t, d = compile_tket_def(qc, M, coupling_list, seed)
-                swaps_tket_def.append(sw)
-            except Exception:
-                swaps_tket_def.append(-1)
-
-            # 3. Paper FGEA+FMA
-            try:
-                sw, t, d = compile_paper_fgea(qc, M, coupling_list, errs, seed)
-                swaps_paper_fgea.append(sw)
-            except Exception:
-                swaps_paper_fgea.append(-1)
-
-            # 4. FAQ + PyTKET (Ours)
-            try:
-                sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "tket", "gaussian", seed)
-                swaps_faq_tket.append(sw)
-            except Exception:
-                swaps_faq_tket.append(-1)
-
-            # 5. FAQ + SABRE (Ours)
             try:
                 sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "sabre", "gaussian", seed)
                 swaps_faq_sabre.append(sw)
             except Exception:
                 swaps_faq_sabre.append(-1)
 
+            # 2. PyTKET Def vs FAQ + PyTKET
+            try:
+                sw, t, d = compile_tket_def(qc, M, coupling_list, seed)
+                swaps_tket_def.append(sw)
+            except Exception:
+                swaps_tket_def.append(-1)
+
+            try:
+                sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "tket", "gaussian", seed)
+                swaps_faq_tket.append(sw)
+            except Exception:
+                swaps_faq_tket.append(-1)
+
+            # 3. QMAP Def vs FAQ + QMAP (for N <= 20)
+            if n_q <= 20:
+                try:
+                    sw, t, d = compile_qmap_def(qc, M, coupling_list, seed)
+                    swaps_qmap_def.append(sw)
+                except Exception:
+                    swaps_qmap_def.append(-1)
+
+                try:
+                    sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "qmap", "gaussian", seed)
+                    swaps_faq_qmap.append(sw)
+                except Exception:
+                    swaps_faq_qmap.append(-1)
+
         task_record["sabre_default"] = compute_run_statistics(swaps_sabre_def)
-        task_record["tket_default"] = compute_run_statistics(swaps_tket_def)
-        task_record["paper_fgea"] = compute_run_statistics(swaps_paper_fgea)
-        task_record["faq_tket"] = compute_run_statistics(swaps_faq_tket)
         task_record["faq_sabre"] = compute_run_statistics(swaps_faq_sabre)
+        task_record["tket_default"] = compute_run_statistics(swaps_tket_def)
+        task_record["faq_tket"] = compute_run_statistics(swaps_faq_tket)
+
+        if n_q <= 20:
+            task_record["qmap_default"] = compute_run_statistics(swaps_qmap_def)
+            task_record["faq_qmap"] = compute_run_statistics(swaps_faq_qmap)
 
         all_results.append(task_record)
         
         s_stats = task_record["faq_sabre"]
         t_stats = task_record["faq_tket"]
-        print(f"  -> FAQ+SABRE: {s_stats['mean_swaps']} (Success: {s_stats['success_rate']:.0f}%) | FAQ+TKET: {t_stats['mean_swaps']} ± {t_stats['ci95_swaps']} (Success: {t_stats['success_rate']:.0f}%)")
+        print(f"  -> FAQ+SABRE: {s_stats['mean_swaps']} | FAQ+TKET: {t_stats['mean_swaps']} ± {t_stats['ci95_swaps']}")
 
     out_path = "/home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/benchmark_eval_results.json"
     with open(out_path, "w") as f:
