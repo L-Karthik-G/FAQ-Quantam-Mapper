@@ -1,5 +1,6 @@
 """
 Rigorous Paired-Seed Quantum Compilation Benchmark & Ablation Suite
+Using the Standardized MQT Bench Suite (TU Munich / IEEE standard benchmarks)
 Evaluates FAQ-Layout against SABRE, PyTKET, QMAP, and IEEE QCE 2023 FGEA+FMA baselines.
 """
 
@@ -7,11 +8,11 @@ import json
 import math
 import time
 from typing import Dict, List, Tuple
+import networkx as nx
 import numpy as np
 from scipy import stats
 
 from qiskit import QuantumCircuit, transpile
-from qiskit.circuit.library import GroverOperator
 from qiskit.transpiler import CouplingMap
 
 from pytket.architecture import Architecture
@@ -19,6 +20,7 @@ from pytket.extensions.qiskit import qiskit_to_tk, tk_to_qiskit
 from pytket.passes import RoutingPass, PlacementPass
 from pytket.placement import GraphPlacement
 
+from mqt import bench as mqt_bench
 from mqt import qmap
 
 from qap_compiler.module_a_dag import DAGInteractionMatrixBuilder
@@ -63,22 +65,14 @@ def get_hardware_topology(arch_name: str) -> Tuple[int, List[Tuple[int, int]], D
 
     elif arch_name == "Rigetti_Grid_80":
         M = 80
-        rows, cols = 8, 10
-        edges = set()
-        for r in range(rows):
-            for c in range(cols):
-                u = r * cols + c
-                if c + 1 < cols:
-                    v = r * cols + (c + 1)
-                    edges.add((u, v))
-                    edges.add((v, u))
-                if r + 1 < rows:
-                    v = (r + 1) * cols + c
-                    edges.add((u, v))
-                    edges.add((v, u))
-        edge_list = list(edges)
-        errs = {e: float(rng.uniform(0.012, 0.024)) for e in edge_list}
-        return M, edge_list, errs
+        grid_G = nx.convert_node_labels_to_integers(nx.grid_2d_graph(8, 10))
+        rigetti_edges, rigetti_errors = [], {}
+        for u, v in grid_G.edges():
+            err = float(rng.uniform(0.01, 0.03))
+            rigetti_edges.extend([(u, v), (v, u)])
+            rigetti_errors[(u, v)] = err
+            rigetti_errors[(v, u)] = err
+        return M, rigetti_edges, rigetti_errors
 
     elif arch_name == "IonQ_AllToAll_50":
         M = 50
@@ -90,79 +84,16 @@ def get_hardware_topology(arch_name: str) -> Tuple[int, List[Tuple[int, int]], D
 
 
 # ==========================================
-# 2. CIRCUIT SUITE FACTORY
+# 2. CIRCUIT LOADER (OFFICIAL MQT BENCH)
 # ==========================================
-def build_benchmark_circuit(name: str, n_qubits: int) -> QuantumCircuit:
-    if name == "grover":
-        oracle = QuantumCircuit(n_qubits)
-        oracle.z(0)
-        grover_op = GroverOperator(oracle)
-        qc = QuantumCircuit(n_qubits)
-        qc.h(range(n_qubits))
-        qc.compose(grover_op, inplace=True)
-        return transpile(qc, basis_gates=["cx", "h", "rz", "x", "sx"], optimization_level=0)
-
-    elif name == "vqe":
-        qc = QuantumCircuit(n_qubits)
-        for q in range(n_qubits):
-            qc.ry(0.5, q)
-        for _ in range(3):
-            for q in range(n_qubits - 1):
-                qc.cx(q, q + 1)
-            for q in range(n_qubits):
-                qc.ry(0.3, q)
-        return qc
-
-    elif name == "ghz":
-        qc = QuantumCircuit(n_qubits)
-        qc.h(0)
-        for i in range(n_qubits - 1):
-            qc.cx(i, i + 1)
-        return qc
-
-    elif name == "bv":
-        qc = QuantumCircuit(n_qubits)
-        qc.x(n_qubits - 1)
-        qc.h(range(n_qubits))
-        for i in range(n_qubits - 1):
-            if i % 2 == 0:
-                qc.cx(i, n_qubits - 1)
-        qc.h(range(n_qubits))
-        return qc
-
-    elif name == "qft":
-        qc = QuantumCircuit(n_qubits)
-        for i in range(n_qubits):
-            qc.h(i)
-            for j in range(i + 1, min(i + 4, n_qubits)):
-                qc.cp(np.pi / (2 ** (j - i)), j, i)
-        return transpile(qc, basis_gates=["cx", "h", "rz", "x", "sx"], optimization_level=0)
-
-    elif name == "qpe":
-        qc = QuantumCircuit(n_qubits)
-        qc.h(range(n_qubits - 1))
-        qc.x(n_qubits - 1)
-        for i in range(n_qubits - 1):
-            qc.cp(0.25 * (i + 1), i, n_qubits - 1)
-        return transpile(qc, basis_gates=["cx", "h", "rz", "x", "sx"], optimization_level=0)
-
-    elif name == "qaoa":
-        qc = QuantumCircuit(n_qubits)
-        qc.h(range(n_qubits))
-        for p in range(2):
-            for i in range(n_qubits):
-                target = (i * 3 + 1) % n_qubits
-                if target != i:
-                    qc.cx(min(i, target), max(i, target))
-            for i in range(n_qubits):
-                qc.rx(0.4, i)
-        return qc
-
-    raise ValueError(f"Unknown benchmark: {name}")
+def load_mqt_benchmark_circuit(bench_key: str, n_qubits: int) -> QuantumCircuit:
+    raw_circ = mqt_bench.get_benchmark(bench_key, mqt_bench.BenchmarkLevel.ALG, n_qubits)
+    decomp_circ = transpile(raw_circ, basis_gates=["cx", "h", "rz", "x", "sx"], optimization_level=0)
+    return decomp_circ
 
 
 # ==========================================
-# 3. COMPILATION EXECUTION ENGINES
+# 3. COMPILATION ROUTERS
 # ==========================================
 def compile_sabre_def(circuit: QuantumCircuit, M: int, coupling_list: List, seed: int):
     t0 = time.perf_counter()
@@ -190,15 +121,6 @@ def compile_tket_def(circuit: QuantumCircuit, M: int, coupling_list: List, seed:
     t = time.perf_counter() - t0
     swaps = res.count_ops().get("swap", 0)
     return swaps, t, res.depth()
-
-
-def compile_qmap_def(circuit: QuantumCircuit, M: int, coupling_list: List, seed: int):
-    t0 = time.perf_counter()
-    arch = qmap.Architecture(M, set(coupling_list))
-    res = qmap.compile(circuit, arch, method="heuristic", initial_layout="identity")
-    t = time.perf_counter() - t0
-    swaps = getattr(res.output, "swaps", 0)
-    return swaps, t, res.output.circuit_depth if hasattr(res.output, "circuit_depth") else 0
 
 
 def compile_paper_fgea(circuit: QuantumCircuit, M: int, coupling_list: List, errs: Dict, seed: int):
@@ -254,14 +176,6 @@ def compile_faq_pipeline(circuit: QuantumCircuit, M: int, coupling_list: List, e
         total_time = time.perf_counter() - t0
         return res.count_ops().get("swap", 0), total_time, prep_time, res.depth(), cost
 
-    elif router == "qmap":
-        arch = qmap.Architecture(M, set(coupling_list))
-        res = qmap.compile(circuit, arch, method="heuristic", initial_layout=mapping)
-        total_time = time.perf_counter() - t0
-        swaps = getattr(res.output, "swaps", 0)
-        depth = res.output.circuit_depth if hasattr(res.output, "circuit_depth") else 0
-        return swaps, total_time, prep_time, depth, cost
-
     elif router == "sabre":
         initial_layout_list = [mapping.get(i, i) for i in range(N)]
         cm = CouplingMap(coupling_list)
@@ -281,75 +195,85 @@ def compile_faq_pipeline(circuit: QuantumCircuit, M: int, coupling_list: List, e
 
 
 # ==========================================
-# 4. MAIN BENCHMARK RUNNER
+# 4. MAIN BENCHMARK EXECUTION
 # ==========================================
 def main():
     SEEDS = [0, 1, 2, 3, 4]  # Paired seeds across all methods
     
     benchmark_tasks = [
-        # (Architecture, Benchmark, Qubits)
-        ("IBM_HeavyHex_115", "grover", 8),
-        ("IBM_HeavyHex_115", "grover", 10),
-        ("IBM_HeavyHex_115", "grover", 12),
-        ("IBM_HeavyHex_115", "vqe", 20),
-        ("IBM_HeavyHex_115", "vqe", 50),
-        ("IBM_HeavyHex_115", "ghz", 20),
-        ("IBM_HeavyHex_115", "ghz", 50),
-        ("IBM_HeavyHex_115", "bv", 10),
-        ("IBM_HeavyHex_115", "bv", 50),
-        ("IBM_HeavyHex_115", "qft", 20),
-        ("IBM_HeavyHex_115", "qft", 50),
-        ("IBM_HeavyHex_115", "qpe", 50),
-        ("IBM_HeavyHex_115", "qaoa", 50),
+        # (Architecture, MQT Key, Label, Qubits)
+        ("IBM_HeavyHex_115", "grover", "Grover's Search", 8),
+        ("IBM_HeavyHex_115", "grover", "Grover's Search", 10),
+        ("IBM_HeavyHex_115", "grover", "Grover's Search", 12),
+        ("IBM_HeavyHex_115", "vqe_real_amp", "VQE (RealAmplitudes)", 10),
+        ("IBM_HeavyHex_115", "vqe_real_amp", "VQE (RealAmplitudes)", 20),
+        ("IBM_HeavyHex_115", "vqe_real_amp", "VQE (RealAmplitudes)", 50),
+        ("IBM_HeavyHex_115", "ghz", "GHZ State", 10),
+        ("IBM_HeavyHex_115", "ghz", "GHZ State", 20),
+        ("IBM_HeavyHex_115", "ghz", "GHZ State", 50),
+        ("IBM_HeavyHex_115", "bv", "Bernstein-Vazirani", 10),
+        ("IBM_HeavyHex_115", "bv", "Bernstein-Vazirani", 20),
+        ("IBM_HeavyHex_115", "bv", "Bernstein-Vazirani", 50),
+        ("IBM_HeavyHex_115", "qft", "QFT", 20),
+        ("IBM_HeavyHex_115", "qft", "QFT", 50),
+        ("IBM_HeavyHex_115", "qpeexact", "QPE (Exact)", 10),
+        ("IBM_HeavyHex_115", "qpeexact", "QPE (Exact)", 20),
+        ("IBM_HeavyHex_115", "qpeexact", "QPE (Exact)", 50),
+        ("IBM_HeavyHex_115", "qaoa", "QAOA", 10),
+        ("IBM_HeavyHex_115", "qaoa", "QAOA", 20),
+        ("IBM_HeavyHex_115", "qaoa", "QAOA", 50),
         
-        ("Rigetti_Grid_80", "grover", 8),
-        ("Rigetti_Grid_80", "grover", 10),
-        ("Rigetti_Grid_80", "grover", 12),
-        ("Rigetti_Grid_80", "vqe", 20),
-        ("Rigetti_Grid_80", "vqe", 50),
-        ("Rigetti_Grid_80", "ghz", 20),
-        ("Rigetti_Grid_80", "ghz", 50),
-        ("Rigetti_Grid_80", "bv", 10),
-        ("Rigetti_Grid_80", "bv", 50),
-        ("Rigetti_Grid_80", "qft", 20),
-        ("Rigetti_Grid_80", "qft", 50),
-        ("Rigetti_Grid_80", "qpe", 50),
-        ("Rigetti_Grid_80", "qaoa", 50),
+        ("Rigetti_Grid_80", "grover", "Grover's Search", 8),
+        ("Rigetti_Grid_80", "grover", "Grover's Search", 10),
+        ("Rigetti_Grid_80", "grover", "Grover's Search", 12),
+        ("Rigetti_Grid_80", "vqe_real_amp", "VQE (RealAmplitudes)", 10),
+        ("Rigetti_Grid_80", "vqe_real_amp", "VQE (RealAmplitudes)", 20),
+        ("Rigetti_Grid_80", "vqe_real_amp", "VQE (RealAmplitudes)", 50),
+        ("Rigetti_Grid_80", "ghz", "GHZ State", 10),
+        ("Rigetti_Grid_80", "ghz", "GHZ State", 20),
+        ("Rigetti_Grid_80", "ghz", "GHZ State", 50),
+        ("Rigetti_Grid_80", "bv", "Bernstein-Vazirani", 10),
+        ("Rigetti_Grid_80", "bv", "Bernstein-Vazirani", 20),
+        ("Rigetti_Grid_80", "bv", "Bernstein-Vazirani", 50),
+        ("Rigetti_Grid_80", "qft", "QFT", 20),
+        ("Rigetti_Grid_80", "qft", "QFT", 50),
+        ("Rigetti_Grid_80", "qpeexact", "QPE (Exact)", 50),
+        ("Rigetti_Grid_80", "qaoa", "QAOA", 50),
 
-        ("IonQ_AllToAll_50", "vqe", 50),
-        ("IonQ_AllToAll_50", "ghz", 50),
-        ("IonQ_AllToAll_50", "qft", 50),
+        ("IonQ_AllToAll_50", "vqe_real_amp", "VQE (RealAmplitudes)", 50),
+        ("IonQ_AllToAll_50", "ghz", "GHZ State", 50),
+        ("IonQ_AllToAll_50", "qft", "QFT", 50),
     ]
 
     all_results = []
-    print(f"=== STARTING RIGOROUS PAIRED-SEED BENCHMARK ({len(benchmark_tasks)} tasks, K={len(SEEDS)} seeds) ===")
+    print(f"=== STARTING OFFICIAL MQT-BENCH PAIRED BENCHMARK ({len(benchmark_tasks)} tasks, K={len(SEEDS)} seeds) ===")
 
-    for task_idx, (arch_name, bench_name, n_q) in enumerate(benchmark_tasks, 1):
-        print(f"\n[{task_idx}/{len(benchmark_tasks)}] Running {bench_name.upper()} N={n_q} on {arch_name}...")
+    for task_idx, (arch_name, bench_key, bench_label, n_q) in enumerate(benchmark_tasks, 1):
+        print(f"\n[{task_idx}/{len(benchmark_tasks)}] Running {bench_label} N={n_q} on {arch_name}...")
         M, coupling_list, errs = get_hardware_topology(arch_name)
-        qc = build_benchmark_circuit(bench_name, n_q)
+        try:
+            qc = load_mqt_benchmark_circuit(bench_key, n_q)
+        except Exception as e:
+            print(f"  [SKIP] Error loading MQT bench {bench_key} N={n_q}: {e}")
+            continue
 
         task_record = {
             "architecture": arch_name,
-            "benchmark": bench_name,
+            "benchmark": bench_key,
+            "benchmark_label": bench_label,
             "qubits": n_q,
             "num_physical_qubits": M,
             "original_gate_count": qc.size(),
             "original_depth": qc.depth(),
-            "runs": {}
         }
 
-        # Track lists for statistics
         swaps_sabre_def, time_sabre_def = [], []
         swaps_tket_def, time_tket_def = [], []
-        swaps_qmap_def, time_qmap_def = [], []
         swaps_paper_fgea, time_paper_fgea = [], []
         
         swaps_faq_tket, time_faq_tket, prep_faq_tket = [], [], []
-        swaps_faq_qmap, time_faq_qmap, prep_faq_qmap = [], [], []
         swaps_faq_sabre, time_faq_sabre, prep_faq_sabre = [], [], []
 
-        # Ablation lists
         swaps_ablation_barycenter = []
         swaps_ablation_random = []
 
@@ -366,42 +290,25 @@ def main():
                 sw, t, d = compile_tket_def(qc, M, coupling_list, seed)
                 swaps_tket_def.append(sw); time_tket_def.append(t)
             except Exception as e:
-                # Expected when PyTKET GraphPlacement fails on irregular unseeded graphs
                 swaps_tket_def.append(-1); time_tket_def.append(0.0)
 
-            # 3. QMAP Def (run on smaller/moderate circuits to avoid timeout)
-            if n_q <= 50 and bench_name in ["vqe", "ghz", "bv", "grover"]:
-                try:
-                    sw, t, d = compile_qmap_def(qc, M, coupling_list, seed)
-                    swaps_qmap_def.append(sw); time_qmap_def.append(t)
-                except Exception as e:
-                    swaps_qmap_def.append(-1); time_qmap_def.append(0.0)
-
-            # 4. Paper FGEA+FMA
+            # 3. Paper FGEA+FMA
             try:
                 sw, t, d = compile_paper_fgea(qc, M, coupling_list, errs, seed)
                 swaps_paper_fgea.append(sw); time_paper_fgea.append(t)
             except Exception as e:
                 print(f"  [Error Paper FGEA] seed={seed}: {e}")
 
-            # 5. FAQ + PyTKET (Ours: 5-Start Gaussian + Momentum)
+            # 4. FAQ + PyTKET (Ours)
             try:
                 sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "tket", "gaussian", seed)
                 swaps_faq_tket.append(sw); time_faq_tket.append(t); prep_faq_tket.append(tp)
             except Exception as e:
                 print(f"  [Error FAQ+TKET] seed={seed}: {e}")
 
-            # 6. FAQ + QMAP (Ours)
-            if n_q <= 50 and bench_name in ["vqe", "ghz", "bv", "grover"]:
-                try:
-                    sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "qmap", "gaussian", seed)
-                    swaps_faq_qmap.append(sw); time_faq_qmap.append(t); prep_faq_qmap.append(tp)
-                except Exception as e:
-                    swaps_faq_qmap.append(-1); time_faq_qmap.append(0.0); prep_faq_qmap.append(0.0)
-
-            # 7. FAQ + SABRE (Ours)
+            # 5. FAQ + SABRE (Ours)
             try:
-                sw, t, tp, d, cost = compile_faq_sabre = compile_faq_pipeline(qc, M, coupling_list, errs, "sabre", "gaussian", seed)
+                sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "sabre", "gaussian", seed)
                 swaps_faq_sabre.append(sw); time_faq_sabre.append(t); prep_faq_sabre.append(tp)
             except Exception as e:
                 print(f"  [Error FAQ+SABRE] seed={seed}: {e}")
@@ -420,22 +327,16 @@ def main():
             except Exception:
                 pass
 
-        # Calculate statistics
+        # Statistics
         m_sabre, ci_sabre = compute_ci95(swaps_sabre_def)
         m_tket_def, ci_tket_def = compute_ci95(swaps_tket_def)
-        m_qmap_def, ci_qmap_def = compute_ci95(swaps_qmap_def)
         m_paper, ci_paper = compute_ci95(swaps_paper_fgea)
         
         m_faq_tket, ci_faq_tket = compute_ci95(swaps_faq_tket)
-        m_faq_qmap, ci_faq_qmap = compute_ci95(swaps_faq_qmap)
         m_faq_sabre, ci_faq_sabre = compute_ci95(swaps_faq_sabre)
 
         m_ablation_bary, _ = compute_ci95(swaps_ablation_barycenter)
         m_ablation_rand, _ = compute_ci95(swaps_ablation_random)
-
-        # Baseline min calculation
-        valid_defaults = [m for m in [m_sabre, m_tket_def, m_qmap_def] if m > 0]
-        min_default = min(valid_defaults) if valid_defaults else m_sabre
 
         task_record["sabre_default_swaps_mean"] = m_sabre
         task_record["sabre_default_swaps_ci95"] = ci_sabre
@@ -444,9 +345,6 @@ def main():
         task_record["tket_default_swaps_mean"] = m_tket_def
         task_record["tket_default_swaps_ci95"] = ci_tket_def
         task_record["tket_default_success_rate"] = float(np.mean([1 if s >= 0 else 0 for s in swaps_tket_def])) * 100
-
-        task_record["qmap_default_swaps_mean"] = m_qmap_def
-        task_record["qmap_default_swaps_ci95"] = ci_qmap_def
 
         task_record["paper_fgea_swaps_mean"] = m_paper
         task_record["paper_fgea_swaps_ci95"] = ci_paper
@@ -457,26 +355,21 @@ def main():
         task_record["faq_tket_prep_time_mean"] = float(np.mean(prep_faq_tket)) if prep_faq_tket else 0.0
         task_record["faq_tket_success_rate"] = 100.0
 
-        task_record["faq_qmap_swaps_mean"] = m_faq_qmap
-        task_record["faq_qmap_swaps_ci95"] = ci_faq_qmap
-
         task_record["faq_sabre_swaps_mean"] = m_faq_sabre
         task_record["faq_sabre_swaps_ci95"] = ci_faq_sabre
 
         task_record["ablation_barycenter_swaps_mean"] = m_ablation_bary
         task_record["ablation_random_multistart_swaps_mean"] = m_ablation_rand
 
-        task_record["min_default_baseline"] = min_default
-
         all_results.append(task_record)
-        print(f"  -> SABRE Def: {m_sabre:.1f} | TKET Def: {m_tket_def:.1f} | Paper: {m_paper:.1f} | FAQ+TKET: {m_faq_tket:.1f} ± {ci_faq_tket:.1f}")
+        print(f"  -> SABRE: {m_sabre:.1f} | TKET: {m_tket_def:.1f} | Paper: {m_paper:.1f} | FAQ+SABRE: {m_faq_sabre:.1f} | FAQ+TKET: {m_faq_tket:.1f} ± {ci_faq_tket:.1f}")
 
     # Save to JSON
     out_path = "/home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/benchmark_rigorous_results.json"
     with open(out_path, "w") as f:
         json.dump(all_results, f, indent=2)
 
-    print(f"\n=== BENCHMARK COMPLETE! Saved {len(all_results)} records to {out_path} ===")
+    print(f"\n=== MQT-BENCH BENCHMARK COMPLETE! Saved {len(all_results)} records to {out_path} ===")
 
 
 if __name__ == "__main__":
