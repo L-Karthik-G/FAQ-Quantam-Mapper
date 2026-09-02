@@ -4,62 +4,45 @@
     "benchmark": "grover",
     "benchmark_label": "Grover's Search",
     "qubits": 8,
+    "suite_type": "mqt",
     "num_physical_qubits": 127,
     "original_gate_count": 5912,
     "original_depth": 4031,
     "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 976.2,
-      "std_swaps": 71.859306982464,
-      "ci95_swaps": 99.7567105671839
+      "mean_swaps": 1152.25,
+      "std_swaps": 63.3528807553374,
+      "ci95_swaps": 30.42032060263227
     },
     "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 824.4,
-      "std_swaps": 19.158288023724875,
-      "ci95_swaps": 26.595967503720217
+      "mean_swaps": 1263.55,
+      "std_swaps": 66.0980143423386,
+      "ci95_swaps": 31.738458670199073
     },
     "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 775.0,
+      "mean_swaps": 851.0,
       "std_swaps": 0.0,
       "ci95_swaps": 0.0
     },
     "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 838.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
+      "mean_swaps": 1039.0,
+      "std_swaps": 18.33030277982336,
+      "ci95_swaps": 8.801710051023527
     }
   },
   {
@@ -67,62 +50,45 @@
     "benchmark": "grover",
     "benchmark_label": "Grover's Search",
     "qubits": 10,
+    "suite_type": "mqt",
     "num_physical_qubits": 127,
     "original_gate_count": 24109,
     "original_depth": 16710,
     "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 4907.0,
-      "std_swaps": 393.0496151887189,
-      "ci95_swaps": 545.6403400952973
+      "mean_swaps": 5603.15,
+      "std_swaps": 295.34983917381777,
+      "ci95_swaps": 141.81891479096586
     },
     "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 4298.8,
-      "std_swaps": 329.0813881093855,
-      "ci95_swaps": 456.8382046139994
+      "mean_swaps": 5693.55,
+      "std_swaps": 193.13090767663266,
+      "ci95_swaps": 92.73617962993055
     },
     "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 3489.0,
+      "mean_swaps": 5035.0,
       "std_swaps": 0.0,
       "ci95_swaps": 0.0
     },
     "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 3766.8,
-      "std_swaps": 87.20183484308113,
-      "ci95_swaps": 121.05555375716949
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
+      "mean_swaps": 4840.45,
+      "std_swaps": 246.4957352572251,
+      "ci95_swaps": 118.36051027678985
     }
   },
   {
@@ -130,62 +96,45 @@
     "benchmark": "grover",
     "benchmark_label": "Grover's Search",
     "qubits": 12,
+    "suite_type": "mqt",
     "num_physical_qubits": 127,
     "original_gate_count": 79019,
     "original_depth": 57134,
     "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 17973.4,
-      "std_swaps": 93.87353194591115,
-      "ci95_swaps": 130.31735413942684
+      "mean_swaps": 18579.0,
+      "std_swaps": 56.908698807827264,
+      "ci95_swaps": 27.32600068335318
     },
     "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 16446.4,
-      "std_swaps": 1438.8802034915902,
-      "ci95_swaps": 1997.4859489751154
+      "mean_swaps": 18625.3,
+      "std_swaps": 144.11179688006115,
+      "ci95_swaps": 69.19854332501747
     },
     "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 14447.0,
+      "mean_swaps": 12610.0,
       "std_swaps": 0.0,
       "ci95_swaps": 0.0
     },
     "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 10938.0,
-      "std_swaps": 88.0,
-      "ci95_swaps": 122.1635846287029
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
+      "mean_swaps": 15669.15,
+      "std_swaps": 46.26691582545783,
+      "ci95_swaps": 22.216107553828195
     }
   },
   {
@@ -193,12 +142,13 @@
     "benchmark": "vqe_real_amp",
     "benchmark_label": "VQE (RealAmplitudes)",
     "qubits": 10,
+    "suite_type": "mqt",
     "num_physical_qubits": 127,
     "original_gate_count": 237,
     "original_depth": 34,
     "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
       "mean_swaps": 0.0,
@@ -206,17 +156,17 @@
       "ci95_swaps": 0.0
     },
     "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 9.4,
-      "std_swaps": 1.7435595774162693,
-      "ci95_swaps": 2.420448727169067
+      "mean_swaps": 0.0,
+      "std_swaps": 0.0,
+      "ci95_swaps": 0.0
     },
     "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
       "mean_swaps": 0.0,
@@ -224,31 +174,13 @@
       "ci95_swaps": 0.0
     },
     "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
       "mean_swaps": 0.0,
       "std_swaps": 0.0,
       "ci95_swaps": 0.0
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
     }
   },
   {
@@ -256,30 +188,31 @@
     "benchmark": "vqe_real_amp",
     "benchmark_label": "VQE (RealAmplitudes)",
     "qubits": 20,
+    "suite_type": "mqt",
     "num_physical_qubits": 127,
     "original_gate_count": 477,
     "original_depth": 44,
     "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 12.4,
-      "std_swaps": 5.3516352641038605,
-      "ci95_swaps": 7.429260766912532
+      "mean_swaps": 9.6,
+      "std_swaps": 0.7348469228349533,
+      "ci95_swaps": 0.3528533938784424
     },
     "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 26.6,
-      "std_swaps": 4.963869458396342,
-      "ci95_swaps": 6.890955530302673
+      "mean_swaps": 23.5,
+      "std_swaps": 8.896628574915331,
+      "ci95_swaps": 4.271917713996975
     },
     "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
       "mean_swaps": 0.0,
@@ -287,31 +220,13 @@
       "ci95_swaps": 0.0
     },
     "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 4.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
+      "mean_swaps": 0.6,
+      "std_swaps": 1.2,
+      "ci95_swaps": 0.5762071793409848
     }
   },
   {
@@ -319,372 +234,31 @@
     "benchmark": "vqe_real_amp",
     "benchmark_label": "VQE (RealAmplitudes)",
     "qubits": 50,
+    "suite_type": "mqt",
     "num_physical_qubits": 127,
     "original_gate_count": 1197,
     "original_depth": 74,
     "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 96.4,
-      "std_swaps": 23.130931671681534,
-      "ci95_swaps": 32.1108810092524
+      "mean_swaps": 30.75,
+      "std_swaps": 0.6224949798994366,
+      "ci95_swaps": 0.29890506376814785
     },
     "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 100.4,
-      "std_swaps": 25.413382301456846,
-      "ci95_swaps": 35.27943044870004
+      "mean_swaps": 158.8,
+      "std_swaps": 35.395762458237854,
+      "ci95_swaps": 16.996077038903966
     },
     "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 7.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 15.2,
-      "std_swaps": 8.818163074019441,
-      "ci95_swaps": 12.241572851848602
-    }
-  },
-  {
-    "architecture": "IBM_Eagle_127_Brisbane",
-    "benchmark": "ghz",
-    "benchmark_label": "GHZ State",
-    "qubits": 10,
-    "num_physical_qubits": 127,
-    "original_gate_count": 20,
-    "original_depth": 11,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 3.8,
-      "std_swaps": 0.39999999999999997,
-      "ci95_swaps": 0.5552890210395586
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    }
-  },
-  {
-    "architecture": "IBM_Eagle_127_Brisbane",
-    "benchmark": "ghz",
-    "benchmark_label": "GHZ State",
-    "qubits": 20,
-    "num_physical_qubits": 127,
-    "original_gate_count": 40,
-    "original_depth": 21,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 16.4,
-      "std_swaps": 2.4166091947189146,
-      "ci95_swaps": 3.354791384926655
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 8.2,
-      "std_swaps": 0.7483314773547882,
-      "ci95_swaps": 1.0388506336835677
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 3.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    }
-  },
-  {
-    "architecture": "IBM_Eagle_127_Brisbane",
-    "benchmark": "ghz",
-    "benchmark_label": "GHZ State",
-    "qubits": 50,
-    "num_physical_qubits": 127,
-    "original_gate_count": 100,
-    "original_depth": 51,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 54.0,
-      "std_swaps": 2.0976176963403033,
-      "ci95_swaps": 2.9119601927901533
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 32.8,
-      "std_swaps": 7.782030583337488,
-      "ci95_swaps": 10.803190360803447
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 16.6,
-      "std_swaps": 0.4898979485566356,
-      "ci95_swaps": 0.6800873806582556
-    }
-  },
-  {
-    "architecture": "IBM_Eagle_127_Brisbane",
-    "benchmark": "bv",
-    "benchmark_label": "Bernstein-Vazirani",
-    "qubits": 10,
-    "num_physical_qubits": 127,
-    "original_gate_count": 40,
-    "original_depth": 14,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 1.4,
-      "std_swaps": 0.4898979485566356,
-      "ci95_swaps": 0.6800873806582556
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 1.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    }
-  },
-  {
-    "architecture": "IBM_Eagle_127_Brisbane",
-    "benchmark": "bv",
-    "benchmark_label": "Bernstein-Vazirani",
-    "qubits": 20,
-    "num_physical_qubits": 127,
-    "original_gate_count": 85,
-    "original_depth": 29,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 6.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 4.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 2.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 5.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    }
-  },
-  {
-    "architecture": "IBM_Eagle_127_Brisbane",
-    "benchmark": "bv",
-    "benchmark_label": "Bernstein-Vazirani",
-    "qubits": 50,
-    "num_physical_qubits": 127,
-    "original_gate_count": 220,
-    "original_depth": 74,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 28.0,
-      "std_swaps": 2.449489742783178,
-      "ci95_swaps": 3.4004369032912782
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 30.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
       "mean_swaps": 12.0,
@@ -692,11 +266,57 @@
       "ci95_swaps": 0.0
     },
     "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 61.0,
+      "mean_swaps": 12.45,
+      "std_swaps": 6.200604809210146,
+      "ci95_swaps": 2.9773608394359368
+    }
+  },
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "ghz",
+    "benchmark_label": "GHZ State",
+    "qubits": 50,
+    "suite_type": "mqt",
+    "num_physical_qubits": 127,
+    "original_gate_count": 100,
+    "original_depth": 51,
+    "sabre_default": {
+      "n_total": 20,
+      "n_success": 20,
+      "n_failure": 0,
+      "success_rate": 100.0,
+      "mean_swaps": 12.0,
+      "std_swaps": 0.0,
+      "ci95_swaps": 0.0
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "n_failure": 0,
+      "success_rate": 100.0,
+      "mean_swaps": 58.9,
+      "std_swaps": 17.76485294056779,
+      "ci95_swaps": 8.530196503576638
+    },
+    "tket_default": {
+      "n_total": 20,
+      "n_success": 20,
+      "n_failure": 0,
+      "success_rate": 100.0,
+      "mean_swaps": 0.0,
+      "std_swaps": 0.0,
+      "ci95_swaps": 0.0
+    },
+    "faq_tket": {
+      "n_total": 20,
+      "n_success": 20,
+      "n_failure": 0,
+      "success_rate": 100.0,
+      "mean_swaps": 6.0,
       "std_swaps": 0.0,
       "ci95_swaps": 0.0
     }
@@ -706,233 +326,45 @@
     "benchmark": "qft",
     "benchmark_label": "QFT",
     "qubits": 20,
+    "suite_type": "mqt",
     "num_physical_qubits": 127,
     "original_gate_count": 1020,
     "original_depth": 155,
     "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 203.4,
-      "std_swaps": 5.607138307550474,
-      "ci95_swaps": 7.783955854082777
+      "mean_swaps": 225.0,
+      "std_swaps": 7.134423592694787,
+      "ci95_swaps": 3.4257550788086997
     },
     "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 162.2,
-      "std_swaps": 3.54400902933387,
-      "ci95_swaps": 4.919873261135403
+      "mean_swaps": 248.25,
+      "std_swaps": 13.148669134174758,
+      "ci95_swaps": 6.313631294908924
     },
     "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 206.0,
+      "mean_swaps": 284.0,
       "std_swaps": 0.0,
       "ci95_swaps": 0.0
     },
     "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 225.8,
-      "std_swaps": 11.267652816802618,
-      "ci95_swaps": 15.64200975513988
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    }
-  },
-  {
-    "architecture": "IBM_Eagle_127_Brisbane",
-    "benchmark": "qft",
-    "benchmark_label": "QFT",
-    "qubits": 50,
-    "num_physical_qubits": 127,
-    "original_gate_count": 6300,
-    "original_depth": 395,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 1599.8,
-      "std_swaps": 21.68317319951118,
-      "ci95_swaps": 30.101070047469392
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 1712.6,
-      "std_swaps": 47.14064064053436,
-      "ci95_swaps": 65.4417004811499
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 1413.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 1632.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    }
-  },
-  {
-    "architecture": "IBM_Eagle_127_Brisbane",
-    "benchmark": "qpeexact",
-    "benchmark_label": "QPE (Exact)",
-    "qubits": 10,
-    "num_physical_qubits": 127,
-    "original_gate_count": 255,
-    "original_depth": 91,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 39.4,
-      "std_swaps": 1.854723699099141,
-      "ci95_swaps": 2.5747692679290775
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 33.4,
-      "std_swaps": 1.2000000000000002,
-      "ci95_swaps": 1.6658670631186763
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 47.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 42.8,
-      "std_swaps": 1.4696938456699067,
-      "ci95_swaps": 2.040262141974767
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    }
-  },
-  {
-    "architecture": "IBM_Eagle_127_Brisbane",
-    "benchmark": "qpeexact",
-    "benchmark_label": "QPE (Exact)",
-    "qubits": 20,
-    "num_physical_qubits": 127,
-    "original_gate_count": 1035,
-    "original_depth": 223,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 213.2,
-      "std_swaps": 7.807688518377254,
-      "ci95_swaps": 10.838809284878769
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 215.8,
-      "std_swaps": 9.53729521405309,
-      "ci95_swaps": 13.239888306942023
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 248.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 254.4,
-      "std_swaps": 11.200000000000001,
-      "ci95_swaps": 15.548092589107641
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
+      "mean_swaps": 213.6,
+      "std_swaps": 4.800000000000001,
+      "ci95_swaps": 2.3048287173639395
     }
   },
   {
@@ -940,62 +372,45 @@
     "benchmark": "qaoa",
     "benchmark_label": "QAOA",
     "qubits": 10,
+    "suite_type": "mqt",
     "num_physical_qubits": 127,
     "original_gate_count": 226,
     "original_depth": 76,
     "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 45.2,
-      "std_swaps": 3.1874754901018454,
-      "ci95_swaps": 4.424925361215603
+      "mean_swaps": 57.2,
+      "std_swaps": 3.736308338453881,
+      "ci95_swaps": 1.7940730740405941
     },
     "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 34.6,
-      "std_swaps": 1.7435595774162693,
-      "ci95_swaps": 2.420448727169067
+      "mean_swaps": 72.55,
+      "std_swaps": 4.69547654663507,
+      "ci95_swaps": 2.2546394138319514
     },
     "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 45.0,
+      "mean_swaps": 79.0,
       "std_swaps": 0.0,
       "ci95_swaps": 0.0
     },
     "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 51.8,
-      "std_swaps": 3.4292856398964493,
-      "ci95_swaps": 4.76061166460779
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
+      "mean_swaps": 73.0,
+      "std_swaps": 0.0,
+      "ci95_swaps": 0.0
     }
   },
   {
@@ -1003,62 +418,45 @@
     "benchmark": "qaoa",
     "benchmark_label": "QAOA",
     "qubits": 20,
+    "suite_type": "mqt",
     "num_physical_qubits": 127,
     "original_gate_count": 692,
     "original_depth": 142,
     "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 235.0,
-      "std_swaps": 12.521980673998822,
-      "ci95_swaps": 17.383295974852697
+      "mean_swaps": 308.65,
+      "std_swaps": 8.75942349701166,
+      "ci95_swaps": 4.206035588221862
     },
     "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 213.0,
-      "std_swaps": 8.602325267042627,
-      "ci95_swaps": 11.941941940499898
+      "mean_swaps": 325.95,
+      "std_swaps": 13.676530992908985,
+      "ci95_swaps": 6.567096122161371
     },
     "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 247.0,
+      "mean_swaps": 398.0,
       "std_swaps": 0.0,
       "ci95_swaps": 0.0
     },
     "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 292.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
+      "mean_swaps": 380.85,
+      "std_swaps": 9.986365705300402,
+      "ci95_swaps": 4.795179679098909
     }
   },
   {
@@ -1066,30 +464,31 @@
     "benchmark": "grover",
     "benchmark_label": "Grover's Search",
     "qubits": 8,
+    "suite_type": "mqt",
     "num_physical_qubits": 80,
     "original_gate_count": 5912,
     "original_depth": 4031,
     "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 768.6,
-      "std_swaps": 12.191800523302536,
-      "ci95_swaps": 16.924932443235612
+      "mean_swaps": 768.25,
+      "std_swaps": 8.971482597653523,
+      "ci95_swaps": 4.307860568417223
     },
     "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 794.0,
-      "std_swaps": 12.033287165193059,
-      "ci95_swaps": 16.704880624619847
+      "mean_swaps": 781.8,
+      "std_swaps": 16.889641796083186,
+      "ci95_swaps": 8.109944049500582
     },
     "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
       "mean_swaps": 639.0,
@@ -1097,31 +496,13 @@
       "ci95_swaps": 0.0
     },
     "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 605.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
+      "mean_swaps": 605.5,
+      "std_swaps": 2.179449471770337,
+      "ci95_swaps": 1.0465120272041544
     }
   },
   {
@@ -1129,30 +510,31 @@
     "benchmark": "grover",
     "benchmark_label": "Grover's Search",
     "qubits": 10,
+    "suite_type": "mqt",
     "num_physical_qubits": 80,
     "original_gate_count": 24109,
     "original_depth": 16710,
     "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 3466.6,
-      "std_swaps": 15.186836405255704,
-      "ci95_swaps": 21.082708800405925
+      "mean_swaps": 3461.75,
+      "std_swaps": 27.566057026713125,
+      "ci95_swaps": 13.236466637429254
     },
     "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 3499.4,
-      "std_swaps": 29.796644106341905,
-      "ci95_swaps": 41.36437334018682
+      "mean_swaps": 3513.45,
+      "std_swaps": 37.74715221046483,
+      "ci95_swaps": 18.1251500861223
     },
     "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
       "mean_swaps": 2669.0,
@@ -1160,31 +542,13 @@
       "ci95_swaps": 0.0
     },
     "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
       "mean_swaps": 2567.0,
       "std_swaps": 0.0,
       "ci95_swaps": 0.0
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
     }
   },
   {
@@ -1192,30 +556,31 @@
     "benchmark": "grover",
     "benchmark_label": "Grover's Search",
     "qubits": 12,
+    "suite_type": "mqt",
     "num_physical_qubits": 80,
     "original_gate_count": 79019,
     "original_depth": 57134,
     "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 12358.0,
-      "std_swaps": 49.05099387372289,
-      "ci95_swaps": 68.09369592289242
+      "mean_swaps": 12375.25,
+      "std_swaps": 56.286654723833074,
+      "ci95_swaps": 27.02731212746648
     },
     "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 12472.4,
-      "std_swaps": 113.01079594445832,
-      "ci95_swaps": 156.88413561724897
+      "mean_swaps": 12390.75,
+      "std_swaps": 112.36675442496326,
+      "ci95_swaps": 53.95544218242434
     },
     "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
       "mean_swaps": 8828.0,
@@ -1223,157 +588,13 @@
       "ci95_swaps": 0.0
     },
     "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 8702.6,
-      "std_swaps": 2.939387691339814,
-      "ci95_swaps": 4.080524283949535
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    }
-  },
-  {
-    "architecture": "Rigetti_Grid_80",
-    "benchmark": "vqe_real_amp",
-    "benchmark_label": "VQE (RealAmplitudes)",
-    "qubits": 10,
-    "num_physical_qubits": 80,
-    "original_gate_count": 237,
-    "original_depth": 34,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    }
-  },
-  {
-    "architecture": "Rigetti_Grid_80",
-    "benchmark": "vqe_real_amp",
-    "benchmark_label": "VQE (RealAmplitudes)",
-    "qubits": 20,
-    "num_physical_qubits": 80,
-    "original_gate_count": 477,
-    "original_depth": 44,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 4.0,
-      "std_swaps": 2.1908902300206643,
-      "ci95_swaps": 3.0414432275832706
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 7.0,
-      "std_swaps": 4.732863826479693,
-      "ci95_swaps": 6.57026830229862
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
+      "mean_swaps": 8702.3,
+      "std_swaps": 2.98496231131986,
+      "ci95_swaps": 1.433297261537303
     }
   },
   {
@@ -1381,30 +602,31 @@
     "benchmark": "vqe_real_amp",
     "benchmark_label": "VQE (RealAmplitudes)",
     "qubits": 50,
+    "suite_type": "mqt",
     "num_physical_qubits": 80,
     "original_gate_count": 1197,
     "original_depth": 74,
     "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 44.0,
-      "std_swaps": 10.059821071967434,
-      "ci95_swaps": 13.965270487214799
+      "mean_swaps": 45.7,
+      "std_swaps": 10.334892355511014,
+      "ci95_swaps": 4.962532644134757
     },
     "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 50.0,
-      "std_swaps": 12.263767773404714,
-      "ci95_swaps": 17.02483900287598
+      "mean_swaps": 64.0,
+      "std_swaps": 16.208022704821214,
+      "ci95_swaps": 7.78264920453306
     },
     "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
       "mean_swaps": 13.0,
@@ -1412,355 +634,13 @@
       "ci95_swaps": 0.0
     },
     "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 0.4,
-      "std_swaps": 0.8,
-      "ci95_swaps": 1.1105780420791174
-    }
-  },
-  {
-    "architecture": "Rigetti_Grid_80",
-    "benchmark": "ghz",
-    "benchmark_label": "GHZ State",
-    "qubits": 10,
-    "num_physical_qubits": 80,
-    "original_gate_count": 20,
-    "original_depth": 11,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    }
-  },
-  {
-    "architecture": "Rigetti_Grid_80",
-    "benchmark": "ghz",
-    "benchmark_label": "GHZ State",
-    "qubits": 20,
-    "num_physical_qubits": 80,
-    "original_gate_count": 40,
-    "original_depth": 21,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 6.6,
-      "std_swaps": 1.0198039027185568,
-      "ci95_swaps": 1.4157147769822718
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 2.2,
-      "std_swaps": 1.6,
-      "ci95_swaps": 2.2211560841582347
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    }
-  },
-  {
-    "architecture": "Rigetti_Grid_80",
-    "benchmark": "ghz",
-    "benchmark_label": "GHZ State",
-    "qubits": 50,
-    "num_physical_qubits": 80,
-    "original_gate_count": 100,
-    "original_depth": 51,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 38.0,
-      "std_swaps": 6.6932802122726045,
-      "ci95_swaps": 9.29176254154076
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 16.4,
-      "std_swaps": 3.8262252939417984,
-      "ci95_swaps": 5.311652244374347
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.2,
-      "std_swaps": 0.4,
-      "ci95_swaps": 0.5552890210395587
-    }
-  },
-  {
-    "architecture": "Rigetti_Grid_80",
-    "benchmark": "bv",
-    "benchmark_label": "Bernstein-Vazirani",
-    "qubits": 10,
-    "num_physical_qubits": 80,
-    "original_gate_count": 40,
-    "original_depth": 14,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.6,
-      "std_swaps": 0.48989794855663565,
-      "ci95_swaps": 0.6800873806582557
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 1.2,
-      "std_swaps": 0.9797958971132713,
-      "ci95_swaps": 1.3601747613165114
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    }
-  },
-  {
-    "architecture": "Rigetti_Grid_80",
-    "benchmark": "bv",
-    "benchmark_label": "Bernstein-Vazirani",
-    "qubits": 20,
-    "num_physical_qubits": 80,
-    "original_gate_count": 85,
-    "original_depth": 29,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 3.4,
-      "std_swaps": 0.4898979485566356,
-      "ci95_swaps": 0.6800873806582556
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 4.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 4.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 5.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
-    }
-  },
-  {
-    "architecture": "Rigetti_Grid_80",
-    "benchmark": "bv",
-    "benchmark_label": "Bernstein-Vazirani",
-    "qubits": 50,
-    "num_physical_qubits": 80,
-    "original_gate_count": 220,
-    "original_depth": 74,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 21.8,
-      "std_swaps": 2.481934729198171,
-      "ci95_swaps": 3.4454777651513364
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 25.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 12.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 20.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
+      "mean_swaps": 1.1,
+      "std_swaps": 0.9949874371066199,
+      "ci95_swaps": 0.4777657538457675
     }
   },
   {
@@ -1768,30 +648,31 @@
     "benchmark": "qft",
     "benchmark_label": "QFT",
     "qubits": 20,
+    "suite_type": "mqt",
     "num_physical_qubits": 80,
     "original_gate_count": 1020,
     "original_depth": 155,
     "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 143.8,
-      "std_swaps": 3.6551333764994123,
-      "ci95_swaps": 5.074138586013438
+      "mean_swaps": 147.9,
+      "std_swaps": 4.763402145525822,
+      "ci95_swaps": 2.2872554286168576
     },
     "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 170.6,
-      "std_swaps": 3.4409301068170506,
-      "ci95_swaps": 4.776776776199959
+      "mean_swaps": 172.95,
+      "std_swaps": 6.288680306709827,
+      "ci95_swaps": 3.0196522844220572
     },
     "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
       "mean_swaps": 148.0,
@@ -1799,107 +680,183 @@
       "ci95_swaps": 0.0
     },
     "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 143.0,
-      "std_swaps": 4.898979485566356,
-      "ci95_swaps": 6.8008738065825565
+      "mean_swaps": 142.0,
+      "std_swaps": 4.58257569495584,
+      "ci95_swaps": 2.2004275127558817
+    }
+  },
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "ripple_carry_adder",
+    "benchmark_label": "Ripple-Carry Adder (Holdout)",
+    "qubits": 20,
+    "suite_type": "holdout",
+    "num_physical_qubits": 127,
+    "original_gate_count": 76,
+    "original_depth": 76,
+    "sabre_default": {
+      "n_total": 20,
+      "n_success": 20,
+      "n_failure": 0,
+      "success_rate": 100.0,
+      "mean_swaps": 5.0,
+      "std_swaps": 0.0,
+      "ci95_swaps": 0.0
     },
-    "qmap_default": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "n_failure": 0,
+      "success_rate": 100.0,
+      "mean_swaps": 5.1,
+      "std_swaps": 2.879236009777594,
+      "ci95_swaps": 1.3825303832091165
     },
-    "faq_qmap": {
-      "n_total": 5,
-      "n_success": 0,
-      "n_failure": 5,
-      "success_rate": 0.0,
-      "mean_swaps": null,
-      "std_swaps": null,
-      "ci95_swaps": null
+    "tket_default": {
+      "n_total": 20,
+      "n_success": 20,
+      "n_failure": 0,
+      "success_rate": 100.0,
+      "mean_swaps": 0.0,
+      "std_swaps": 0.0,
+      "ci95_swaps": 0.0
+    },
+    "faq_tket": {
+      "n_total": 20,
+      "n_success": 20,
+      "n_failure": 0,
+      "success_rate": 100.0,
+      "mean_swaps": 3.25,
+      "std_swaps": 5.629165124598851,
+      "ci95_swaps": 2.70297113207479
+    }
+  },
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "qram_bucket_brigade",
+    "benchmark_label": "QRAM Decoder (Holdout)",
+    "qubits": 20,
+    "suite_type": "holdout",
+    "num_physical_qubits": 127,
+    "original_gate_count": 19,
+    "original_depth": 6,
+    "sabre_default": {
+      "n_total": 20,
+      "n_success": 20,
+      "n_failure": 0,
+      "success_rate": 100.0,
+      "mean_swaps": 19.3,
+      "std_swaps": 2.12367605815953,
+      "ci95_swaps": 1.0197311594217366
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "n_failure": 0,
+      "success_rate": 100.0,
+      "mean_swaps": 14.0,
+      "std_swaps": 2.9832867780352594,
+      "ci95_swaps": 1.4324927162807932
+    },
+    "tket_default": {
+      "n_total": 20,
+      "n_success": 20,
+      "n_failure": 0,
+      "success_rate": 100.0,
+      "mean_swaps": 3.0,
+      "std_swaps": 0.0,
+      "ci95_swaps": 0.0
+    },
+    "faq_tket": {
+      "n_total": 20,
+      "n_success": 20,
+      "n_failure": 0,
+      "success_rate": 100.0,
+      "mean_swaps": 21.8,
+      "std_swaps": 0.9797958971132712,
+      "ci95_swaps": 0.4704711918379232
+    }
+  },
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "random_3_regular",
+    "benchmark_label": "Random 3-Regular (Holdout)",
+    "qubits": 20,
+    "suite_type": "holdout",
+    "num_physical_qubits": 127,
+    "original_gate_count": 90,
+    "original_depth": 27,
+    "sabre_default": {
+      "n_total": 20,
+      "n_success": 20,
+      "n_failure": 0,
+      "success_rate": 100.0,
+      "mean_swaps": 36.65,
+      "std_swaps": 2.329699551444349,
+      "ci95_swaps": 1.1186580060414215
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "n_failure": 0,
+      "success_rate": 100.0,
+      "mean_swaps": 40.65,
+      "std_swaps": 4.819491674440366,
+      "ci95_swaps": 2.314188086322203
+    },
+    "tket_default": {
+      "n_total": 20,
+      "n_success": 20,
+      "n_failure": 0,
+      "success_rate": 100.0,
+      "mean_swaps": 55.0,
+      "std_swaps": 0.0,
+      "ci95_swaps": 0.0
+    },
+    "faq_tket": {
+      "n_total": 20,
+      "n_success": 20,
+      "n_failure": 0,
+      "success_rate": 100.0,
+      "mean_swaps": 50.85,
+      "std_swaps": 2.9372606285449034,
+      "ci95_swaps": 1.4103922181359894
     }
   },
   {
     "architecture": "Rigetti_Grid_80",
-    "benchmark": "qft",
-    "benchmark_label": "QFT",
-    "qubits": 50,
+    "benchmark": "ripple_carry_adder",
+    "benchmark_label": "Ripple-Carry Adder (Holdout)",
+    "qubits": 20,
+    "suite_type": "holdout",
     "num_physical_qubits": 80,
-    "original_gate_count": 6300,
-    "original_depth": 395,
+    "original_gate_count": 76,
+    "original_depth": 76,
     "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 1091.8,
-      "std_swaps": 39.776374897670095,
-      "ci95_swaps": 55.21846069357426
+      "mean_swaps": 7.85,
+      "std_swaps": 1.7399712641305312,
+      "ci95_swaps": 0.8354866118658509
     },
     "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 1429.4,
-      "std_swaps": 35.48858971556914,
-      "ci95_swaps": 49.266060603082344
+      "mean_swaps": 0.75,
+      "std_swaps": 0.9937303457175896,
+      "ci95_swaps": 0.477162132942895
     },
     "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 1023.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 1153.4,
-      "std_swaps": 14.207040508142432,
-      "ci95_swaps": 19.722534039089414
-    }
-  },
-  {
-    "architecture": "IonQ_AllToAll_50",
-    "benchmark": "vqe_real_amp",
-    "benchmark_label": "VQE (RealAmplitudes)",
-    "qubits": 50,
-    "num_physical_qubits": 50,
-    "original_gate_count": 1197,
-    "original_depth": 74,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
       "mean_swaps": 0.0,
@@ -1907,8 +864,8 @@
       "ci95_swaps": 0.0
     },
     "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
       "mean_swaps": 0.0,
@@ -1917,34 +874,35 @@
     }
   },
   {
-    "architecture": "IonQ_AllToAll_50",
-    "benchmark": "ghz",
-    "benchmark_label": "GHZ State",
-    "qubits": 50,
-    "num_physical_qubits": 50,
-    "original_gate_count": 100,
-    "original_depth": 51,
+    "architecture": "Rigetti_Grid_80",
+    "benchmark": "qram_bucket_brigade",
+    "benchmark_label": "QRAM Decoder (Holdout)",
+    "qubits": 20,
+    "suite_type": "holdout",
+    "num_physical_qubits": 80,
+    "original_gate_count": 19,
+    "original_depth": 6,
     "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
+      "mean_swaps": 7.55,
+      "std_swaps": 1.4309088021254186,
+      "ci95_swaps": 0.6870832706390624
     },
     "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
+      "mean_swaps": 0.6,
+      "std_swaps": 0.7348469228349533,
+      "ci95_swaps": 0.35285339387844233
     },
     "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
       "mean_swaps": 0.0,
@@ -1952,58 +910,13 @@
       "ci95_swaps": 0.0
     },
     "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
+      "n_total": 20,
+      "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    }
-  },
-  {
-    "architecture": "IonQ_AllToAll_50",
-    "benchmark": "qft",
-    "benchmark_label": "QFT",
-    "qubits": 50,
-    "num_physical_qubits": 50,
-    "original_gate_count": 6300,
-    "original_depth": 395,
-    "sabre_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_sabre": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "tket_default": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
-    },
-    "faq_tket": {
-      "n_total": 5,
-      "n_success": 5,
-      "n_failure": 0,
-      "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
+      "mean_swaps": 13.0,
+      "std_swaps": 2.0,
+      "ci95_swaps": 0.9603452989016413
     }
   }
 ]
