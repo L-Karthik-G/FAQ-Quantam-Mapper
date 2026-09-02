@@ -20,7 +20,7 @@ class FGEASubgraphExtractor:
     """
     Fidelity-aware Graph Extraction Algorithm.
     Identifies the best-quality connected subgraph of K physical qubits
-    from the full hardware coupling map, guided by edge fidelity scores.
+    from the full hardware coupling map, guided by directed edge fidelity scores.
     """
 
     def __init__(self, buffer: int = 4):
@@ -39,7 +39,7 @@ class FGEASubgraphExtractor:
         error_rates: Optional[Dict[Tuple[int, int], float]] = None,
     ) -> Tuple[List[Tuple[int, int]], Dict[Tuple[int, int], float], Dict[int, int], Dict[int, int]]:
         """
-        Extracts the best-fidelity connected subgraph of size K = N + buffer.
+        Extracts the best-fidelity connected subgraph of size K = N + buffer using directed graph structure.
 
         Returns:
             sub_coupling_map: List of (u, v) edges using re-indexed [0, K) labels
@@ -49,84 +49,71 @@ class FGEASubgraphExtractor:
         """
         K = min(N + self.buffer, num_physical_qubits)
 
-        # Build graph with fidelity-weighted directed/undirected edges
-        G = nx.Graph()
+        # Build directed graph preserving CNOT edge directionality and asymmetric infidelities
+        G = nx.DiGraph()
         G.add_nodes_from(range(num_physical_qubits))
 
+        error_dict = error_rates if error_rates is not None else {}
         for u, v in coupling_map:
-            err = error_rates.get((u, v), error_rates.get((v, u), 0.01)) if error_rates else 0.01
+            err = error_dict.get((u, v), 0.01)
             fidelity = max(1.0 - err, 1e-6)
-            if not G.has_edge(u, v):
-                G.add_edge(u, v, fidelity=fidelity, weight=-fidelity)
-            else:
-                G[u][v]["fidelity"] = max(G[u][v]["fidelity"], fidelity)
-                G[u][v]["weight"] = -G[u][v]["fidelity"]
+            G.add_edge(u, v, fidelity=fidelity, weight=-fidelity)
 
-        # Score each node as the sum of fidelities of its incident edges (degree + quality)
+        # Node score: Sum of outgoing and incoming edge fidelities
         node_scores = {}
         for node in G.nodes():
-            neighbors = list(G.neighbors(node))
-            if neighbors:
-                sum_fidelity = sum(G[node][nb]["fidelity"] for nb in neighbors)
-                node_scores[node] = sum_fidelity
-            else:
-                node_scores[node] = 0.0
+            in_f = sum(data["fidelity"] for _, _, data in G.in_edges(node, data=True))
+            out_f = sum(data["fidelity"] for _, _, data in G.out_edges(node, data=True))
+            node_scores[node] = in_f + out_f
 
         seed_node = max(node_scores, key=node_scores.get)
 
         selected: Set[int] = {seed_node}
         frontier = []
 
-        for nb in G.neighbors(seed_node):
-            fidelity = G[seed_node][nb]["fidelity"]
-            heapq.heappush(frontier, (-fidelity, nb))
+        neighbors = set(G.successors(seed_node)).union(set(G.predecessors(seed_node)))
+        for nb in neighbors:
+            f1 = G[seed_node][nb]["fidelity"] if G.has_edge(seed_node, nb) else 0.0
+            f2 = G[nb][seed_node]["fidelity"] if G.has_edge(nb, seed_node) else 0.0
+            best_f = max(f1, f2)
+            heapq.heappush(frontier, (-best_f, nb))
 
         while len(selected) < K and frontier:
             neg_fid, node = heapq.heappop(frontier)
             if node in selected:
                 continue
             selected.add(node)
-            for nb in G.neighbors(node):
+            nbrs = set(G.successors(node)).union(set(G.predecessors(node)))
+            for nb in nbrs:
                 if nb not in selected:
-                    fidelity = G[node][nb]["fidelity"]
-                    heapq.heappush(frontier, (-fidelity, nb))
+                    f1 = G[node][nb]["fidelity"] if G.has_edge(node, nb) else 0.0
+                    f2 = G[nb][node]["fidelity"] if G.has_edge(nb, node) else 0.0
+                    best_f = max(f1, f2)
+                    heapq.heappush(frontier, (-best_f, nb))
 
-        if len(selected) < K:
-            sorted_remaining = sorted(
-                [n for n in G.nodes() if n not in selected],
-                key=lambda x: node_scores.get(x, 0.0),
-                reverse=True
-            )
-            for n in sorted_remaining:
-                if len(selected) >= K:
-                    break
-                selected.add(n)
-
-        selected_list = sorted(list(selected))
-
-        global_to_local = {g_idx: l_idx for l_idx, g_idx in enumerate(selected_list)}
-        local_to_global = {l_idx: g_idx for l_idx, g_idx in enumerate(selected_list)}
+        # Re-index selected physical qubits to [0, K)
+        sorted_selected = sorted(list(selected))
+        global_to_local = {g: l for l, g in enumerate(sorted_selected)}
+        local_to_global = {l: g for l, g in enumerate(sorted_selected)}
 
         sub_coupling_map: List[Tuple[int, int]] = []
         sub_error_rates: Dict[Tuple[int, int], float] = {}
 
         for u, v in coupling_map:
             if u in selected and v in selected:
-                lu = global_to_local[u]
-                lv = global_to_local[v]
-                sub_coupling_map.append((lu, lv))
-                if error_rates and (u, v) in error_rates:
-                    sub_error_rates[(lu, lv)] = error_rates[(u, v)]
-                else:
-                    sub_error_rates[(lu, lv)] = 0.01
+                u_loc, v_loc = global_to_local[u], global_to_local[v]
+                sub_coupling_map.append((u_loc, v_loc))
+                if (u, v) in error_dict:
+                    sub_error_rates[(u_loc, v_loc)] = error_dict[(u, v)]
 
         return sub_coupling_map, sub_error_rates, global_to_local, local_to_global
 
 
 class FMALogicalPlacer:
     """
-    Frequency-based Mapping Algorithm (FMA).
-    Greedily maps logical qubits to the extracted physical subgraph.
+    Frequency-based Mapping Algorithm.
+    Greedily maps logical qubits to physical subgraph nodes based on 2-qubit gate interaction frequencies.
+    Raises explicit RuntimeError if physical slots are exhausted (no silent fallback).
     """
 
     def place(
@@ -135,12 +122,6 @@ class FMALogicalPlacer:
         sub_coupling_map: List[Tuple[int, int]],
         sub_error_rates: Optional[Dict[Tuple[int, int], float]] = None,
     ) -> Dict[int, int]:
-        """
-        Maps logical qubits 0..N-1 to subgraph physical slots 0..K-1.
-
-        Returns:
-            logical_to_local: Dict mapping logical qubit idx -> local subgraph qubit idx
-        """
         dag = circuit_to_dag(circuit)
         qubit_indices = {q: idx for idx, q in enumerate(circuit.qubits)}
         N = len(circuit.qubits)
@@ -159,7 +140,8 @@ class FMALogicalPlacer:
             sub_adj[v].add(u)
 
         all_sub_nodes = set(sub_adj.keys())
-        all_sub_nodes.update(range(max(all_sub_nodes, default=-1) + 1))
+        if all_sub_nodes:
+            all_sub_nodes.update(range(max(all_sub_nodes) + 1))
 
         sorted_pairs = sorted(interaction_freq.items(), key=lambda x: x[1], reverse=True)
 
@@ -188,7 +170,6 @@ class FMALogicalPlacer:
                     if not free_nodes:
                         break
                     best_p2 = max(free_nodes, key=lambda n: node_degrees.get(n, 0))
-
                 logical_to_sub[q2] = best_p2
                 occupied_sub_nodes.add(best_p2)
 
@@ -218,7 +199,7 @@ class FMALogicalPlacer:
                 logical_to_sub[q1] = best_p1
                 occupied_sub_nodes.add(best_p1)
 
-        # Place remaining unplaced logical qubits
+        # Explicit failure handling: raise RuntimeError if physical slots are insufficient
         for q in range(N):
             if q not in logical_to_sub:
                 free_nodes = [n for n in all_sub_nodes if n not in occupied_sub_nodes]
