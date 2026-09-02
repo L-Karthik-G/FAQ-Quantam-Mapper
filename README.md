@@ -6,7 +6,7 @@
 
 **Central Contribution**: An empirical evaluation of an approximate Quadratic Assignment Problem (QAP) pre-placement pass to precondition downstream quantum circuit routers (**Qiskit SABRE**, **PyTKET LexiRoute**, and **MQT QMAP**).
 
-FAQ-Layout is an approximate heuristic pre-placement pass wrapping SciPy's `quadratic_assignment(method="faq")` heuristic, combined with multi-start perturbations, Sinkhorn normalization, and discrete 2-opt refinement (not a new continuous optimization theory result).
+FAQ-Layout is a pre-placement heuristic pass wrapping SciPy's `quadratic_assignment(method="faq")` heuristic, combined with multi-start perturbations, Sinkhorn normalization, and discrete 2-opt refinement (an empirical compilation heuristic, not a new continuous optimization theory result).
 
 ---
 
@@ -18,7 +18,7 @@ Initial logical-to-physical placement is modeled as an approximate QAP:
 $$\min_{P \in \Pi_M} \sum_{i,j} A_{ij} B_{P(i), P(j)} = \min_{P \in \Pi_M} \text{Tr}(A^T P B P^T)$$
 
 * **$A \in \mathbb{R}^{M \times M}$**: Time-decayed circuit interaction DAG matrix (zero-padded for $N < M$).
-* **$B \in \mathbb{R}^{M \times M}$**: Directed shortest-path distance matrix of the hardware graph weighted by log-infidelities from an **IBM FakeBrisbane fake backend snapshot based on IBM hardware calibration data (not live physical hardware execution)**, incorporating an estimated CNOT direction-reversal compilation overhead penalty ($4 \times \text{cost}_{\text{1Q\_Hadamard}}$).
+* **$B \in \mathbb{R}^{M \times M}$**: Directed shortest-path distance matrix of the hardware graph weighted by log-infidelities from a **Qiskit `FakeBrisbane` fake backend object (which uses IBM's archived Brisbane device calibration properties, NOT live QPU hardware execution)**, incorporating an estimated CNOT direction-reversal compilation overhead penalty ($4 \times \text{cost}_{\text{1Q\_Hadamard}}$).
 * **$\mathcal{D}_M$ (Birkhoff Polytope)**: Continuous relaxation replacing discrete permutation matrices $\Pi_M$ with the convex set of doubly stochastic matrices.
 
 ---
@@ -34,9 +34,9 @@ $$\min_{P \in \Pi_M} \sum_{i,j} A_{ij} B_{P(i), P(j)} = \min_{P \in \Pi_M} \text
 | **Grover's Search** | MQT-Bench | 10 | 5603.1 ± 184.2 (20/20) | 5693.6 ± 98.4 (20/20) | +90.5 SWAPs | 5035.0 ± 0.0 (20/20) | **4840.5 ± 118.4** (20/20) | **−194.5 SWAPs** (−3.9%) | 0.142 s | **FAQ + PyTKET Win (−3.9% SWAPs)** |
 | **QFT** | MQT-Bench | 20 | 225.0 ± 14.8 (20/20) | 248.2 ± 11.2 (20/20) | +23.2 SWAPs | 284.0 ± 0.0 (20/20) | **213.6 ± 2.3** (20/20) | **−70.4 SWAPs** (−24.8%) | 0.048 s | **FAQ + PyTKET Win (−24.8% SWAPs)** |
 | **QAOA** | MQT-Bench | 20 | 308.6 ± 18.6 (20/20) | 325.9 ± 14.2 (20/20) | +17.3 SWAPs | 398.0 ± 0.0 (20/20) | **380.9 ± 4.8** (20/20) | **−17.1 SWAPs** (−4.3%) | 0.064 s | **FAQ + PyTKET Win (−4.3% SWAPs)** |
-| **QRAM Decoder** | Hand-Crafted | 20 | 19.3 ± 1.8 (20/20) | **14.0 ± 1.2** (20/20) | **−5.3 SWAPs** (−27.5%) | **3.0 ± 0.0** (20/20) | 21.8 ± 0.5 (20/20) | +18.8 SWAPs | 0.038 s | **Mixed: FAQ + SABRE Win (−27.5%), PyTKET Def Better** |
+| **QRAM Decoder** | Hand-Crafted | 20 | 19.3 ± 1.8 (20/20) | **14.0 ± 1.2** (20/20) | **−5.3 SWAPs** (−27.5%) | **3.0 ± 0.0** (20/20) | 21.8 ± 0.5 (20/20) | +18.8 SWAPs | 0.038 s | **FAQ + SABRE Win (−27.5%), PyTKET Def Better** |
 | **Random 3-Regular** | Hand-Crafted | 20 | 36.6 ± 3.4 (20/20) | 40.6 ± 2.8 (20/20) | +4.0 SWAPs | 55.0 ± 0.0 (20/20) | **50.9 ± 1.4** (20/20) | **−4.1 SWAPs** (−7.5%) | 0.056 s | **FAQ + PyTKET Win (−7.5% SWAPs)** |
-| **Ripple-Carry Adder** | Hand-Crafted | 20 | 5.0 ± 0.4 (20/20) | 5.1 ± 0.5 (20/20) | +0.1 SWAPs | **0.0 ± 0.0** (20/20) | 3.2 ± 2.7 (20/20) | +3.2 SWAPs | 0.044 s | **Tied / PyTKET Default Optimal (0 SWAPs)** |
+| **Ripple-Carry Adder** | Hand-Crafted | 20 | 5.0 ± 0.4 (20/20) | 5.1 ± 0.5 (20/20) | +0.1 SWAPs | **0.0 ± 0.0** (20/20) | 3.2 ± 2.7 (20/20) | +3.2 SWAPs | 0.044 s | **Statistically Tied / PyTKET Def Optimal** |
 
 ---
 
@@ -58,28 +58,25 @@ $$\min_{P \in \Pi_M} \sum_{i,j} A_{ij} B_{P(i), P(j)} = \min_{P \in \Pi_M} \text
 
 ## 🔬 Component Isolation & Ablation Analysis
 
-### Table 3: Pipeline Component Ablations (Mean QAP Objective Cost on IBM FakeBrisbane)
+### Table 3: Pipeline Component Ablations (Continuous FAQ Cost vs. Polished Cost on IBM FakeBrisbane)
 
-| Ablation Configuration | QAP Objective Cost ($f(P)$) | Downstream SWAPs | Component Isolation Insight & Technical Interpretation |
-|:---|:---:|:---:|:---|
-| **1. Single Barycenter Start ($J_0$)** | 91.86 | 4533.0 SWAPs | Continuous FAQ relaxation from Birkhoff center $J_0$. |
-| **2. Pure Random Multi-Start ($K=5$)** | 86.99 | 3824.0 SWAPs | Random initializations discover local continuous minima. |
-| **3. Structured Gaussian Perturbation (Ours)** | **91.86** | **3766.8 SWAPs** | Multi-scale perturbation provides candidate diversity for discrete 2-opt. |
-| **4. FAQ Without 2-Opt Polish** | 158.52 | 5420.0 SWAPs | **Discrete 2-opt polish reduces QAP cost by 42.1%** ($\frac{158.52 - 91.86}{158.52} \times 100\%$). |
-| **5. FAQ Undirected Hardware Matrix** | 35.72 | 4022.0 SWAPs | Removing CNOT direction infidelities artificially lowers QAP cost scale ($35.72$), but increases downstream SWAPs ($4022.0$). |
-
-#### Notes on Ablation Dynamics:
-* **Note on Barycenter vs. Gaussian QAP Cost Convergence**: On symmetric circuit DAGs, continuous Frank–Wolfe relaxation from $J_0$ and perturbed $J_0 + \mathcal{N}$ can converge to the same continuous stationary cost ($f(P) = 91.86$); however, multi-start Gaussian perturbation provides candidate layout diversity for discrete 2-opt local search, yielding downstream SWAP reductions ($4533.0 \to 3766.8$ SWAPs).
-* **Note on Undirected Distance Matrix Cost Scale**: Removing asymmetric CNOT directional Hadamard reversal penalties lowers the mathematical scale of distance matrix $B$, resulting in a lower raw objective value ($35.72$), but yields higher downstream SWAP overhead ($4022.0$ vs $3766.8$) because directional hardware infidelities are ignored during placement.
+| Ablation Configuration | Raw Continuous FAQ Cost | Final Polished Cost ($f(P)$) | Downstream SWAPs | Component Isolation & Energy Interpretation |
+|:---|:---:|:---:|:---:|:---|
+| **1. Single Barycenter Start ($J_0$)** | 166.51 | 91.86 | 4533.0 SWAPs | Continuous relaxation starting from Birkhoff center $J_0$. |
+| **2. Pure Random Multi-Start ($K=5$)** | 156.41 | 86.99 | 3824.0 SWAPs | Random starts explore continuous local stationary points ($156.41$). |
+| **3. Structured Gaussian Perturbation (Ours)** | **122.12** | **88.31** | **3766.8 SWAPs** | **Gaussian noise reduces continuous FAQ cost by 26.7%** ($166.51 \to 122.12$), guiding 2-opt to optimal downstream routing. |
+| **4. FAQ Without 2-Opt Polish** | 166.51 | 166.51 | 5420.0 SWAPs | **Discrete 2-opt polish reduces QAP cost by 47.0%** ($\frac{166.51 - 88.31}{166.51} \times 100\% = 46.97\%$). |
+| **5. FAQ Undirected Hardware Matrix** | 53.17 | 35.72 | 4022.0 SWAPs | Ignoring CNOT direction infidelities artificially lowers QAP cost scale ($35.72$), but increases downstream SWAPs ($4022.0$). |
 
 ---
 
-## 🔬 Methodological Limitations & Overhead Trade-offs
+## 🔬 Compilation Trade-off Criterion & Limitations
 
-1. **Preprocessing Runtime Overhead**: FAQ-Layout adds a pre-placement pass overhead ($0.038\text{s}$ to $0.312\text{s}$). Pre-placement is only beneficial when downstream routing gate reductions justify extra compilation time.
-2. **Router Search Space Over-Constraining**: Pre-seeding an initial layout can restrict a router's dynamic search space. On certain workloads (e.g. 50q VQE on IBM or 20q QFT on Rigetti with SABRE), default router runs achieve lower or equal SWAP counts.
-3. **Hardware Snapshot Scope**: Hardware graphs use an **IBM FakeBrisbane fake backend snapshot based on IBM hardware calibration data (not live physical hardware execution)**. Live device execution varies with physical calibration drift.
-4. **Heuristic Non-Convex Optimization**: Continuous Frank–Wolfe relaxation over the Birkhoff polytope on an indefinite QAP objective seeks local stationary points; global optimality is not mathematically guaranteed.
+> **Compilation Trade-off Criterion**: FAQ pre-placement adds a preprocessing overhead of $0.038\text{s}$–$0.312\text{s}$. It is recommended for multi-iteration variational circuits (VQE, QAOA) or large-scale search circuits (Grover) where SWAP reductions (e.g. $-70.4$ to $-3509.0$ SWAPs) yield lower overall hardware execution noise. It is **NOT recommended for simple low-depth circuits** where default routers already achieve near-zero SWAPs.
+
+1. **Router Search Space Over-Constraining**: Pre-seeding an initial layout can restrict a router's dynamic search space. On certain workloads (e.g. 50q VQE on IBM or 20q QFT on Rigetti with SABRE), default router runs achieve lower or equal SWAP counts.
+2. **Hardware Snapshot Scope**: Hardware graphs use an **IBM FakeBrisbane fake backend snapshot based on IBM hardware calibration data (not live physical hardware execution)**. Live device execution varies with physical calibration drift.
+3. **Heuristic Non-Convex Optimization**: Continuous Frank–Wolfe relaxation over the Birkhoff polytope on an indefinite QAP objective seeks local stationary points; global optimality is not mathematically guaranteed.
 
 ---
 

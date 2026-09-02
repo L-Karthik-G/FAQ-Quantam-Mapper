@@ -3,6 +3,7 @@ Module C: Multi-Start Quadratic Assignment Problem (QAP) Pre-Placement Solver
 Solves initial logical-to-physical qubit layout over the Birkhoff polytope using
 SciPy's FAQ heuristic (quadratic_assignment), multi-scale Gaussian perturbations,
 Sinkhorn-Knopp doubly stochastic projection, and discrete 2-opt local search refinement.
+Tracks continuous FAQ costs vs discrete 2-opt polished costs separately for clean contribution isolation.
 """
 
 from concurrent.futures import ThreadPoolExecutor
@@ -146,19 +147,22 @@ class AdaptiveFAQSolver:
 
     def _solve_single_start(
         self, A: np.ndarray, B: np.ndarray, P0: Union[str, np.ndarray]
-    ) -> Tuple[np.ndarray, float]:
+    ) -> Tuple[np.ndarray, float, float]:
         """
         Runs a single optimization run starting from P0 via SciPy FAQ algorithm.
+        Returns (perm, faq_continuous_cost, final_polished_cost).
         """
         options = {"P0": P0, "maxiter": 30}
         res = quadratic_assignment(A, B, method="faq", options=options)
         perm = res.col_ind
-        cost = float(res.fun)
+        faq_continuous_cost = float(res.fun)
 
         if self.enable_2opt:
-            perm, cost = refine_2opt(A, B, perm, max_rounds=3)
+            perm, final_polished_cost = refine_2opt(A, B, perm, max_rounds=3)
+        else:
+            final_polished_cost = faq_continuous_cost
 
-        return perm, cost
+        return perm, faq_continuous_cost, final_polished_cost
 
     def solve(
         self, matrix_a: np.ndarray, matrix_b: np.ndarray
@@ -168,7 +172,7 @@ class AdaptiveFAQSolver:
 
         Returns:
             mapping: Dict mapping logical qubit index -> physical qubit index.
-            best_cost: Minimum objective value trace(A_padded^T * P * B * P^T).
+            best_cost: Minimum objective value trace(A_padded^T * P * B * P^T) after optional 2-opt.
         """
         N = matrix_a.shape[0]
         M = matrix_b.shape[0]
@@ -186,7 +190,7 @@ class AdaptiveFAQSolver:
         rng = np.random.default_rng(self.seed)
         p0_list = self._generate_p0_candidates(M, rng)
 
-        all_results: List[Tuple[np.ndarray, float]] = []
+        all_results: List[Tuple[np.ndarray, float, float]] = []
         failed_starts_count = 0
 
         with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
@@ -196,28 +200,32 @@ class AdaptiveFAQSolver:
             ]
             for f in futures:
                 try:
-                    perm, cost = f.result()
-                    all_results.append((perm, cost))
+                    perm, raw_faq_cost, polished_cost = f.result()
+                    all_results.append((perm, raw_faq_cost, polished_cost))
                 except Exception:
                     failed_starts_count += 1
 
         if not all_results:
             best_perm = np.arange(M)
             best_cost = float(np.trace(A_padded.T @ matrix_b))
-            all_costs = [best_cost]
+            raw_faq_costs = [best_cost]
+            polished_costs = [best_cost]
         else:
-            all_results.sort(key=lambda x: x[1])
-            best_perm, best_cost = all_results[0]
-            all_costs = [cost for _, cost in all_results]
+            all_results.sort(key=lambda x: x[2])  # Sort by final polished cost
+            best_perm, best_raw_faq_cost, best_cost = all_results[0]
+            raw_faq_costs = [c1 for _, c1, _ in all_results]
+            polished_costs = [c2 for _, _, c2 in all_results]
 
         self.last_run_stats = {
             "num_starts_requested": len(p0_list),
             "num_starts_evaluated": len(all_results),
             "failed_starts_count": failed_starts_count,
-            "best_cost": float(best_cost),
-            "mean_cost": float(np.mean(all_costs)),
-            "std_cost": float(np.std(all_costs)),
-            "all_costs": [float(c) for c in all_costs],
+            "best_faq_continuous_cost": float(best_raw_faq_cost),
+            "best_polished_cost": float(best_cost),
+            "mean_faq_continuous_cost": float(np.mean(raw_faq_costs)),
+            "mean_polished_cost": float(np.mean(polished_costs)),
+            "all_faq_continuous_costs": [float(c) for c in raw_faq_costs],
+            "all_polished_costs": [float(c) for c in polished_costs],
         }
 
         mapping = {logical_idx: int(best_perm[logical_idx]) for logical_idx in range(N)}
