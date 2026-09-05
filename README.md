@@ -94,6 +94,11 @@ mean for each router pair.*
 
 ### Table 1: IBM FakeBrisbane (127-qubit Heavy-Hex), K=20 paired seeds
 
+*FAQ-arm numbers below were produced with the now-**deprecated Gaussian** multi-start; the
+project now ships **random** multi-start (see [ablation](reports/a5_results.md)). Tables 1–2
+have not been regenerated under the new default — treat the FAQ columns as reflecting the
+previous initialization scheme.*
+
 | Benchmark Circuit | Suite | Scale $N$ | **SABRE Default** | **FAQ+SABRE** | **Δ (SABRE)** | **PyTKET Default** | **FAQ+PyTKET** | **Δ (PyTKET)** | **FAQ Preproc. (s)** | **Lower-SWAP method** |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
 | **Grover's Search** | MQT-Bench | 8 | 1152.2 ± 30.4 | 1263.5 ± 31.7 | +111.3 (+9.7%) | 851.0 ± 0.0 | 1039.0 ± 8.8 | +188.0 (+22.1%) | 3.932 | SABRE Def / PyTKET Def |
@@ -111,6 +116,11 @@ mean for each router pair.*
 | **Random 3-Regular** | Hand-Crafted | 20 | 36.6 ± 1.1 | 40.6 ± 2.3 | +4.0 (+10.9%) | 55.0 ± 0.0 | 50.9 ± 1.4 | -4.1 (-7.5%) | 3.328 | SABRE Def / FAQ+PyTKET |
 
 ### Table 2: Synthetic Grid Topology (80-qubit), K=20 paired seeds
+
+*FAQ-arm numbers below were produced with the now-**deprecated Gaussian** multi-start; the
+project now ships **random** multi-start (see [ablation](reports/a5_results.md)). Tables 1–2
+have not been regenerated under the new default — treat the FAQ columns as reflecting the
+previous initialization scheme.*
 
 | Benchmark Circuit | Suite | Scale $N$ | **SABRE Default** | **FAQ+SABRE** | **Δ (SABRE)** | **PyTKET Default** | **FAQ+PyTKET** | **Δ (PyTKET)** | **FAQ Preproc. (s)** | **Lower-SWAP method** |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
