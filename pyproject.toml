@@ -22,13 +22,19 @@ dependencies = [
     "pytket>=1.25.0",
     "pytket-qiskit>=0.48.0",
     "mqt.qmap>=2.5.0",
+    "mqt.bench>=1.0.0",
     "networkx>=3.0",
     "scipy>=1.11.0",
     "numpy>=1.24.0",
 ]
 
-[project.optional-dependencies]
-test = ["pytest>=7.4.0"]
+[dependency-groups]
+dev = [
+    "pytest>=7.4.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["qap_compiler*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

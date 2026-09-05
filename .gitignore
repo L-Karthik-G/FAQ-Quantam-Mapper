@@ -29,3 +29,7 @@ Thumbs.db
 
 # ── Scratch / local-only (never regenerate experiment data here) ──────
 scratch/
+
+# uv-managed cache (local only)
+.uv-cache/
+.uv-python/

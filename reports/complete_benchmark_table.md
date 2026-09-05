@@ -27,13 +27,14 @@ Metrics are **mean ± 95% CI** over the 20 paired seeds; every row compiled 20/2
 ### Reproduction
 
 ```bash
-pip install -r requirements.txt
+# Python dependencies are managed with uv (see pyproject.toml + uv.lock)
+uv sync
 
 # Regenerate the QAP-cost ablation table (in-repo output)
-python3 benchmark_ablations.py
+uv run python benchmark_ablations.py
 
 # Regenerate the paired-seed benchmark suite (in-repo output; slow — full routing)
-python3 benchmark_eval.py
+uv run python benchmark_eval.py
 ```
 
 ### Other result files

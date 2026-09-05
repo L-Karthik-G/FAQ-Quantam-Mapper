@@ -187,26 +187,33 @@ conclusions.
 
 ---
 
-## 🚀 Quickstart
+## 🚀 Quickstart (uv)
+
+This project uses **[uv](https://docs.astral.sh/uv/)** for dependency management and
+environment setup. Python dependencies are declared in `pyproject.toml` and pinned in
+`uv.lock`; a `.python-version` pins the interpreter to Python 3.12.
 
 ```bash
 git clone https://github.com/L-Karthik-G/FAQ-Quantam-Mapper.git
 cd FAQ-Quantam-Mapper
 
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+# Create the environment (downloads Python 3.12 if needed) and install all deps
+uv sync
 
 # Run the unit & integration test suite
-pytest tests/test_modules.py -v
+uv run pytest tests/test_modules.py -v
 
 # Regenerate the QAP-cost ablation table (writes benchmark_ablation_results.json in-repo)
-python3 benchmark_ablations.py
+uv run python benchmark_ablations.py
 
 # Regenerate the paired-seed benchmark suite (K=20 seeds; writes results in-repo).
-# NOTE: this runs full Qiskit/PyTKET routing and can take a long time.
-python3 benchmark_eval.py
+# NOTE: this runs full Qiskit/PyTKET/MQT routing and can take a long time.
+uv run python benchmark_eval.py
 ```
+
+`uv sync` installs the project itself (editable) plus the runtime dependencies and the `dev`
+group (pytest). To add/upgrade a dependency: `uv add <pkg>` / `uv add --dev <pkg>`, then
+commit the updated `pyproject.toml` and `uv.lock`.
 
 The pure-`numpy`/`scipy` solver (`qap_compiler/module_c_faq.py`) has no Qiskit dependency and
 can be tested/used standalone.

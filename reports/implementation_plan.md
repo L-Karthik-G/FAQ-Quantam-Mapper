@@ -49,8 +49,9 @@ This plan implements all architectural, mathematical, benchmarking, and reportin
 #### [NEW] [`qap_compiler/qiskit_plugin.py`](qap_compiler/qiskit_plugin.py)
 - Native Qiskit `TransformationPass` (`FAQPlacementPass`) that plugs directly into Qiskit's `PassManager`.
 
-#### [NEW] [`pyproject.toml`](pyproject.toml) & [`requirements.txt`](requirements.txt)
-- Standard packaging metadata with pinned dependencies.
+#### [NEW] [`pyproject.toml`](pyproject.toml)
+- Standard packaging metadata with pinned dependencies (managed via `uv`; `uv.lock` pins the
+  resolved environment).
 
 ---
 
