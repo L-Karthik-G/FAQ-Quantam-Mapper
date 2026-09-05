@@ -15,7 +15,7 @@ This plan implements all architectural, mathematical, benchmarking, and reportin
 
 ### Component 1: Core Solver & Algorithmic Enhancements
 
-#### [MODIFY] [`qap_compiler/module_c_faq.py`](file:///home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/qap_compiler/module_c_faq.py)
+#### [MODIFY] [`qap_compiler/module_c_faq.py`](qap_compiler/module_c_faq.py)
 - **5-Start Gaussian Perturbation**:
   - Start 1: Exact Analytical Barycenter ($J_0 = \frac{1}{M}\mathbf{1}\mathbf{1}^T$).
   - Starts 2–3: Adaptive Gaussian noise ($\sigma = 0.05 / M$) + Sinkhorn-Knopp projection.
@@ -29,7 +29,7 @@ This plan implements all architectural, mathematical, benchmarking, and reportin
 - **Return Multi-Start Metrics**:
   - Return best permutation layout along with best-of-k and mean-of-k energies.
 
-#### [MODIFY] [`qap_compiler/module_e_fgea.py`](file:///home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/qap_compiler/module_e_fgea.py)
+#### [MODIFY] [`qap_compiler/module_e_fgea.py`](qap_compiler/module_e_fgea.py)
 - Fix edge handling logic to ensure directed edges $(u, v)$ where $u > v$ are preserved.
 - Align seed node selection to use `sum()` of neighbor fidelities instead of `np.mean()`.
 
@@ -37,7 +37,7 @@ This plan implements all architectural, mathematical, benchmarking, and reportin
 
 ### Component 2: Hardware Architecture & Noise Modeling
 
-#### [MODIFY] [`qap_compiler/module_b_hardware.py`](file:///home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/qap_compiler/module_b_hardware.py)
+#### [MODIFY] [`qap_compiler/module_b_hardware.py`](qap_compiler/module_b_hardware.py)
 - Update graph representation to `nx.DiGraph()` to preserve directional CNOT error rates ($q_1 \to q_2 \neq q_2 \to q_1$).
 - Add real IBM Eagle 127-qubit (`ibm_brisbane` / `ibm_kyoto`) calibration snapshot loaders.
 - Compute directed Dijkstra shortest-path distance matrix $B$ weighted by edge log-infidelities.
@@ -46,17 +46,17 @@ This plan implements all architectural, mathematical, benchmarking, and reportin
 
 ### Component 3: Packaging & Native Qiskit Plugin
 
-#### [NEW] [`qap_compiler/qiskit_plugin.py`](file:///home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/qap_compiler/qiskit_plugin.py)
+#### [NEW] [`qap_compiler/qiskit_plugin.py`](qap_compiler/qiskit_plugin.py)
 - Native Qiskit `TransformationPass` (`FAQPlacementPass`) that plugs directly into Qiskit's `PassManager`.
 
-#### [NEW] [`pyproject.toml`](file:///home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/pyproject.toml) & [`requirements.txt`](file:///home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/requirements.txt)
+#### [NEW] [`pyproject.toml`](pyproject.toml) & [`requirements.txt`](requirements.txt)
 - Standard packaging metadata with pinned dependencies.
 
 ---
 
 ### Component 4: Testing & Verification
 
-#### [MODIFY] [`tests/test_modules.py`](file:///home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/tests/test_modules.py)
+#### [MODIFY] [`tests/test_modules.py`](tests/test_modules.py)
 - Add small-scale ($N \le 5$) semantic equivalence tests verifying `Operator(qc_in).equiv(Operator(qc_out))`.
 - Test directed hardware distance matrices.
 - Test 5-start Gaussian solver with momentum and 2-opt polishing.
@@ -66,7 +66,7 @@ This plan implements all architectural, mathematical, benchmarking, and reportin
 
 ### Component 5: Rigorous Benchmarking & Ablation Suite
 
-#### [NEW] [`benchmark_rigorous.py`](file:///home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/benchmark_rigorous.py)
+#### [NEW] [`benchmark_rigorous.py`](benchmark_rigorous.py)
 - Strict paired-seed protocol ($s \in \{0, 1, 2, 3, 4\}$) on fixed hardware profiles.
 - Evaluate SABRE Default, PyTKET Default, MQT QMAP Default, Paper Baseline (FGEA+FMA), and FAQ+PyTKET / FAQ+QMAP / FAQ+SABRE.
 - Dedicated Ablation Study:
@@ -79,7 +79,7 @@ This plan implements all architectural, mathematical, benchmarking, and reportin
 
 ### Component 6: Master Reports & Documentation
 
-#### [MODIFY] [`reports/team_summary.md`](file:///home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/reports/team_summary.md) & [`reports/walkthrough.md`](file:///home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/reports/walkthrough.md) & [`README.md`](file:///home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/README.md)
+#### [MODIFY] [`reports/team_summary.md`](reports/team_summary.md) & [`reports/walkthrough.md`](reports/walkthrough.md) & [`README.md`](README.md)
 - Update title and framing: *"FAQ-Layout: A Quadratic Assignment Pre-placement Engine for Quantum Routers"*.
 - Replace "convex relaxation" with rigorous non-convex Frank–Wolfe theory on the Birkhoff polytope.
 - Include the new rigorous benchmark results with paired confidence intervals, success rates, and ablation tables.

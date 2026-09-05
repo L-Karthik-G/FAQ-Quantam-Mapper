@@ -3,7 +3,13 @@ Module C: Multi-Start Quadratic Assignment Problem (QAP) Pre-Placement Solver
 Solves initial logical-to-physical qubit layout over the Birkhoff polytope using
 SciPy's FAQ heuristic (quadratic_assignment), multi-scale Gaussian perturbations,
 Sinkhorn-Knopp doubly stochastic projection, and discrete 2-opt local search refinement.
-Tracks continuous FAQ costs vs discrete 2-opt polished costs separately for clean contribution isolation.
+
+IMPORTANT (terminology): SciPy's `quadratic_assignment(method="faq")` returns a discrete
+permutation (`res.col_ind`), and `res.fun` is the *discrete* QAP cost of that permutation
+(it equals sum(A*B[perm][:,perm])). The Frank-Wolfe relaxation is internal to SciPy and is
+not returned. So the cost recorded *before* 2-opt polish is a discrete permutation cost, NOT
+a "continuous relaxation cost". It is tracked separately from the post-2-opt cost only so the
+2-opt refinement gain can be reported in the ablation study.
 """
 
 from concurrent.futures import ThreadPoolExecutor
@@ -82,7 +88,8 @@ class AdaptiveFAQSolver:
     Multi-Start QAP Pre-Placement Solver.
     
     Combines:
-      - SciPy's quadratic_assignment (FAQ method) continuous QAP relaxation.
+      - SciPy's quadratic_assignment (FAQ method) approximate QAP pre-placement
+        (returns a discrete permutation; the Frank-Wolfe relaxation is internal to SciPy).
       - 5-Start Structured Gaussian Perturbation (1 Barycenter, 2 small noise, 2 medium noise).
       - Sinkhorn-Knopp doubly stochastic projection onto the Birkhoff polytope.
       - Discrete 2-opt pairwise local search refinement.
@@ -101,7 +108,7 @@ class AdaptiveFAQSolver:
         Args:
             num_starts: Total multi-start initializations (default 5).
             start_mode: Mode of initialization ('barycenter', 'gaussian', 'random').
-            enable_2opt: If True, applies discrete 2-opt polishing after continuous Frank-Wolfe.
+            enable_2opt: If True, applies discrete 2-opt polishing after the FAQ permutation.
             seed: Master random seed for reproducible perturbations.
             max_workers: Worker threads for parallel start evaluation.
         """
@@ -150,19 +157,24 @@ class AdaptiveFAQSolver:
     ) -> Tuple[np.ndarray, float, float]:
         """
         Runs a single optimization run starting from P0 via SciPy FAQ algorithm.
-        Returns (perm, faq_continuous_cost, final_polished_cost).
+
+        Returns (perm, faq_perm_cost, polished_cost), where:
+          - perm is the discrete permutation returned by FAQ.
+          - faq_perm_cost is the discrete QAP cost of that permutation before 2-opt polish
+            (res.fun -- NOT a continuous-relaxation value; see module docstring).
+          - polished_cost is the cost after optional discrete 2-opt polish.
         """
         options = {"P0": P0, "maxiter": 30}
         res = quadratic_assignment(A, B, method="faq", options=options)
         perm = res.col_ind
-        faq_continuous_cost = float(res.fun)
+        faq_perm_cost = float(res.fun)
 
         if self.enable_2opt:
             perm, final_polished_cost = refine_2opt(A, B, perm, max_rounds=3)
         else:
-            final_polished_cost = faq_continuous_cost
+            final_polished_cost = faq_perm_cost
 
-        return perm, faq_continuous_cost, final_polished_cost
+        return perm, faq_perm_cost, final_polished_cost
 
     def solve(
         self, matrix_a: np.ndarray, matrix_b: np.ndarray
@@ -220,11 +232,11 @@ class AdaptiveFAQSolver:
             "num_starts_requested": len(p0_list),
             "num_starts_evaluated": len(all_results),
             "failed_starts_count": failed_starts_count,
-            "best_faq_continuous_cost": float(best_raw_faq_cost),
+            "best_faq_perm_cost": float(best_raw_faq_cost),
             "best_polished_cost": float(best_cost),
-            "mean_faq_continuous_cost": float(np.mean(raw_faq_costs)),
+            "mean_faq_perm_cost": float(np.mean(raw_faq_costs)),
             "mean_polished_cost": float(np.mean(polished_costs)),
-            "all_faq_continuous_costs": [float(c) for c in raw_faq_costs],
+            "all_faq_perm_costs": [float(c) for c in raw_faq_costs],
             "all_polished_costs": [float(c) for c in polished_costs],
         }
 

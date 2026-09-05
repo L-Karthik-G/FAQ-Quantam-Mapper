@@ -6,6 +6,7 @@ Includes explicit success/failure accounting and 95% confidence intervals withou
 
 import json
 import math
+import os
 import time
 from typing import Dict, List, Tuple
 import networkx as nx
@@ -340,7 +341,7 @@ def main():
         t_stats = task_record["faq_tket"]
         print(f"  -> FAQ+SABRE: {s_stats['mean_swaps']} (Success: {s_stats['success_rate']:.0f}%) | FAQ+TKET: {t_stats['mean_swaps']} ± {t_stats['ci95_swaps']} (Success: {t_stats['success_rate']:.0f}%)")
 
-    out_path = "/home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/benchmark_rigorous_results.json"
+    out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "benchmark_rigorous_results.json")
     with open(out_path, "w") as f:
         json.dump(all_results, f, indent=2)
 

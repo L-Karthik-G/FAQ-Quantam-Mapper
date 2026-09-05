@@ -32,8 +32,8 @@ from qap_compiler.module_c_faq import AdaptiveFAQSolver
 
 class FAQPlacementPass(TransformationPass):
     """
-    Qiskit TransformationPass that computes an initial layout via
-    Continuous Quadratic Assignment Relaxation on the Birkhoff polytope.
+    Qiskit TransformationPass that computes an initial layout via an approximate
+    Quadratic Assignment Problem (QAP) pre-placement (SciPy FAQ + 2-opt polish).
     """
 
     def __init__(

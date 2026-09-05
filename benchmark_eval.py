@@ -10,6 +10,7 @@ unseen hand-crafted holdout circuits, and IBM FakeBrisbane hardware snapshots.
 
 from enum import Enum
 import json
+import os
 import time
 from typing import Dict, List, Tuple
 import networkx as nx
@@ -357,11 +358,12 @@ def main():
         t_stats = task_record["faq_tket"]
         print(f"  -> FAQ+SABRE: {s_stats['mean_swaps']} | FAQ+TKET: {t_stats['mean_swaps']} ± {t_stats['ci95_swaps']}")
 
-    out_path = "/home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/benchmark_eval_results.json"
+    out_dir = os.path.dirname(os.path.abspath(__file__))
+    out_path = os.path.join(out_dir, "benchmark_eval_results.json")
     with open(out_path, "w") as f:
         json.dump(all_results, f, indent=2)
 
-    raw_path = "/home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/benchmark_eval_raw_seeds.json"
+    raw_path = os.path.join(out_dir, "benchmark_eval_raw_seeds.json")
     with open(raw_path, "w") as f:
         json.dump(raw_seed_logs, f, indent=2)
 

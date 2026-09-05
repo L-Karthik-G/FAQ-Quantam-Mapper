@@ -34,7 +34,7 @@ class FAQCompilerPipeline:
         alpha: float = 1.0,
         threshold_qubits: int = 10,
         amnesia_threshold: int = 100,
-        num_faq_starts: int = 3,
+        num_faq_starts: int = 5,
         ttl_seconds: float = 3600.0,
         seed: int = 42,
         fgea_buffer: int = 4,

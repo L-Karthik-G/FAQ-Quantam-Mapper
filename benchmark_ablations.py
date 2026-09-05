@@ -9,6 +9,7 @@ Evaluates and isolates individual pipeline components on IBM FakeBrisbane:
 """
 
 import json
+import os
 import numpy as np
 from qiskit import transpile
 from mqt import bench as mqt_bench
@@ -41,7 +42,7 @@ def run_ablation_suite():
     map_bary, cost_bary = solver_bary.solve(matrix_a, matrix_b_dir)
     ablation_results["1_barycenter_single_start"] = {
         "qap_cost": float(cost_bary),
-        "raw_faq_cost": float(solver_bary.last_run_stats["best_faq_continuous_cost"]),
+        "raw_faq_cost": float(solver_bary.last_run_stats["best_faq_perm_cost"]),
     }
 
     # 2. Pure Random Multi-Start (K=5)
@@ -49,7 +50,7 @@ def run_ablation_suite():
     map_rand, cost_rand = solver_rand.solve(matrix_a, matrix_b_dir)
     ablation_results["2_random_multi_start"] = {
         "qap_cost": float(cost_rand),
-        "raw_faq_cost": float(solver_rand.last_run_stats["best_faq_continuous_cost"]),
+        "raw_faq_cost": float(solver_rand.last_run_stats["best_faq_perm_cost"]),
     }
 
     # 3. Structured Gaussian Perturbation Multi-Start (K=5, Ours)
@@ -80,7 +81,7 @@ def run_ablation_suite():
     map_no2opt, cost_no2opt = solver_no2opt.solve(matrix_a, matrix_b_dir)
     ablation_results["4_faq_no_2opt_polish"] = {
         "qap_cost": float(cost_no2opt),
-        "raw_faq_cost": float(solver_no2opt.last_run_stats["best_faq_continuous_cost"]),
+        "raw_faq_cost": float(solver_no2opt.last_run_stats["best_faq_perm_cost"]),
     }
 
     # 5. FAQ Undirected Hardware Matrix
@@ -88,10 +89,10 @@ def run_ablation_suite():
     map_undir, cost_undir = solver_undir.solve(matrix_a, matrix_b_undir)
     ablation_results["5_undirected_hardware_matrix"] = {
         "qap_cost": float(cost_undir),
-        "raw_faq_cost": float(solver_undir.last_run_stats["best_faq_continuous_cost"]),
+        "raw_faq_cost": float(solver_undir.last_run_stats["best_faq_perm_cost"]),
     }
 
-    out_path = "/home/karthikg/.gemini/antigravity/scratch/qap_quantum_compiler/benchmark_ablation_results.json"
+    out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "benchmark_ablation_results.json")
     with open(out_path, "w") as f:
         json.dump(ablation_results, f, indent=2)
 

@@ -116,7 +116,7 @@ def run_10method_benchmark(
                     run_seed = 42 + k * 17
                     profiles = build_hardware_profiles(seed=run_seed)
                     _, coupling_map, error_rates = profiles[arch_name]
-                    p = FAQCompilerPipeline(threshold_qubits=10, num_faq_starts=3, seed=run_seed, fgea_buffer=4)
+                    p = FAQCompilerPipeline(threshold_qubits=10, num_faq_starts=5, seed=run_seed, fgea_buffer=4)
 
                     # 1. SABRE Default
                     sw, t = safe_run(p.compile_baseline_qiskit_sabre, raw_circuit, M, coupling_map)
