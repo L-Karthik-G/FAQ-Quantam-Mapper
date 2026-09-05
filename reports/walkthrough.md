@@ -175,14 +175,15 @@ Canonical paired-seed dataset (this README's Tables 1–2):
 
 The benchmark scripts write their outputs **into this repository** (relative to each script),
 so re-running them regenerates the files above. Older, mutually-inconsistent experiment rounds
-(`benchmark_2_results.json`, `benchmark_results.json`, `benchmark_statistical_results.json`,
+(e.g. `benchmark_2_results.json`, `benchmark_results.json`, `benchmark_statistical_results.json`,
 `benchmark_rigorous_results.json`, `benchmark_new_circuits_results.json`,
-`benchmark_tket_all_results.json`, `benchmark_fgea_results.json`, `qft_scaling_results.json`,
-and the generated `benchmark_summary.md` / `benchmark_fgea_summary.md` tables) used different
-seeds, topologies, or `optimization_level` settings and are **not** the numbers reported here.
-The previously contradictory `reports/complete_benchmark_table.md` has been rewritten as a data
-provenance note. Treat the three files in the table above as the authoritative dataset and
-regenerate before drawing conclusions.
+`benchmark_tket_all_results.json`, `benchmark_fgea_results.json`, `qft_scaling_results.json`
+and their generators) used different seeds, topologies, or `optimization_level` settings and are
+**not** the numbers reported here. They have been archived under `historical/` (see
+`historical/README.md`) for provenance only. The previously contradictory
+`reports/complete_benchmark_table.md` has been rewritten as a data provenance note. Treat the
+three files in the table above as the authoritative dataset and regenerate before drawing
+conclusions.
 
 ---
 
