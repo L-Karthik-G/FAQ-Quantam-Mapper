@@ -2,81 +2,187 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Tests: Passing](https://img.shields.io/badge/pytest-passing-brightgreen.svg)]()
 
-**Central Contribution**: An empirical evaluation of an approximate Quadratic Assignment Problem (QAP) pre-placement pass to precondition downstream quantum circuit routers (**Qiskit SABRE**, **PyTKET LexiRoute**, and **MQT QMAP**).
+**Central Contribution**: An empirical evaluation of an approximate Quadratic Assignment
+Problem (QAP) pre-placement pass that pre-seeds the initial layout of downstream quantum
+circuit routers (Qiskit SABRE and PyTKET LexiRoute) and measures whether it reduces the number
+of SWAP gates they emit.
 
-FAQ-Layout is a pre-placement heuristic pass wrapping SciPy's `quadratic_assignment(method="faq")` heuristic, combined with multi-start perturbations, Sinkhorn normalization, and discrete 2-opt refinement (an empirical compilation heuristic, not a new continuous optimization theory result).
+FAQ-Layout is a pre-placement heuristic that wraps SciPy's
+`quadratic_assignment(method="faq")` and adds multi-start Gaussian perturbations, Sinkhorn
+normalization, and a discrete 2-opt refinement. It is an *empirical compilation heuristic*,
+not a new continuous-optimization theory result. The benchmark evaluates routers on a fixed,
+recorded hardware calibration snapshot; it does **not** run on live quantum hardware.
+
+> **Scope note.** This repository contains several experiment rounds. The **canonical,
+> reproducible paired-seed dataset is `benchmark_eval_results.json`** (with its raw per-seed
+> log `benchmark_eval_raw_seeds.json`), produced by `benchmark_eval.py` over the 20 tasks in
+> Tables 1–2 below (K=20 seeds, Qiskit `optimization_level=1`). Older `*_results.json` files
+> in the repo root come from earlier rounds that used different seeds, topologies, or
+> `optimization_level` settings; they are kept for history and are **not** the numbers cited in
+> this README. See [Data provenance & reproduction](#-data-provenance--reproduction).
 
 ---
 
 ## 📌 Problem Formulation & Heuristic Pipeline
 
 ### QAP Objective Function
+
 Initial logical-to-physical placement is modeled as an approximate QAP:
 
 $$\min_{P \in \Pi_M} \sum_{i,j} A_{ij} B_{P(i), P(j)} = \min_{P \in \Pi_M} \text{Tr}(A^T P B P^T)$$
 
-* **$A \in \mathbb{R}^{M \times M}$**: Time-decayed circuit interaction DAG matrix (zero-padded for $N < M$).
-* **$B \in \mathbb{R}^{M \times M}$**: Directed shortest-path distance matrix of the hardware graph weighted by log-infidelities from a **Qiskit `FakeBrisbane` fake backend object (which uses IBM's archived Brisbane device calibration properties, NOT live QPU hardware execution)**, incorporating an estimated CNOT direction-reversal compilation overhead penalty ($4 \times \text{cost}_{\text{1Q\_Hadamard}}$).
-* **$\mathcal{D}_M$ (Birkhoff Polytope)**: Continuous relaxation replacing discrete permutation matrices $\Pi_M$ with the convex set of doubly stochastic matrices.
+* **$A \in \mathbb{R}^{M \times M}$**: Time-decayed circuit interaction DAG matrix
+  (zero-padded for $N < M$).
+* **$B \in \mathbb{R}^{M \times M}$**: Directed shortest-path distance matrix of the hardware
+  graph weighted by log-infidelities from a Qiskit **`FakeBrisbane`** fake backend object
+  (IBM's archived Brisbane calibration properties; **not** live QPU execution), plus an
+  estimated CNOT direction-reversal overhead ($4 \times \text{cost}_{\text{1Q\_Hadamard}}$).
+* **$\mathcal{D}_M$ (Birkhoff polytope)**: the doubly-stochastic relaxation used internally by
+  SciPy's FAQ method. FAQ returns a discrete permutation; its reported cost is the discrete QAP
+  cost of that permutation (the relaxation value is not exposed by SciPy and is **not** claimed
+  here as a "continuous cost").
+
+Heuristic pipeline: build $A$ and $B$ → solve the QAP by FAQ from 5 starts (1 barycenter +
+2 small-noise + 2 medium-noise Gaussian Sinkhorn projections) → keep the lowest-cost
+permutation → apply a discrete 2-opt local search → hand the resulting layout to the router.
 
 ---
 
-## 📊 Paired-Seed Benchmark Evaluation (MQT-Bench + Hand-Crafted Holdout Suite, $K=20$ Seeds)
+## 📊 Paired-Seed Benchmark (MQT-Bench + Hand-Crafted Holdout Suite, $K=20$ Seeds)
 
-*All methods are evaluated on identical hardware profiles, matching seeds ($s \in \{0..19\}$), basis gates (`cx`, `h`, `rz`, `x`, `sx`), and transpiler optimization parameters: Qiskit `transpile(..., optimization_level=1)`, PyTKET `RoutingPass(Architecture)`, and MQT QMAP `compile(..., method='heuristic')`.*
+*All methods share identical hardware profiles, matching seeds ($s \in \{0..19\}$), basis gates
+(`cx`, `h`, `rz`, `x`, `sx`), and router options: Qiskit `transpile(..., optimization_level=1)`
+with `seed_transpiler=s`, and PyTKET `PlacementPass(GraphPlacement)` + `RoutingPass` (default)
+vs. FAQ-embedding + `RoutingPass`. Values are **mean ± 95% CI over the 20 paired seeds**; all
+rows achieved 20/20 successful compilations. "Lower-SWAP method" reports the strictly-lower
+mean for each router pair.*
 
-### Table 1: IBM FakeBrisbane Backend Snapshot ($K=20$ Paired Seeds)
+### Table 1: IBM FakeBrisbane (127-qubit Heavy-Hex), K=20 paired seeds
 
-| Benchmark Circuit | Suite Source | Scale ($N$) | SABRE Default SWAPs (Success) | **FAQ + SABRE SWAPs (Success)** | SABRE Delta | PyTKET Default SWAPs (Success) | **FAQ + TKET SWAPs (Success)** | PyTKET Delta | Preprocessing Overhead (s) | Empirical Relative Outcome |
+| Benchmark Circuit | Suite | Scale $N$ | **SABRE Default** | **FAQ+SABRE** | **Δ (SABRE)** | **PyTKET Default** | **FAQ+PyTKET** | **Δ (PyTKET)** | **FAQ Preproc. (s)** | **Lower-SWAP method** |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
-| **Grover's Search** | MQT-Bench | 10 | 5603.1 ± 184.2 (20/20) | 5693.6 ± 98.4 (20/20) | +90.5 SWAPs | 5035.0 ± 0.0 (20/20) | **4840.5 ± 118.4** (20/20) | **−194.5 SWAPs** (−3.9%) | 0.142 s | **FAQ + PyTKET Win (−3.9% SWAPs)** |
-| **QFT** | MQT-Bench | 20 | 225.0 ± 14.8 (20/20) | 248.2 ± 11.2 (20/20) | +23.2 SWAPs | 284.0 ± 0.0 (20/20) | **213.6 ± 2.3** (20/20) | **−70.4 SWAPs** (−24.8%) | 0.048 s | **FAQ + PyTKET Win (−24.8% SWAPs)** |
-| **QAOA** | MQT-Bench | 20 | 308.6 ± 18.6 (20/20) | 325.9 ± 14.2 (20/20) | +17.3 SWAPs | 398.0 ± 0.0 (20/20) | **380.9 ± 4.8** (20/20) | **−17.1 SWAPs** (−4.3%) | 0.064 s | **FAQ + PyTKET Win (−4.3% SWAPs)** |
-| **QRAM Decoder** | Hand-Crafted | 20 | 19.3 ± 1.8 (20/20) | **14.0 ± 1.2** (20/20) | **−5.3 SWAPs** (−27.5%) | **3.0 ± 0.0** (20/20) | 21.8 ± 0.5 (20/20) | +18.8 SWAPs | 0.038 s | **FAQ + SABRE Win (−27.5%), PyTKET Def Better** |
-| **Random 3-Regular** | Hand-Crafted | 20 | 36.6 ± 3.4 (20/20) | 40.6 ± 2.8 (20/20) | +4.0 SWAPs | 55.0 ± 0.0 (20/20) | **50.9 ± 1.4** (20/20) | **−4.1 SWAPs** (−7.5%) | 0.056 s | **FAQ + PyTKET Win (−7.5% SWAPs)** |
-| **Ripple-Carry Adder** | Hand-Crafted | 20 | 5.0 ± 0.4 (20/20) | 5.1 ± 0.5 (20/20) | +0.1 SWAPs | **0.0 ± 0.0** (20/20) | 3.2 ± 2.7 (20/20) | +3.2 SWAPs | 0.044 s | **Statistically Tied / PyTKET Def Optimal** |
+| **Grover's Search** | MQT-Bench | 8 | 1152.2 ± 30.4 | 1263.5 ± 31.7 | +111.3 (+9.7%) | 851.0 ± 0.0 | 1039.0 ± 8.8 | +188.0 (+22.1%) | 3.932 | SABRE Def / PyTKET Def |
+| **Grover's Search** | MQT-Bench | 10 | 5603.1 ± 141.8 | 5693.6 ± 92.7 | +90.4 (+1.6%) | 5035.0 ± 0.0 | 4840.4 ± 118.4 | -194.6 (-3.9%) | 4.397 | SABRE Def / FAQ+PyTKET |
+| **Grover's Search** | MQT-Bench | 12 | 18579.0 ± 27.3 | 18625.3 ± 69.2 | +46.3 (+0.2%) | 12610.0 ± 0.0 | 15669.1 ± 22.2 | +3059.1 (+24.3%) | 4.794 | SABRE Def / PyTKET Def |
+| **VQE (RealAmplitudes)** | MQT-Bench | 10 | 0.0 ± 0.0 | 0.0 ± 0.0 | +0.0 (n/a) | 0.0 ± 0.0 | 0.0 ± 0.0 | +0.0 (n/a) | 3.354 | Tie / Tie |
+| **VQE (RealAmplitudes)** | MQT-Bench | 20 | 9.6 ± 0.4 | 23.5 ± 4.3 | +13.9 (+144.8%) | 0.0 ± 0.0 | 0.6 ± 0.6 | +0.6 (n/a) | 4.436 | SABRE Def / PyTKET Def |
+| **VQE (RealAmplitudes)** | MQT-Bench | 50 | 30.8 ± 0.3 | 158.8 ± 17.0 | +128.1 (+416.4%) | 12.0 ± 0.0 | 12.4 ± 3.0 | +0.4 (+3.7%) | 4.617 | SABRE Def / PyTKET Def |
+| **GHZ State** | MQT-Bench | 50 | 12.0 ± 0.0 | 58.9 ± 8.5 | +46.9 (+390.8%) | 0.0 ± 0.0 | 6.0 ± 0.0 | +6.0 (n/a) | 4.687 | SABRE Def / PyTKET Def |
+| **QFT** | MQT-Bench | 20 | 225.0 ± 3.4 | 248.2 ± 6.3 | +23.2 (+10.3%) | 284.0 ± 0.0 | 213.6 ± 2.3 | -70.4 (-24.8%) | 1.977 | SABRE Def / FAQ+PyTKET |
+| **QAOA** | MQT-Bench | 10 | 57.2 ± 1.8 | 72.5 ± 2.3 | +15.3 (+26.8%) | 79.0 ± 0.0 | 73.0 ± 0.0 | -6.0 (-7.6%) | 2.954 | SABRE Def / FAQ+PyTKET |
+| **QAOA** | MQT-Bench | 20 | 308.6 ± 4.2 | 325.9 ± 6.6 | +17.3 (+5.6%) | 398.0 ± 0.0 | 380.9 ± 4.8 | -17.1 (-4.3%) | 2.686 | SABRE Def / FAQ+PyTKET |
+| **Ripple-Carry Adder** | Hand-Crafted | 20 | 5.0 ± 0.0 | 5.1 ± 1.4 | +0.1 (+2.0%) | 0.0 ± 0.0 | 3.2 ± 2.7 | +3.2 (n/a) | 3.334 | SABRE Def / PyTKET Def |
+| **QRAM Decoder** | Hand-Crafted | 20 | 19.3 ± 1.0 | 14.0 ± 1.4 | -5.3 (-27.5%) | 3.0 ± 0.0 | 21.8 ± 0.5 | +18.8 (+626.7%) | 3.749 | FAQ+SABRE / PyTKET Def |
+| **Random 3-Regular** | Hand-Crafted | 20 | 36.6 ± 1.1 | 40.6 ± 2.3 | +4.0 (+10.9%) | 55.0 ± 0.0 | 50.9 ± 1.4 | -4.1 (-7.5%) | 3.328 | SABRE Def / FAQ+PyTKET |
 
----
+### Table 2: Rigetti Grid (80-qubit), K=20 paired seeds
 
-### Table 2: Rigetti Grid 80q Calibration Profile ($K=20$ Paired Seeds)
-
-| Benchmark Circuit | Suite Source | Scale ($N$) | SABRE Default SWAPs (Success) | **FAQ + SABRE SWAPs (Success)** | SABRE Delta | PyTKET Default SWAPs (Success) | **FAQ + TKET SWAPs (Success)** | PyTKET Delta | Preprocessing Overhead (s) | Empirical Relative Outcome |
+| Benchmark Circuit | Suite | Scale $N$ | **SABRE Default** | **FAQ+SABRE** | **Δ (SABRE)** | **PyTKET Default** | **FAQ+PyTKET** | **Δ (PyTKET)** | **FAQ Preproc. (s)** | **Lower-SWAP method** |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
-| **Grover's Search** | MQT-Bench | 8 | 768.2 ± 38.4 (20/20) | 781.8 ± 36.2 (20/20) | +13.6 SWAPs | 639.0 ± 0.0 (20/20) | **605.5 ± 1.0** (20/20) | **−33.5 SWAPs** (−5.2%) | 0.042 s | **FAQ + PyTKET Win (−5.2% SWAPs)** |
-| **Grover's Search** | MQT-Bench | 10 | 3461.8 ± 124.0 (20/20) | 3513.4 ± 118.0 (20/20) | +51.6 SWAPs | 2669.0 ± 0.0 (20/20) | **2567.0 ± 0.0** (20/20) | **−102.0 SWAPs** (−3.8%) | 0.098 s | **FAQ + PyTKET Win (−3.8% SWAPs)** |
-| **Grover's Search** | MQT-Bench | 12 | 12375.2 ± 320.0 (20/20) | 12390.8 ± 298.0 (20/20) | +15.6 SWAPs | 8828.0 ± 0.0 (20/20) | **8702.3 ± 1.4** (20/20) | **−125.7 SWAPs** (−1.4%) | 0.224 s | **FAQ + PyTKET Win (−1.4% SWAPs)** |
-| **VQE (RealAmplitudes)**| MQT-Bench | 50 | 45.7 ± 7.2 (20/20) | 64.0 ± 8.4 (20/20) | +18.3 SWAPs | 13.0 ± 0.0 (20/20) | **1.1 ± 0.5** (20/20) | **−11.9 SWAPs** (−91.5%) | 0.054 s | **FAQ + PyTKET Win (−91.5% SWAPs)** |
-| **QFT** | MQT-Bench | 20 | 147.9 ± 11.2 (20/20) | 172.9 ± 12.8 (20/20) | +25.0 SWAPs | 148.0 ± 0.0 (20/20) | **142.0 ± 2.2** (20/20) | **−6.0 SWAPs** (−4.1%) | 0.046 s | **FAQ + PyTKET Win (−4.1% SWAPs)** |
-| **Ripple-Carry Adder** | Hand-Crafted | 20 | 7.8 ± 0.8 (20/20) | **0.8 ± 0.2** (20/20) | **−7.0 SWAPs** (−89.7%) | **0.0 ± 0.0** (20/20) | **0.0 ± 0.0** (20/20) | 0.0 SWAPs | 0.036 s | **FAQ + SABRE Win (−89.7%), PyTKET Optimal**|
-| **QRAM Decoder** | Hand-Crafted | 20 | 7.5 ± 0.6 (20/20) | **0.6 ± 0.1** (20/20) | **−6.9 SWAPs** (−92.0%) | **0.0 ± 0.0** (20/20) | 13.0 ± 1.0 (20/20) | +13.0 SWAPs | 0.038 s | **FAQ + SABRE Win (−92.0%), PyTKET Def Better** |
+| **Grover's Search** | MQT-Bench | 8 | 768.2 ± 4.3 | 781.8 ± 8.1 | +13.5 (+1.8%) | 639.0 ± 0.0 | 605.5 ± 1.0 | -33.5 (-5.2%) | 1.422 | SABRE Def / FAQ+PyTKET |
+| **Grover's Search** | MQT-Bench | 10 | 3461.8 ± 13.2 | 3513.4 ± 18.1 | +51.7 (+1.5%) | 2669.0 ± 0.0 | 2567.0 ± 0.0 | -102.0 (-3.8%) | 1.733 | SABRE Def / FAQ+PyTKET |
+| **Grover's Search** | MQT-Bench | 12 | 12375.2 ± 27.0 | 12390.8 ± 54.0 | +15.5 (+0.1%) | 8828.0 ± 0.0 | 8702.3 ± 1.4 | -125.7 (-1.4%) | 2.391 | SABRE Def / FAQ+PyTKET |
+| **VQE (RealAmplitudes)** | MQT-Bench | 50 | 45.7 ± 5.0 | 64.0 ± 7.8 | +18.3 (+40.0%) | 13.0 ± 0.0 | 1.1 ± 0.5 | -11.9 (-91.5%) | 1.510 | SABRE Def / FAQ+PyTKET |
+| **QFT** | MQT-Bench | 20 | 147.9 ± 2.3 | 172.9 ± 3.0 | +25.0 (+16.9%) | 148.0 ± 0.0 | 142.0 ± 2.2 | -6.0 (-4.1%) | 1.496 | SABRE Def / FAQ+PyTKET |
+| **Ripple-Carry Adder** | Hand-Crafted | 20 | 7.8 ± 0.8 | 0.8 ± 0.5 | -7.1 (-90.4%) | 0.0 ± 0.0 | 0.0 ± 0.0 | +0.0 (n/a) | 1.434 | FAQ+SABRE / Tie |
+| **QRAM Decoder** | Hand-Crafted | 20 | 7.5 ± 0.7 | 0.6 ± 0.4 | -7.0 (-92.1%) | 0.0 ± 0.0 | 13.0 ± 1.0 | +13.0 (n/a) | 1.311 | FAQ+SABRE / PyTKET Def |
 
-*Note: Complete raw per-seed execution logs containing every seed ($s \in \{0..19\}$) with explicit status and failure reasons are archived in `benchmark_eval_raw_seeds.json`.*
+### What these data actually show
+
+* **FAQ + PyTKET** reduces SWAPs versus PyTKET's own `GraphPlacement` on every Rigetti-Grid
+  task except the (already SWAP-free) holdouts, and on several IBM tasks (Grover-N10, QFT,
+  QAOA, Random 3-regular). The largest consistent win is VQE-N50 on Rigetti (−11.9 SWAPs,
+  −91.5%).
+* **FAQ + SABRE rarely helps.** It is worse than default SABRE on essentially all MQT-Bench
+  tasks (VQE/GHZ on IBM by 100–400%, Grover by +0.2% to +9.7%); it only beats default SABRE on
+  three rows of the hand-crafted holdouts — QRAM on IBM (19.3→14.0) and Ripple-Carry Adder /
+  QRAM on Rigetti (7.8→0.8 and 7.5→0.6). Pre-seeding a layout can *over-constrain* SABRE's own
+  search, so a worse FAQ layout than SABRE would find on its own cannot always be recovered by
+  routing.
+* FAQ + PyTKET is **not** uniformly better even on IBM: on Grover-N8 (+22%) and Grover-N12
+  (+24%) it is substantially *worse* than PyTKET default. Gains are workload- and size-specific,
+  not a blanket improvement.
+* Default routers are already optimal (0–3 SWAPs) on the easiest circuits (VQE-N10, Ripple,
+  QRAM holdouts on Rigetti); there is no room for FAQ to help there, and it often adds swaps.
+
+All raw per-seed values (each of the 20 seeds, per method, with explicit success/failure) are
+in `benchmark_eval_raw_seeds.json`.
 
 ---
 
-## 🔬 Component Isolation & Ablation Analysis
+## 🔬 Component Ablations (QAP-cost level, IBM FakeBrisbane, Grover N=10)
 
-### Table 3: Pipeline Component Ablations (Continuous FAQ Cost vs. Polished Cost on IBM FakeBrisbane)
+`benchmark_ablations.py` measures each solver configuration's **QAP objective value only**
+(FAQ permutation cost before 2-opt and final cost after 2-opt) on one circuit. It does **not**
+route; downstream routing outcomes are measured per-router in Tables 1–2 and are not a property
+of a single QAP-init configuration, so no "downstream SWAPs" column is reported here.
 
-| Ablation Configuration | Raw Continuous FAQ Cost | Final Polished Cost ($f(P)$) | Downstream SWAPs | Component Isolation & Energy Interpretation |
-|:---|:---:|:---:|:---:|:---|
-| **1. Single Barycenter Start ($J_0$)** | 166.51 | 91.86 | 4533.0 SWAPs | Continuous relaxation starting from Birkhoff center $J_0$. |
-| **2. Pure Random Multi-Start ($K=5$)** | 156.41 | 86.99 | 3824.0 SWAPs | Random starts explore continuous local stationary points ($156.41$). |
-| **3. Structured Gaussian Perturbation (Ours)** | **122.12** | **88.31** | **3766.8 SWAPs** | **Gaussian noise reduces continuous FAQ cost by 26.7%** ($166.51 \to 122.12$), guiding 2-opt to optimal downstream routing. |
-| **4. FAQ Without 2-Opt Polish** | 166.51 | 166.51 | 5420.0 SWAPs | **Discrete 2-opt polish reduces QAP cost by 47.0%** ($\frac{166.51 - 88.31}{166.51} \times 100\% = 46.97\%$). |
-| **5. FAQ Undirected Hardware Matrix** | 53.17 | 35.72 | 4022.0 SWAPs | Ignoring CNOT direction infidelities artificially lowers QAP cost scale ($35.72$), but increases downstream SWAPs ($4022.0$). |
+| Ablation configuration | FAQ perm. cost (pre-2-opt) | After 2-opt polish | Isolated effect |
+|:---|:---:|:---:|:---|
+| 1. Single barycenter start | 166.51 | 91.86 | Baseline single start (best-of-1). |
+| 2. Random multi-start (K=5) | 156.41 | 86.99 | Multi-start min over random starts. |
+| 3. Structured Gaussian multi-start (K=5, ours) | 122.12 | 88.31 | Multi-start min over Gaussian-perturbed starts. |
+| 4. FAQ, no 2-opt polish (barycenter, K=5) | 166.51 | 166.51 | Same init as row 1 with polish disabled. |
+| 5. FAQ with undirected hardware matrix (Gaussian K=5) | 53.17 | 35.72 | Ignoring CNOT direction lowers the cost scale; **not** directly comparable. |
+
+Interpretation, scoped to this single circuit/seed:
+
+* **2-opt polish (isolated, rows 1 vs 4):** with a fixed barycenter start, 2-opt lowers the QAP
+  cost from 166.51 to 91.86 (−44.8%). This is the clean measure of the 2-opt contribution.
+* **Multi-start Gaussian (row 3) vs. single barycenter (row 1):** the best-of-5 Gaussian FAQ
+  cost is 122.12 vs 166.51 (−26.7%); versus best-of-5 random (156.41) it is −21.9%. Part of the
+  gain is simply the min-over-K effect, so these figures are **not** a pure "Gaussian-noise"
+  effect.
+* **Random vs. Gaussian:** after 2-opt the random multi-start (86.99) is essentially as good as
+  the Gaussian multi-start (88.31) on this example — the Gaussian scheme is not decisively
+  better than random once 2-opt is applied.
+* These are QAP-cost proxies on one circuit. They are consistent with — but do not alone
+  establish — the routing results in Tables 1–2.
 
 ---
 
-## 🔬 Compilation Trade-off Criterion & Limitations
+## Limitations & When to Use It
 
-> **Compilation Trade-off Criterion**: FAQ pre-placement adds a preprocessing overhead of $0.038\text{s}$–$0.312\text{s}$. It is recommended for multi-iteration variational circuits (VQE, QAOA) or large-scale search circuits (Grover) where SWAP reductions (e.g. $-70.4$ to $-3509.0$ SWAPs) yield lower overall hardware execution noise. It is **NOT recommended for simple low-depth circuits** where default routers already achieve near-zero SWAPs.
+* **Real overhead is seconds, not sub-second.** FAQ pre-placement measured ~1.3–4.8 s per
+  circuit here (Tables 1–2). That is far from negligible, so it is only justified when the
+  routed circuit is itself large/multi-iteration (e.g. repeated VQE/QAOA layers) and the SWAP
+  savings outweigh the one-time cost.
+* **FAQ+SABRE usually makes routing worse** on these benchmarks; prefer default SABRE. The
+  FAQ-seeded gain is specific to PyTKET routing on the Rigetti grid and on several IBM tasks.
+* **Not a blanket improvement.** On IBM, FAQ+PyTKET *hurts* Grover at N=8 and N=12, and gains
+  nothing on VQE/GHZ. The README's earlier recommendation "use it for large Grover/search
+  circuits" is **not** supported by the data and has been removed.
+* **Over-constraining:** pre-seeding an initial layout can restrict a router's search space.
+* **Hardware snapshot scope:** results use an IBM `FakeBrisbane` snapshot (archived calibration
+  data) and a synthetic Rigetti profile, **not** live physical hardware; live results vary with
+  calibration drift.
+* **Heuristic, non-convex:** FAQ seeks local solutions of an indefinite QAP over the Birkhoff
+  polytope; no global-optimality guarantee.
+* The ablation table is a single-circuit, single-seed cost study; see the caveats in its section.
 
-1. **Router Search Space Over-Constraining**: Pre-seeding an initial layout can restrict a router's dynamic search space. On certain workloads (e.g. 50q VQE on IBM or 20q QFT on Rigetti with SABRE), default router runs achieve lower or equal SWAP counts.
-2. **Hardware Snapshot Scope**: Hardware graphs use an **IBM FakeBrisbane fake backend snapshot based on IBM hardware calibration data (not live physical hardware execution)**. Live device execution varies with physical calibration drift.
-3. **Heuristic Non-Convex Optimization**: Continuous Frank–Wolfe relaxation over the Birkhoff polytope on an indefinite QAP objective seeks local stationary points; global optimality is not mathematically guaranteed.
+---
+
+## 📌 Data provenance & reproduction
+
+Canonical paired-seed dataset (this README's Tables 1–2):
+
+| File | Contents | Produced by |
+|:---|:---|:---|
+| `benchmark_eval_results.json` | Summary (mean, 95% CI, success) per task/method | `benchmark_eval.py` |
+| `benchmark_eval_raw_seeds.json` | Raw per-seed SWAP/time/prep logs (all 20 seeds) | `benchmark_eval.py` |
+| `benchmark_ablation_results.json` | QAP-cost ablation table | `benchmark_ablations.py` |
+
+The benchmark scripts write their outputs **into this repository** (relative to each script),
+so re-running them regenerates the files above. Older, mutually-inconsistent experiment rounds
+(`benchmark_2_results.json`, `benchmark_results.json`, `benchmark_statistical_results.json`,
+`benchmark_rigorous_results.json`, `benchmark_new_circuits_results.json`,
+`benchmark_tket_all_results.json`, `benchmark_fgea_results.json`, `qft_scaling_results.json`,
+and the generated `benchmark_summary.md` / `benchmark_fgea_summary.md` tables) used different
+seeds, topologies, or `optimization_level` settings and are **not** the numbers reported here.
+The previously contradictory `reports/complete_benchmark_table.md` has been rewritten as a data
+provenance note. Treat the three files in the table above as the authoritative dataset and
+regenerate before drawing conclusions.
 
 ---
 
@@ -90,15 +196,19 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 
-# Run pytest unit & integration test suite
+# Run the unit & integration test suite
 pytest tests/test_modules.py -v
 
-# Run the 6-way ablation suite
+# Regenerate the QAP-cost ablation table (writes benchmark_ablation_results.json in-repo)
 python3 benchmark_ablations.py
 
-# Run the paired-seed benchmark suite (K=20 seeds)
+# Regenerate the paired-seed benchmark suite (K=20 seeds; writes results in-repo).
+# NOTE: this runs full Qiskit/PyTKET routing and can take a long time.
 python3 benchmark_eval.py
 ```
+
+The pure-`numpy`/`scipy` solver (`qap_compiler/module_c_faq.py`) has no Qiskit dependency and
+can be tested/used standalone.
 
 ---
 
