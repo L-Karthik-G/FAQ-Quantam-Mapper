@@ -67,7 +67,7 @@ def test_module_b_directed_hardware_builder():
 
 
 def test_module_c_multi_start_improvement_and_2opt():
-    """Verify that multi-start Gaussian solver and 2-opt refinement strictly improve or maintain QAP cost."""
+    """Verify that multi-start (random default) solver and 2-opt refinement strictly improve or maintain QAP cost."""
     rng = np.random.default_rng(42)
     M = 6
     A = rng.uniform(0, 5, size=(M, M))
@@ -91,10 +91,15 @@ def test_module_c_multi_start_improvement_and_2opt():
     solver_single = AdaptiveFAQSolver(num_starts=1, start_mode="barycenter", enable_2opt=False, seed=42)
     _, cost_single = solver_single.solve(A, B)
 
-    solver_multi = AdaptiveFAQSolver(num_starts=5, start_mode="gaussian", enable_2opt=True, seed=42)
+    solver_multi = AdaptiveFAQSolver(num_starts=5, start_mode="random", enable_2opt=True, seed=42)
     _, cost_multi = solver_multi.solve(A, B)
 
     assert cost_multi <= cost_single + 1e-8
+
+    # Default multi-start mode must be random multi-start + 2-opt (per multi-cell ablation,
+    # reports/a5_results.md), NOT the deprecated gaussian scheme.
+    assert AdaptiveFAQSolver().start_mode == "random"
+    assert AdaptiveFAQSolver().enable_2opt is True
 
 
 def test_module_e_fgea_and_fma_exception_on_overfill():

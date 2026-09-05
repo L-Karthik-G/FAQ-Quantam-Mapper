@@ -13,9 +13,10 @@ $$ \min_{P \in \Pi_M} \text{Tr}(A^\top P B P^\top) $$
    circuit layer (`qap_compiler/module_a_dag.py`).
 2. **Hardware matrix $B$** — directed, fidelity-weighted shortest-path distances over the
    device coupling graph from a Qiskit `FakeBrisbane` snapshot (`module_b_hardware.py`).
-3. **Solve** — SciPy FAQ from 5 starts (barycenter + Gaussian Sinkhorn perturbations), then a
-   discrete **2-opt** polish (`module_c_faq.py`). FAQ returns a discrete permutation; its cost
-   is the discrete QAP cost (not a "continuous relaxation cost").
+3. **Solve** — SciPy FAQ from K=5 **random** doubly-stochastic restarts, then a discrete
+   **2-opt** polish (`module_c_faq.py`). (Random multi-start is the default; the earlier
+   structured-Gaussian scheme was dropped — see `reports/a5_results.md`.) FAQ returns a discrete
+   permutation; its cost is the discrete QAP cost (not a "continuous relaxation cost").
 4. **Hand off** — the layout seeds Qiskit SABRE, PyTKET, or MQT-QMAP routing (`pipeline.py`,
    `module_d_handoff.py`, `module_e_fgea.py`, `qiskit_plugin.py`).
 

@@ -1,8 +1,13 @@
 """
 Module C: Multi-Start Quadratic Assignment Problem (QAP) Pre-Placement Solver
 Solves initial logical-to-physical qubit layout over the Birkhoff polytope using
-SciPy's FAQ heuristic (quadratic_assignment), multi-scale Gaussian perturbations,
-Sinkhorn-Knopp doubly stochastic projection, and discrete 2-opt local search refinement.
+SciPy's FAQ heuristic (quadratic_assignment) and a discrete 2-opt local search refinement.
+
+Multi-start initialization: since the multi-cell ablation (see reports/a5_results.md) showed
+that the structured-Gaussian perturbation scheme does **not** beat plain random restarts once
+2-opt is applied, **random multi-start + 2-opt is the default and recommended configuration**.
+The structured-Gaussian start mode is retained only for reproducing the earlier ablation/eval
+datasets and is deprecated (see `AdaptiveFAQSolver`).
 
 IMPORTANT (terminology): SciPy's `quadratic_assignment(method="faq")` returns a discrete
 permutation (`res.col_ind`), and `res.fun` is the *discrete* QAP cost of that permutation
@@ -87,20 +92,24 @@ def refine_2opt(A: np.ndarray, B: np.ndarray, initial_perm: np.ndarray, max_roun
 class AdaptiveFAQSolver:
     """
     Multi-Start QAP Pre-Placement Solver.
-    
+
     Combines:
       - SciPy's quadratic_assignment (FAQ method) approximate QAP pre-placement
         (returns a discrete permutation; the Frank-Wolfe relaxation is internal to SciPy).
-      - 5-Start Structured Gaussian Perturbation (1 Barycenter, 2 small noise, 2 medium noise).
-      - Sinkhorn-Knopp doubly stochastic projection onto the Birkhoff polytope.
+      - Random multi-start initialization over the Birkhoff polytope (default, K starts).
       - Discrete 2-opt pairwise local search refinement.
       - Thread-pooled multi-core parallel execution.
+
+    The default is **random multi-start + 2-opt**, which the multi-cell ablation
+    (reports/a5_results.md) showed is equal-or-better than the previously-default structured
+    Gaussian perturbation scheme. `start_mode="gaussian"` is deprecated and retained only for
+    reproducing the earlier ablation/evaluation datasets.
     """
 
     def __init__(
         self,
         num_starts: int = 5,
-        start_mode: str = "gaussian",  # 'barycenter', 'gaussian', 'random'
+        start_mode: str = "random",  # 'random' (default), 'barycenter', 'gaussian' (deprecated)
         enable_2opt: bool = True,
         seed: int = 42,
         max_workers: Optional[int] = 4,
@@ -108,11 +117,14 @@ class AdaptiveFAQSolver:
         """
         Args:
             num_starts: Total multi-start initializations (default 5).
-            start_mode: Mode of initialization ('barycenter', 'gaussian', 'random').
+            start_mode: Mode of initialization ('random' default, 'barycenter',
+                or 'gaussian' which is deprecated).
             enable_2opt: If True, applies discrete 2-opt polishing after the FAQ permutation.
-            seed: Master random seed for reproducible perturbations.
+            seed: Master random seed for reproducible initializations.
             max_workers: Worker threads for parallel start evaluation.
         """
+        if start_mode not in ("random", "barycenter", "gaussian"):
+            raise ValueError(f"Unknown start_mode: {start_mode!r}")
         self.num_starts = num_starts
         self.start_mode = start_mode
         self.enable_2opt = enable_2opt
@@ -123,6 +135,11 @@ class AdaptiveFAQSolver:
     def _generate_p0_candidates(self, M: int, rng: np.random.Generator) -> List[Union[str, np.ndarray]]:
         """
         Generates P0 initialization candidate matrices on the Birkhoff polytope.
+
+        start_mode='random' (default) samples i.i.d. doubly-stochastic matrices; this is the
+        recommended scheme (multi-cell ablation shows it equals or beats the old Gaussian
+        scheme after 2-opt). start_mode='gaussian' is deprecated for new use but retained so the
+        earlier ablation/eval datasets can be reproduced (see reports/a5_results.md).
         """
         candidates: List[Union[str, np.ndarray]] = []
         J0 = np.ones((M, M), dtype=float) / M
@@ -136,7 +153,8 @@ class AdaptiveFAQSolver:
                 candidates.append(sinkhorn_knopp(rand_mat))
             return candidates
 
-        # Default: Structured multi-scale Gaussian perturbation around barycenter J0
+        # start_mode == "gaussian" (deprecated, kept for reproduction):
+        # structured multi-scale Gaussian perturbation around barycenter J0
         candidates.append("barycenter")
 
         # Small noise (5% entry scale relative to 1/M)

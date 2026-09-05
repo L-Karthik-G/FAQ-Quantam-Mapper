@@ -32,7 +32,9 @@ from qap_compiler.module_c_faq import AdaptiveFAQSolver
 class FAQPlacementPass(TransformationPass):
     """
     Qiskit TransformationPass that computes an initial layout via an approximate
-    Quadratic Assignment Problem (QAP) pre-placement (SciPy FAQ + 2-opt polish).
+    Quadratic Assignment Problem (QAP) pre-placement (SciPy FAQ + random multi-start +
+    2-opt polish). `start_mode` defaults to `"random"` (recommended); `"gaussian"` is
+    deprecated and kept only for reproducing earlier datasets.
     """
 
     def __init__(
@@ -40,7 +42,7 @@ class FAQPlacementPass(TransformationPass):
         coupling_map: Union[CouplingMap, List[Tuple[int, int]]],
         error_rates: Optional[Dict[Tuple[int, int], float]] = None,
         num_starts: int = 5,
-        start_mode: str = "gaussian",
+        start_mode: str = "random",
         enable_2opt: bool = True,
         time_decay_gamma: float = 0.9,
         seed: int = 42,
