@@ -92,6 +92,10 @@ def get_hardware_topology(arch_name: str) -> Tuple[int, List[Tuple[int, int]], D
         return load_ibm_fake_brisbane_snapshot()
 
     elif arch_name == "Rigetti_Grid_80":
+        # NOTE (honest-labeling): "Rigetti_Grid_80" is a SYNTHETIC 8x10 grid topology with a
+        # randomly-generated uniform error profile, NOT a real archived Rigetti device. The
+        # identifier is kept as-is (it is baked into the committed result JSON and task list),
+        # but it must be read as "synthetic grid topology" everywhere it appears to users.
         M = 80
         rng = np.random.default_rng(12345)
         grid_G = nx.convert_node_labels_to_integers(nx.grid_2d_graph(8, 10))

@@ -58,6 +58,26 @@ vs. FAQ-embedding + `RoutingPass`. Values are **mean ± 95% CI over the 20 paire
 rows achieved 20/20 successful compilations. "Lower-SWAP method" reports the strictly-lower
 mean for each router pair.*
 
+> **Determinism note (PyTKET default).** In the installed pytket (2.18.x), neither
+> `GraphPlacement` (constructor args: `maximum_matches`, `timeout`, `maximum_pattern_gates`,
+> `maximum_pattern_depth` — no seed/RNG) nor `RoutingPass` (documented as deterministic
+> `LexiLabellingMethod` + `LexiRouteRoutingMethod`) exposes any seed or random seed; there is no
+> global random-seed knob in `pytket.placement`/`pytket.passes`. So the default PyTKET arm is
+> deterministic by construction, and indeed it yields the identical swap count on every seed.
+> Its `± 0.0` CI therefore reflects a single deterministic value, *not* 20 independent samples,
+> and it is reported as a point value. Rows whose only varying arm is FAQ's are still valid
+> paired comparisons; rows where both arms are deterministic (marked **det**) are not treated as
+> sampled.
+>
+> **How to read the "Lower-SWAP method" column.** It states the lower **mean**, which is *not*
+> the same as a statistically significant difference. Every claim here is now (a) tested with a
+> paired **Wilcoxon signed-rank** over the 20 per-seed differences with a **Benjamini–Hochberg
+> FDR correction** across all comparisons and (b) re-checked against an
+> estimated **fidelity-loss proxy** of the routed circuit (which can disagree with raw SWAP
+> count). Full per-row results, and rows that are *not* significant or that flip sign under the
+> fidelity metric, are in
+> [`reports/statistical_fidelity_analysis.md`](reports/statistical_fidelity_analysis.md).
+
 ### Table 1: IBM FakeBrisbane (127-qubit Heavy-Hex), K=20 paired seeds
 
 | Benchmark Circuit | Suite | Scale $N$ | **SABRE Default** | **FAQ+SABRE** | **Δ (SABRE)** | **PyTKET Default** | **FAQ+PyTKET** | **Δ (PyTKET)** | **FAQ Preproc. (s)** | **Lower-SWAP method** |
@@ -76,7 +96,7 @@ mean for each router pair.*
 | **QRAM Decoder** | Hand-Crafted | 20 | 19.3 ± 1.0 | 14.0 ± 1.4 | -5.3 (-27.5%) | 3.0 ± 0.0 | 21.8 ± 0.5 | +18.8 (+626.7%) | 3.749 | FAQ+SABRE / PyTKET Def |
 | **Random 3-Regular** | Hand-Crafted | 20 | 36.6 ± 1.1 | 40.6 ± 2.3 | +4.0 (+10.9%) | 55.0 ± 0.0 | 50.9 ± 1.4 | -4.1 (-7.5%) | 3.328 | SABRE Def / FAQ+PyTKET |
 
-### Table 2: Rigetti Grid (80-qubit), K=20 paired seeds
+### Table 2: Synthetic Grid Topology (80-qubit), K=20 paired seeds
 
 | Benchmark Circuit | Suite | Scale $N$ | **SABRE Default** | **FAQ+SABRE** | **Δ (SABRE)** | **PyTKET Default** | **FAQ+PyTKET** | **Δ (PyTKET)** | **FAQ Preproc. (s)** | **Lower-SWAP method** |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
@@ -90,24 +110,36 @@ mean for each router pair.*
 
 ### What these data actually show
 
-* **FAQ + PyTKET** reduces SWAPs versus PyTKET's own `GraphPlacement` on every Rigetti-Grid
+* **FAQ + PyTKET** reduces SWAPs versus PyTKET's own `GraphPlacement` on every synthetic-grid
   task except the (already SWAP-free) holdouts, and on several IBM tasks (Grover-N10, QFT,
-  QAOA, Random 3-regular). The largest consistent win is VQE-N50 on Rigetti (−11.9 SWAPs,
+  QAOA, Random 3-regular). The largest consistent win is VQE-N50 on the synthetic grid (−11.9 SWAPs,
   −91.5%).
 * **FAQ + SABRE rarely helps.** It is worse than default SABRE on essentially all MQT-Bench
   tasks (VQE/GHZ on IBM by 100–400%, Grover by +0.2% to +9.7%); it only beats default SABRE on
   three rows of the hand-crafted holdouts — QRAM on IBM (19.3→14.0) and Ripple-Carry Adder /
-  QRAM on Rigetti (7.8→0.8 and 7.5→0.6). Pre-seeding a layout can *over-constrain* SABRE's own
+  QRAM on the synthetic grid (7.8→0.8 and 7.5→0.6). Pre-seeding a layout can *over-constrain* SABRE's own
   search, so a worse FAQ layout than SABRE would find on its own cannot always be recovered by
   routing.
 * FAQ + PyTKET is **not** uniformly better even on IBM: on Grover-N8 (+22%) and Grover-N12
   (+24%) it is substantially *worse* than PyTKET default. Gains are workload- and size-specific,
   not a blanket improvement.
 * Default routers are already optimal (0–3 SWAPs) on the easiest circuits (VQE-N10, Ripple,
-  QRAM holdouts on Rigetti); there is no room for FAQ to help there, and it often adds swaps.
+  QRAM holdouts on the synthetic grid); there is no room for FAQ to help there, and it often adds swaps.
 
 All raw per-seed values (each of the 20 seeds, per method, with explicit success/failure) are
 in `benchmarks/results/benchmark_eval_raw_seeds.json`.
+
+> **Significance & fidelity caveat on the bullets above.** These are statements about *mean*
+> differences. With a Benjamini–Hochberg FDR correction (q < 0.05) several are **not**
+> significant despite a lower mean — e.g. FAQ+SABRE vs SABRE on Grover-N10/N12 Brisbane,
+> FAQ+PyTKET vs PyTKET on VQE-N50 Brisbane, and the "PyTKET default lower" claim on VQE-N20
+> Brisbane (raw p=0.046 but q=0.053). The significant FAQ-lower PyTKET wins are Grover-N8/N12
+> (synthetic grid), Grover-N10 (Brisbane), QAOA-N20 (Brisbane), QFT (both grids) and Random
+> 3-regular (Brisbane), all at q ≤ 0.0014. The fidelity-loss proxy shows SWAP deltas and fidelity
+> deltas agree in sign only on IBM — several synthetic-grid rows flip sign. Read the bullets as
+> directional means, not tested claims, and consult
+> [`reports/statistical_fidelity_analysis.md`](reports/statistical_fidelity_analysis.md) before
+> drawing conclusions.
 
 ---
 
@@ -126,19 +158,32 @@ of a single QAP-init configuration, so no "downstream SWAPs" column is reported 
 | 4. FAQ, no 2-opt polish (barycenter, K=5) | 166.51 | 166.51 | Same init as row 1 with polish disabled. |
 | 5. FAQ with undirected hardware matrix (Gaussian K=5) | 53.17 | 35.72 | Ignoring CNOT direction lowers the cost scale; **not** directly comparable. |
 
-Interpretation, scoped to this single circuit/seed:
+Interpretation below is **superseded for the Gaussian-vs-random question** by the multi-cell,
+K=20 follow-up in `reports/a5_results.md` (see the verdict block after it). The single-cell
+numbers are kept only to show the historical basis and the 2-opt/undirected isolation effects,
+which the multi-cell study did not re-derive:
 
 * **2-opt polish (isolated, rows 1 vs 4):** with a fixed barycenter start, 2-opt lowers the QAP
-  cost from 166.51 to 91.86 (−44.8%). This is the clean measure of the 2-opt contribution.
-* **Multi-start Gaussian (row 3) vs. single barycenter (row 1):** the best-of-5 Gaussian FAQ
-  cost is 122.12 vs 166.51 (−26.7%); versus best-of-5 random (156.41) it is −21.9%. Part of the
-  gain is simply the min-over-K effect, so these figures are **not** a pure "Gaussian-noise"
-  effect.
-* **Random vs. Gaussian:** after 2-opt the random multi-start (86.99) is essentially as good as
-  the Gaussian multi-start (88.31) on this example — the Gaussian scheme is not decisively
-  better than random once 2-opt is applied.
-* These are QAP-cost proxies on one circuit. They are consistent with — but do not alone
+  cost from 166.51 to 91.86 (−44.8%). This is the clean measure of the 2-opt contribution (the
+  multi-cell study kept 2-opt on throughout, so it does not re-isolate this).
+* **Multi-start vs single barycenter (rows 2/3 vs 1):** best-of-K multi-start beats best-of-1
+  (random 86.99, Gaussian 88.31, vs barycenter 91.86). Part of the gain is simply the
+  min-over-K effect, so these figures are **not** a pure "Gaussian-noise" effect.
+* **Random vs. Gaussian (superseded):** on this one Grover-N10 example the two were within ~1
+  point after 2-opt (86.99 vs 88.31). With only a single seed this could not distinguish them.
+* These are QAP-cost proxies on one circuit; they are consistent with — but do not alone
   establish — the routing results in Tables 1–2.
+
+> **CURRENT POSITION — multi-cell follow-up (rows 1–3, K=20 seeds, 5 regimes).** The
+> Gaussian-vs-random question above was re-run across five cells from Tables 1–2 (Grover-N10,
+> VQE-N50 synthetic-grid, QRAM-N20, Grover-N12, VQE-N10) at K=20 seeds with mean ± 95% CI and a
+> paired Wilcoxon (BH-corrected). **Verdict: Gaussian multi-start does not beat random
+> multi-start once 2-opt is applied.** It ties (non-significant) in 3 cells and is *significantly
+> worse* in VQE-N50 (q=0.032; a real but small ~+3.9% penalty — Gaussian worse on 16/20 seeds,
+> not a tie artifact). The one cell where Gaussian looks significantly better (VQE-N10, q=0.042)
+> is a tie artifact: Gaussian collapses to the deterministic single-barycenter value on every
+> seed. See [`reports/a5_results.md`](reports/a5_results.md). Recommendation: **ship random
+> multi-start + 2-opt** (simpler, equal-or-better) rather than the structured-Gaussian scheme.
 
 ---
 
@@ -149,13 +194,13 @@ Interpretation, scoped to this single circuit/seed:
   routed circuit is itself large/multi-iteration (e.g. repeated VQE/QAOA layers) and the SWAP
   savings outweigh the one-time cost.
 * **FAQ+SABRE usually makes routing worse** on these benchmarks; prefer default SABRE. The
-  FAQ-seeded gain is specific to PyTKET routing on the Rigetti grid and on several IBM tasks.
+  FAQ-seeded gain is specific to PyTKET routing on the synthetic grid and on several IBM tasks.
 * **Not a blanket improvement.** On IBM, FAQ+PyTKET *hurts* Grover at N=8 and N=12, and gains
   nothing on VQE/GHZ. The README's earlier recommendation "use it for large Grover/search
   circuits" is **not** supported by the data and has been removed.
 * **Over-constraining:** pre-seeding an initial layout can restrict a router's search space.
 * **Hardware snapshot scope:** results use an IBM `FakeBrisbane` snapshot (archived calibration
-  data) and a synthetic Rigetti profile, **not** live physical hardware; live results vary with
+  data) and a synthetic-grid profile (labeled "Rigetti_Grid_80" internally), **not** live physical hardware; live results vary with
   calibration drift.
 * **Heuristic, non-convex:** FAQ seeks local solutions of an indefinite QAP over the Birkhoff
   polytope; no global-optimality guarantee.
@@ -172,6 +217,10 @@ Canonical paired-seed dataset (this README's Tables 1–2):
 | `benchmarks/results/benchmark_eval_results.json` | Summary (mean, 95% CI, success) per task/method | `benchmarks/benchmark_eval.py` |
 | `benchmarks/results/benchmark_eval_raw_seeds.json` | Raw per-seed SWAP/time/prep logs (all 20 seeds) | `benchmarks/benchmark_eval.py` |
 | `benchmarks/results/benchmark_ablation_results.json` | QAP-cost ablation table | `benchmarks/benchmark_ablations.py` |
+| `benchmarks/results/significance_results.json` | Paired Wilcoxon test per row | `benchmarks/analyze_significance.py` |
+| `benchmarks/results/benchmark_fidelity_raw.json` / `benchmark_fidelity_results.json` | Per-seed SWAP + fidelity-loss proxy per method | `benchmarks/benchmark_fidelity.py` |
+| `benchmarks/results/benchmark_fidelity_crosscheck.json` | Validates fidelity re-run reproduces canonical data (0/1600 SWAP divergences) | `benchmarks/benchmark_fidelity.py` |
+| `benchmarks/results/benchmark_fidelity_comparison.json` | SWAP-delta vs fidelity-delta per pair | `benchmarks/report_fidelity.py` |
 
 Running `benchmarks/benchmark_eval.py` (or its CPU-parallel variants) and
 `benchmarks/benchmark_ablations.py` regenerates these files in `benchmarks/results/`. Older,
@@ -183,7 +232,9 @@ and their generators) used different seeds, topologies, or `optimization_level` 
 **not** the numbers reported here. They have been archived under `historical/` (see
 `historical/README.md`) for provenance only. The previously contradictory
 `reports/complete_benchmark_table.md` has been rewritten as a data provenance note. Treat the
-three files in the table above as the authoritative dataset and regenerate before drawing
+three canonical benchmark files (`benchmark_eval_results.json`, `benchmark_eval_raw_seeds.json`,
+`benchmark_ablation_results.json`) as the authoritative dataset — the significance and fidelity
+files in the table are *derived analysis* over that same dataset — and regenerate before drawing
 conclusions.
 
 ---

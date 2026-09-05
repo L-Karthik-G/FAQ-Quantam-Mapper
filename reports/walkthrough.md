@@ -37,12 +37,30 @@ uv run python benchmarks/benchmark_eval_parallel.py 6 # same results, CPU-parall
 
 # In sandboxes that block multiprocessing Pools, use the strided driver instead:
 #   uv run python benchmarks/benchmark_eval_strided.py 6 0   # ...remainder 0..5, then merge partials
+
+# Paired significance testing (Wilcoxon + BH FDR) on the committed per-seed log (analysis-only)
+uv run python benchmarks/analyze_significance.py
+
+# Fidelity-loss proxy on the routed circuits (heavy; deterministic re-route).
+# Launch 6 strided slices in parallel, then merge and render the delta table:
+uv run python benchmarks/benchmark_fidelity.py 6 0   # ...remainder 0..5
+uv run python benchmarks/benchmark_fidelity.py --merge 6
+uv run python benchmarks/report_fidelity.py
 ```
+
+CI (`.github/workflows/ci.yml`) lints/tests on every push and diffs the regenerated ablation +
+significance JSON against the checked-in files; the expensive fidelity re-run is a manual
+`workflow_dispatch` job.
 
 ## Notes
 
 - The committed canonical results (`benchmarks/results/benchmark_eval_results.json` / `_raw_seeds.json`) are fully
   reproducible: a full re-run matched them exactly (mean diff 0; 0/1600 per-seed mismatches).
+- The fidelity re-run (`benchmarks/benchmark_fidelity.py`) also matched 0/1600 SWAP values, so
+  its fidelity-loss proxies describe the same routed circuits as the canonical tables.
+- Paired significance (`benchmarks/analyze_significance.py`) and the fidelity proxy
+  (`benchmarks/report_fidelity.py`) are summarised in
+  [`reports/statistical_fidelity_analysis.md`](statistical_fidelity_analysis.md).
 - Older, inconsistent experiment files are archived under `../historical/`.
 - This work is CPU-bound; a GPU provides no speedup (no GPU code paths in Qiskit/PyTKET routing
   or SciPy FAQ).

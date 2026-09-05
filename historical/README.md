@@ -19,15 +19,21 @@ table). Files in this directory are kept only for provenance/history.
 
 ## What each archived file was
 
-| File | Was |
-|:---|:---|
-| `benchmark_suite.py`, `benchmark_fgea_results.json`, `benchmark_fgea_summary.md` | 10-method round (Defaults / FAQ / FAQ+FGEA / IEEE-QCE-2023 paper method), K=5 |
-| `run_benchmark_2.py`, `benchmark_2_results.json` | Round-2 benchmark (K=5, 95% CI) |
-| `benchmark_rigorous.py`, `benchmark_rigorous_results.json` | "Rigorous" round (115q Heavy-Hex profile) |
-| `benchmark_new_circuits.py`, `benchmark_new_circuits_results.json` | New-circuit holdout round |
-| `benchmark_tket_all.py`, `benchmark_tket_all_results.json` | TKET-focused sweep |
-| `benchmark_results.json`, `benchmark_statistical_results.json`, `benchmark_summary.md` | Earlier statistical rounds (K=5, `optimization_level=3`) |
-| `qft_scaling_study.py`, `qft_scaling_results.json` | QFT depth-scaling mini-study |
+> One-line *why it was superseded* is given per round. In all cases the files were replaced by
+> the canonical `benchmark_eval.py` dataset (K=20 paired seeds, matching router seeds,
+> `optimization_level=1`, 127-qubit FakeBrisbane / synthetic 80-grid) because they used fewer
+> seeds, unmatching seeds, or different `optimization_level`/topology settings that made them
+> mutually inconsistent with the README tables.
+
+| File | Was | Why superseded |
+|:---|:---|:---|
+| `benchmark_suite.py`, `benchmark_fgea_results.json`, `benchmark_fgea_summary.md` | 10-method round (Defaults / FAQ / FAQ+FGEA / IEEE-QCE-2023 paper method), K=5 | Only K=5 (low power) and FGEA/extra methods later dropped as out-of-scope. |
+| `run_benchmark_2.py`, `benchmark_2_results.json` | Round-2 benchmark (K=5, 95% CI, 115-qubit Heavy-Hex) | K=5 underpowered; 115q topology differs from the 127q canonical device. |
+| `benchmark_rigorous.py`, `benchmark_rigorous_results.json` | "Rigorous" round (115q Heavy-Hex profile) | Topology (115q) inconsistent with canonical 127q FakeBrisbane. |
+| `benchmark_new_circuits.py`, `benchmark_new_circuits_results.json` | New-circuit holdout round | K=5 and `optimization_level=0` basis decomp differed from canonical settings. |
+| `benchmark_tket_all.py`, `benchmark_tket_all_results.json` | TKET-focused sweep (115q, K=5) | K=5 and 115q topology; superseded by the integrated PyTKET rows of `benchmark_eval.py`. |
+| `benchmark_results.json`, `benchmark_statistical_results.json`, `benchmark_summary.md` | Earlier statistical rounds (K=5, `optimization_level=3`) | Low power (K=5); `optimization_level=3` is not the reported setting. |
+| `qft_scaling_study.py`, `qft_scaling_results.json` | QFT depth-scaling mini-study | Standalone scope; not part of the paired-seed design reported in the README. |
 
 To reproduce the canonical results run `../benchmarks/benchmark_ablations.py` and `../benchmarks/benchmark_eval.py`
 from the repository root (see the README).

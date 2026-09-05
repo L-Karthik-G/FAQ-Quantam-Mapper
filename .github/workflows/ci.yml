@@ -27,3 +27,88 @@ jobs:
 
       - name: Test (pytest)
         run: uv run pytest
+
+  results-reproducibility:
+    # Regenerates the cheap, deterministic derived artifacts and diffs them against the
+    # checked-in JSON so that a code change that silently changes results is caught on every
+    # push/PR. The heavy routing re-run (benchmark_fidelity.py, tens of minutes) is NOT run
+    # here; it is available as the manual "fidelity-rerun" workflow_dispatch job below.
+    name: Results reproducibility (ablation + significance)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: Install Python + dependencies
+        run: uv sync --all-groups
+
+      - name: Snapshot committed artifacts as baselines
+        run: |
+          cp benchmarks/results/benchmark_ablation_results.json /tmp/ablation.json
+          cp benchmarks/results/significance_results.json /tmp/significance.json
+
+      - name: Regenerate QAP-cost ablation
+        run: uv run python benchmarks/benchmark_ablations.py
+
+      - name: Regenerate paired significance (Wilcoxon + BH FDR)
+        run: uv run python benchmarks/analyze_significance.py
+
+      - name: Diff regenerated vs committed (ablation)
+        run: >
+          uv run python benchmarks/check_reproducibility.py
+          --baseline /tmp/ablation.json
+          --output benchmarks/results/benchmark_ablation_results.json
+
+      - name: Diff regenerated vs committed (significance)
+        run: >
+          uv run python benchmarks/check_reproducibility.py
+          --baseline /tmp/significance.json
+          --output benchmarks/results/significance_results.json
+
+  fidelity-rerun:
+    # Manual-only (workflow_dispatch): re-routes every circuit (deterministic) to recompute
+    # the fidelity-loss proxy and cross-checks that it reproduces the committed canonical SWAP
+    # counts. Expensive (~tens of minutes across CPU cores), so it is never triggered
+    # automatically. Run via the Actions UI after changing routing/placement code.
+    name: Fidelity re-run cross-check (manual)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: Install Python + dependencies
+        run: uv sync --all-groups
+
+      - name: Re-route all circuits (strided, 6 slices)
+        run: |
+          uv run python benchmarks/benchmark_fidelity.py 6 0 &
+          uv run python benchmarks/benchmark_fidelity.py 6 1 &
+          uv run python benchmarks/benchmark_fidelity.py 6 2 &
+          uv run python benchmarks/benchmark_fidelity.py 6 3 &
+          uv run python benchmarks/benchmark_fidelity.py 6 4 &
+          uv run python benchmarks/benchmark_fidelity.py 6 5 &
+          wait
+
+      - name: Merge + cross-check SWAP counts vs canonical
+        run: uv run python benchmarks/benchmark_fidelity.py --merge 6
+
+      - name: Assert no SWAP divergence
+        run: >
+          uv run python -c "
+          import json; d=json.load(open('benchmarks/results/benchmark_fidelity_crosscheck.json'))
+          assert d.get('checked') and d.get('n_divergent', -1)==0, d
+          print('OK: 0 SWAP divergences from canonical dataset')
+          "

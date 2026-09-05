@@ -1,0 +1,502 @@
+[
+  {
+    "task": "Grover's Search",
+    "qubits": 8,
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "sabre_def": {
+      "mean_swaps": 1152.25,
+      "mean_infidelity_sum": 68.19499324708002,
+      "mean_failure_prob": 1.0
+    },
+    "faq_sabre": {
+      "mean_swaps": 1263.55,
+      "mean_infidelity_sum": 72.22602812120081,
+      "mean_failure_prob": 1.0
+    },
+    "tket_def": {
+      "mean_swaps": 851.0,
+      "mean_infidelity_sum": 63.839809566819156,
+      "mean_failure_prob": 1.0
+    },
+    "faq_tket": {
+      "mean_swaps": 1039.0,
+      "mean_infidelity_sum": 70.21775423288098,
+      "mean_failure_prob": 1.0
+    }
+  },
+  {
+    "task": "Grover's Search",
+    "qubits": 10,
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "sabre_def": {
+      "mean_swaps": 5603.15,
+      "mean_infidelity_sum": 310.06553650131895,
+      "mean_failure_prob": 1.0
+    },
+    "faq_sabre": {
+      "mean_swaps": 5693.55,
+      "mean_infidelity_sum": 313.33962053205914,
+      "mean_failure_prob": 1.0
+    },
+    "tket_def": {
+      "mean_swaps": 5035.0,
+      "mean_infidelity_sum": 323.0622738290966,
+      "mean_failure_prob": 1.0
+    },
+    "faq_tket": {
+      "mean_swaps": 4840.45,
+      "mean_infidelity_sum": 314.79014116735937,
+      "mean_failure_prob": 1.0
+    }
+  },
+  {
+    "task": "Grover's Search",
+    "qubits": 12,
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "sabre_def": {
+      "mean_swaps": 18579.0,
+      "mean_infidelity_sum": 1025.2881064841768,
+      "mean_failure_prob": 1.0
+    },
+    "faq_sabre": {
+      "mean_swaps": 18625.3,
+      "mean_infidelity_sum": 1026.964988017598,
+      "mean_failure_prob": 1.0
+    },
+    "tket_def": {
+      "mean_swaps": 12610.0,
+      "mean_infidelity_sum": 897.7654309063595,
+      "mean_failure_prob": 1.0
+    },
+    "faq_tket": {
+      "mean_swaps": 15669.15,
+      "mean_infidelity_sum": 1018.9029182693745,
+      "mean_failure_prob": 1.0
+    }
+  },
+  {
+    "task": "VQE (RealAmplitudes)",
+    "qubits": 10,
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "sabre_def": {
+      "mean_swaps": 0.0,
+      "mean_infidelity_sum": 0.3259596933252694,
+      "mean_failure_prob": 0.2781657184150353
+    },
+    "faq_sabre": {
+      "mean_swaps": 0.0,
+      "mean_infidelity_sum": 0.3259596933252694,
+      "mean_failure_prob": 0.2781657184150353
+    },
+    "tket_def": {
+      "mean_swaps": 0.0,
+      "mean_infidelity_sum": 0.3259596933252694,
+      "mean_failure_prob": 0.2781657184150353
+    },
+    "faq_tket": {
+      "mean_swaps": 0.0,
+      "mean_infidelity_sum": 0.3259596933252694,
+      "mean_failure_prob": 0.2781657184150353
+    }
+  },
+  {
+    "task": "VQE (RealAmplitudes)",
+    "qubits": 20,
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "sabre_def": {
+      "mean_swaps": 9.6,
+      "mean_infidelity_sum": 1.0358274699003007,
+      "mean_failure_prob": 0.6449434081708537
+    },
+    "faq_sabre": {
+      "mean_swaps": 23.5,
+      "mean_infidelity_sum": 1.5392541073693278,
+      "mean_failure_prob": 0.7746103824147401
+    },
+    "tket_def": {
+      "mean_swaps": 0.0,
+      "mean_infidelity_sum": 0.6881371303533468,
+      "mean_failure_prob": 0.4974886892531868
+    },
+    "faq_tket": {
+      "mean_swaps": 0.6,
+      "mean_infidelity_sum": 0.731598422796716,
+      "mean_failure_prob": 0.517118456777688
+    }
+  },
+  {
+    "task": "VQE (RealAmplitudes)",
+    "qubits": 50,
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "sabre_def": {
+      "mean_swaps": 30.75,
+      "mean_infidelity_sum": 2.8883650602988995,
+      "mean_failure_prob": 0.94431872506474
+    },
+    "faq_sabre": {
+      "mean_swaps": 158.8,
+      "mean_infidelity_sum": 7.526047141443472,
+      "mean_failure_prob": 0.9991262931818408
+    },
+    "tket_def": {
+      "mean_swaps": 12.0,
+      "mean_infidelity_sum": 2.245500109574074,
+      "mean_failure_prob": 0.8941254217590154
+    },
+    "faq_tket": {
+      "mean_swaps": 12.45,
+      "mean_infidelity_sum": 2.393992858755584,
+      "mean_failure_prob": 0.9059119292980234
+    }
+  },
+  {
+    "task": "GHZ State",
+    "qubits": 50,
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "sabre_def": {
+      "mean_swaps": 12.0,
+      "mean_infidelity_sum": 1.0261694049128853,
+      "mean_failure_prob": 0.6416228677105303
+    },
+    "faq_sabre": {
+      "mean_swaps": 58.9,
+      "mean_infidelity_sum": 2.7247815845745547,
+      "mean_failure_prob": 0.9222824078556539
+    },
+    "tket_def": {
+      "mean_swaps": 0.0,
+      "mean_infidelity_sum": 0.5915564804791928,
+      "mean_failure_prob": 0.4465348437461392
+    },
+    "faq_tket": {
+      "mean_swaps": 6.0,
+      "mean_infidelity_sum": 0.8450806863988468,
+      "mean_failure_prob": 0.5704772998273582
+    }
+  },
+  {
+    "task": "QFT",
+    "qubits": 20,
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "sabre_def": {
+      "mean_swaps": 225.0,
+      "mean_infidelity_sum": 13.09875063918226,
+      "mean_failure_prob": 0.9999978805305512
+    },
+    "faq_sabre": {
+      "mean_swaps": 248.25,
+      "mean_infidelity_sum": 13.940813180272553,
+      "mean_failure_prob": 0.9999990245376458
+    },
+    "tket_def": {
+      "mean_swaps": 284.0,
+      "mean_infidelity_sum": 15.23559751764795,
+      "mean_failure_prob": 0.9999997583070016
+    },
+    "faq_tket": {
+      "mean_swaps": 213.6,
+      "mean_infidelity_sum": 12.68586836097024,
+      "mean_failure_prob": 0.9999968650512574
+    }
+  },
+  {
+    "task": "QAOA",
+    "qubits": 10,
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "sabre_def": {
+      "mean_swaps": 57.2,
+      "mean_infidelity_sum": 3.327203388164578,
+      "mean_failure_prob": 0.9637623181304262
+    },
+    "faq_sabre": {
+      "mean_swaps": 72.55,
+      "mean_infidelity_sum": 3.883145754002667,
+      "mean_failure_prob": 0.9791038664645784
+    },
+    "tket_def": {
+      "mean_swaps": 79.0,
+      "mean_infidelity_sum": 4.116750200885776,
+      "mean_failure_prob": 0.9837026082756708
+    },
+    "faq_tket": {
+      "mean_swaps": 73.0,
+      "mean_infidelity_sum": 3.8994437386689307,
+      "mean_failure_prob": 0.9797468256293176
+    }
+  },
+  {
+    "task": "QAOA",
+    "qubits": 20,
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "sabre_def": {
+      "mean_swaps": 308.65,
+      "mean_infidelity_sum": 15.621316488082858,
+      "mean_failure_prob": 0.9999998271113334
+    },
+    "faq_sabre": {
+      "mean_swaps": 325.95,
+      "mean_infidelity_sum": 16.247883454141395,
+      "mean_failure_prob": 0.9999999010100813
+    },
+    "tket_def": {
+      "mean_swaps": 398.0,
+      "mean_infidelity_sum": 18.85737188792837,
+      "mean_failure_prob": 0.99999999353829
+    },
+    "faq_tket": {
+      "mean_swaps": 380.85,
+      "mean_infidelity_sum": 18.2362375834253,
+      "mean_failure_prob": 0.9999999871835742
+    }
+  },
+  {
+    "task": "Grover's Search",
+    "qubits": 8,
+    "architecture": "Rigetti_Grid_80",
+    "sabre_def": {
+      "mean_swaps": 768.25,
+      "mean_infidelity_sum": 82.0036881869007,
+      "mean_failure_prob": 1.0
+    },
+    "faq_sabre": {
+      "mean_swaps": 781.8,
+      "mean_infidelity_sum": 81.92210701938856,
+      "mean_failure_prob": 1.0
+    },
+    "tket_def": {
+      "mean_swaps": 639.0,
+      "mean_infidelity_sum": 90.71768557211274,
+      "mean_failure_prob": 1.0
+    },
+    "faq_tket": {
+      "mean_swaps": 605.5,
+      "mean_infidelity_sum": 77.44254197464312,
+      "mean_failure_prob": 1.0
+    }
+  },
+  {
+    "task": "Grover's Search",
+    "qubits": 10,
+    "architecture": "Rigetti_Grid_80",
+    "sabre_def": {
+      "mean_swaps": 3461.75,
+      "mean_infidelity_sum": 361.46443600974703,
+      "mean_failure_prob": 1.0
+    },
+    "faq_sabre": {
+      "mean_swaps": 3513.45,
+      "mean_infidelity_sum": 353.3953032882659,
+      "mean_failure_prob": 1.0
+    },
+    "tket_def": {
+      "mean_swaps": 2669.0,
+      "mean_infidelity_sum": 329.9212562833917,
+      "mean_failure_prob": 1.0
+    },
+    "faq_tket": {
+      "mean_swaps": 2567.0,
+      "mean_infidelity_sum": 338.14248104159833,
+      "mean_failure_prob": 1.0
+    }
+  },
+  {
+    "task": "Grover's Search",
+    "qubits": 12,
+    "architecture": "Rigetti_Grid_80",
+    "sabre_def": {
+      "mean_swaps": 12375.25,
+      "mean_infidelity_sum": 1229.130648419155,
+      "mean_failure_prob": 1.0
+    },
+    "faq_sabre": {
+      "mean_swaps": 12390.75,
+      "mean_infidelity_sum": 1213.3336285306273,
+      "mean_failure_prob": 1.0
+    },
+    "tket_def": {
+      "mean_swaps": 8828.0,
+      "mean_infidelity_sum": 1063.7502145579922,
+      "mean_failure_prob": 1.0
+    },
+    "faq_tket": {
+      "mean_swaps": 8702.3,
+      "mean_infidelity_sum": 1102.2433845963883,
+      "mean_failure_prob": 1.0
+    }
+  },
+  {
+    "task": "VQE (RealAmplitudes)",
+    "qubits": 50,
+    "architecture": "Rigetti_Grid_80",
+    "sabre_def": {
+      "mean_swaps": 45.7,
+      "mean_infidelity_sum": 5.381799946275162,
+      "mean_failure_prob": 0.9943887502279694
+    },
+    "faq_sabre": {
+      "mean_swaps": 64.0,
+      "mean_infidelity_sum": 6.461311060185747,
+      "mean_failure_prob": 0.9977449896612933
+    },
+    "tket_def": {
+      "mean_swaps": 13.0,
+      "mean_infidelity_sum": 3.4704081968019187,
+      "mean_failure_prob": 0.9688956686192611
+    },
+    "faq_tket": {
+      "mean_swaps": 1.1,
+      "mean_infidelity_sum": 3.079034644363877,
+      "mean_failure_prob": 0.9538403885408455
+    }
+  },
+  {
+    "task": "QFT",
+    "qubits": 20,
+    "architecture": "Rigetti_Grid_80",
+    "sabre_def": {
+      "mean_swaps": 147.9,
+      "mean_infidelity_sum": 15.815373134266684,
+      "mean_failure_prob": 0.9999998232919861
+    },
+    "faq_sabre": {
+      "mean_swaps": 172.95,
+      "mean_infidelity_sum": 17.00999314400467,
+      "mean_failure_prob": 0.9999999527363294
+    },
+    "tket_def": {
+      "mean_swaps": 148.0,
+      "mean_infidelity_sum": 17.02716739845916,
+      "mean_failure_prob": 0.9999999597101956
+    },
+    "faq_tket": {
+      "mean_swaps": 142.0,
+      "mean_infidelity_sum": 14.724695843364685,
+      "mean_failure_prob": 0.9999995287879754
+    }
+  },
+  {
+    "task": "Ripple-Carry Adder (Holdout)",
+    "qubits": 20,
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "sabre_def": {
+      "mean_swaps": 5.0,
+      "mean_infidelity_sum": 0.6398468054162696,
+      "mean_failure_prob": 0.4726267914258278
+    },
+    "faq_sabre": {
+      "mean_swaps": 5.1,
+      "mean_infidelity_sum": 0.6434685797865505,
+      "mean_failure_prob": 0.4716903992230147
+    },
+    "tket_def": {
+      "mean_swaps": 0.0,
+      "mean_infidelity_sum": 0.4587580869022311,
+      "mean_failure_prob": 0.3679318680341367
+    },
+    "faq_tket": {
+      "mean_swaps": 3.25,
+      "mean_infidelity_sum": 0.5764657539363561,
+      "mean_failure_prob": 0.4272699005342391
+    }
+  },
+  {
+    "task": "QRAM Decoder (Holdout)",
+    "qubits": 20,
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "sabre_def": {
+      "mean_swaps": 19.3,
+      "mean_infidelity_sum": 0.9283814969153046,
+      "mean_failure_prob": 0.603651154303305
+    },
+    "faq_sabre": {
+      "mean_swaps": 14.0,
+      "mean_infidelity_sum": 0.7364274552904235,
+      "mean_failure_prob": 0.5182800513961705
+    },
+    "tket_def": {
+      "mean_swaps": 3.0,
+      "mean_infidelity_sum": 0.5191209930735774,
+      "mean_failure_prob": 0.4049566346038328
+    },
+    "faq_tket": {
+      "mean_swaps": 21.8,
+      "mean_infidelity_sum": 1.0189258561723236,
+      "mean_failure_prob": 0.6387913061167265
+    }
+  },
+  {
+    "task": "Random 3-Regular (Holdout)",
+    "qubits": 20,
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "sabre_def": {
+      "mean_swaps": 36.65,
+      "mean_infidelity_sum": 2.051735180764056,
+      "mean_failure_prob": 0.8710250389084321
+    },
+    "faq_sabre": {
+      "mean_swaps": 40.65,
+      "mean_infidelity_sum": 2.1966061555752843,
+      "mean_failure_prob": 0.887022622249838
+    },
+    "tket_def": {
+      "mean_swaps": 55.0,
+      "mean_infidelity_sum": 2.7163307777105663,
+      "mean_failure_prob": 0.9338830924712449
+    },
+    "faq_tket": {
+      "mean_swaps": 50.85,
+      "mean_infidelity_sum": 2.566027141343917,
+      "mean_failure_prob": 0.922722135419258
+    }
+  },
+  {
+    "task": "Ripple-Carry Adder (Holdout)",
+    "qubits": 20,
+    "architecture": "Rigetti_Grid_80",
+    "sabre_def": {
+      "mean_swaps": 7.85,
+      "mean_infidelity_sum": 1.172503604649214,
+      "mean_failure_prob": 0.6879897297340578
+    },
+    "faq_sabre": {
+      "mean_swaps": 0.75,
+      "mean_infidelity_sum": 0.7062038510686481,
+      "mean_failure_prob": 0.5050411803389598
+    },
+    "tket_def": {
+      "mean_swaps": 0.0,
+      "mean_infidelity_sum": 0.6853087367294217,
+      "mean_failure_prob": 0.49606537757193025
+    },
+    "faq_tket": {
+      "mean_swaps": 0.0,
+      "mean_infidelity_sum": 0.7866533494307015,
+      "mean_failure_prob": 0.5446222378272851
+    }
+  },
+  {
+    "task": "QRAM Decoder (Holdout)",
+    "qubits": 20,
+    "architecture": "Rigetti_Grid_80",
+    "sabre_def": {
+      "mean_swaps": 7.55,
+      "mean_infidelity_sum": 0.7503276167189112,
+      "mean_failure_prob": 0.5265939576027929
+    },
+    "faq_sabre": {
+      "mean_swaps": 0.6,
+      "mean_infidelity_sum": 0.3593807481124581,
+      "mean_failure_prob": 0.3011651726114988
+    },
+    "tket_def": {
+      "mean_swaps": 0.0,
+      "mean_infidelity_sum": 0.3866777857563707,
+      "mean_failure_prob": 0.3206900569937652
+    },
+    "faq_tket": {
+      "mean_swaps": 13.0,
+      "mean_infidelity_sum": 0.9911113232722407,
+      "mean_failure_prob": 0.6271351911639301
+    }
+  }
+]
