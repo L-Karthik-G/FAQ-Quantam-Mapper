@@ -238,122 +238,146 @@ def compile_faq_pipeline(circuit: QuantumCircuit, M: int, coupling_list: List, e
     raise ValueError(f"Unknown router: {router}")
 
 
+# --- Configuration shared by the serial and parallel drivers -----------------
+SEEDS = list(range(20))  # K=20 paired seeds
+
+BENCHMARK_TASKS = [
+    # Standard MQT-Bench Suite
+    ("IBM_Eagle_127_Brisbane", "grover", "Grover's Search", 8, "mqt"),
+    ("IBM_Eagle_127_Brisbane", "grover", "Grover's Search", 10, "mqt"),
+    ("IBM_Eagle_127_Brisbane", "grover", "Grover's Search", 12, "mqt"),
+    ("IBM_Eagle_127_Brisbane", "vqe_real_amp", "VQE (RealAmplitudes)", 10, "mqt"),
+    ("IBM_Eagle_127_Brisbane", "vqe_real_amp", "VQE (RealAmplitudes)", 20, "mqt"),
+    ("IBM_Eagle_127_Brisbane", "vqe_real_amp", "VQE (RealAmplitudes)", 50, "mqt"),
+    ("IBM_Eagle_127_Brisbane", "ghz", "GHZ State", 50, "mqt"),
+    ("IBM_Eagle_127_Brisbane", "qft", "QFT", 20, "mqt"),
+    ("IBM_Eagle_127_Brisbane", "qaoa", "QAOA", 10, "mqt"),
+    ("IBM_Eagle_127_Brisbane", "qaoa", "QAOA", 20, "mqt"),
+
+    ("Rigetti_Grid_80", "grover", "Grover's Search", 8, "mqt"),
+    ("Rigetti_Grid_80", "grover", "Grover's Search", 10, "mqt"),
+    ("Rigetti_Grid_80", "grover", "Grover's Search", 12, "mqt"),
+    ("Rigetti_Grid_80", "vqe_real_amp", "VQE (RealAmplitudes)", 50, "mqt"),
+    ("Rigetti_Grid_80", "qft", "QFT", 20, "mqt"),
+
+    # Hand-Crafted Unseen Holdout Suite
+    ("IBM_Eagle_127_Brisbane", "ripple_carry_adder", "Ripple-Carry Adder (Holdout)", 20, "holdout"),
+    ("IBM_Eagle_127_Brisbane", "qram_bucket_brigade", "QRAM Decoder (Holdout)", 20, "holdout"),
+    ("IBM_Eagle_127_Brisbane", "random_3_regular", "Random 3-Regular (Holdout)", 20, "holdout"),
+    ("Rigetti_Grid_80", "ripple_carry_adder", "Ripple-Carry Adder (Holdout)", 20, "holdout"),
+    ("Rigetti_Grid_80", "qram_bucket_brigade", "QRAM Decoder (Holdout)", 20, "holdout"),
+]
+
+
+def run_one_task(task: Tuple) -> Tuple[Dict, List[Dict]]:
+    """Runs a single benchmark task across all K seeds and 4 router methods.
+
+    Returns (task_record, seed_logs). task_record is None if the circuit could
+    not be built (mirrors the serial runner's historical skip behaviour).
+    Deterministic given the fixed seeds, so it is safe to call concurrently from
+    multiple worker processes (each produces an identical result to the serial
+    runner for the same task).
+    """
+    arch_name, bench_key, bench_label, n_q, suite_type = task
+    logs: List[Dict] = []
+
+    M, coupling_list, errs = get_hardware_topology(arch_name)
+
+    try:
+        if suite_type == "mqt":
+            qc = load_benchmark_circuit(bench_key, n_q)
+        else:
+            qc = load_holdout_circuit(bench_key, n_q)
+    except Exception as e:
+        print(f"  [SKIP] Error loading circuit {bench_key} N={n_q}: {e}")
+        return None, []
+
+    task_record = {
+        "architecture": arch_name,
+        "benchmark": bench_key,
+        "benchmark_label": bench_label,
+        "qubits": n_q,
+        "suite_type": suite_type,
+        "num_physical_qubits": M,
+        "original_gate_count": qc.size(),
+        "original_depth": qc.depth(),
+    }
+
+    swaps_sabre_def, status_sabre_def = [], []
+    swaps_faq_sabre, status_faq_sabre = [], []
+    swaps_tket_def, status_tket_def = [], []
+    swaps_faq_tket, status_faq_tket = [], []
+
+    for seed in SEEDS:
+        # 1. SABRE Default
+        try:
+            sw, t, d = compile_sabre_def(qc, M, coupling_list, seed)
+            swaps_sabre_def.append(sw)
+            status_sabre_def.append("success")
+            logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "sabre_def", "status": "success", "swaps": sw, "time_sec": t, "failure_reason": FailureReason.NONE})
+        except Exception as e:
+            swaps_sabre_def.append(-1)
+            status_sabre_def.append("failed")
+            logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "sabre_def", "status": "failed", "swaps": None, "time_sec": None, "failure_reason": FailureReason.PASS_EXCEPTION, "error": str(e)})
+
+        # 2. FAQ + SABRE
+        try:
+            sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "sabre", "gaussian", seed)
+            swaps_faq_sabre.append(sw)
+            status_faq_sabre.append("success")
+            logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "faq_sabre", "status": "success", "swaps": sw, "time_sec": t, "prep_time_sec": tp, "failure_reason": FailureReason.NONE})
+        except Exception as e:
+            swaps_faq_sabre.append(-1)
+            status_faq_sabre.append("failed")
+            logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "faq_sabre", "status": "failed", "swaps": None, "time_sec": None, "failure_reason": FailureReason.PASS_EXCEPTION, "error": str(e)})
+
+        # 3. PyTKET Default
+        try:
+            sw, t, d = compile_tket_def(qc, M, coupling_list, seed)
+            swaps_tket_def.append(sw)
+            status_tket_def.append("success")
+            logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "tket_def", "status": "success", "swaps": sw, "time_sec": t, "failure_reason": FailureReason.NONE})
+        except Exception as e:
+            swaps_tket_def.append(-1)
+            status_tket_def.append("failed")
+            logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "tket_def", "status": "failed", "swaps": None, "time_sec": None, "failure_reason": FailureReason.PASS_EXCEPTION, "error": str(e)})
+
+        # 4. FAQ + PyTKET
+        try:
+            sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "tket", "gaussian", seed)
+            swaps_faq_tket.append(sw)
+            status_faq_tket.append("success")
+            logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "faq_tket", "status": "success", "swaps": sw, "time_sec": t, "prep_time_sec": tp, "failure_reason": FailureReason.NONE})
+        except Exception as e:
+            swaps_faq_tket.append(-1)
+            status_faq_tket.append("failed")
+            logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "faq_tket", "status": "failed", "swaps": None, "time_sec": None, "failure_reason": FailureReason.PASS_EXCEPTION, "error": str(e)})
+
+    task_record["sabre_default"] = compute_run_statistics(swaps_sabre_def, status_sabre_def)
+    task_record["faq_sabre"] = compute_run_statistics(swaps_faq_sabre, status_faq_sabre)
+    task_record["tket_default"] = compute_run_statistics(swaps_tket_def, status_tket_def)
+    task_record["faq_tket"] = compute_run_statistics(swaps_faq_tket, status_faq_tket)
+
+    return task_record, logs
+
+
 def main():
-    SEEDS = list(range(20))  # Expanded K=20 paired seeds
-    
-    benchmark_tasks = [
-        # Standard MQT-Bench Suite
-        ("IBM_Eagle_127_Brisbane", "grover", "Grover's Search", 8, "mqt"),
-        ("IBM_Eagle_127_Brisbane", "grover", "Grover's Search", 10, "mqt"),
-        ("IBM_Eagle_127_Brisbane", "grover", "Grover's Search", 12, "mqt"),
-        ("IBM_Eagle_127_Brisbane", "vqe_real_amp", "VQE (RealAmplitudes)", 10, "mqt"),
-        ("IBM_Eagle_127_Brisbane", "vqe_real_amp", "VQE (RealAmplitudes)", 20, "mqt"),
-        ("IBM_Eagle_127_Brisbane", "vqe_real_amp", "VQE (RealAmplitudes)", 50, "mqt"),
-        ("IBM_Eagle_127_Brisbane", "ghz", "GHZ State", 50, "mqt"),
-        ("IBM_Eagle_127_Brisbane", "qft", "QFT", 20, "mqt"),
-        ("IBM_Eagle_127_Brisbane", "qaoa", "QAOA", 10, "mqt"),
-        ("IBM_Eagle_127_Brisbane", "qaoa", "QAOA", 20, "mqt"),
-
-        ("Rigetti_Grid_80", "grover", "Grover's Search", 8, "mqt"),
-        ("Rigetti_Grid_80", "grover", "Grover's Search", 10, "mqt"),
-        ("Rigetti_Grid_80", "grover", "Grover's Search", 12, "mqt"),
-        ("Rigetti_Grid_80", "vqe_real_amp", "VQE (RealAmplitudes)", 50, "mqt"),
-        ("Rigetti_Grid_80", "qft", "QFT", 20, "mqt"),
-
-        # Hand-Crafted Unseen Holdout Suite
-        ("IBM_Eagle_127_Brisbane", "ripple_carry_adder", "Ripple-Carry Adder (Holdout)", 20, "holdout"),
-        ("IBM_Eagle_127_Brisbane", "qram_bucket_brigade", "QRAM Decoder (Holdout)", 20, "holdout"),
-        ("IBM_Eagle_127_Brisbane", "random_3_regular", "Random 3-Regular (Holdout)", 20, "holdout"),
-        ("Rigetti_Grid_80", "ripple_carry_adder", "Ripple-Carry Adder (Holdout)", 20, "holdout"),
-        ("Rigetti_Grid_80", "qram_bucket_brigade", "QRAM Decoder (Holdout)", 20, "holdout"),
-    ]
-
     all_results = []
     raw_seed_logs = []
 
-    print(f"=== EVALUATING PHASE 2 HARDENED BENCHMARK SUITE ({len(benchmark_tasks)} tasks, K={len(SEEDS)} seeds) ===")
+    print(f"=== EVALUATING PHASE 2 HARDENED BENCHMARK SUITE ({len(BENCHMARK_TASKS)} tasks, K={len(SEEDS)} seeds) ===")
 
-    for task_idx, (arch_name, bench_key, bench_label, n_q, suite_type) in enumerate(benchmark_tasks, 1):
-        print(f"\n[{task_idx}/{len(benchmark_tasks)}] Running {bench_label} N={n_q} ({suite_type}) on {arch_name}...")
-        M, coupling_list, errs = get_hardware_topology(arch_name)
-        
-        try:
-            if suite_type == "mqt":
-                qc = load_benchmark_circuit(bench_key, n_q)
-            else:
-                qc = load_holdout_circuit(bench_key, n_q)
-        except Exception as e:
-            print(f"  [SKIP] Error loading circuit {bench_key} N={n_q}: {e}")
+    for task_idx, task in enumerate(BENCHMARK_TASKS, 1):
+        arch_name, _, bench_label, n_q, suite_type = task
+        print(f"\n[{task_idx}/{len(BENCHMARK_TASKS)}] Running {bench_label} N={n_q} ({suite_type}) on {arch_name}...")
+
+        task_record, logs = run_one_task(task)
+        if task_record is None:
             continue
 
-        task_record = {
-            "architecture": arch_name,
-            "benchmark": bench_key,
-            "benchmark_label": bench_label,
-            "qubits": n_q,
-            "suite_type": suite_type,
-            "num_physical_qubits": M,
-            "original_gate_count": qc.size(),
-            "original_depth": qc.depth(),
-        }
-
-        swaps_sabre_def, status_sabre_def = [], []
-        swaps_faq_sabre, status_faq_sabre = [], []
-        swaps_tket_def, status_tket_def = [], []
-        swaps_faq_tket, status_faq_tket = [], []
-
-        for seed in SEEDS:
-            # 1. SABRE Default
-            try:
-                sw, t, d = compile_sabre_def(qc, M, coupling_list, seed)
-                swaps_sabre_def.append(sw)
-                status_sabre_def.append("success")
-                raw_seed_logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "sabre_def", "status": "success", "swaps": sw, "time_sec": t, "failure_reason": FailureReason.NONE})
-            except Exception as e:
-                swaps_sabre_def.append(-1)
-                status_sabre_def.append("failed")
-                raw_seed_logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "sabre_def", "status": "failed", "swaps": None, "time_sec": None, "failure_reason": FailureReason.PASS_EXCEPTION, "error": str(e)})
-
-            # 2. FAQ + SABRE
-            try:
-                sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "sabre", "gaussian", seed)
-                swaps_faq_sabre.append(sw)
-                status_faq_sabre.append("success")
-                raw_seed_logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "faq_sabre", "status": "success", "swaps": sw, "time_sec": t, "prep_time_sec": tp, "failure_reason": FailureReason.NONE})
-            except Exception as e:
-                swaps_faq_sabre.append(-1)
-                status_faq_sabre.append("failed")
-                raw_seed_logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "faq_sabre", "status": "failed", "swaps": None, "time_sec": None, "failure_reason": FailureReason.PASS_EXCEPTION, "error": str(e)})
-
-            # 3. PyTKET Default
-            try:
-                sw, t, d = compile_tket_def(qc, M, coupling_list, seed)
-                swaps_tket_def.append(sw)
-                status_tket_def.append("success")
-                raw_seed_logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "tket_def", "status": "success", "swaps": sw, "time_sec": t, "failure_reason": FailureReason.NONE})
-            except Exception as e:
-                swaps_tket_def.append(-1)
-                status_tket_def.append("failed")
-                raw_seed_logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "tket_def", "status": "failed", "swaps": None, "time_sec": None, "failure_reason": FailureReason.PASS_EXCEPTION, "error": str(e)})
-
-            # 4. FAQ + PyTKET
-            try:
-                sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "tket", "gaussian", seed)
-                swaps_faq_tket.append(sw)
-                status_faq_tket.append("success")
-                raw_seed_logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "faq_tket", "status": "success", "swaps": sw, "time_sec": t, "prep_time_sec": tp, "failure_reason": FailureReason.NONE})
-            except Exception as e:
-                swaps_faq_tket.append(-1)
-                status_faq_tket.append("failed")
-                raw_seed_logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "faq_tket", "status": "failed", "swaps": None, "time_sec": None, "failure_reason": FailureReason.PASS_EXCEPTION, "error": str(e)})
-
-        task_record["sabre_default"] = compute_run_statistics(swaps_sabre_def, status_sabre_def)
-        task_record["faq_sabre"] = compute_run_statistics(swaps_faq_sabre, status_faq_sabre)
-        task_record["tket_default"] = compute_run_statistics(swaps_tket_def, status_tket_def)
-        task_record["faq_tket"] = compute_run_statistics(swaps_faq_tket, status_faq_tket)
-
         all_results.append(task_record)
-        
+        raw_seed_logs.extend(logs)
+
         s_stats = task_record["faq_sabre"]
         t_stats = task_record["faq_tket"]
         print(f"  -> FAQ+SABRE: {s_stats['mean_swaps']} | FAQ+TKET: {t_stats['mean_swaps']} ± {t_stats['ci95_swaps']}")

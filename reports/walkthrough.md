@@ -209,6 +209,13 @@ uv run python benchmark_ablations.py
 # Regenerate the paired-seed benchmark suite (K=20 seeds; writes results in-repo).
 # NOTE: this runs full Qiskit/PyTKET/MQT routing and can take a long time.
 uv run python benchmark_eval.py
+
+# Faster alternative: run the 20 tasks in parallel across CPU cores
+# (multiprocessing Pool; results identical to the serial run):
+uv run python benchmark_eval_parallel.py 6
+#   ...or, in sandboxed environments that block multiprocessing Pools, launch the
+#   strided driver on <workers> shells and merge the partial results:
+#   uv run python benchmark_eval_strided.py 6 0   # repeat remainder 0..5
 ```
 
 `uv sync` installs the project itself (editable) plus the runtime dependencies and the `dev`
