@@ -15,11 +15,11 @@ not a new continuous-optimization theory result. The benchmark evaluates routers
 recorded hardware calibration snapshot; it does **not** run on live quantum hardware.
 
 > **Scope note.** This repository contains several experiment rounds. The **canonical,
-> reproducible paired-seed dataset is `benchmark_eval_results.json`** (with its raw per-seed
-> log `benchmark_eval_raw_seeds.json`), produced by `benchmark_eval.py` over the 20 tasks in
+> reproducible paired-seed dataset is `benchmarks/results/benchmark_eval_results.json`** (with its raw per-seed
+> log `benchmarks/results/benchmark_eval_raw_seeds.json`), produced by `benchmarks/benchmark_eval.py` over the 20 tasks in
 > Tables 1–2 below (K=20 seeds, Qiskit `optimization_level=1`). Older `*_results.json` files
-> in the repo root come from earlier rounds that used different seeds, topologies, or
-> `optimization_level` settings; they are kept for history and are **not** the numbers cited in
+> (archived under `historical/`) come from earlier rounds that used different seeds, topologies,
+> or `optimization_level` settings; they are kept for history and are **not** the numbers cited in
 > this README. See [Data provenance & reproduction](#-data-provenance--reproduction).
 
 ---
@@ -107,13 +107,13 @@ mean for each router pair.*
   QRAM holdouts on Rigetti); there is no room for FAQ to help there, and it often adds swaps.
 
 All raw per-seed values (each of the 20 seeds, per method, with explicit success/failure) are
-in `benchmark_eval_raw_seeds.json`.
+in `benchmarks/results/benchmark_eval_raw_seeds.json`.
 
 ---
 
 ## 🔬 Component Ablations (QAP-cost level, IBM FakeBrisbane, Grover N=10)
 
-`benchmark_ablations.py` measures each solver configuration's **QAP objective value only**
+`benchmarks/benchmark_ablations.py` measures each solver configuration's **QAP objective value only**
 (FAQ permutation cost before 2-opt and final cost after 2-opt) on one circuit. It does **not**
 route; downstream routing outcomes are measured per-router in Tables 1–2 and are not a property
 of a single QAP-init configuration, so no "downstream SWAPs" column is reported here.
@@ -169,12 +169,13 @@ Canonical paired-seed dataset (this README's Tables 1–2):
 
 | File | Contents | Produced by |
 |:---|:---|:---|
-| `benchmark_eval_results.json` | Summary (mean, 95% CI, success) per task/method | `benchmark_eval.py` |
-| `benchmark_eval_raw_seeds.json` | Raw per-seed SWAP/time/prep logs (all 20 seeds) | `benchmark_eval.py` |
-| `benchmark_ablation_results.json` | QAP-cost ablation table | `benchmark_ablations.py` |
+| `benchmarks/results/benchmark_eval_results.json` | Summary (mean, 95% CI, success) per task/method | `benchmarks/benchmark_eval.py` |
+| `benchmarks/results/benchmark_eval_raw_seeds.json` | Raw per-seed SWAP/time/prep logs (all 20 seeds) | `benchmarks/benchmark_eval.py` |
+| `benchmarks/results/benchmark_ablation_results.json` | QAP-cost ablation table | `benchmarks/benchmark_ablations.py` |
 
-The benchmark scripts write their outputs **into this repository** (relative to each script),
-so re-running them regenerates the files above. Older, mutually-inconsistent experiment rounds
+Running `benchmarks/benchmark_eval.py` (or its CPU-parallel variants) and
+`benchmarks/benchmark_ablations.py` regenerates these files in `benchmarks/results/`. Older,
+mutually-inconsistent experiment rounds
 (e.g. `benchmark_2_results.json`, `benchmark_results.json`, `benchmark_statistical_results.json`,
 `benchmark_rigorous_results.json`, `benchmark_new_circuits_results.json`,
 `benchmark_tket_all_results.json`, `benchmark_fgea_results.json`, `qft_scaling_results.json`
@@ -203,19 +204,19 @@ uv sync
 # Run the unit & integration test suite
 uv run pytest tests/test_modules.py -v
 
-# Regenerate the QAP-cost ablation table (writes benchmark_ablation_results.json in-repo)
-uv run python benchmark_ablations.py
+# Regenerate the QAP-cost ablation table (writes benchmarks/results/benchmark_ablation_results.json in-repo)
+uv run python benchmarks/benchmark_ablations.py
 
 # Regenerate the paired-seed benchmark suite (K=20 seeds; writes results in-repo).
 # NOTE: this runs full Qiskit/PyTKET/MQT routing and can take a long time.
-uv run python benchmark_eval.py
+uv run python benchmarks/benchmark_eval.py
 
 # Faster alternative: run the 20 tasks in parallel across CPU cores
 # (multiprocessing Pool; results identical to the serial run):
-uv run python benchmark_eval_parallel.py 6
+uv run python benchmarks/benchmark_eval_parallel.py 6
 #   ...or, in sandboxed environments that block multiprocessing Pools, launch the
 #   strided driver on <workers> shells and merge the partial results:
-#   uv run python benchmark_eval_strided.py 6 0   # repeat remainder 0..5
+#   uv run python benchmarks/benchmark_eval_strided.py 6 0   # repeat remainder 0..5
 ```
 
 `uv sync` installs the project itself (editable) plus the runtime dependencies and the `dev`

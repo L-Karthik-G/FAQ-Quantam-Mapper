@@ -6,13 +6,13 @@ they are mutually inconsistent with it and with each other (they used different 
 topologies, and `optimization_level` settings — e.g. K=5 with `optimization_level=3`, a
 115-qubit Heavy-Hex profile, MQT-QMAP/FGEA/paper-method comparisons).
 
-## The canonical dataset (kept in the repo root)
+## The canonical dataset (in `../benchmarks/results/`)
 
 | File | Produced by | Contents |
 |:---|:---|:---|
-| `../benchmark_eval_results.json` | `../benchmark_eval.py` | Per-task/method mean SWAPs, 95% CI, success (K=20 paired seeds) |
-| `../benchmark_eval_raw_seeds.json` | `../benchmark_eval.py` | Raw per-seed logs (all 20 seeds × all methods) |
-| `../benchmark_ablation_results.json` | `../benchmark_ablations.py` | QAP-cost ablation table |
+| `../benchmarks/results/benchmark_eval_results.json` | `../benchmarks/benchmark_eval.py` | Per-task/method mean SWAPs, 95% CI, success (K=20 paired seeds) |
+| `../benchmarks/results/benchmark_eval_raw_seeds.json` | `../benchmarks/benchmark_eval.py` | Raw per-seed logs (all 20 seeds × all methods) |
+| `../benchmarks/results/benchmark_ablation_results.json` | `../benchmarks/benchmark_ablations.py` | QAP-cost ablation table |
 
 Always report numbers from those files (as shown in the README Tables 1–2 and the ablation
 table). Files in this directory are kept only for provenance/history.
@@ -29,5 +29,5 @@ table). Files in this directory are kept only for provenance/history.
 | `benchmark_results.json`, `benchmark_statistical_results.json`, `benchmark_summary.md` | Earlier statistical rounds (K=5, `optimization_level=3`) |
 | `qft_scaling_study.py`, `qft_scaling_results.json` | QFT depth-scaling mini-study |
 
-To reproduce the canonical results run `../benchmark_ablations.py` and `../benchmark_eval.py`
+To reproduce the canonical results run `../benchmarks/benchmark_ablations.py` and `../benchmarks/benchmark_eval.py`
 from the repository root (see the README).

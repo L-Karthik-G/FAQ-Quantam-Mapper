@@ -6,13 +6,13 @@
 > That table was removed so the repository reports a single, internally-consistent dataset.
 
 The **authoritative, reproducible paired-seed dataset** for this project is produced by
-`benchmark_eval.py` and written into the repository root as:
+`benchmarks/benchmark_eval.py` and written into the repository root as:
 
 | File | Contents |
 |:---|:---|
-| `benchmark_eval_results.json` | Per-task/method mean SWAPs, 95% CI, and success counts (K=20 paired seeds) |
-| `benchmark_eval_raw_seeds.json` | Raw per-seed logs (all 20 seeds × all methods) |
-| `benchmark_ablation_results.json` | QAP-cost ablation table (`benchmark_ablations.py`) |
+| `benchmarks/results/benchmark_eval_results.json` | Per-task/method mean SWAPs, 95% CI, and success counts (K=20 paired seeds) |
+| `benchmarks/results/benchmark_eval_raw_seeds.json` | Raw per-seed logs (all 20 seeds × all methods) |
+| `benchmarks/results/benchmark_ablation_results.json` | QAP-cost ablation table (`benchmarks/benchmark_ablations.py`) |
 
 The full results tables derived from these files are published in the README:
 
@@ -31,10 +31,10 @@ Metrics are **mean ± 95% CI** over the 20 paired seeds; every row compiled 20/2
 uv sync
 
 # Regenerate the QAP-cost ablation table (in-repo output)
-uv run python benchmark_ablations.py
+uv run python benchmarks/benchmark_ablations.py
 
 # Regenerate the paired-seed benchmark suite (in-repo output; slow — full routing)
-uv run python benchmark_eval.py
+uv run python benchmarks/benchmark_eval.py
 ```
 
 ### Other result files

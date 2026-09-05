@@ -28,20 +28,20 @@ uv sync
 # unit/integration tests
 uv run pytest tests/test_modules.py -v
 
-# QAP-cost ablation table -> writes benchmark_ablation_results.json
-uv run python benchmark_ablations.py
+# QAP-cost ablation table -> writes benchmarks/results/benchmark_ablation_results.json
+uv run python benchmarks/benchmark_ablations.py
 
-# canonical K=20 paired-seed benchmark -> writes benchmark_eval_results.json + raw seeds
-uv run python benchmark_eval.py            # serial (slow)
-uv run python benchmark_eval_parallel.py 6 # same results, CPU-parallel
+# canonical K=20 paired-seed benchmark -> writes benchmarks/results/benchmark_eval_results.json + raw seeds
+uv run python benchmarks/benchmark_eval.py            # serial (slow)
+uv run python benchmarks/benchmark_eval_parallel.py 6 # same results, CPU-parallel
 
 # In sandboxes that block multiprocessing Pools, use the strided driver instead:
-#   uv run python benchmark_eval_strided.py 6 0   # ...remainder 0..5, then merge partials
+#   uv run python benchmarks/benchmark_eval_strided.py 6 0   # ...remainder 0..5, then merge partials
 ```
 
 ## Notes
 
-- The committed canonical results (`benchmark_eval_results.json` / `_raw_seeds.json`) are fully
+- The committed canonical results (`benchmarks/results/benchmark_eval_results.json` / `_raw_seeds.json`) are fully
   reproducible: a full re-run matched them exactly (mean diff 0; 0/1600 per-seed mismatches).
 - Older, inconsistent experiment files are archived under `../historical/`.
 - This work is CPU-bound; a GPU provides no speedup (no GPU code paths in Qiskit/PyTKET routing

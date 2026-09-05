@@ -10,6 +10,13 @@ Evaluates and isolates individual pipeline components on IBM FakeBrisbane:
 
 import json
 import os
+import sys
+
+# Ensure the repository root is importable regardless of the working directory
+# (this file lives in <repo>/benchmarks/).
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
 
 import numpy as np
 from mqt import bench as mqt_bench
@@ -93,7 +100,9 @@ def run_ablation_suite():
         "raw_faq_cost": float(solver_undir.last_run_stats["best_faq_perm_cost"]),
     }
 
-    out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "benchmark_ablation_results.json")
+    out_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results")
+    os.makedirs(out_dir, exist_ok=True)
+    out_path = os.path.join(out_dir, "benchmark_ablation_results.json")
     with open(out_path, "w") as f:
         json.dump(ablation_results, f, indent=2)
 

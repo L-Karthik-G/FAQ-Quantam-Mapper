@@ -4,13 +4,13 @@ Tasks are indexed 0..19 in BENCHMARK_TASKS order. This process runs every task w
 index satisfies  idx % workers == remainder , so launching `workers` such processes
 (with remainders 0..workers-1) covers all 20 tasks once, in parallel on the CPU.
 
-Each process writes its own partial outputs into this file's directory:
+Each process writes its own partial outputs into <repo>/benchmarks/results/:
   partial_results_<remainder>.json
   partial_raw_<remainder>.json
 and prints one line per finished task (progress can be tailed).
 
 Usage (launch <workers> processes, one per remainder 0..workers-1):
-  uv run python benchmark_eval_strided.py <workers> <remainder>
+  uv run python benchmarks/benchmark_eval_strided.py <workers> <remainder>
   # e.g. workers=6 -> launch remainders 0,1,2,3,4,5, then merge the
   # partial_results_<r>.json / partial_raw_<r>.json files in task order.
 
@@ -29,7 +29,8 @@ def main() -> None:
     workers = int(sys.argv[1])
     remainder = int(sys.argv[2])
     t0 = time.time()
-    out_dir = os.path.dirname(os.path.abspath(__file__))
+    out_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results")
+    os.makedirs(out_dir, exist_ok=True)
 
     results = []
     logs = []

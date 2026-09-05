@@ -15,7 +15,7 @@ Note: this work is CPU-bound (quantum routing + SciPy FAQ); a GPU provides no
 speedup and is not used.
 
 Usage:
-  uv run python benchmark_eval_parallel.py [workers]
+  uv run python benchmarks/benchmark_eval_parallel.py [workers]
 """
 import json
 import os
@@ -64,7 +64,8 @@ def main(workers: int) -> None:
 
     all_results = [r for r in results if r is not None]
 
-    out_dir = os.path.dirname(os.path.abspath(__file__))
+    out_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results")
+    os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, "benchmark_eval_results.json")
     raw_path = os.path.join(out_dir, "benchmark_eval_raw_seeds.json")
 
