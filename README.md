@@ -37,7 +37,7 @@ $$\min_{P \in \Pi_M} \sum_{i,j} A_{ij} B_{P(i), P(j)} = \min_{P \in \Pi_M} \text
 * **$B \in \mathbb{R}^{M \times M}$**: Directed shortest-path distance matrix of the hardware
   graph weighted by log-infidelities from a Qiskit **`FakeBrisbane`** fake backend object
   (IBM's archived Brisbane calibration properties; **not** live QPU execution), plus an
-  estimated CNOT direction-reversal overhead ($4 \times \text{cost}_{\text{1Q\_Hadamard}}$).
+  estimated CNOT direction-reversal overhead ($4 \times \text{cost}_{\text{1Q-Hadamard}}$).
 * **$\mathcal{D}_M$ (Birkhoff polytope)**: the doubly-stochastic relaxation used internally by
   SciPy's FAQ method. FAQ returns a discrete permutation; its reported cost is the discrete QAP
   cost of that permutation (the relaxation value is not exposed by SciPy and is **not** claimed
