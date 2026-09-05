@@ -11,7 +11,6 @@ from collections import defaultdict
 from typing import Dict, List, Optional, Set, Tuple
 
 import networkx as nx
-import numpy as np
 from qiskit import QuantumCircuit
 from qiskit.converters import circuit_to_dag
 
@@ -93,8 +92,8 @@ class FGEASubgraphExtractor:
 
         # Re-index selected physical qubits to [0, K)
         sorted_selected = sorted(list(selected))
-        global_to_local = {g: l for l, g in enumerate(sorted_selected)}
-        local_to_global = {l: g for l, g in enumerate(sorted_selected)}
+        global_to_local = {g: loc for loc, g in enumerate(sorted_selected)}
+        local_to_global = {loc: g for loc, g in enumerate(sorted_selected)}
 
         sub_coupling_map: List[Tuple[int, int]] = []
         sub_error_rates: Dict[Tuple[int, int], float] = {}

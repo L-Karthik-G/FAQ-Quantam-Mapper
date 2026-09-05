@@ -4,18 +4,26 @@ Includes semantic quantum state verification, directed hardware graph tests,
 multi-start Gaussian solver verification, 2-opt refinement tests, and Qiskit pass manager integration.
 """
 
-import time
 import numpy as np
 import pytest
 from qiskit import QuantumCircuit
-from qiskit.quantum_info import Statevector, Operator
-from qiskit.transpiler import PassManager, CouplingMap
-from qiskit.transpiler.passes import SabreSwap, FullAncillaAllocation, EnlargeWithAncilla, ApplyLayout
+from qiskit.quantum_info import Statevector
+from qiskit.transpiler import CouplingMap, PassManager
+from qiskit.transpiler.passes import (
+    ApplyLayout,
+    EnlargeWithAncilla,
+    FullAncillaAllocation,
+    SabreSwap,
+)
 
 from qap_compiler.module_a_dag import DAGInteractionMatrixBuilder
 from qap_compiler.module_b_hardware import HardwareMatrixBuilder, load_ibm_heavy_hex_127
-from qap_compiler.module_c_faq import AdaptiveFAQSolver, sinkhorn_knopp, refine_2opt, compute_qap_cost
-from qap_compiler.module_d_handoff import QMAPWarmStartHandoff
+from qap_compiler.module_c_faq import (
+    AdaptiveFAQSolver,
+    compute_qap_cost,
+    refine_2opt,
+    sinkhorn_knopp,
+)
 from qap_compiler.module_e_fgea import FGEASubgraphExtractor, FMALogicalPlacer
 from qap_compiler.pipeline import FAQCompilerPipeline
 from qap_compiler.qiskit_plugin import FAQPlacementPass

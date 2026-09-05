@@ -9,6 +9,7 @@ Includes a 1-hour Time-To-Live (TTL) cache to prevent stale calibration profiles
 import math
 import time
 from typing import Dict, List, Optional, Set, Tuple, Union
+
 import networkx as nx
 import numpy as np
 
@@ -125,7 +126,6 @@ def load_ibm_fake_brisbane_snapshot() -> Tuple[int, List[Tuple[int, int]], Dict[
         error_rates = {}
         for u, v in edges:
             try:
-                gate = target.get_inst_map("cx").get((u, v))
                 err = target["cx"][(u, v)].error if "cx" in target and (u, v) in target["cx"] else 0.012
             except Exception:
                 err = 0.012

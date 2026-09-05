@@ -10,9 +10,10 @@ Evaluates and isolates individual pipeline components on IBM FakeBrisbane:
 
 import json
 import os
+
 import numpy as np
-from qiskit import transpile
 from mqt import bench as mqt_bench
+from qiskit import transpile
 
 from qap_compiler.module_a_dag import DAGInteractionMatrixBuilder
 from qap_compiler.module_b_hardware import HardwareMatrixBuilder, load_ibm_fake_brisbane_snapshot

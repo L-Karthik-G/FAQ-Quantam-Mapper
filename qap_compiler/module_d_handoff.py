@@ -5,10 +5,11 @@ permutations into soft-constraint heuristic seeds for MQT QMAP.
 """
 
 from typing import Dict, List, Optional, Tuple, Union
+
 import mqt.core as core
+import qiskit.qasm3
 from mqt.qmap import sc
 from qiskit import QuantumCircuit
-import qiskit.qasm3
 
 
 class QMAPWarmStartHandoff:
@@ -28,7 +29,6 @@ class QMAPWarmStartHandoff:
         Embeds a logical QuantumCircuit (N qubits) onto a physical register (M qubits)
         according to the initial layout mapping {logical_idx: physical_idx}.
         """
-        N = circuit.num_qubits
         M = num_physical_qubits
 
         qubit_indices = {q: i for i, q in enumerate(circuit.qubits)}

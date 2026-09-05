@@ -6,14 +6,13 @@ baseline and hybrid FAQ / FGEA seeding comparisons (Qiskit SABRE, PyTKET, MQT QM
 
 import time
 from typing import Dict, List, Optional, Tuple, Union
-import numpy as np
-from qiskit import QuantumCircuit, transpile
-from qiskit.transpiler import CouplingMap
 
 from pytket.architecture import Architecture
 from pytket.extensions.qiskit import qiskit_to_tk, tk_to_qiskit
-from pytket.passes import RoutingPass, PlacementPass
+from pytket.passes import PlacementPass, RoutingPass
 from pytket.placement import GraphPlacement
+from qiskit import QuantumCircuit, transpile
+from qiskit.transpiler import CouplingMap
 
 from .module_a_dag import DAGInteractionMatrixBuilder
 from .module_b_hardware import HardwareMatrixBuilder

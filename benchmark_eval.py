@@ -8,25 +8,23 @@ Includes explicit FailureReason Enums, raw per-seed result logs (benchmark_eval_
 unseen hand-crafted holdout circuits, and IBM FakeBrisbane hardware snapshots.
 """
 
-from enum import Enum
 import json
 import os
 import time
+from enum import Enum
 from typing import Dict, List, Tuple
+
 import networkx as nx
 import numpy as np
-from scipy import stats
-
-from qiskit import QuantumCircuit, transpile
-from qiskit.transpiler import CouplingMap
-
-from pytket.architecture import Architecture
-from pytket.extensions.qiskit import qiskit_to_tk, tk_to_qiskit
-from pytket.passes import RoutingPass, PlacementPass
-from pytket.placement import GraphPlacement
-
 from mqt import bench as mqt_bench
 from mqt import qmap
+from pytket.architecture import Architecture
+from pytket.extensions.qiskit import qiskit_to_tk, tk_to_qiskit
+from pytket.passes import PlacementPass, RoutingPass
+from pytket.placement import GraphPlacement
+from qiskit import QuantumCircuit, transpile
+from qiskit.transpiler import CouplingMap
+from scipy import stats
 
 from qap_compiler.module_a_dag import DAGInteractionMatrixBuilder
 from qap_compiler.module_b_hardware import HardwareMatrixBuilder, load_ibm_fake_brisbane_snapshot

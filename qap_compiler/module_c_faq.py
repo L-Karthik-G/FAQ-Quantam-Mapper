@@ -14,6 +14,7 @@ a "continuous relaxation cost". It is tracked separately from the post-2-opt cos
 
 from concurrent.futures import ThreadPoolExecutor
 from typing import Dict, List, Optional, Tuple, Union
+
 import numpy as np
 from scipy.optimize import quadratic_assignment
 

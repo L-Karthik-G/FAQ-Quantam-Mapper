@@ -19,11 +19,10 @@ Usage:
 """
 
 from typing import Dict, List, Optional, Tuple, Union
-import numpy as np
-from qiskit import QuantumCircuit
+
+from qiskit.transpiler import CouplingMap
 from qiskit.transpiler.basepasses import TransformationPass
 from qiskit.transpiler.layout import Layout
-from qiskit.transpiler import CouplingMap
 
 from qap_compiler.module_a_dag import DAGInteractionMatrixBuilder
 from qap_compiler.module_b_hardware import HardwareMatrixBuilder
