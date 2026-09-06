@@ -16,9 +16,11 @@ findings reported there (FAQ arms use the random multi-start default):
 - **FAQ + PyTKET** reduces SWAPs vs PyTKET's own `GraphPlacement` on every synthetic-grid MQT
   task (e.g. VQE‑N50 −93.1%) and on several IBM tasks (e.g. Grover-N10 −10.6%, QAOA-N10/N20,
   QFT-N20, VQE-N50 −34.2%, Random 3-regular).
-- **FAQ + SABRE rarely helps** — it usually increases SWAPs vs default SABRE, and only wins on
-  three hand-crafted holdout rows (QRAM Brisbane, Ripple/QRAM synthetic grid). Pre-seeding can
-  over-constrain SABRE.
+- **FAQ + SABRE rarely helps when hard-constrained** — it usually increases SWAPs vs default
+  SABRE, and only wins on three hand-crafted holdout rows (QRAM Brisbane, Ripple/QRAM synthetic
+  grid). Pre-seeding can over-constrain SABRE. **Offering the FAQ layout as one trial inside
+  SABRE's own pool instead removes the downside** (0/18 significant losses) while keeping the
+  wins (+5 significant improvements) — see `reports/soft_candidate_sabre.md`.
 - FAQ + PyTKET is **not** uniformly better on IBM (it hurts Grover‑N8/N12 and the QRAM/Ripple
   holdouts).
 - Real FAQ overhead is ~2–29 s/circuit (single-threaded Python solve), so it is only worth it
@@ -39,6 +41,7 @@ Wilcoxon and fidelity analyses (review points #2 and #5).
 | `benchmarks/analyze_significance.py` | Paired Wilcoxon + BH significance testing (analysis-only) |
 | `benchmarks/render_tables.py` | Renders README Tables 1–2 from the results + significance JSON (incl. per-row † markers) |
 | `benchmarks/benchmark_fidelity.py`, `benchmarks/report_fidelity.py` | Fidelity-loss proxy on routed circuits + delta table (currently describes the previous Gaussian-era canonical circuits) |
+| `benchmarks/benchmark_soft_sabre.py`, `benchmarks/results/benchmark_soft_sabre_*.json`, `reports/soft_candidate_sabre.md` | FAQ-as-soft-candidate SABRE experiment (FAQ layout = one trial in SABRE's pool) |
 | `benchmarks/results/benchmark_eval_results.json`, `benchmarks/results/benchmark_eval_raw_seeds.json`, `benchmarks/results/benchmark_ablation_results.json` | Canonical committed results |
 | `benchmarks/results/significance_results.json`, `benchmarks/results/benchmark_fidelity_results.json`, `benchmarks/results/benchmark_fidelity_comparison.json` | Significance + fidelity analysis outputs |
 | `tests/` | Unit/integration tests |

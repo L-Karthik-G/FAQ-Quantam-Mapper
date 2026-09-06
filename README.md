@@ -222,6 +222,30 @@ which the multi-cell study did not re-derive:
 
 ---
 
+## 🧪 Follow-up experiment: FAQ as a soft candidate in SABRE's own trial pool
+
+Tables 1–2 show FAQ+SABRE *hard-constrained* pre-seeding (FAQ layout forced as
+`initial_layout`) usually increases SWAPs. Qiskit's `SabreLayout` natively supports the softer
+alternative: a `sabre_starting_layouts` property-set list is evaluated as **additional layout
+trials inside SABRE's own randomized trial pool** (min-SWAP selection across all trials). The
+follow-up benchmark (K=20, same 20 tasks, identical `optimization_level=1` preset pipeline and
+seeds) compares default SABRE, hard FAQ+SABRE, and **FAQ-as-one-trial** SABRE; full table in
+[`reports/soft_candidate_sabre.md`](reports/soft_candidate_sabre.md).
+
+**Result (paired Wilcoxon + BH, m = 58):** injecting the FAQ layout as one trial in the pool is
+**never significantly worse than default SABRE** (0/18 tested rows; largest deltas +39.6 SWAPs,
+q = 0.209, and +1.0, q = 0.507), and it keeps the FAQ wins — **5 significant improvements**
+(QRAM Brisbane −7.0, QRAM synthetic grid −6.8, Ripple synthetic grid −7.0, and — where *hard*
+FAQ+SABRE had been a significant loss — Ripple Brisbane −1.1 and Random 3-regular −3.6). Every
+row where hard-constraint FAQ made SABRE significantly worse (VQE-N50 Brisbane +117.0, GHZ
++38.6, QFT Brisbane +33.9, QAOA +13.1/+19.3, VQE-N20 +14.4, Grover-N8 Brisbane +112.3, synthetic
+grid +23.2/+47.5) falls back to ≈ default SABRE under the soft injection (all non-significant).
+This confirms the over-constraint diagnosis: FAQ pre-seeding is only harmful to SABRE because it
+*forces* the layout; offered as one candidate among SABRE's own trials it is harmless at worst
+and a real win on the structural holdout circuits.
+
+---
+
 ## Limitations & When to Use It
 
 * **Real overhead is seconds, not sub-second.** FAQ pre-placement measured ~2–29 s per
@@ -230,9 +254,12 @@ which the multi-cell study did not re-derive:
   single-threaded Python over an M×M permutation). That is far from negligible, so it is only
   justified when the routed circuit is itself large/multi-iteration (e.g. repeated VQE/QAOA
   layers) and the SWAP savings outweigh the one-time cost.
-* **FAQ+SABRE usually makes routing worse** on these benchmarks; prefer default SABRE. The
-  FAQ-seeded gains are specific to PyTKET routing (the synthetic-grid MQT rows plus a
-  workload-specific IBM subset) and to three structural holdout circuits for FAQ+SABRE.
+* **FAQ+SABRE (hard-constrained) usually makes routing worse** on these benchmarks; prefer
+  default SABRE. This is specific to *forcing* the FAQ layout as `initial_layout` — offering the
+  FAQ layout as one candidate inside SABRE's own trial pool removes the downside entirely (see
+  the [follow-up experiment](#-follow-up-experiment-faq-as-a-soft-candidate-in-sabres-own-trial-pool)).
+  The FAQ-seeded gains for PyTKET are specific to the synthetic-grid MQT rows plus a
+  workload-specific IBM subset (QAOA, QFT-N20, VQE-N50, Random 3-regular).
 * **Not a blanket improvement.** On IBM, FAQ+PyTKET *hurts* Grover at N=8 and N=12 and the
   QRAM/Ripple holdouts, and helps only a workload-specific subset (QAOA-N10/20, QFT-N20,
   VQE-N50, Random 3-regular). The README's earlier recommendation "use it for large
@@ -260,6 +287,7 @@ Canonical paired-seed dataset (this README's Tables 1–2):
 | `benchmarks/results/benchmark_fidelity_raw.json` / `benchmark_fidelity_results.json` | Per-seed SWAP + fidelity-loss proxy per method (**describes the previous Gaussian-era canonical circuits; pending re-derivation under the regenerated Tables 1–2**) | `benchmarks/benchmark_fidelity.py` |
 | `benchmarks/results/benchmark_fidelity_crosscheck.json` | Validates fidelity re-run reproduces canonical data (0/1600 SWAP divergences) | `benchmarks/benchmark_fidelity.py` |
 | `benchmarks/results/benchmark_fidelity_comparison.json` | SWAP-delta vs fidelity-delta per pair | `benchmarks/report_fidelity.py` |
+| `benchmarks/results/benchmark_soft_sabre_results.json` / `benchmark_soft_sabre_raw.json` / `benchmark_soft_sabre_significance.json` | FAQ-as-soft-candidate SABRE: per-task means, per-seed logs, merged paired-Wilcoxon + BH (report: `reports/soft_candidate_sabre.md`) | `benchmarks/benchmark_soft_sabre.py` (4 balanced slices, merged) |
 
 Running `benchmarks/benchmark_eval.py` (or its CPU-parallel variants),
 `benchmarks/analyze_significance.py` and `benchmarks/benchmark_ablations.py` regenerates these

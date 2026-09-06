@@ -1,0 +1,582 @@
+[
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "grover",
+    "benchmark_label": "Grover's Search",
+    "qubits": 8,
+    "suite_type": "mqt",
+    "num_physical_qubits": 127,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 1152.25,
+      "std_swaps": 63.3528807553374,
+      "ci95_swaps": 30.42032060263227
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 1264.6,
+      "std_swaps": 76.1350116569243,
+      "ci95_swaps": 36.55795026327446
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 1153.25,
+      "std_swaps": 64.15518295508166,
+      "ci95_swaps": 30.805564175543694
+    }
+  },
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "vqe_real_amp",
+    "benchmark_label": "VQE (RealAmplitudes)",
+    "qubits": 50,
+    "suite_type": "mqt",
+    "num_physical_qubits": 127,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 30.75,
+      "std_swaps": 0.6224949798994366,
+      "ci95_swaps": 0.29890506376814785
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 147.75,
+      "std_swaps": 25.496813526399723,
+      "ci95_swaps": 12.242872503524879
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 31.1,
+      "std_swaps": 1.044030650891055,
+      "ci95_swaps": 0.5013149637462228
+    }
+  },
+  {
+    "architecture": "Rigetti_Grid_80",
+    "benchmark": "grover",
+    "benchmark_label": "Grover's Search",
+    "qubits": 8,
+    "suite_type": "mqt",
+    "num_physical_qubits": 80,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 768.25,
+      "std_swaps": 8.971482597653523,
+      "ci95_swaps": 4.307860568417223
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 791.45,
+      "std_swaps": 16.924759968755836,
+      "ci95_swaps": 8.12680683551668
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 767.9,
+      "std_swaps": 10.039422294136251,
+      "ci95_swaps": 4.820656001931041
+    }
+  },
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "ripple_carry_adder",
+    "benchmark_label": "Ripple-Carry Adder (Holdout)",
+    "qubits": 20,
+    "suite_type": "holdout",
+    "num_physical_qubits": 127,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 5.0,
+      "std_swaps": 0.0,
+      "ci95_swaps": 0.0
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 7.35,
+      "std_swaps": 4.486368241685026,
+      "ci95_swaps": 2.1542313250219194
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 3.9,
+      "std_swaps": 1.7291616465790582,
+      "ci95_swaps": 0.8302961291666101
+    }
+  },
+  {
+    "architecture": "Rigetti_Grid_80",
+    "benchmark": "qram_bucket_brigade",
+    "benchmark_label": "QRAM Decoder (Holdout)",
+    "qubits": 20,
+    "suite_type": "holdout",
+    "num_physical_qubits": 80,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 7.55,
+      "std_swaps": 1.4309088021254186,
+      "ci95_swaps": 0.6870832706390624
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 0.8,
+      "std_swaps": 1.077032961426901,
+      "ci95_swaps": 0.5171617706342186
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 0.7,
+      "std_swaps": 0.9,
+      "ci95_swaps": 0.43215538450573865
+    }
+  },
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "grover",
+    "benchmark_label": "Grover's Search",
+    "qubits": 10,
+    "suite_type": "mqt",
+    "num_physical_qubits": 127,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 5603.15,
+      "std_swaps": 295.34983917381777,
+      "ci95_swaps": 141.81891479096586
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 5705.85,
+      "std_swaps": 228.79625761799514,
+      "ci95_swaps": 109.86170520486525
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 5642.75,
+      "std_swaps": 269.64808083871094,
+      "ci95_swaps": 129.47763339565293
+    }
+  },
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "ghz",
+    "benchmark_label": "GHZ State",
+    "qubits": 50,
+    "suite_type": "mqt",
+    "num_physical_qubits": 127,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 12.0,
+      "std_swaps": 0.0,
+      "ci95_swaps": 0.0
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 50.65,
+      "std_swaps": 7.051772826743641,
+      "ci95_swaps": 3.3860684415427977
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 12.0,
+      "std_swaps": 0.0,
+      "ci95_swaps": 0.0
+    }
+  },
+  {
+    "architecture": "Rigetti_Grid_80",
+    "benchmark": "grover",
+    "benchmark_label": "Grover's Search",
+    "qubits": 10,
+    "suite_type": "mqt",
+    "num_physical_qubits": 80,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 3461.75,
+      "std_swaps": 27.566057026713125,
+      "ci95_swaps": 13.236466637429254
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 3509.2,
+      "std_swaps": 36.97106977083568,
+      "ci95_swaps": 17.752496524893317
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 3452.4,
+      "std_swaps": 30.468672435798712,
+      "ci95_swaps": 14.630223168746658
+    }
+  },
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "qram_bucket_brigade",
+    "benchmark_label": "QRAM Decoder (Holdout)",
+    "qubits": 20,
+    "suite_type": "holdout",
+    "num_physical_qubits": 127,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 19.3,
+      "std_swaps": 2.12367605815953,
+      "ci95_swaps": 1.0197311594217366
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 14.15,
+      "std_swaps": 2.5937424698685874,
+      "ci95_swaps": 1.2454441937499152
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 12.3,
+      "std_swaps": 2.4919871588754225,
+      "ci95_swaps": 1.196584076474635
+    }
+  },
+  {
+    "architecture": "Rigetti_Grid_80",
+    "benchmark": "ripple_carry_adder",
+    "benchmark_label": "Ripple-Carry Adder (Holdout)",
+    "qubits": 20,
+    "suite_type": "holdout",
+    "num_physical_qubits": 80,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 7.85,
+      "std_swaps": 1.7399712641305312,
+      "ci95_swaps": 0.8354866118658509
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 0.6,
+      "std_swaps": 0.9165151389911679,
+      "ci95_swaps": 0.4400855025511763
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 0.9,
+      "std_swaps": 1.5459624833740309,
+      "ci95_swaps": 0.7423289015932788
+    }
+  },
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "grover",
+    "benchmark_label": "Grover's Search",
+    "qubits": 12,
+    "suite_type": "mqt",
+    "num_physical_qubits": 127,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 18579.0,
+      "std_swaps": 56.908698807827264,
+      "ci95_swaps": 27.32600068335318
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 18641.65,
+      "std_swaps": 141.9092227446828,
+      "ci95_swaps": 68.140927466821
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 18570.55,
+      "std_swaps": 48.2726371767692,
+      "ci95_swaps": 23.179200089147454
+    }
+  },
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "qft",
+    "benchmark_label": "QFT",
+    "qubits": 20,
+    "suite_type": "mqt",
+    "num_physical_qubits": 127,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 225.0,
+      "std_swaps": 7.134423592694787,
+      "ci95_swaps": 3.4257550788086997
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 258.9,
+      "std_swaps": 19.989747372090523,
+      "ci95_swaps": 9.598529957509289
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 222.25,
+      "std_swaps": 6.048760203545847,
+      "ci95_swaps": 2.904449212829295
+    }
+  },
+  {
+    "architecture": "Rigetti_Grid_80",
+    "benchmark": "grover",
+    "benchmark_label": "Grover's Search",
+    "qubits": 12,
+    "suite_type": "mqt",
+    "num_physical_qubits": 80,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 12375.25,
+      "std_swaps": 56.286654723833074,
+      "ci95_swaps": 27.02731212746648
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 12428.95,
+      "std_swaps": 92.39397978223474,
+      "ci95_swaps": 44.36506206534121
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 12365.85,
+      "std_swaps": 65.11088618656638,
+      "ci95_swaps": 31.264466728294423
+    }
+  },
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "random_3_regular",
+    "benchmark_label": "Random 3-Regular (Holdout)",
+    "qubits": 20,
+    "suite_type": "holdout",
+    "num_physical_qubits": 127,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 36.65,
+      "std_swaps": 2.329699551444349,
+      "ci95_swaps": 1.1186580060414215
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 39.7,
+      "std_swaps": 3.8091993909481814,
+      "ci95_swaps": 1.829073363838041
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 33.0,
+      "std_swaps": 3.521363372331802,
+      "ci95_swaps": 1.6908623801716383
+    }
+  },
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "vqe_real_amp",
+    "benchmark_label": "VQE (RealAmplitudes)",
+    "qubits": 10,
+    "suite_type": "mqt",
+    "num_physical_qubits": 127,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 0.0,
+      "std_swaps": 0.0,
+      "ci95_swaps": 0.0
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 1.2,
+      "std_swaps": 1.913112646970899,
+      "ci95_swaps": 0.9186243683938892
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 0.0,
+      "std_swaps": 0.0,
+      "ci95_swaps": 0.0
+    }
+  },
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "vqe_real_amp",
+    "benchmark_label": "VQE (RealAmplitudes)",
+    "qubits": 20,
+    "suite_type": "mqt",
+    "num_physical_qubits": 127,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 9.6,
+      "std_swaps": 0.7348469228349533,
+      "ci95_swaps": 0.3528533938784424
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 24.05,
+      "std_swaps": 8.958096896104664,
+      "ci95_swaps": 4.30143312063975
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 9.7,
+      "std_swaps": 2.0760539492026697,
+      "ci95_swaps": 0.9968643251914856
+    }
+  },
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "qaoa",
+    "benchmark_label": "QAOA",
+    "qubits": 10,
+    "suite_type": "mqt",
+    "num_physical_qubits": 127,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 57.2,
+      "std_swaps": 3.736308338453881,
+      "ci95_swaps": 1.7940730740405941
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 70.3,
+      "std_swaps": 6.8854919940408035,
+      "ci95_swaps": 3.306224933550987
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 57.65,
+      "std_swaps": 3.8765319552404054,
+      "ci95_swaps": 1.8614046196285559
+    }
+  },
+  {
+    "architecture": "IBM_Eagle_127_Brisbane",
+    "benchmark": "qaoa",
+    "benchmark_label": "QAOA",
+    "qubits": 20,
+    "suite_type": "mqt",
+    "num_physical_qubits": 127,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 308.65,
+      "std_swaps": 8.75942349701166,
+      "ci95_swaps": 4.206035588221862
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 327.95,
+      "std_swaps": 14.329951151347306,
+      "ci95_swaps": 6.880850610843274
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 304.2,
+      "std_swaps": 7.846018098373213,
+      "ci95_swaps": 3.7674432979349555
+    }
+  },
+  {
+    "architecture": "Rigetti_Grid_80",
+    "benchmark": "vqe_real_amp",
+    "benchmark_label": "VQE (RealAmplitudes)",
+    "qubits": 50,
+    "suite_type": "mqt",
+    "num_physical_qubits": 80,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 45.7,
+      "std_swaps": 10.334892355511014,
+      "ci95_swaps": 4.962532644134757
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 49.5,
+      "std_swaps": 23.061873297718034,
+      "ci95_swaps": 11.073680802664404
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 39.45,
+      "std_swaps": 13.362166740465412,
+      "ci95_swaps": 6.416147006172913
+    }
+  },
+  {
+    "architecture": "Rigetti_Grid_80",
+    "benchmark": "qft",
+    "benchmark_label": "QFT",
+    "qubits": 20,
+    "suite_type": "mqt",
+    "num_physical_qubits": 80,
+    "sabre_def": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 147.9,
+      "std_swaps": 4.763402145525822,
+      "ci95_swaps": 2.2872554286168576
+    },
+    "faq_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 174.35,
+      "std_swaps": 7.47178024302107,
+      "ci95_swaps": 3.587744515405724
+    },
+    "faq_soft_sabre": {
+      "n_total": 20,
+      "n_success": 20,
+      "mean_swaps": 148.55,
+      "std_swaps": 4.477443466979789,
+      "ci95_swaps": 2.149945892305954
+    }
+  }
+]

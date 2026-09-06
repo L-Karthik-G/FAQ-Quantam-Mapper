@@ -1,0 +1,760 @@
+{
+  "alpha": 0.05,
+  "n_tested": 58,
+  "rows": [
+    {
+      "task": "GHZ State",
+      "qubits": 50,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "def_vs_soft": {
+        "base_mean": 12.0,
+        "faq_mean": 12.0,
+        "mean_diff_faq_minus_base": 0.0,
+        "test": "constant",
+        "p_value": null,
+        "note": "constant per-seed difference or missing"
+      },
+      "hard_vs_soft": {
+        "base_mean": 50.65,
+        "faq_mean": 12.0,
+        "mean_diff_faq_minus_base": -38.65,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 8.745059215649785e-05,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.00042750422602524186,
+        "significant_bh": true
+      },
+      "def_vs_hard": {
+        "base_mean": 12.0,
+        "faq_mean": 50.65,
+        "mean_diff_faq_minus_base": 38.65,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 8.745059215649785e-05,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.00042750422602524186,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "Grover's Search",
+      "qubits": 8,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "def_vs_soft": {
+        "base_mean": 1152.25,
+        "faq_mean": 1153.25,
+        "mean_diff_faq_minus_base": 1.0,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 7.0,
+        "p_value": 0.463071015014588,
+        "n_zero_diffs_dropped": 14,
+        "q_value_bh": 0.506756959827285,
+        "significant_bh": false
+      },
+      "hard_vs_soft": {
+        "base_mean": 1264.6,
+        "faq_mean": 1153.25,
+        "mean_diff_faq_minus_base": -111.35,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 1.9073486328125e-06,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.000110626220703125,
+        "significant_bh": true
+      },
+      "def_vs_hard": {
+        "base_mean": 1152.25,
+        "faq_mean": 1264.6,
+        "mean_diff_faq_minus_base": 112.35,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 8.844915021211901e-05,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.00042750422602524186,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "Grover's Search",
+      "qubits": 8,
+      "architecture": "Rigetti_Grid_80",
+      "def_vs_soft": {
+        "base_mean": 768.25,
+        "faq_mean": 767.9,
+        "mean_diff_faq_minus_base": -0.35,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 23.5,
+        "p_value": 0.6827004547895166,
+        "n_zero_diffs_dropped": 10,
+        "q_value_bh": 0.7070826138891422,
+        "significant_bh": false
+      },
+      "hard_vs_soft": {
+        "base_mean": 791.45,
+        "faq_mean": 767.9,
+        "mean_diff_faq_minus_base": -23.55,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 14.0,
+        "p_value": 0.0006798746354693244,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.001516643417585416,
+        "significant_bh": true
+      },
+      "def_vs_hard": {
+        "base_mean": 768.25,
+        "faq_mean": 791.45,
+        "mean_diff_faq_minus_base": 23.2,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 10.0,
+        "p_value": 0.00038931689726311056,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.0009408491683858505,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "Grover's Search",
+      "qubits": 10,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "def_vs_soft": {
+        "base_mean": 5603.15,
+        "faq_mean": 5642.75,
+        "mean_diff_faq_minus_base": 39.6,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 11.0,
+        "p_value": 0.1730709208049953,
+        "n_zero_diffs_dropped": 11,
+        "q_value_bh": 0.20912736263936935,
+        "significant_bh": false
+      },
+      "hard_vs_soft": {
+        "base_mean": 5705.85,
+        "faq_mean": 5642.75,
+        "mean_diff_faq_minus_base": -63.1,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 80.0,
+        "p_value": 0.36827659606933594,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.4107700494619516,
+        "significant_bh": false
+      },
+      "def_vs_hard": {
+        "base_mean": 5603.15,
+        "faq_mean": 5705.85,
+        "mean_diff_faq_minus_base": 102.7,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 73.0,
+        "p_value": 0.24548721313476562,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.2847651672363281,
+        "significant_bh": false
+      }
+    },
+    {
+      "task": "Grover's Search",
+      "qubits": 10,
+      "architecture": "Rigetti_Grid_80",
+      "def_vs_soft": {
+        "base_mean": 3461.75,
+        "faq_mean": 3452.4,
+        "mean_diff_faq_minus_base": -9.35,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 2.0,
+        "p_value": 0.07473549830588248,
+        "n_zero_diffs_dropped": 14,
+        "q_value_bh": 0.1083664725435296,
+        "significant_bh": false
+      },
+      "hard_vs_soft": {
+        "base_mean": 3509.2,
+        "faq_mean": 3452.4,
+        "mean_diff_faq_minus_base": -56.8,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 11.0,
+        "p_value": 0.0004488206370567378,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.0010412638779716318,
+        "significant_bh": true
+      },
+      "def_vs_hard": {
+        "base_mean": 3461.75,
+        "faq_mean": 3509.2,
+        "mean_diff_faq_minus_base": 47.45,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 19.0,
+        "p_value": 0.0013232490063517005,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.0027410157988713795,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "Grover's Search",
+      "qubits": 12,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "def_vs_soft": {
+        "base_mean": 18579.0,
+        "faq_mean": 18570.55,
+        "mean_diff_faq_minus_base": -8.45,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 14.5,
+        "p_value": 0.3428288397234035,
+        "n_zero_diffs_dropped": 11,
+        "q_value_bh": 0.3898837785089687,
+        "significant_bh": false
+      },
+      "hard_vs_soft": {
+        "base_mean": 18641.65,
+        "faq_mean": 18570.55,
+        "mean_diff_faq_minus_base": -71.1,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 48.0,
+        "p_value": 0.058573296793890506,
+        "n_zero_diffs_dropped": 1,
+        "q_value_bh": 0.08710900548834999,
+        "significant_bh": false
+      },
+      "def_vs_hard": {
+        "base_mean": 18579.0,
+        "faq_mean": 18641.65,
+        "mean_diff_faq_minus_base": 62.65,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 59.0,
+        "p_value": 0.1474161990774467,
+        "n_zero_diffs_dropped": 1,
+        "q_value_bh": 0.18587259883678064,
+        "significant_bh": false
+      }
+    },
+    {
+      "task": "Grover's Search",
+      "qubits": 12,
+      "architecture": "Rigetti_Grid_80",
+      "def_vs_soft": {
+        "base_mean": 12375.25,
+        "faq_mean": 12365.85,
+        "mean_diff_faq_minus_base": -9.4,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 20.0,
+        "p_value": 0.7670968684102772,
+        "n_zero_diffs_dropped": 11,
+        "q_value_bh": 0.7789060199126654,
+        "significant_bh": false
+      },
+      "hard_vs_soft": {
+        "base_mean": 12428.95,
+        "faq_mean": 12365.85,
+        "mean_diff_faq_minus_base": -63.1,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 45.0,
+        "p_value": 0.023950576782226562,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.037544147388355154,
+        "significant_bh": true
+      },
+      "def_vs_hard": {
+        "base_mean": 12375.25,
+        "faq_mean": 12428.95,
+        "mean_diff_faq_minus_base": 53.7,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 58.0,
+        "p_value": 0.082550048828125,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.11677811785442073,
+        "significant_bh": false
+      }
+    },
+    {
+      "task": "QAOA",
+      "qubits": 10,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "def_vs_soft": {
+        "base_mean": 57.2,
+        "faq_mean": 57.65,
+        "mean_diff_faq_minus_base": 0.45,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 2.0,
+        "p_value": 0.13079706180685857,
+        "n_zero_diffs_dropped": 15,
+        "q_value_bh": 0.17241430874540448,
+        "significant_bh": false
+      },
+      "hard_vs_soft": {
+        "base_mean": 70.3,
+        "faq_mean": 57.65,
+        "mean_diff_faq_minus_base": -12.65,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 4.5,
+        "p_value": 0.0001736527469559972,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.0005035929661723918,
+        "significant_bh": true
+      },
+      "def_vs_hard": {
+        "base_mean": 57.2,
+        "faq_mean": 70.3,
+        "mean_diff_faq_minus_base": 13.1,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 4.0,
+        "p_value": 0.00016157339856378992,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.000495831235575591,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "QAOA",
+      "qubits": 20,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "def_vs_soft": {
+        "base_mean": 308.65,
+        "faq_mean": 304.2,
+        "mean_diff_faq_minus_base": -4.45,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 23.0,
+        "p_value": 0.03552642138267934,
+        "n_zero_diffs_dropped": 5,
+        "q_value_bh": 0.054224537899878994,
+        "significant_bh": false
+      },
+      "hard_vs_soft": {
+        "base_mean": 327.95,
+        "faq_mean": 304.2,
+        "mean_diff_faq_minus_base": -23.75,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 4.0,
+        "p_value": 0.00016242747372303843,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.000495831235575591,
+        "significant_bh": true
+      },
+      "def_vs_hard": {
+        "base_mean": 308.65,
+        "faq_mean": 327.95,
+        "mean_diff_faq_minus_base": 19.3,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 9.0,
+        "p_value": 0.00033764586864969587,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.0008514547992035809,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "QFT",
+      "qubits": 20,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "def_vs_soft": {
+        "base_mean": 225.0,
+        "faq_mean": 222.25,
+        "mean_diff_faq_minus_base": -2.75,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 15.5,
+        "p_value": 0.11862456478399583,
+        "n_zero_diffs_dropped": 9,
+        "q_value_bh": 0.16000522691794786,
+        "significant_bh": false
+      },
+      "hard_vs_soft": {
+        "base_mean": 258.9,
+        "faq_mean": 222.25,
+        "mean_diff_faq_minus_base": -36.65,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 8.844915021211901e-05,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.00042750422602524186,
+        "significant_bh": true
+      },
+      "def_vs_hard": {
+        "base_mean": 225.0,
+        "faq_mean": 258.9,
+        "mean_diff_faq_minus_base": 33.9,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 8.844915021211901e-05,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.00042750422602524186,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "QFT",
+      "qubits": 20,
+      "architecture": "Rigetti_Grid_80",
+      "def_vs_soft": {
+        "base_mean": 147.9,
+        "faq_mean": 148.55,
+        "mean_diff_faq_minus_base": 0.65,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 16.0,
+        "p_value": 0.7789060199126654,
+        "n_zero_diffs_dropped": 12,
+        "q_value_bh": 0.7789060199126654,
+        "significant_bh": false
+      },
+      "hard_vs_soft": {
+        "base_mean": 174.35,
+        "faq_mean": 148.55,
+        "mean_diff_faq_minus_base": -25.8,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 8.745059215649785e-05,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.00042750422602524186,
+        "significant_bh": true
+      },
+      "def_vs_hard": {
+        "base_mean": 147.9,
+        "faq_mean": 174.35,
+        "mean_diff_faq_minus_base": 26.45,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 8.757494073814436e-05,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.00042750422602524186,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "QRAM Decoder (Holdout)",
+      "qubits": 20,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "def_vs_soft": {
+        "base_mean": 19.3,
+        "faq_mean": 12.3,
+        "mean_diff_faq_minus_base": -7.0,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 0.0001269363918387154,
+        "n_zero_diffs_dropped": 1,
+        "q_value_bh": 0.0004756510648570244,
+        "significant_bh": true
+      },
+      "hard_vs_soft": {
+        "base_mean": 14.15,
+        "faq_mean": 12.3,
+        "mean_diff_faq_minus_base": -1.85,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 22.5,
+        "p_value": 0.009884275148182802,
+        "n_zero_diffs_dropped": 3,
+        "q_value_bh": 0.019109598619820086,
+        "significant_bh": true
+      },
+      "def_vs_hard": {
+        "base_mean": 19.3,
+        "faq_mean": 14.15,
+        "mean_diff_faq_minus_base": -5.15,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 3.0,
+        "p_value": 0.00019801074586707257,
+        "n_zero_diffs_dropped": 1,
+        "q_value_bh": 0.0005220283300131913,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "QRAM Decoder (Holdout)",
+      "qubits": 20,
+      "architecture": "Rigetti_Grid_80",
+      "def_vs_soft": {
+        "base_mean": 7.55,
+        "faq_mean": 0.7,
+        "mean_diff_faq_minus_base": -6.85,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 7.590165737101056e-05,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.00042750422602524186,
+        "significant_bh": true
+      },
+      "hard_vs_soft": {
+        "base_mean": 0.8,
+        "faq_mean": 0.7,
+        "mean_diff_faq_minus_base": -0.1,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 0.15729920705028502,
+        "n_zero_diffs_dropped": 18,
+        "q_value_bh": 0.19411391508333045,
+        "significant_bh": false
+      },
+      "def_vs_hard": {
+        "base_mean": 7.55,
+        "faq_mean": 0.8,
+        "mean_diff_faq_minus_base": -6.75,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 7.590165737101056e-05,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.00042750422602524186,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "Random 3-Regular (Holdout)",
+      "qubits": 20,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "def_vs_soft": {
+        "base_mean": 36.65,
+        "faq_mean": 33.0,
+        "mean_diff_faq_minus_base": -3.65,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 20.5,
+        "p_value": 0.00768662495323443,
+        "n_zero_diffs_dropped": 3,
+        "q_value_bh": 0.01537324990646886,
+        "significant_bh": true
+      },
+      "hard_vs_soft": {
+        "base_mean": 39.7,
+        "faq_mean": 33.0,
+        "mean_diff_faq_minus_base": -6.7,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 0.00019133243006843798,
+        "n_zero_diffs_dropped": 2,
+        "q_value_bh": 0.0005220283300131913,
+        "significant_bh": true
+      },
+      "def_vs_hard": {
+        "base_mean": 36.65,
+        "faq_mean": 39.7,
+        "mean_diff_faq_minus_base": 3.05,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 31.5,
+        "p_value": 0.010442322132323977,
+        "n_zero_diffs_dropped": 1,
+        "q_value_bh": 0.01953724786047712,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "Ripple-Carry Adder (Holdout)",
+      "qubits": 20,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "def_vs_soft": {
+        "base_mean": 5.0,
+        "faq_mean": 3.9,
+        "mean_diff_faq_minus_base": -1.1,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 0.0169473483375683,
+        "n_zero_diffs_dropped": 13,
+        "q_value_bh": 0.029942203071416994,
+        "significant_bh": true
+      },
+      "hard_vs_soft": {
+        "base_mean": 7.35,
+        "faq_mean": 3.9,
+        "mean_diff_faq_minus_base": -3.45,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 5.0,
+        "p_value": 0.0010703604189356564,
+        "n_zero_diffs_dropped": 4,
+        "q_value_bh": 0.0022992927517877064,
+        "significant_bh": true
+      },
+      "def_vs_hard": {
+        "base_mean": 5.0,
+        "faq_mean": 7.35,
+        "mean_diff_faq_minus_base": 2.35,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 37.5,
+        "p_value": 0.020211239187512078,
+        "n_zero_diffs_dropped": 1,
+        "q_value_bh": 0.033492910653591446,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "Ripple-Carry Adder (Holdout)",
+      "qubits": 20,
+      "architecture": "Rigetti_Grid_80",
+      "def_vs_soft": {
+        "base_mean": 7.85,
+        "faq_mean": 0.9,
+        "mean_diff_faq_minus_base": -6.95,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 0.00011324521778151883,
+        "n_zero_diffs_dropped": 1,
+        "q_value_bh": 0.000469158759380578,
+        "significant_bh": true
+      },
+      "hard_vs_soft": {
+        "base_mean": 0.6,
+        "faq_mean": 0.9,
+        "mean_diff_faq_minus_base": 0.3,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 0.10247043485974937,
+        "n_zero_diffs_dropped": 17,
+        "q_value_bh": 0.14150679099679675,
+        "significant_bh": false
+      },
+      "def_vs_hard": {
+        "base_mean": 7.85,
+        "faq_mean": 0.6,
+        "mean_diff_faq_minus_base": -7.25,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 0.0001099583257985599,
+        "n_zero_diffs_dropped": 1,
+        "q_value_bh": 0.000469158759380578,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "VQE (RealAmplitudes)",
+      "qubits": 10,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "def_vs_soft": {
+        "base_mean": 0.0,
+        "faq_mean": 0.0,
+        "mean_diff_faq_minus_base": 0.0,
+        "test": "constant",
+        "p_value": null,
+        "note": "constant per-seed difference or missing"
+      },
+      "hard_vs_soft": {
+        "base_mean": 1.2,
+        "faq_mean": 0.0,
+        "mean_diff_faq_minus_base": -1.2,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 0.01755232593841686,
+        "n_zero_diffs_dropped": 13,
+        "q_value_bh": 0.029942203071416994,
+        "significant_bh": true
+      },
+      "def_vs_hard": {
+        "base_mean": 0.0,
+        "faq_mean": 1.2,
+        "mean_diff_faq_minus_base": 1.2,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 0.01755232593841686,
+        "n_zero_diffs_dropped": 13,
+        "q_value_bh": 0.029942203071416994,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "VQE (RealAmplitudes)",
+      "qubits": 20,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "def_vs_soft": {
+        "base_mean": 9.6,
+        "faq_mean": 9.7,
+        "mean_diff_faq_minus_base": 0.1,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 38.0,
+        "p_value": 0.5963418515501138,
+        "n_zero_diffs_dropped": 7,
+        "q_value_bh": 0.6288695889073928,
+        "significant_bh": false
+      },
+      "hard_vs_soft": {
+        "base_mean": 24.05,
+        "faq_mean": 9.7,
+        "mean_diff_faq_minus_base": -14.35,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 0.00013121408685711018,
+        "n_zero_diffs_dropped": 1,
+        "q_value_bh": 0.0004756510648570244,
+        "significant_bh": true
+      },
+      "def_vs_hard": {
+        "base_mean": 9.6,
+        "faq_mean": 24.05,
+        "mean_diff_faq_minus_base": 14.45,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 3.5,
+        "p_value": 0.0001483021111215502,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.000495831235575591,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "def_vs_soft": {
+        "base_mean": 30.75,
+        "faq_mean": 31.1,
+        "mean_diff_faq_minus_base": 0.35,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 15.0,
+        "p_value": 0.19098714540508965,
+        "n_zero_diffs_dropped": 10,
+        "q_value_bh": 0.22606641701010613,
+        "significant_bh": false
+      },
+      "hard_vs_soft": {
+        "base_mean": 147.75,
+        "faq_mean": 31.1,
+        "mean_diff_faq_minus_base": -116.65,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 8.844915021211901e-05,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.00042750422602524186,
+        "significant_bh": true
+      },
+      "def_vs_hard": {
+        "base_mean": 30.75,
+        "faq_mean": 147.75,
+        "mean_diff_faq_minus_base": 117.0,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 0.0,
+        "p_value": 8.832385863081277e-05,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.00042750422602524186,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "def_vs_soft": {
+        "base_mean": 45.7,
+        "faq_mean": 39.45,
+        "mean_diff_faq_minus_base": -6.25,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 20.5,
+        "p_value": 0.14655224568852063,
+        "n_zero_diffs_dropped": 8,
+        "q_value_bh": 0.18587259883678064,
+        "significant_bh": false
+      },
+      "hard_vs_soft": {
+        "base_mean": 49.5,
+        "faq_mean": 39.45,
+        "mean_diff_faq_minus_base": -10.05,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 44.0,
+        "p_value": 0.022697756407540775,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.03656860754548236,
+        "significant_bh": true
+      },
+      "def_vs_hard": {
+        "base_mean": 45.7,
+        "faq_mean": 49.5,
+        "mean_diff_faq_minus_base": 3.8,
+        "test": "wilcoxon_signed_rank",
+        "statistic": 86.0,
+        "p_value": 0.47785692745000774,
+        "n_zero_diffs_dropped": 0,
+        "q_value_bh": 0.513253736890749,
+        "significant_bh": false
+      }
+    }
+  ]
+}
