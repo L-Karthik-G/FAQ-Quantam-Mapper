@@ -25,6 +25,17 @@ findings reported there (FAQ arms use the random multi-start default):
   transitive dependence depth (variant A2) is statistically indistinguishable from the shipped
   raw-frequency A after FDR on 32/33 cells, with one significant regression; A2 is not adopted.
   See `reports/dependence_objective.md`.
+- **Exact ceiling (item 8)** on tiny cells (N≤6): optima are 0–3 SWAPs; o3 comes closest on the
+  only headroom cell (random-3/grid-2×3: 105% of optimum), and line-N5 ripple shows hard
+  FAQ+SABRE above the exact 0 floor while FAQ-as-trial returns to 0. See
+  `reports/exact_ceiling.md`.
+- **A6 gamma-decay sensitivity (Compact A6, 300 runs): gamma matters but is workload-dependent.**
+  No gamma beats 0.9 everywhere: on the variational cell (VQE-N50 grid, SABRE) weak/no decay
+  wins (`1.0` ≈ −51% SWAPs, `0.95` −17, q ≤ 0.047) while aggressive decay (0.5/0.7) is worse;
+  on the search cell (Grover-N10 Brisbane, SABRE) the default 0.9 beats 0.95/1.0 (q ≤ 0.047);
+  on its PyTKET arm `1.0` is better (−792); QRAM shows no effect. Recommendation: **keep 0.9
+  shipped**, treat gamma as a per-family dial for repeated-layer variational workloads. See
+  `reports/a6_gamma_results.md`.
 - **Stronger baselines (item 7): for SABRE, o3 + VF2PostLayout is the answer, not FAQ.**
   optimization_level 2/3 beat the o1 default on 15/16 tasks; o3 beats FAQ-as-trial SABRE on 13
   tasks (FAQ-soft wins only on Ripple Brisbane / Ripple grid / QRAM grid). **FAQ+PyTKET still
@@ -54,6 +65,7 @@ Wilcoxon and fidelity analyses (review points #2 and #5).
 | `benchmarks/benchmark_dependence_a.py`, `benchmarks/results/benchmark_dependence_a_*.json`, `reports/dependence_objective.md` | A2 dependence-weighted objective A/B vs A0 (negative result) |
 | `benchmarks/benchmark_baselines.py`, `benchmarks/results/benchmark_baselines_*.json`, `reports/stronger_baselines.md` | optimization_level 2/3 (+VF2PostLayout) SABRE baselines vs FAQ arms |
 | `benchmarks/exact_ceiling.py`, `benchmarks/results/exact_ceiling.json`, `reports/exact_ceiling.md` | Exact joint layout+routing optimum on tiny cells (N≤6) |
+| `benchmarks/benchmark_gamma.py`, `benchmarks/analyze_gamma.py`, `benchmarks/results/a6_gamma_results.json` / `a6_gamma_significance.json` / `a6_gamma_smoke_raw.json`, `reports/a6_gamma_spec.md` / `a6_gamma_smoke.md` / `a6_gamma_results.md` | A6 gamma-decay sensitivity (Compact A6: 5 gammas × 3 cells × K=10 × 2 routers = 300 runs) |
 | `benchmarks/results/benchmark_eval_results.json`, `benchmarks/results/benchmark_eval_raw_seeds.json`, `benchmarks/results/benchmark_ablation_results.json` | Canonical committed results |
 | `benchmarks/results/significance_results.json`, `benchmarks/results/benchmark_fidelity_results.json`, `benchmarks/results/benchmark_fidelity_comparison.json` | Significance + fidelity analysis outputs |
 | `tests/` | Unit/integration tests |

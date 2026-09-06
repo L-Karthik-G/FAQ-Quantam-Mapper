@@ -1,5 +1,14 @@
 # Implementation Plan: Rigorous FAQ-Layout Quantum Placement Engine
 
+> **Status: historical plan.** This document records the original implementation plan for
+> moving FAQ from prototype to a defensible research engine. Most components were implemented,
+> but the shipped architecture evolved beyond this plan: the solver ships **random multi-start
+> + 2-opt** (the structured "5-start Gaussian + momentum" scheme was dropped after the A5
+> multi-cell ablation — see `a5_results.md`), results are K=20 paired-seed datasets regenerated
+> by `benchmarks/*.py` into `benchmarks/results/`, and the rigorous round described here was
+> superseded by the canonical `benchmark_eval.py` dataset (see `../README.md` and
+> `../historical/`). Treat proposals below as history, not as the current design.
+
 This plan implements all architectural, mathematical, benchmarking, and reporting upgrades recommended in the research review to transition FAQ from a prototype to a defensible, top-tier publication-ready research engine.
 
 ## User Review Required

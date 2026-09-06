@@ -109,6 +109,9 @@ jobs:
         run: >
           uv run python -c "
           import json; d=json.load(open('benchmarks/results/benchmark_fidelity_crosscheck.json'))
-          assert d.get('checked') and d.get('n_divergent', -1)==0, d
-          print('OK: 0 SWAP divergences from canonical dataset')
+          ca = d.get('canonical_arms') or {}
+          sa = d.get('soft_arm') or {}
+          assert ca.get('checked') and ca.get('n_divergent', -1) == 0, d
+          assert sa.get('checked') and sa.get('n_divergent', -1) == 0, d
+          print('OK: 0/1600 canonical-arm and 0/400 soft-arm SWAP divergences')
           "

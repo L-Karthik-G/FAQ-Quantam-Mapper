@@ -1,8 +1,10 @@
 # A6 — Gamma decay sensitivity: Phase-0 smoke report
 
-**Status: SMOKE COMPLETE — full sweep NOT run (execution gate).** This report is the
-feasibility/correctness gate described in [`a6_gamma_spec.md`](a6_gamma_spec.md). It is
-**not inferential**: no gamma "winner" is selected or implied here.
+**Status: SMOKE COMPLETE — execution gate passed.** This report is the feasibility/correctness
+gate described in [`a6_gamma_spec.md`](a6_gamma_spec.md). It is **not inferential**: no gamma
+"winner" is selected or implied here. The full Phase-1 sweep was subsequently run under the
+human-authorized **Compact A6** grid (see the spec addendum) — final results in
+[`a6_gamma_results.md`](a6_gamma_results.md).
 
 ## Setup (exact cell)
 

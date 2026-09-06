@@ -6,7 +6,7 @@
 > That table was removed so the repository reports a single, internally-consistent dataset.
 
 The **authoritative, reproducible paired-seed dataset** for this project is produced by
-`benchmarks/benchmark_eval.py` and written into the repository root as:
+`benchmarks/benchmark_eval.py` and written into `benchmarks/results/`:
 
 | File | Contents |
 |:---|:---|
@@ -52,7 +52,11 @@ Significance and fidelity results (review points #2 and #5) are summarised in
 
 ### Other result files
 
-Root `*_results.json` files other than the three canonical files above reflect earlier,
-mutually-inconsistent experiment rounds (different seeds, topologies, or
-`optimization_level`). They are retained for history but are **not** the numbers reported in
-the README. Do not mix them with the canonical dataset when reporting results.
+Older `*_results.json` files (and their generators) from earlier, mutually-inconsistent
+experiment rounds (different seeds, topologies, or `optimization_level`) are archived under
+`../historical/` (see `../historical/README.md`) for provenance only. They are **not** the
+numbers reported in the README. Do not mix them with the canonical dataset when reporting
+results. Additional experiment datasets (soft-candidate SABRE, dependence-objective A/B,
+optimization-level baselines, exact ceiling, A6 gamma sensitivity) live in
+`../benchmarks/results/` alongside the canonical files and are indexed in the README's data
+provenance table.

@@ -47,7 +47,23 @@ uv run python benchmarks/analyze_significance.py
 uv run python benchmarks/benchmark_fidelity.py 6 0   # ...remainder 0..5
 uv run python benchmarks/benchmark_fidelity.py --merge 6
 uv run python benchmarks/report_fidelity.py
+
+# Re-render README Tables 1–2 from the results + significance JSON (incl. † markers):
+uv run python benchmarks/render_tables.py
 ```
+
+### Later experiment rounds (see their reports for exact usage)
+
+The repository also contains several bounded follow-up experiments that reuse the canonical
+cells/harness. Each has its own runner + per-seed results + report:
+
+| Experiment | Runner | Results | Report |
+|:--|:--|:--|:--|
+| FAQ layout as one trial in SABRE's pool (over-constraint test) | `benchmark_soft_sabre.py` | `benchmark_soft_sabre_*.json` | `reports/soft_candidate_sabre.md` |
+| Dependence-weighted objective A/B (A2 vs A0) | `benchmark_dependence_a.py` | `benchmark_dependence_a_*.json` | `reports/dependence_objective.md` |
+| optimization_level 2/3 (+VF2PostLayout) baselines | `benchmark_baselines.py` | `benchmark_baselines_*.json` | `reports/stronger_baselines.md` |
+| Exact joint layout+routing ceiling on tiny cells | `exact_ceiling.py` | `exact_ceiling.json` | `reports/exact_ceiling.md` |
+| A6 gamma-decay sensitivity (Compact A6) | `benchmark_gamma.py` (+`--merge`) | `a6_gamma_results.json`, `a6_gamma_significance.json` | `reports/a6_gamma_spec.md`, `a6_gamma_smoke.md`, `a6_gamma_results.md` |
 
 CI (`.github/workflows/ci.yml`) lints/tests on every push and diffs the regenerated ablation +
 significance JSON against the checked-in files; the expensive fidelity re-run is a manual

@@ -13,7 +13,7 @@ Gaussian multi-start (row 3) beat plain random multi-start (row 2) once 2-opt is
 real power — or should the method just ship as random-multi-start + 2-opt?**
 
 Cells: Grover-N10 (Brisbane, continuity), VQE-N50 (synthetic grid — the largest FAQ+PyTKET
-paired-seed win, −91.5%), QRAM-N20 (Brisbane — the FAQ+SABRE win), Grover-N12 (Brisbane — a
+paired-seed win, −93.1% on the regenerated canonical dataset), QRAM-N20 (Brisbane — the FAQ+SABRE win), Grover-N12 (Brisbane — a
 FAQ+PyTKET regression), VQE-N10 (Brisbane — the zero-SWAP baseline).
 
 Metric: post-2-opt **polished QAP cost** (the objective the pipeline minimizes before routing).
@@ -40,7 +40,7 @@ cells and is actively contradicted in the most important one.**
 * In **3 cells** (Grover N10, QRAM N20, Grover N12) Gaussian ≈ random: small, non-significant
   differences (q > 0.3). The original Grover-N10 finding generalizes.
 * In **VQE-N50 (synthetic grid)** — the cell where FAQ+PyTKET recorded its largest paired-seed
-  SWAP win (−91.5%) — Gaussian is **significantly worse** than random (q = 0.032), adding
+  SWAP win (−93.1% on the regenerated canonical dataset) — Gaussian is **significantly worse** than random (q = 0.032), adding
   ~0.86 to the polished cost. Random multi-start is the better init here.
 * In **VQE-N10 (Brisbane)** Gaussian is flagged *significantly better* (q = 0.042) — but this is
   a **degeneracy artifact, not a real win**: see point 2.
@@ -81,7 +81,8 @@ the Gaussian machinery, since it is more complex, roughly equally good, and occa
   downstream (that is exactly the Grover-N12 concern in the cell selection). It is the right
   level to isolate *which init scheme to keep*, which is the question A5 asks.
 * **Synthetic grid for VQE-N50.** Its error profile is randomly generated, not real Rigetti
-  hardware (see the A4 rename); the finding is about the method's init scheme, not that device.
+  hardware (the internally-named `Rigetti_Grid_80` is a synthetic 8×10 grid); the finding is
+  about the method's init scheme, not that device.
 * QAP costs are continuous, so Wilcoxon tie-handling is not a general concern, but VQE-N10
   produced many exact-zero differences (a real degeneracy) and is flagged rather than hidden.
 

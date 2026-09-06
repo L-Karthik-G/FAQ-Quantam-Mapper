@@ -36,7 +36,12 @@ Initial logical-to-physical placement is modeled as an approximate QAP:
 $$\min_{P \in \Pi_M} \sum_{i,j} A_{ij} B_{P(i), P(j)} = \min_{P \in \Pi_M} \text{Tr}(A^T P B P^T)$$
 
 * **$A \in \mathbb{R}^{M \times M}$**: Time-decayed circuit interaction DAG matrix
-  (zero-padded for $N < M$).
+  (zero-padded for $N < M$), where a two-qubit interaction at DAG layer $l$ contributes
+  $g^l$ with decay `gamma = 0.9`. The decay rate is heuristic; A6 tested it against
+  downstream SWAP count and found a **workload-dependent effect** — weak/no decay helps
+  repeated-layer variational circuits (SABRE) but hurts Grover-style search circuits, so the
+  default `0.9` is kept and treated as a per-family dial (see
+  [`reports/a6_gamma_results.md`](reports/a6_gamma_results.md)).
 * **$B \in \mathbb{R}^{M \times M}$**: Directed shortest-path distance matrix of the hardware
   graph weighted by log-infidelities from a Qiskit **`FakeBrisbane`** fake backend object
   (IBM's archived Brisbane calibration properties; **not** live QPU execution), plus an
@@ -343,7 +348,7 @@ Canonical paired-seed dataset (this README's Tables 1–2):
 | `benchmarks/results/benchmark_dependence_a_results.json` / `benchmark_dependence_a_raw.json` / `benchmark_dependence_a_significance.json` | A2 (dependence-weighted A) vs A0 arms for FAQ+PyTKET and FAQ-soft-SABRE: means, per-seed logs, per-seed paired-Wilcoxon + BH (report: `reports/dependence_objective.md`) | `benchmarks/benchmark_dependence_a.py` (6 balanced slices, merged) |
 | `benchmarks/results/benchmark_baselines_results.json` / `benchmark_baselines_raw.json` / `benchmark_baselines_significance.json` | optimization_level 2/3 (VF2PostLayout) default SABRE baselines vs committed arms: means, per-seed logs, paired-Wilcoxon + BH (report: `reports/stronger_baselines.md`) | `benchmarks/benchmark_baselines.py` |
 | `benchmarks/results/exact_ceiling.json` | Exact joint layout+routing optimum on tiny cells (N≤6) + arm means (report: `reports/exact_ceiling.md`) | `benchmarks/exact_ceiling.py` |
-| `benchmarks/results/a6_gamma_results.json` / `a6_gamma_significance.json` | A6 gamma-decay sensitivity: per-seed SWAP rows (Compact A6: 5 gammas × 3 cells × K=10 × 2 routers = 300 runs) + Friedman/Wilcoxon/BH analysis (reports: `reports/a6_gamma_spec.md`, `a6_gamma_smoke.md`, `a6_gamma_results.md`) | `benchmarks/benchmark_gamma.py`, `benchmarks/analyze_gamma.py` |
+| `benchmarks/results/a6_gamma_results.json` / `a6_gamma_significance.json` / `a6_gamma_smoke_raw.json` | A6 gamma-decay sensitivity: per-seed SWAP rows (Compact A6: 5 gammas × 3 cells × K=10 × 2 routers = 300 runs; plus the 120-run Phase-0 smoke log) + Friedman/Wilcoxon/BH analysis (reports: `reports/a6_gamma_spec.md`, `a6_gamma_smoke.md`, `a6_gamma_results.md`) | `benchmarks/benchmark_gamma.py`, `benchmarks/analyze_gamma.py` |
 
 Running `benchmarks/benchmark_eval.py` (or its CPU-parallel variants),
 `benchmarks/analyze_significance.py` and `benchmarks/benchmark_ablations.py` regenerates these

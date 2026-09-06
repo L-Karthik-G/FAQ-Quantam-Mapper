@@ -1,6 +1,12 @@
 # A6 — Gamma decay sensitivity (spec / preregistration)
 
-**Status: SPEC — preregistration recorded before any execution.**
+**Status: SPEC (preregistration) + EXECUTED as Compact A6.** The preregistration below (cells,
+grid, seeds, routers, analysis plan) was recorded before execution. Phase-0 smoke ran on the
+original 9×5×20×2 grid's representative cell; per-run calibration showed that original grid is
+~11 CPU-hours (PyTKET arm on Grover-N10/N12 dominates), so a **Compact A6** revision was
+documented in the addendum at the end of this file and human-authorized before execution. Final
+results: [`a6_gamma_results.md`](a6_gamma_results.md), raw data
+`../benchmarks/results/a6_gamma_results.json`.
 
 ## Question
 
