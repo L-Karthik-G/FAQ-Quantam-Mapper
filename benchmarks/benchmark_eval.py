@@ -37,6 +37,12 @@ from qap_compiler.module_a_dag import DAGInteractionMatrixBuilder
 from qap_compiler.module_b_hardware import HardwareMatrixBuilder, load_ibm_fake_brisbane_snapshot
 from qap_compiler.module_c_faq import AdaptiveFAQSolver
 
+# FAQ solver init mode for the canonical Tables 1-2 dataset. The solver's shipped default is
+# random multi-start + 2-opt (start_mode="random"; the multi-cell ablation in reports/a5_results.md
+# showed it equals or beats the deprecated structured-Gaussian scheme). Earlier committed tables
+# were generated while "gaussian" was still hardcoded here; the canonical dataset now uses the
+# random default so the tables match what the shipped solver does.
+FAQ_START_MODE = "random"
 
 class FailureReason(str, Enum):
     NONE = "None"
@@ -331,7 +337,7 @@ def run_one_task(task: Tuple) -> Tuple[Dict, List[Dict]]:
 
         # 2. FAQ + SABRE
         try:
-            sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "sabre", "gaussian", seed)
+            sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "sabre", FAQ_START_MODE, seed)
             swaps_faq_sabre.append(sw)
             status_faq_sabre.append("success")
             logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "faq_sabre", "status": "success", "swaps": sw, "time_sec": t, "prep_time_sec": tp, "failure_reason": FailureReason.NONE})
@@ -353,7 +359,7 @@ def run_one_task(task: Tuple) -> Tuple[Dict, List[Dict]]:
 
         # 4. FAQ + PyTKET
         try:
-            sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "tket", "gaussian", seed)
+            sw, t, tp, d, cost = compile_faq_pipeline(qc, M, coupling_list, errs, "tket", FAQ_START_MODE, seed)
             swaps_faq_tket.append(sw)
             status_faq_tket.append("success")
             logs.append({"task": bench_label, "qubits": n_q, "arch": arch_name, "seed": seed, "method": "faq_tket", "status": "success", "swaps": sw, "time_sec": t, "prep_time_sec": tp, "failure_reason": FailureReason.NONE})

@@ -22,9 +22,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 1263.55,
-      "std_swaps": 66.0980143423386,
-      "ci95_swaps": 31.738458670199073
+      "mean_swaps": 1264.6,
+      "std_swaps": 76.1350116569243,
+      "ci95_swaps": 36.55795026327446
     },
     "tket_default": {
       "n_total": 20,
@@ -40,9 +40,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 1039.0,
-      "std_swaps": 18.33030277982336,
-      "ci95_swaps": 8.801710051023527
+      "mean_swaps": 1037.0,
+      "std_swaps": 17.320508075688775,
+      "ci95_swaps": 8.316834252537815
     }
   },
   {
@@ -68,9 +68,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 5693.55,
-      "std_swaps": 193.13090767663266,
-      "ci95_swaps": 92.73617962993055
+      "mean_swaps": 5705.85,
+      "std_swaps": 228.79625761799514,
+      "ci95_swaps": 109.86170520486525
     },
     "tket_default": {
       "n_total": 20,
@@ -86,9 +86,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 4840.45,
-      "std_swaps": 246.4957352572251,
-      "ci95_swaps": 118.36051027678985
+      "mean_swaps": 4501.15,
+      "std_swaps": 539.4526184012827,
+      "ci95_swaps": 259.03039303092646
     }
   },
   {
@@ -114,9 +114,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 18625.3,
-      "std_swaps": 144.11179688006115,
-      "ci95_swaps": 69.19854332501747
+      "mean_swaps": 18641.65,
+      "std_swaps": 141.9092227446828,
+      "ci95_swaps": 68.140927466821
     },
     "tket_default": {
       "n_total": 20,
@@ -132,9 +132,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 15669.15,
-      "std_swaps": 46.26691582545783,
-      "ci95_swaps": 22.216107553828195
+      "mean_swaps": 15650.55,
+      "std_swaps": 44.35817286588797,
+      "ci95_swaps": 21.299581389810932
     }
   },
   {
@@ -160,9 +160,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 0.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
+      "mean_swaps": 1.2,
+      "std_swaps": 1.913112646970899,
+      "ci95_swaps": 0.9186243683938892
     },
     "tket_default": {
       "n_total": 20,
@@ -206,9 +206,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 23.5,
-      "std_swaps": 8.896628574915331,
-      "ci95_swaps": 4.271917713996975
+      "mean_swaps": 24.05,
+      "std_swaps": 8.958096896104664,
+      "ci95_swaps": 4.30143312063975
     },
     "tket_default": {
       "n_total": 20,
@@ -224,9 +224,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 0.6,
-      "std_swaps": 1.2,
-      "ci95_swaps": 0.5762071793409848
+      "mean_swaps": 0.9,
+      "std_swaps": 1.374772708486752,
+      "ci95_swaps": 0.6601282538267645
     }
   },
   {
@@ -252,9 +252,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 158.8,
-      "std_swaps": 35.395762458237854,
-      "ci95_swaps": 16.996077038903966
+      "mean_swaps": 147.75,
+      "std_swaps": 25.496813526399723,
+      "ci95_swaps": 12.242872503524879
     },
     "tket_default": {
       "n_total": 20,
@@ -270,9 +270,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 12.45,
-      "std_swaps": 6.200604809210146,
-      "ci95_swaps": 2.9773608394359368
+      "mean_swaps": 7.9,
+      "std_swaps": 5.957348403442592,
+      "ci95_swaps": 2.8605557665826464
     }
   },
   {
@@ -298,9 +298,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 58.9,
-      "std_swaps": 17.76485294056779,
-      "ci95_swaps": 8.530196503576638
+      "mean_swaps": 50.65,
+      "std_swaps": 7.051772826743641,
+      "ci95_swaps": 3.3860684415427977
     },
     "tket_default": {
       "n_total": 20,
@@ -344,9 +344,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 248.25,
-      "std_swaps": 13.148669134174758,
-      "ci95_swaps": 6.313631294908924
+      "mean_swaps": 258.9,
+      "std_swaps": 19.989747372090523,
+      "ci95_swaps": 9.598529957509289
     },
     "tket_default": {
       "n_total": 20,
@@ -362,9 +362,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 213.6,
-      "std_swaps": 4.800000000000001,
-      "ci95_swaps": 2.3048287173639395
+      "mean_swaps": 212.0,
+      "std_swaps": 0.0,
+      "ci95_swaps": 0.0
     }
   },
   {
@@ -390,9 +390,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 72.55,
-      "std_swaps": 4.69547654663507,
-      "ci95_swaps": 2.2546394138319514
+      "mean_swaps": 70.3,
+      "std_swaps": 6.8854919940408035,
+      "ci95_swaps": 3.306224933550987
     },
     "tket_default": {
       "n_total": 20,
@@ -408,9 +408,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 73.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
+      "mean_swaps": 73.9,
+      "std_swaps": 2.6999999999999997,
+      "ci95_swaps": 1.296466153517216
     }
   },
   {
@@ -436,9 +436,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 325.95,
-      "std_swaps": 13.676530992908985,
-      "ci95_swaps": 6.567096122161371
+      "mean_swaps": 327.95,
+      "std_swaps": 14.329951151347306,
+      "ci95_swaps": 6.880850610843274
     },
     "tket_default": {
       "n_total": 20,
@@ -454,9 +454,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 380.85,
-      "std_swaps": 9.986365705300402,
-      "ci95_swaps": 4.795179679098909
+      "mean_swaps": 387.1,
+      "std_swaps": 9.38562730988185,
+      "ci95_swaps": 4.506721532143946
     }
   },
   {
@@ -482,9 +482,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 781.8,
-      "std_swaps": 16.889641796083186,
-      "ci95_swaps": 8.109944049500582
+      "mean_swaps": 791.45,
+      "std_swaps": 16.924759968755836,
+      "ci95_swaps": 8.12680683551668
     },
     "tket_default": {
       "n_total": 20,
@@ -500,9 +500,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 605.5,
-      "std_swaps": 2.179449471770337,
-      "ci95_swaps": 1.0465120272041544
+      "mean_swaps": 606.5,
+      "std_swaps": 3.570714214271425,
+      "ci95_swaps": 1.7145593046984158
     }
   },
   {
@@ -528,9 +528,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 3513.45,
-      "std_swaps": 37.74715221046483,
-      "ci95_swaps": 18.1251500861223
+      "mean_swaps": 3509.2,
+      "std_swaps": 36.97106977083568,
+      "ci95_swaps": 17.752496524893317
     },
     "tket_default": {
       "n_total": 20,
@@ -546,9 +546,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 2567.0,
-      "std_swaps": 0.0,
-      "ci95_swaps": 0.0
+      "mean_swaps": 2540.6,
+      "std_swaps": 32.33326460473795,
+      "ci95_swaps": 15.525549330651467
     }
   },
   {
@@ -574,9 +574,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 12390.75,
-      "std_swaps": 112.36675442496326,
-      "ci95_swaps": 53.95544218242434
+      "mean_swaps": 12428.95,
+      "std_swaps": 92.39397978223474,
+      "ci95_swaps": 44.36506206534121
     },
     "tket_default": {
       "n_total": 20,
@@ -592,9 +592,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 8702.3,
-      "std_swaps": 2.98496231131986,
-      "ci95_swaps": 1.433297261537303
+      "mean_swaps": 8704.1,
+      "std_swaps": 2.142428528562855,
+      "ci95_swaps": 1.0287355828190494
     }
   },
   {
@@ -620,9 +620,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 64.0,
-      "std_swaps": 16.208022704821214,
-      "ci95_swaps": 7.78264920453306
+      "mean_swaps": 49.5,
+      "std_swaps": 23.061873297718034,
+      "ci95_swaps": 11.073680802664404
     },
     "tket_default": {
       "n_total": 20,
@@ -638,9 +638,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 1.1,
-      "std_swaps": 0.9949874371066199,
-      "ci95_swaps": 0.4777657538457675
+      "mean_swaps": 0.9,
+      "std_swaps": 0.9949874371066201,
+      "ci95_swaps": 0.4777657538457676
     }
   },
   {
@@ -666,9 +666,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 172.95,
-      "std_swaps": 6.288680306709827,
-      "ci95_swaps": 3.0196522844220572
+      "mean_swaps": 174.35,
+      "std_swaps": 7.47178024302107,
+      "ci95_swaps": 3.587744515405724
     },
     "tket_default": {
       "n_total": 20,
@@ -684,9 +684,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 142.0,
-      "std_swaps": 4.58257569495584,
-      "ci95_swaps": 2.2004275127558817
+      "mean_swaps": 144.5,
+      "std_swaps": 4.9749371855331,
+      "ci95_swaps": 2.388828769228838
     }
   },
   {
@@ -712,9 +712,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 5.1,
-      "std_swaps": 2.879236009777594,
-      "ci95_swaps": 1.3825303832091165
+      "mean_swaps": 7.35,
+      "std_swaps": 4.486368241685026,
+      "ci95_swaps": 2.1542313250219194
     },
     "tket_default": {
       "n_total": 20,
@@ -758,9 +758,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 14.0,
-      "std_swaps": 2.9832867780352594,
-      "ci95_swaps": 1.4324927162807932
+      "mean_swaps": 14.15,
+      "std_swaps": 2.5937424698685874,
+      "ci95_swaps": 1.2454441937499152
     },
     "tket_default": {
       "n_total": 20,
@@ -776,7 +776,7 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 21.8,
+      "mean_swaps": 22.2,
       "std_swaps": 0.9797958971132712,
       "ci95_swaps": 0.4704711918379232
     }
@@ -804,9 +804,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 40.65,
-      "std_swaps": 4.819491674440366,
-      "ci95_swaps": 2.314188086322203
+      "mean_swaps": 39.7,
+      "std_swaps": 3.8091993909481814,
+      "ci95_swaps": 1.829073363838041
     },
     "tket_default": {
       "n_total": 20,
@@ -822,9 +822,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 50.85,
-      "std_swaps": 2.9372606285449034,
-      "ci95_swaps": 1.4103922181359894
+      "mean_swaps": 49.8,
+      "std_swaps": 3.9191835884530852,
+      "ci95_swaps": 1.8818847673516927
     }
   },
   {
@@ -850,9 +850,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 0.75,
-      "std_swaps": 0.9937303457175896,
-      "ci95_swaps": 0.477162132942895
+      "mean_swaps": 0.6,
+      "std_swaps": 0.9165151389911679,
+      "ci95_swaps": 0.4400855025511763
     },
     "tket_default": {
       "n_total": 20,
@@ -896,9 +896,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 0.6,
-      "std_swaps": 0.7348469228349533,
-      "ci95_swaps": 0.35285339387844233
+      "mean_swaps": 0.8,
+      "std_swaps": 1.077032961426901,
+      "ci95_swaps": 0.5171617706342186
     },
     "tket_default": {
       "n_total": 20,
@@ -914,9 +914,9 @@
       "n_success": 20,
       "n_failure": 0,
       "success_rate": 100.0,
-      "mean_swaps": 13.0,
-      "std_swaps": 2.0,
-      "ci95_swaps": 0.9603452989016413
+      "mean_swaps": 14.0,
+      "std_swaps": 1.7320508075688772,
+      "ci95_swaps": 0.8316834252537815
     }
   }
 ]
