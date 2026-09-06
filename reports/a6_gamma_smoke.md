@@ -34,9 +34,10 @@ Runner: `benchmarks/benchmark_gamma.py`; raw per-seed data:
    0.125^… earlier VQE-N10 check: total 0.13). No plateau effect applies: both smoke cells
    have ≤ 100 DAG layers (the plateau only starts above the 100-layer threshold).
 2. **Identical seeds across gammas** — every gamma used the same 20 seed IDs; per-seed parity
-   with the committed random-init canonical dataset at `gamma=0.9` is exact
-   (`faq_sabre` mean 49.50 = canonical 49.5; `faq_tket` 0.90 = canonical 0.9; seed-level
-   spot checks matched 1:1), confirming both the gamma-threading plumbing and seed reuse.
+   with the committed random-init canonical dataset at `gamma=0.9` is exact across the full
+   cell: **40/40 per-seed SWAP matches** (20 seeds × {SABRE, PyTKET}; `faq_sabre` mean 49.50 =
+   canonical 49.5, `faq_tket` 0.90 = canonical 0.9), confirming both the gamma-threading
+   plumbing and seed reuse row-for-row.
 3. **Artifacts recorded** — per row: gamma, cell, router, seed, mapper config, SWAP count,
    routed depth, total 2q count, prep seconds, QAP cost, layer count, Matrix-A diagnostics.
 4. **Wall-clock** — 120 runs in 241 s ≈ **2.0 s/run average** on this machine (FAQ prep
