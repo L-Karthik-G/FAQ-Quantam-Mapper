@@ -57,6 +57,9 @@ from pytket.passes import PlacementPass, RoutingPass
 from pytket.placement import GraphPlacement
 from qiskit import QuantumCircuit, transpile
 from qiskit.transpiler import CouplingMap
+from qiskit.transpiler.basepasses import AnalysisPass
+from qiskit.transpiler.layout import Layout
+from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager
 
 from benchmarks.benchmark_eval import (
     BENCHMARK_TASKS,
@@ -70,6 +73,21 @@ from qap_compiler.module_b_hardware import HardwareMatrixBuilder
 from qap_compiler.module_c_faq import AdaptiveFAQSolver
 
 DEFAULT_ERR = 0.012  # fallback per-edge 2Q error if not present in snapshot
+
+# FAQ solver mode: must match the regenerated canonical dataset (random multi-start default).
+FAQ_START_MODE = "random"
+
+
+class _SetSabreStartingLayouts(AnalysisPass):
+    """Seeds SabreLayout's extra-trial pool (identical to benchmark_soft_sabre)."""
+
+    def __init__(self, layouts):
+        super().__init__()
+        self.layouts = layouts
+
+    def run(self, dag):
+        self.property_set["sabre_starting_layouts"] = list(self.layouts)
+        return dag
 
 
 # --- Routed-circuit producers (mirror benchmark_eval's compile logic, but keep `res`) ------
@@ -108,11 +126,24 @@ def _route_tket(qc: QuantumCircuit, M: int, edges: List,
 def _faq_layout(qc: QuantumCircuit, M: int, edges: List, errs: Dict, seed: int):
     dag = DAGInteractionMatrixBuilder(gamma=0.9)
     hw = HardwareMatrixBuilder(alpha=1.0)
-    faq = AdaptiveFAQSolver(num_starts=5, start_mode="gaussian", enable_2opt=True, seed=seed)
+    faq = AdaptiveFAQSolver(num_starts=5, start_mode=FAQ_START_MODE, enable_2opt=True, seed=seed)
     A = dag.build_matrix(qc)
     B = hw.build_matrix(M, edges, errs, is_directed=True)
     mapping, cost = faq.solve(A, B)
     return mapping, cost
+
+
+def _route_sabre_soft(qc: QuantumCircuit, M: int, edges: List, errs: Dict, seed: int):
+    """Default-o1 SABRE whose trial pool receives the FAQ layout as one extra trial
+    (identical to benchmark_soft_sabre.compile_soft_faq_sabre, but returns the circuit)."""
+    cm = CouplingMap(edges)
+    mapping, _cost = _faq_layout(qc, M, edges, errs, seed)
+    layout = Layout({qc.qubits[i]: int(mapping[i]) for i in range(qc.num_qubits)})
+    pm = generate_preset_pass_manager(optimization_level=1, coupling_map=cm,
+                                      layout_method="sabre", routing_method="sabre",
+                                      seed_transpiler=seed)
+    pm.layout._tasks.insert(0, [_SetSabreStartingLayouts([layout])])
+    return pm.run(qc)
 
 
 def compute_fidelity_proxy(res: QuantumCircuit, errs: Dict,
@@ -164,7 +195,7 @@ def run_one_task(task: Tuple) -> Optional[Tuple[int, Dict, List[Dict]]]:
         print(f"[SKIP] {bench_key} N={n_q}: {e}", flush=True)
         return None
 
-    arms = ["sabre_def", "faq_sabre", "tket_def", "faq_tket"]
+    arms = ["sabre_def", "faq_sabre", "tket_def", "faq_tket", "faq_soft_sabre"]
     per_seed = []
 
     for seed in SEEDS:
@@ -179,6 +210,10 @@ def run_one_task(task: Tuple) -> Optional[Tuple[int, Dict, List[Dict]]]:
         res = _route_sabre(qc, M, edges, seed, initial_layout=[mapping.get(i, i) for i in range(qc.num_qubits)])
         row["faq_sabre"] = {"swaps": res.count_ops().get("swap", 0),
                             **compute_fidelity_proxy(res, errs), "qap_cost": float(cost)}
+        # FAQ as one trial in SABRE's pool (soft-candidate arm)
+        res = _route_sabre_soft(qc, M, edges, errs, seed)
+        row["faq_soft_sabre"] = {"swaps": res.count_ops().get("swap", 0),
+                                 **compute_fidelity_proxy(res, errs)}
         # PyTKET default
         res = _route_tket(qc, M, edges)
         row["tket_def"] = {"swaps": res.count_ops().get("swap", 0),
@@ -194,8 +229,9 @@ def run_one_task(task: Tuple) -> Optional[Tuple[int, Dict, List[Dict]]]:
                  "num_physical_qubits": M, "seeds": per_seed}, arms
 
 
-def cross_check(records: List[Dict], canonical_path: str) -> Dict:
-    """Compare every captured SWAP against the committed raw-seed dataset."""
+def cross_check(records: List[Dict], canonical_path: str,
+                methods: Tuple[str, ...] = ("sabre_def", "faq_sabre", "tket_def", "faq_tket")) -> Dict:
+    """Compare every captured SWAP against a committed raw-seed dataset."""
     if not os.path.exists(canonical_path):
         return {"checked": False, "reason": "canonical raw file not found"}
     with open(canonical_path) as f:
@@ -207,7 +243,7 @@ def cross_check(records: List[Dict], canonical_path: str) -> Dict:
     samples = []
     for rec in records:
         for sr in rec["seeds"]:
-            for meth in ("sabre_def", "faq_sabre", "tket_def", "faq_tket"):
+            for meth in methods:
                 total += 1
                 got = sr[meth]["swaps"]
                 want = exp.get((sr["task"], sr["qubits"], sr["arch"], sr["seed"], meth))
@@ -259,7 +295,11 @@ def main_merge(workers: int) -> None:
     out_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results")
     records = _merge_partials(workers, out_dir)
     canonical = os.path.join(out_dir, "benchmark_eval_raw_seeds.json")
-    check = cross_check(records, canonical)
+    check_canonical = cross_check(records, canonical,
+                                  ("sabre_def", "faq_sabre", "tket_def", "faq_tket"))
+    soft_path = os.path.join(out_dir, "benchmark_soft_sabre_raw.json")
+    check_soft = cross_check(records, soft_path, ("faq_soft_sabre",))
+    check = {"canonical_arms": check_canonical, "soft_arm": check_soft}
 
     all_per_seed = []
     for rec in records:
@@ -275,7 +315,7 @@ def main_merge(workers: int) -> None:
     summary = []
     for rec in records:
         s = {"task": rec["task"], "qubits": rec["qubits"], "architecture": rec["architecture"]}
-        for meth in ("sabre_def", "faq_sabre", "tket_def", "faq_tket"):
+        for meth in ("sabre_def", "faq_sabre", "tket_def", "faq_tket", "faq_soft_sabre"):
             swaps = np.array([sr[meth]["swaps"] for sr in rec["seeds"]])
             inf = np.array([sr[meth]["infidelity_sum"] for sr in rec["seeds"]])
             fp = np.array([sr[meth]["failure_prob"] for sr in rec["seeds"]])
@@ -291,9 +331,14 @@ def main_merge(workers: int) -> None:
     print(json.dumps(check))
     print(f"\nMerged {len(records)} records -> {raw_path}, "
           f"{os.path.join(out_dir, 'benchmark_fidelity_results.json')}")
-    if check.get("checked"):
-        print(f"Cross-check: {check['n_divergent']}/{check['n_checked']} SWAP values diverged "
-              f"from canonical dataset.")
+    cc = check.get("canonical_arms", {})
+    if cc.get("checked"):
+        print(f"Canonical cross-check: {cc['n_divergent']}/{cc['n_checked']} SWAP values "
+              f"diverged from benchmark_eval_raw_seeds.json.")
+    sc = check.get("soft_arm", {})
+    if sc.get("checked"):
+        print(f"Soft-arm cross-check: {sc['n_divergent']}/{sc['n_checked']} SWAP values "
+              f"diverged from benchmark_soft_sabre_raw.json.")
 
 
 if __name__ == "__main__":
