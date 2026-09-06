@@ -99,16 +99,22 @@ def effect_stats(diff: np.ndarray) -> Dict:
 
 def analyze(raw_path: str) -> Dict:
     blocks = load_blocks(raw_path)
+    # gamma conditions actually tested (data-driven, so reduced grids work)
+    all_gammas = sorted({float(g) for b in blocks.values() for g in b})
     cells_out = []
     post_hoc_rows = []  # (cell, router, gamma, dict) for comparisons actually performed
     n_friedman = 0
     n_gated = 0
 
     for (cell, router), gammas in sorted(blocks.items()):
-        seeds = sorted({s for g in gammas.values() for s in g})
-        # Friedman needs complete blocks: require all 9 gammas x all seeds present
-        g_keys = [str(g) for g in GAMMAS]
-        if not all(gk in gammas and len(gammas[gk]) == len(seeds) for gk in g_keys):
+        g_keys = [str(g) for g in sorted(float(g) for g in gammas)]
+        # Friedman needs complete matched blocks per cell: every gamma present with the
+        # same seed set, the reference condition included, and >= 3 conditions to test.
+        if str(REF) not in gammas or len(g_keys) < 3:
+            continue
+        seed_sets = [set(gammas[gk]) for gk in g_keys]
+        seeds = sorted(set.intersection(*seed_sets))
+        if len(seeds) < 2 or any(len(gammas[gk]) != len(seeds) for gk in g_keys):
             continue
         mat = np.array([[gammas[gk][s] for s in seeds] for gk in g_keys], dtype=float)
         fr = stats.friedmanchisquare(*mat)
@@ -131,7 +137,7 @@ def analyze(raw_path: str) -> Dict:
             continue
         n_gated += 1
         ref = np.array([gammas[str(REF)][s] for s in seeds], float)
-        for g in GAMMAS:
+        for g in [float(x) for x in g_keys]:
             if g == REF:
                 continue
             gv = np.array([gammas[str(g)][s] for s in seeds], float)
@@ -165,7 +171,7 @@ def analyze(raw_path: str) -> Dict:
         "posthoc_negative_bh": sum(1 for r in performed
                                    if r["significant_bh"] and r["mean_diff_gamma_minus_ref"] > 0),
     }
-    return {"alpha": ALPHA, "reference_gamma": REF, "gamma_grid": GAMMAS,
+    return {"alpha": ALPHA, "reference_gamma": REF, "gamma_grid": all_gammas,
             "summary": summary, "cells": cells_out, "posthoc": post_hoc_rows}
 
 

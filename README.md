@@ -343,6 +343,7 @@ Canonical paired-seed dataset (this README's Tables 1–2):
 | `benchmarks/results/benchmark_dependence_a_results.json` / `benchmark_dependence_a_raw.json` / `benchmark_dependence_a_significance.json` | A2 (dependence-weighted A) vs A0 arms for FAQ+PyTKET and FAQ-soft-SABRE: means, per-seed logs, per-seed paired-Wilcoxon + BH (report: `reports/dependence_objective.md`) | `benchmarks/benchmark_dependence_a.py` (6 balanced slices, merged) |
 | `benchmarks/results/benchmark_baselines_results.json` / `benchmark_baselines_raw.json` / `benchmark_baselines_significance.json` | optimization_level 2/3 (VF2PostLayout) default SABRE baselines vs committed arms: means, per-seed logs, paired-Wilcoxon + BH (report: `reports/stronger_baselines.md`) | `benchmarks/benchmark_baselines.py` |
 | `benchmarks/results/exact_ceiling.json` | Exact joint layout+routing optimum on tiny cells (N≤6) + arm means (report: `reports/exact_ceiling.md`) | `benchmarks/exact_ceiling.py` |
+| `benchmarks/results/a6_gamma_results.json` / `a6_gamma_significance.json` | A6 gamma-decay sensitivity: per-seed SWAP rows (Compact A6: 5 gammas × 3 cells × K=10 × 2 routers = 300 runs) + Friedman/Wilcoxon/BH analysis (reports: `reports/a6_gamma_spec.md`, `a6_gamma_smoke.md`, `a6_gamma_results.md`) | `benchmarks/benchmark_gamma.py`, `benchmarks/analyze_gamma.py` |
 
 Running `benchmarks/benchmark_eval.py` (or its CPU-parallel variants),
 `benchmarks/analyze_significance.py` and `benchmarks/benchmark_ablations.py` regenerates these
