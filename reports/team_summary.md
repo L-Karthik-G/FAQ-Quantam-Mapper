@@ -25,6 +25,11 @@ findings reported there (FAQ arms use the random multi-start default):
   transitive dependence depth (variant A2) is statistically indistinguishable from the shipped
   raw-frequency A after FDR on 32/33 cells, with one significant regression; A2 is not adopted.
   See `reports/dependence_objective.md`.
+- **Stronger baselines (item 7): for SABRE, o3 + VF2PostLayout is the answer, not FAQ.**
+  optimization_level 2/3 beat the o1 default on 15/16 tasks; o3 beats FAQ-as-trial SABRE on 13
+  tasks (FAQ-soft wins only on Ripple Brisbane / Ripple grid / QRAM grid). **FAQ+PyTKET still
+  beats every SABRE baseline** on the large rows (Grover N10/N12, VQE-N50 grid), so FAQ's
+  remaining value is the PyTKET/LexiRoute embedding. See `reports/stronger_baselines.md`.
 - FAQ + PyTKET is **not** uniformly better on IBM (it hurts Grover‑N8/N12 and the QRAM/Ripple
   holdouts).
 - Real FAQ overhead is ~2–29 s/circuit (single-threaded Python solve), so it is only worth it
@@ -47,6 +52,7 @@ Wilcoxon and fidelity analyses (review points #2 and #5).
 | `benchmarks/benchmark_fidelity.py`, `benchmarks/report_fidelity.py` | Fidelity-loss proxy on routed circuits + delta table (regenerated under the random-init dataset; 5 arms incl. FAQ-soft-SABRE; 0/1600 + 0/400 cross-check) |
 | `benchmarks/benchmark_soft_sabre.py`, `benchmarks/results/benchmark_soft_sabre_*.json`, `reports/soft_candidate_sabre.md` | FAQ-as-soft-candidate SABRE experiment (FAQ layout = one trial in SABRE's pool) |
 | `benchmarks/benchmark_dependence_a.py`, `benchmarks/results/benchmark_dependence_a_*.json`, `reports/dependence_objective.md` | A2 dependence-weighted objective A/B vs A0 (negative result) |
+| `benchmarks/benchmark_baselines.py`, `benchmarks/results/benchmark_baselines_*.json`, `reports/stronger_baselines.md` | optimization_level 2/3 (+VF2PostLayout) SABRE baselines vs FAQ arms |
 | `benchmarks/results/benchmark_eval_results.json`, `benchmarks/results/benchmark_eval_raw_seeds.json`, `benchmarks/results/benchmark_ablation_results.json` | Canonical committed results |
 | `benchmarks/results/significance_results.json`, `benchmarks/results/benchmark_fidelity_results.json`, `benchmarks/results/benchmark_fidelity_comparison.json` | Significance + fidelity analysis outputs |
 | `tests/` | Unit/integration tests |

@@ -269,6 +269,24 @@ shipped objective. Full table:
 
 ---
 
+## 🧪 Stronger off-the-shelf baselines (item 7): optimization_level 2/3 (+ VF2PostLayout)
+
+FAQ has only ever been compared against `optimization_level=1` routers. A new baseline run
+(K=20, same tasks/seeds; `benchmarks/benchmark_baselines.py`) adds Qiskit's default
+`optimization_level=2` and `3` arms — the o3 preset also refines the layout with **VF2PostLayout**
+(the VF2-family pass available in this Qiskit; there is no `layout_method='vf2'` plugin). Full
+table: [`reports/stronger_baselines.md`](reports/stronger_baselines.md).
+
+**Result: for the SABRE router family, FAQ pre-placement is not the answer — o3 is.** o3 beats
+the o1 default SABRE used in Tables 1–2 on 16/20 tasks and beats the FAQ-as-trial SABRE arm on
+13 tasks, tying 2 and losing only on **three small structural holdouts** (Ripple Brisbane 3.9 vs
+5.0, Ripple synthetic grid 0.9 vs 3.3, QRAM synthetic grid 0.7 vs 4.3). **FAQ+PyTKET still beats
+every SABRE baseline** on the large rows (e.g. Grover-N12 Brisbane 15650 vs 18469, VQE-N50
+synthetic grid 0.9 vs 20.8): FAQ's remaining measurable value is as an embedding for PyTKET's
+LexiRoute on large structured circuits — not as a seed for SABRE.
+
+---
+
 ## Limitations & When to Use It
 
 * **Real overhead is seconds, not sub-second.** FAQ pre-placement measured ~2–29 s per
@@ -278,11 +296,14 @@ shipped objective. Full table:
   justified when the routed circuit is itself large/multi-iteration (e.g. repeated VQE/QAOA
   layers) and the SWAP savings outweigh the one-time cost.
 * **FAQ+SABRE (hard-constrained) usually makes routing worse** on these benchmarks; prefer
-  default SABRE. This is specific to *forcing* the FAQ layout as `initial_layout` — offering the
+  default SABRE — and the item-7 baselines show default `optimization_level=3` (+VF2PostLayout)
+  beats even the FAQ-as-trial arm on most tasks, so for SABRE the recommendation is simply
+  o3. This is specific to *forcing* the FAQ layout as `initial_layout` — offering the
   FAQ layout as one candidate inside SABRE's own trial pool removes the downside entirely (see
   the [follow-up experiment](#-follow-up-experiment-faq-as-a-soft-candidate-in-sabres-own-trial-pool)).
   The FAQ-seeded gains for PyTKET are specific to the synthetic-grid MQT rows plus a
-  workload-specific IBM subset (QAOA, QFT-N20, VQE-N50, Random 3-regular).
+  workload-specific IBM subset (QAOA, QFT-N20, VQE-N50, Random 3-regular), and persist against
+  the o3 baseline on the large Grover/VQE rows.
 * **Not a blanket improvement.** On IBM, FAQ+PyTKET *hurts* Grover at N=8 and N=12 and the
   QRAM/Ripple holdouts, and helps only a workload-specific subset (QAOA-N10/20, QFT-N20,
   VQE-N50, Random 3-regular). The README's earlier recommendation "use it for large
@@ -312,6 +333,7 @@ Canonical paired-seed dataset (this README's Tables 1–2):
 | `benchmarks/results/benchmark_fidelity_comparison.json` | SWAP-delta vs fidelity-delta per pair (hard-SABRE, soft-SABRE, TKET) | `benchmarks/report_fidelity.py` |
 | `benchmarks/results/benchmark_soft_sabre_results.json` / `benchmark_soft_sabre_raw.json` / `benchmark_soft_sabre_significance.json` | FAQ-as-soft-candidate SABRE: per-task means, per-seed logs, merged paired-Wilcoxon + BH (report: `reports/soft_candidate_sabre.md`) | `benchmarks/benchmark_soft_sabre.py` (4 balanced slices, merged) |
 | `benchmarks/results/benchmark_dependence_a_results.json` / `benchmark_dependence_a_raw.json` / `benchmark_dependence_a_significance.json` | A2 (dependence-weighted A) vs A0 arms for FAQ+PyTKET and FAQ-soft-SABRE: means, per-seed logs, per-seed paired-Wilcoxon + BH (report: `reports/dependence_objective.md`) | `benchmarks/benchmark_dependence_a.py` (6 balanced slices, merged) |
+| `benchmarks/results/benchmark_baselines_results.json` / `benchmark_baselines_raw.json` / `benchmark_baselines_significance.json` | optimization_level 2/3 (VF2PostLayout) default SABRE baselines vs committed arms: means, per-seed logs, paired-Wilcoxon + BH (report: `reports/stronger_baselines.md`) | `benchmarks/benchmark_baselines.py` |
 
 Running `benchmarks/benchmark_eval.py` (or its CPU-parallel variants),
 `benchmarks/analyze_significance.py` and `benchmarks/benchmark_ablations.py` regenerates these

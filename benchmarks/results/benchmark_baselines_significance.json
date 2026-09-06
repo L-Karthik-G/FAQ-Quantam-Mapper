@@ -1,0 +1,1097 @@
+{
+  "alpha": 0.05,
+  "n_tested": 88,
+  "rows": [
+    {
+      "task": "GHZ State",
+      "qubits": 50,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 0.0,
+        "old_mean": 12.0,
+        "new_mean": 12.0,
+        "p_value": null
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 0.0,
+        "old_mean": 12.0,
+        "new_mean": 12.0,
+        "p_value": null
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 0.0,
+        "old_mean": 12.0,
+        "new_mean": 12.0,
+        "p_value": null
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 6.0,
+        "old_mean": 12.0,
+        "new_mean": 6.0,
+        "p_value": null
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 6.0,
+        "old_mean": 12.0,
+        "new_mean": 6.0,
+        "p_value": null
+      }
+    },
+    {
+      "task": "Grover's Search",
+      "qubits": 8,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -92.6,
+        "old_mean": 1059.65,
+        "new_mean": 1152.25,
+        "p_value": 8.782404130245517e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -89.6,
+        "old_mean": 1062.65,
+        "new_mean": 1152.25,
+        "p_value": 0.00013162704518922692,
+        "statistic": 0.0,
+        "q_value_bh": 0.0002522039615323767,
+        "significant_bh": true
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -93.6,
+        "old_mean": 1059.65,
+        "new_mean": 1153.25,
+        "p_value": 8.745059215649785e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 22.65,
+        "old_mean": 1059.65,
+        "new_mean": 1037.0,
+        "p_value": 0.04007502733593548,
+        "statistic": 44.0,
+        "q_value_bh": 0.04408253006952903,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 25.65,
+        "old_mean": 1062.65,
+        "new_mean": 1037.0,
+        "p_value": 0.014875680809294889,
+        "statistic": 34.5,
+        "q_value_bh": 0.017454132149572667,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "Grover's Search",
+      "qubits": 8,
+      "architecture": "Rigetti_Grid_80",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -18.3,
+        "old_mean": 749.95,
+        "new_mean": 768.25,
+        "p_value": 0.0001534318915079138,
+        "statistic": 1.0,
+        "q_value_bh": 0.0002785393470617913,
+        "significant_bh": true
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -18.35,
+        "old_mean": 749.9,
+        "new_mean": 768.25,
+        "p_value": 0.00018163310249577513,
+        "statistic": 2.0,
+        "q_value_bh": 0.0003073790965313118,
+        "significant_bh": true
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -17.95,
+        "old_mean": 749.95,
+        "new_mean": 767.9,
+        "p_value": 0.000194724286386347,
+        "statistic": 0.0,
+        "q_value_bh": 0.0003201191093830259,
+        "significant_bh": true
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 143.45,
+        "old_mean": 749.95,
+        "new_mean": 606.5,
+        "p_value": 8.732637791829415e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 143.4,
+        "old_mean": 749.9,
+        "new_mean": 606.5,
+        "p_value": 8.807368035275503e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "Grover's Search",
+      "qubits": 10,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -255.1,
+        "old_mean": 5348.05,
+        "new_mean": 5603.15,
+        "p_value": 0.03276824951171875,
+        "statistic": 48.0,
+        "q_value_bh": 0.036501341228243674,
+        "significant_bh": true
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -346.85,
+        "old_mean": 5256.3,
+        "new_mean": 5603.15,
+        "p_value": 0.0019855499267578125,
+        "statistic": 26.0,
+        "q_value_bh": 0.00256953519933364,
+        "significant_bh": true
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -294.7,
+        "old_mean": 5348.05,
+        "new_mean": 5642.75,
+        "p_value": 0.00830841064453125,
+        "statistic": 36.0,
+        "q_value_bh": 0.009880272117820946,
+        "significant_bh": true
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 846.9,
+        "old_mean": 5348.05,
+        "new_mean": 4501.15,
+        "p_value": 3.814697265625e-06,
+        "statistic": 1.0,
+        "q_value_bh": 6.7138671875e-05,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 755.15,
+        "old_mean": 5256.3,
+        "new_mean": 4501.15,
+        "p_value": 1.9073486328125e-06,
+        "statistic": 0.0,
+        "q_value_bh": 4.1961669921875e-05,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "Grover's Search",
+      "qubits": 10,
+      "architecture": "Rigetti_Grid_80",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -70.55,
+        "old_mean": 3391.2,
+        "new_mean": 3461.75,
+        "p_value": 8.844915021211901e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -73.2,
+        "old_mean": 3388.55,
+        "new_mean": 3461.75,
+        "p_value": 8.832385863081277e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -61.2,
+        "old_mean": 3391.2,
+        "new_mean": 3452.4,
+        "p_value": 0.00010305922341480608,
+        "statistic": 1.0,
+        "q_value_bh": 0.0002267302915125734,
+        "significant_bh": true
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 850.6,
+        "old_mean": 3391.2,
+        "new_mean": 2540.6,
+        "p_value": 8.844915021211901e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 847.95,
+        "old_mean": 3388.55,
+        "new_mean": 2540.6,
+        "p_value": 1.9073486328125e-06,
+        "statistic": 0.0,
+        "q_value_bh": 4.1961669921875e-05,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "Grover's Search",
+      "qubits": 12,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -110.4,
+        "old_mean": 18468.6,
+        "new_mean": 18579.0,
+        "p_value": 0.00015485725743722618,
+        "statistic": 1.0,
+        "q_value_bh": 0.0002785393470617913,
+        "significant_bh": true
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -94.1,
+        "old_mean": 18484.9,
+        "new_mean": 18579.0,
+        "p_value": 0.00019643672621231134,
+        "statistic": 0.0,
+        "q_value_bh": 0.0003201191093830259,
+        "significant_bh": true
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -101.95,
+        "old_mean": 18468.6,
+        "new_mean": 18570.55,
+        "p_value": 0.00015509577279577017,
+        "statistic": 1.0,
+        "q_value_bh": 0.0002785393470617913,
+        "significant_bh": true
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 2818.05,
+        "old_mean": 18468.6,
+        "new_mean": 15650.55,
+        "p_value": 8.844915021211901e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 2834.35,
+        "old_mean": 18484.9,
+        "new_mean": 15650.55,
+        "p_value": 8.844915021211901e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "Grover's Search",
+      "qubits": 12,
+      "architecture": "Rigetti_Grid_80",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -166.45,
+        "old_mean": 12208.8,
+        "new_mean": 12375.25,
+        "p_value": 1.9073486328125e-06,
+        "statistic": 0.0,
+        "q_value_bh": 4.1961669921875e-05,
+        "significant_bh": true
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -140.1,
+        "old_mean": 12235.15,
+        "new_mean": 12375.25,
+        "p_value": 0.0001318338889828333,
+        "statistic": 0.0,
+        "q_value_bh": 0.0002522039615323767,
+        "significant_bh": true
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -157.05,
+        "old_mean": 12208.8,
+        "new_mean": 12365.85,
+        "p_value": 8.844915021211901e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 3504.7,
+        "old_mean": 12208.8,
+        "new_mean": 8704.1,
+        "p_value": 1.9073486328125e-06,
+        "statistic": 0.0,
+        "q_value_bh": 4.1961669921875e-05,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 3531.05,
+        "old_mean": 12235.15,
+        "new_mean": 8704.1,
+        "p_value": 8.844915021211901e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "QAOA",
+      "qubits": 10,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -5.0,
+        "old_mean": 52.2,
+        "new_mean": 57.2,
+        "p_value": 0.00044256408225805226,
+        "statistic": 5.0,
+        "q_value_bh": 0.0006600955803170949,
+        "significant_bh": true
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -5.25,
+        "old_mean": 51.95,
+        "new_mean": 57.2,
+        "p_value": 0.0002767281666690105,
+        "statistic": 0.0,
+        "q_value_bh": 0.0004427650666704169,
+        "significant_bh": true
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -5.45,
+        "old_mean": 52.2,
+        "new_mean": 57.65,
+        "p_value": 0.00028516896294134567,
+        "statistic": 5.0,
+        "q_value_bh": 0.00044812265605068607,
+        "significant_bh": true
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -21.7,
+        "old_mean": 52.2,
+        "new_mean": 73.9,
+        "p_value": 8.234812230538902e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -21.95,
+        "old_mean": 51.95,
+        "new_mean": 73.9,
+        "p_value": 8.270487133608805e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "QAOA",
+      "qubits": 20,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -13.2,
+        "old_mean": 295.45,
+        "new_mean": 308.65,
+        "p_value": 0.0006718167372387823,
+        "statistic": 14.0,
+        "q_value_bh": 0.0009535463367260136,
+        "significant_bh": true
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -17.35,
+        "old_mean": 291.3,
+        "new_mean": 308.65,
+        "p_value": 0.00012936777246760716,
+        "statistic": 0.0,
+        "q_value_bh": 0.0002522039615323767,
+        "significant_bh": true
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -8.75,
+        "old_mean": 295.45,
+        "new_mean": 304.2,
+        "p_value": 0.00483096812586204,
+        "statistic": 25.0,
+        "q_value_bh": 0.005904516598275827,
+        "significant_bh": true
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -91.65,
+        "old_mean": 295.45,
+        "new_mean": 387.1,
+        "p_value": 8.832385863081277e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -95.8,
+        "old_mean": 291.3,
+        "new_mean": 387.1,
+        "p_value": 8.782404130245517e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "QFT",
+      "qubits": 20,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -18.5,
+        "old_mean": 206.5,
+        "new_mean": 225.0,
+        "p_value": 8.819870204194453e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -14.7,
+        "old_mean": 210.3,
+        "new_mean": 225.0,
+        "p_value": 0.0005894953445255375,
+        "statistic": 13.0,
+        "q_value_bh": 0.0008504195134138902,
+        "significant_bh": true
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -15.75,
+        "old_mean": 206.5,
+        "new_mean": 222.25,
+        "p_value": 8.769942375590214e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -5.5,
+        "old_mean": 206.5,
+        "new_mean": 212.0,
+        "p_value": 0.00448359833219281,
+        "statistic": 24.5,
+        "q_value_bh": 0.005557135961027708,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -1.7,
+        "old_mean": 210.3,
+        "new_mean": 212.0,
+        "p_value": 0.3137517566361644,
+        "statistic": 70.0,
+        "q_value_bh": 0.33265246486725863,
+        "significant_bh": false
+      }
+    },
+    {
+      "task": "QFT",
+      "qubits": 20,
+      "architecture": "Rigetti_Grid_80",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -8.95,
+        "old_mean": 138.95,
+        "new_mean": 147.9,
+        "p_value": 0.00017071967857719582,
+        "statistic": 4.5,
+        "q_value_bh": 0.00030046663429586463,
+        "significant_bh": true
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -7.8,
+        "old_mean": 140.1,
+        "new_mean": 147.9,
+        "p_value": 0.0003185377104798877,
+        "statistic": 3.0,
+        "q_value_bh": 0.0004917775179338617,
+        "significant_bh": true
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -9.6,
+        "old_mean": 138.95,
+        "new_mean": 148.55,
+        "p_value": 0.00010898460038149086,
+        "statistic": 1.5,
+        "q_value_bh": 0.00023391816667246818,
+        "significant_bh": true
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -5.55,
+        "old_mean": 138.95,
+        "new_mean": 144.5,
+        "p_value": 0.018469130448531018,
+        "statistic": 36.5,
+        "q_value_bh": 0.021107577655464022,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -4.4,
+        "old_mean": 140.1,
+        "new_mean": 144.5,
+        "p_value": 0.0007039689089147844,
+        "statistic": 8.0,
+        "q_value_bh": 0.0009833216505476354,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "QRAM Decoder (Holdout)",
+      "qubits": 20,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -6.6,
+        "old_mean": 12.7,
+        "new_mean": 19.3,
+        "p_value": 8.402303711316719e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -2.0,
+        "old_mean": 17.3,
+        "new_mean": 19.3,
+        "p_value": 0.005654085045039986,
+        "statistic": 2.0,
+        "q_value_bh": 0.006815883341966011,
+        "significant_bh": true
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 0.4,
+        "old_mean": 12.7,
+        "new_mean": 12.3,
+        "p_value": 0.40224536351268614,
+        "statistic": 59.0,
+        "q_value_bh": 0.42139990463233784,
+        "significant_bh": false
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -9.5,
+        "old_mean": 12.7,
+        "new_mean": 22.2,
+        "p_value": 8.199254746247181e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -4.9,
+        "old_mean": 17.3,
+        "new_mean": 22.2,
+        "p_value": 8.09328432326008e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "QRAM Decoder (Holdout)",
+      "qubits": 20,
+      "architecture": "Rigetti_Grid_80",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -3.25,
+        "old_mean": 4.3,
+        "new_mean": 7.55,
+        "p_value": 7.336878605348575e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -1.25,
+        "old_mean": 6.3,
+        "new_mean": 7.55,
+        "p_value": 0.00433435413693397,
+        "statistic": 3.0,
+        "q_value_bh": 0.005448902343574133,
+        "significant_bh": true
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 3.6,
+        "old_mean": 4.3,
+        "new_mean": 0.7,
+        "p_value": 7.953619237840905e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -9.7,
+        "old_mean": 4.3,
+        "new_mean": 14.0,
+        "p_value": 8.09328432326008e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -7.7,
+        "old_mean": 6.3,
+        "new_mean": 14.0,
+        "p_value": 7.736253883936304e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "Random 3-Regular (Holdout)",
+      "qubits": 20,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -5.75,
+        "old_mean": 30.9,
+        "new_mean": 36.65,
+        "p_value": 8.633748926134029e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -3.6,
+        "old_mean": 33.05,
+        "new_mean": 36.65,
+        "p_value": 0.002489627389491183,
+        "statistic": 20.0,
+        "q_value_bh": 0.0031751769605104945,
+        "significant_bh": true
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -2.1,
+        "old_mean": 30.9,
+        "new_mean": 33.0,
+        "p_value": 0.030503259745942472,
+        "statistic": 41.5,
+        "q_value_bh": 0.03441393407234535,
+        "significant_bh": true
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -18.9,
+        "old_mean": 30.9,
+        "new_mean": 49.8,
+        "p_value": 8.769942375590214e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -16.75,
+        "old_mean": 33.05,
+        "new_mean": 49.8,
+        "p_value": 8.720229793087962e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "Ripple-Carry Adder (Holdout)",
+      "qubits": 20,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 0.0,
+        "old_mean": 5.0,
+        "new_mean": 5.0,
+        "p_value": null
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 0.0,
+        "old_mean": 5.0,
+        "new_mean": 5.0,
+        "p_value": null
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 1.1,
+        "old_mean": 5.0,
+        "new_mean": 3.9,
+        "p_value": 0.0169473483375683,
+        "statistic": 0.0,
+        "q_value_bh": 0.019623245443500137,
+        "significant_bh": true
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 1.75,
+        "old_mean": 5.0,
+        "new_mean": 3.25,
+        "p_value": 0.5547720968284046,
+        "statistic": 90.0,
+        "q_value_bh": 0.5547720968284046,
+        "significant_bh": false
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 1.75,
+        "old_mean": 5.0,
+        "new_mean": 3.25,
+        "p_value": 0.5547720968284046,
+        "statistic": 90.0,
+        "q_value_bh": 0.5547720968284046,
+        "significant_bh": false
+      }
+    },
+    {
+      "task": "Ripple-Carry Adder (Holdout)",
+      "qubits": 20,
+      "architecture": "Rigetti_Grid_80",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -4.55,
+        "old_mean": 3.3,
+        "new_mean": 7.85,
+        "p_value": 0.00011250848290965831,
+        "statistic": 0.0,
+        "q_value_bh": 0.00023573205942976024,
+        "significant_bh": true
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -2.1,
+        "old_mean": 5.75,
+        "new_mean": 7.85,
+        "p_value": 0.0010038484080866635,
+        "statistic": 7.5,
+        "q_value_bh": 0.0013590563063327135,
+        "significant_bh": true
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 2.4,
+        "old_mean": 3.3,
+        "new_mean": 0.9,
+        "p_value": 0.0012605462110582158,
+        "statistic": 15.5,
+        "q_value_bh": 0.0016807282814109543,
+        "significant_bh": true
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 3.3,
+        "old_mean": 3.3,
+        "new_mean": 0.0,
+        "p_value": 6.397612406920131e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 5.75,
+        "old_mean": 5.75,
+        "new_mean": 0.0,
+        "p_value": 7.28268274741086e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "VQE (RealAmplitudes)",
+      "qubits": 10,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 0.0,
+        "old_mean": 0.0,
+        "new_mean": 0.0,
+        "p_value": null
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 0.0,
+        "old_mean": 0.0,
+        "new_mean": 0.0,
+        "p_value": null
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 0.0,
+        "old_mean": 0.0,
+        "new_mean": 0.0,
+        "p_value": null
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 0.0,
+        "old_mean": 0.0,
+        "new_mean": 0.0,
+        "p_value": null
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 0.0,
+        "old_mean": 0.0,
+        "new_mean": 0.0,
+        "p_value": null
+      }
+    },
+    {
+      "task": "VQE (RealAmplitudes)",
+      "qubits": 20,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -1.9,
+        "old_mean": 7.7,
+        "new_mean": 9.6,
+        "p_value": 0.0016126051401026587,
+        "statistic": 2.5,
+        "q_value_bh": 0.0021180485422243873,
+        "significant_bh": true
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -0.4,
+        "old_mean": 9.2,
+        "new_mean": 9.6,
+        "p_value": 0.2623135752307827,
+        "statistic": 7.5,
+        "q_value_bh": 0.2815072514671814,
+        "significant_bh": false
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -2.0,
+        "old_mean": 7.7,
+        "new_mean": 9.7,
+        "p_value": 0.0007793878136021075,
+        "statistic": 3.5,
+        "q_value_bh": 0.0010716582437028978,
+        "significant_bh": true
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 6.8,
+        "old_mean": 7.7,
+        "new_mean": 0.9,
+        "p_value": 0.0001810942649119703,
+        "statistic": 0.0,
+        "q_value_bh": 0.0003073790965313118,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 8.3,
+        "old_mean": 9.2,
+        "new_mean": 0.9,
+        "p_value": 7.5456426214969e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "IBM_Eagle_127_Brisbane",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 0.0,
+        "old_mean": 30.75,
+        "new_mean": 30.75,
+        "p_value": 0.5073822957159169,
+        "statistic": 26.0,
+        "q_value_bh": 0.51918188398838,
+        "significant_bh": false
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 0.0,
+        "old_mean": 30.75,
+        "new_mean": 30.75,
+        "p_value": 0.5073822957159169,
+        "statistic": 26.0,
+        "q_value_bh": 0.51918188398838,
+        "significant_bh": false
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -0.35,
+        "old_mean": 30.75,
+        "new_mean": 31.1,
+        "p_value": 0.11554040738205033,
+        "statistic": 45.0,
+        "q_value_bh": 0.12552538085951148,
+        "significant_bh": false
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 22.85,
+        "old_mean": 30.75,
+        "new_mean": 7.9,
+        "p_value": 7.479232692417942e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 22.85,
+        "old_mean": 30.75,
+        "new_mean": 7.9,
+        "p_value": 7.479232692417942e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      }
+    },
+    {
+      "task": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "o3_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -24.9,
+        "old_mean": 20.8,
+        "new_mean": 45.7,
+        "p_value": 0.0001308020996998329,
+        "statistic": 0.0,
+        "q_value_bh": 0.0002522039615323767,
+        "significant_bh": true
+      },
+      "o2_vs_o1": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -9.95,
+        "old_mean": 35.75,
+        "new_mean": 45.7,
+        "p_value": 0.00045495104862668074,
+        "statistic": 2.5,
+        "q_value_bh": 0.0006672615379857984,
+        "significant_bh": true
+      },
+      "o3_vs_soft": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": -18.65,
+        "old_mean": 20.8,
+        "new_mean": 39.45,
+        "p_value": 0.0003360324080809574,
+        "statistic": 9.0,
+        "q_value_bh": 0.0005098422743297286,
+        "significant_bh": true
+      },
+      "o3_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 19.9,
+        "old_mean": 20.8,
+        "new_mean": 0.9,
+        "p_value": 8.658390851382302e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      },
+      "o2_vs_tket": {
+        "n_paired": 20,
+        "mean_diff_new_minus_old": 34.85,
+        "old_mean": 35.75,
+        "new_mean": 0.9,
+        "p_value": 8.782404130245517e-05,
+        "statistic": 0.0,
+        "q_value_bh": 0.00019957756970939673,
+        "significant_bh": true
+      }
+    }
+  ],
+  "comparisons": [
+    [
+      "o3_vs_o1",
+      "sabre_o3",
+      "sabre_def"
+    ],
+    [
+      "o2_vs_o1",
+      "sabre_o2",
+      "sabre_def"
+    ],
+    [
+      "o3_vs_soft",
+      "sabre_o3",
+      "faq_soft_sabre"
+    ],
+    [
+      "o3_vs_tket",
+      "sabre_o3",
+      "faq_tket"
+    ],
+    [
+      "o2_vs_tket",
+      "sabre_o2",
+      "faq_tket"
+    ]
+  ]
+}
