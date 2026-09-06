@@ -66,6 +66,42 @@ def test_module_b_directed_hardware_builder():
     assert len(errs) == len(edges)
 
 
+def test_module_a_dependence_weighted_builder():
+    """Transitive-dependence-weighted A (variant A2): chain length, not raw frequency."""
+    builder = DAGInteractionMatrixBuilder(gamma=0.9)
+
+    # A single isolated CX is dependence-free: A2 == A0.
+    qc_single = QuantumCircuit(2)
+    qc_single.cx(0, 1)
+    a0 = builder.build_matrix(qc_single)
+    a2 = builder.build_matrix_dependence_weighted(qc_single)
+    assert np.allclose(a0, a2)
+
+    # Chain of dependent CXs on a shared qubit: later chain gates are up-weighted.
+    qc_chain = QuantumCircuit(3)
+    qc_chain.cx(0, 1)  # d=0
+    qc_chain.cx(1, 2)  # depends on (0,1) via q1 -> d=1
+    qc_chain.cx(0, 1)  # depends on (1,2) via q1 -> d=2
+    a2_chain = builder.build_matrix_dependence_weighted(qc_chain)
+    a0_chain = builder.build_matrix(qc_chain)
+    assert np.allclose(a2_chain, a2_chain.T)
+    assert np.any(a2_chain != a0_chain)
+    # The later same-pair interaction (d=2) is worth more than in A0 relative to
+    # the first (d=0): ratio of accumulated weight on pair (0,1) rises.
+    w_a2 = a2_chain[0, 1]
+    w_a0 = a0_chain[0, 1]
+    assert w_a2 > w_a0
+
+    # Independent parallel tracks do not chain: two CXs on disjoint qubit pairs
+    # each have d=0, so A2 == A0 when no gate shares a qubit with a predecessor.
+    qc_par = QuantumCircuit(4)
+    qc_par.cx(0, 1)
+    qc_par.cx(2, 3)
+    a0p = builder.build_matrix(qc_par)
+    a2p = builder.build_matrix_dependence_weighted(qc_par)
+    assert np.allclose(a0p, a2p)
+
+
 def test_module_c_multi_start_improvement_and_2opt():
     """Verify that multi-start (random default) solver and 2-opt refinement strictly improve or maintain QAP cost."""
     rng = np.random.default_rng(42)
