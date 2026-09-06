@@ -61,19 +61,23 @@ Runner: `benchmarks/benchmark_gamma.py`; raw per-seed data:
 
 ## Feasibility recommendation
 
-**Full sweep is feasible as planned.** At ~3.5 s/run average over the mixed cells, the
-authorized grid (9 gamma × 5 cells × 20 seeds × 2 routers = 1,800 runs) is ≈ 105 minutes
-single-process. Slicing the run across 6 worker processes with `--slice K/6` (each process
-writes its own partial file) brings wall time to ≈ 20 minutes, well within the budget used by
-previous A-series sweeps. No reduction or modification of the authorized grid is recommended.
+**Original-grid feasibility estimate was wrong and is superseded.** The smoke report estimated
+~3.5 s/run average and ≈ 20 min wall for the 1,800-run grid. A full-grid per-run calibration on
+all five cells (recorded in the A6 spec addendum) showed the real cost is dominated by the **PyTKET arm on the Grover cells**: grover10-bris ~30–46 s/run, grover12-bris **114–150
+s/run** (vs ~2.5 s for vqe50-grid), putting the original grid at **~11 CPU-hours** — and at
+seed 0 the grover tket runs returned identical SWAP counts at gamma = 0.5 and 1.0 (no observed
+gamma variation there). Per the spec's feasibility provision the human authorized a **Compact
+A6** revision (see `a6_gamma_spec.md` addendum): 5 gamma {0.5, 0.7, 0.9(ref), 0.95, 1.0} × 3
+cells {vqe50-grid, qram20-bris, grover10-bris} × K=10 × 2 routers = **300 runs**, ≈ 1 CPU-hour,
+estimated 10–20 min wall across 6 slices. The vqe50-grid smoke cell is retained as-is in the
+compact design; no grid change was selected from smoke outcomes.
 
-## Proposed next step (subject to review)
+## Proposed next step (reviewed & authorized)
 
-Proceed to Phase 1 with the **preregistered** configuration from
-[`a6_gamma_spec.md`](a6_gamma_spec.md) — unchanged: gamma grid
-{0.50, 0.60, 0.70, 0.80, 0.85, 0.90(ref), 0.95, 0.98, 1.00}, the five A5 cells, K=20 matched
-seeds, both routers, Friedman → (gated) Wilcoxon-vs-0.90 → BH analysis on SWAP count. Raw data
-to `benchmarks/results/a6_gamma_results.json`, then the results report
+Phase 1 runs with the **Compact A6** configuration recorded in the
+[`a6_gamma_spec.md`](a6_gamma_spec.md) addendum (human-authorized): gamma {0.50, 0.70,
+0.90(ref), 0.95, 1.00} × cells {vqe50-grid, qram20-bris, grover10-bris} × K=10 matched seeds ×
+SABRE + PyTKET = **300 runs**, with the unchanged analysis (Friedman → gated
+Wilcoxon-vs-0.90 → BH) on SWAP count. Raw per-seed data to
+`benchmarks/results/a6_gamma_results.json`, then the results report
 `reports/a6_gamma_results.md`.
-
-**Execution gate: this smoke report must be reviewed before any Phase-1 run starts.**

@@ -154,3 +154,36 @@ Re-evaluating Gaussian vs random multi-start; tuning FAQ start count; testing ne
 learned routing; fidelity as a primary endpoint; scaling beyond the authorized cells; changing
 the mapper default before analysis; tuning gamma against the QAP objective alone; claiming a
 universally optimal gamma.
+
+
+---
+
+## Addendum — Compact A6 revision (authorized 2026-09-06)
+
+**Reason.** The original 1,800-run grid was calibrated at ~11 CPU-hours (per-run wall clock:
+vqe50-grid ~2.5 s; qram20-bris ~6–7 s; vqe10-bris ~3–6 s; grover10-bris ~7 s SABRE / 30–46 s
+PyTKET; grover12-bris ~13–21 s SABRE / 114–150 s PyTKET). The PyTKET arm on Grover-N10/N12 is
+~10 of those hours, and at seed 0 it returns **identical** SWAP counts at gamma = 0.5 and 1.0
+(zero observed between-gamma variation there), so that compute buys almost no signal. Per the
+spec's feasibility provision (any reduction documented before the run, not selected from
+outcomes), the human authorized the Compact A6 design.
+
+**Authorized Compact A6 grid (replaces the Phase-1 grid above for this execution):**
+
+| Element | Compact A6 (executed) |
+|:--|:--|
+| Gamma levels | {0.50, 0.70, 0.90 (ref), 0.95, 1.00} — 5 levels spanning aggressive decay, moderate decay, the default, weak decay, no decay |
+| Cells | `vqe50-grid`, `qram20-bris`, `grover10-bris` — variational/repeated-layer, structural holdout, and search workloads |
+| Cells dropped | `vqe10-bris` (zero-SWAP floor: no headroom, low information) and `grover12-bris` (150 s/run PyTKET arm; cost-prohibitive) — **not** dropped because of gamma outcomes |
+| Seeds | K = 10, `{0..9}`, matched blocks (same seed IDs across gammas) |
+| Routers | Qiskit SABRE + PyTKET RoutingPass (both retained) |
+| Runs | 5 gamma × 3 cells × 10 seeds × 2 routers = **300 routing runs** |
+| Est. cost | ~1 CPU-hour; ~10–20 min wall across 6 worker slices |
+
+Mapper configuration, statistical plan (Friedman gate per cell → paired Wilcoxon vs 0.90 on
+gated cells → BH across the performed family), primary metric (SWAP count), decision rules,
+and historical-data isolation are unchanged. Consequences are disclosed up-front: Friedman runs
+over 5 conditions; Wilcoxon tests are K=10 paired comparisons (lower power than K=20, reported
+as such); conclusions apply to the three tested cells and must not be blanket-generalized to
+all circuit families (e.g., the zero-SWAP-floor and 127q-deep-search regimes are not covered by
+this run).
