@@ -6,10 +6,10 @@ regenerated data — no new experiment design, no new backends:
 1. **#2 — Paired significance testing.** Every "FAQ-lower / baseline-lower / tie" SWAP-count
    claim in the README tables is now backed by a paired **Wilcoxon signed-rank test** over the
    K=20 per-seed differences, with a **Benjamini–Hochberg FDR correction** across all tested
-   comparisons (m = 34). A signed-rank test is used because the design is paired-by-seed and SWAP
-   counts are small, skewed, often zero-inflated integers where a paired t-test's normality
-   assumption is fragile; FDR correction guards against declaring winners from any single
-   comparison among the many tested.
+   comparisons (m = 36 on the regenerated dataset). A signed-rank test is used because the design
+   is paired-by-seed and SWAP counts are small, skewed, often zero-inflated integers where a
+   paired t-test's normality assumption is fragile; FDR correction guards against declaring
+   winners from any single comparison among the many tested.
 2. **#5 — Fidelity-loss proxy metric.** Alongside SWAP counts, we now estimate the
    fidelity loss of the *routed* circuit by walking the final transpiled circuit and
    multiplying the actual per-edge CNOT error rates from the same calibration snapshot used to
@@ -28,14 +28,21 @@ regenerated data — no new experiment design, no new backends:
 | `benchmarks/results/benchmark_fidelity_crosscheck.json` | Validation that the re-run reproduced the canonical dataset: **0/1600 per-seed SWAP divergences** |
 
 The fidelity re-run re-routes every circuit deterministically and keeps the routed circuit
-(which `benchmark_eval.py` discarded). Because routing is seed-deterministic, it reproduces the
-canonical SWAP counts exactly — the cross-check confirmed 0/1600 divergences — so the fidelity
-numbers below describe the *same* routed circuits whose SWAP counts are in the README tables.
+(which `benchmark_eval.py` discarded). Because routing is seed-deterministic, it reproduced the
+then-canonical SWAP counts exactly — the cross-check confirmed 0/1600 divergences — so the fidelity
+numbers below describe the *same* routed circuits whose SWAP counts were in the previous README
+tables (Gaussian-era FAQ arms). The canonical dataset has since been regenerated under the random
+multi-start FAQ default; see the stale-data banner in section #5.
 
 ## #2 — Significance results (paired Wilcoxon, K=20)
 
+**Regenerated dataset.** The canonical Tables 1–2 were regenerated under the shipped **random
+multi-start** FAQ default (the earlier committed tables used the deprecated Gaussian mode;
+default-router arms are bit-identical, FAQ arms changed). This analysis was re-run on the
+regenerated per-seed log — numbers below supersede the previous Gaussian-era panel.
+
 Method: paired **Wilcoxon signed-rank** on the 20 per-seed SWAP differences per row, then a
-**Benjamini–Hochberg FDR correction** is applied across all tested comparisons (m = 34) to
+**Benjamini–Hochberg FDR correction** is applied across all tested comparisons (m = 36) to
 control the false-discovery rate from testing many rows at once. A row is significant only if
 its **BH-adjusted q-value < 0.05**. Meanings: "base" = default router lower mean; "FAQ" =
 FAQ-seeded lower mean; rows marked **det** are deterministic (one/both arms have zero
@@ -45,39 +52,48 @@ device).
 
 | Task | Arch | N | SABRE lower? | p | q(BH) | Sig@FDR | TKET lower? | p | q(BH) | Sig@FDR |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| GHZ State | Brisbane | 50 | base | 8.8e-05 | 0.0002 | yes | det | — | — | — |
-| Grover's Search | Brisbane | 8 | base | 8.8e-05 | 0.0002 | yes | base | 4.2e-05 | 0.0002 | yes |
-| Grover's Search | Synthetic grid | 8 | base | 0.012 | 0.015 | yes | FAQ | 1.2e-05 | 0.0002 | yes |
-| Grover's Search | Brisbane | 10 | base | 0.33 | 0.37 | **no** | FAQ | 1.2e-05 | 0.0002 | yes |
-| Grover's Search | Synthetic grid | 10 | base | 4.5e-04 | 0.0007 | yes | det | — | — | — |
-| Grover's Search | Brisbane | 12 | base | 0.25 | 0.28 | **no** | base | 5.3e-05 | 0.0002 | yes |
-| Grover's Search | Synthetic grid | 12 | base | 0.61 | 0.63 | **no** | FAQ | 5.3e-05 | 0.0002 | yes |
-| QAOA | Brisbane | 10 | base | 8.8e-05 | 0.0002 | yes | det | — | — | — |
-| QAOA | Brisbane | 20 | base | 7.2e-04 | 0.0010 | yes | FAQ | 6.9e-05 | 0.0002 | yes |
-| QFT | Brisbane | 20 | base | 8.8e-05 | 0.0002 | yes | FAQ | 1.7e-05 | 0.0002 | yes |
-| QFT | Synthetic grid | 20 | base | 8.8e-05 | 0.0002 | yes | FAQ | 1.0e-03 | 0.0014 | yes |
-| QRAM Decoder (Holdout) | Brisbane | 20 | FAQ | 1.0e-04 | 0.0002 | yes | base | 5.1e-05 | 0.0002 | yes |
-| QRAM Decoder (Holdout) | Synthetic grid | 20 | FAQ | 7.5e-05 | 0.0002 | yes | base | 5.4e-05 | 0.0002 | yes |
-| Random 3-Regular (Holdout) | Brisbane | 20 | base | 0.022 | 0.028 | yes | FAQ | 2.2e-04 | 0.0004 | yes |
-| Ripple-Carry Adder (Holdout) | Brisbane | 20 | base | 1.0 | 1.0 | **no** | base | 0.025 | 0.031 | yes |
-| Ripple-Carry Adder (Holdout) | Synthetic grid | 20 | FAQ | 8.3e-05 | 0.0002 | yes | det | — | — | — |
-| VQE (RealAmplitudes) | Brisbane | 10 | det (tie) | — | — | — | det (tie) | — | — | — |
-| VQE (RealAmplitudes) | Brisbane | 20 | base | 1.3e-04 | 0.0002 | yes | base | 0.046 | 0.053 | **no** |
-| VQE (RealAmplitudes) | Brisbane | 50 | base | 8.8e-05 | 0.0002 | yes | base | 0.59 | 0.62 | **no** |
-| VQE (RealAmplitudes) | Synthetic grid | 50 | base | 7.2e-04 | 0.0010 | yes | FAQ | 5.3e-05 | 0.0002 | yes |
+| GHZ State | Brisbane | 50 | base | 8.75e-05 | 0.0002 | yes | det | — | — | — |
+| Grover's Search | Brisbane | 8 | base | 8.84e-05 | 0.0002 | yes | base | 3.56e-05 | 0.0002 | yes |
+| Grover's Search | Synthetic grid | 8 | base | 0.0004 | 0.0006 | yes | FAQ | 2.30e-05 | 0.0002 | yes |
+| Grover's Search | Brisbane | 10 | base | 0.2455 | 0.2525 | no | FAQ | 4.67e-05 | 0.0002 | yes |
+| Grover's Search | Synthetic grid | 10 | base | 0.0013 | 0.0018 | yes | FAQ | 5.06e-05 | 0.0002 | yes |
+| Grover's Search | Brisbane | 12 | base | 0.1474 | 0.1561 | no | base | 4.67e-05 | 0.0002 | yes |
+| Grover's Search | Synthetic grid | 12 | base | 0.0826 | 0.0929 | no | FAQ | 2.30e-05 | 0.0002 | yes |
+| QAOA | Brisbane | 10 | base | 0.0002 | 0.0003 | yes | FAQ | 2.95e-05 | 0.0002 | yes |
+| QAOA | Brisbane | 20 | base | 0.0003 | 0.0006 | yes | FAQ | 0.0001 | 0.0003 | yes |
+| QFT | Brisbane | 20 | base | 8.84e-05 | 0.0002 | yes | det | — | — | — |
+| QFT | Synthetic grid | 20 | base | 8.76e-05 | 0.0002 | yes | FAQ | 0.1333 | 0.1454 | no |
+| QRAM Decoder (Holdout) | Brisbane | 20 | FAQ | 0.0002 | 0.0003 | yes | base | 5.06e-05 | 0.0002 | yes |
+| QRAM Decoder (Holdout) | Synthetic grid | 20 | FAQ | 7.59e-05 | 0.0002 | yes | base | 3.56e-05 | 0.0002 | yes |
+| Random 3-Regular (Holdout) | Brisbane | 20 | base | 0.0104 | 0.0139 | yes | FAQ | 0.0004 | 0.0006 | yes |
+| Ripple-Carry Adder (Holdout) | Brisbane | 20 | base | 0.0202 | 0.0243 | yes | base | 0.0253 | 0.0294 | yes |
+| Ripple-Carry Adder (Holdout) | Synthetic grid | 20 | FAQ | 0.0001 | 0.0002 | yes | tie/det | — | — | — |
+| VQE (RealAmplitudes) | Brisbane | 10 | base | 0.0176 | 0.0218 | yes | tie/det | — | — | — |
+| VQE (RealAmplitudes) | Brisbane | 20 | base | 0.0001 | 0.0003 | yes | base | 0.0143 | 0.0184 | yes |
+| VQE (RealAmplitudes) | Brisbane | 50 | base | 8.83e-05 | 0.0002 | yes | FAQ | 0.0010 | 0.0015 | yes |
+| VQE (RealAmplitudes) | Synthetic grid | 50 | base | 0.4779 | 0.4779 | no | FAQ | 5.31e-05 | 0.0002 | yes |
 
-**What this adds over the earlier "Lower-SWAP method" column.** Several previously-reported
-differences are **not** significant even under FDR despite a lower mean — notably FAQ+SABRE
-*worsening* SABRE on Grover N=10/N=12 (Brisbane) and FAQ+PyTKET "improving" over PyTKET on
-VQE-N50 (Brisbane). The BH correction additionally removes **VQE-N20 (Brisbane), TKET pair**:
-raw p = 0.046 looked significant but its adjusted q = 0.053 crosses the 0.05 threshold, so the
-"default PyTKET is better here" claim is not supported at FDR 0.05. Where one arm is
-deterministic the row is labelled, not compared as though sampled. All *significant* FAQ-lower
-PyTKET wins (QFT, QAOA, Random 3-regular, Grover N8 synthetic grid, Grover N10 Brisbane, VQE-N50
-synthetic grid) survive the FDR correction at q ≤ 0.0014.
-
+**What this adds over the "Lower-SWAP method" column.** Several lower-mean claims are **not**
+significant even under FDR: FAQ+SABRE *worsening* SABRE on Grover N=10/N=12 (Brisbane) and
+Grover N=12 / VQE-N50 (synthetic grid), and FAQ+PyTKET "improving" over PyTKET on QFT-N20
+(synthetic grid, q = 0.145). These five rows carry a **†** in README Tables 1–2. Notably the
+BH correction removes **no** row on the regenerated dataset (m = 36): the VQE-N20 (Brisbane)
+"default PyTKET lower" claim that BH previously downgraded (raw p = 0.046, q = 0.053) is now
+itself significant (q = 0.018), and VQE-N50 (Brisbane) PyTKET flipped from a non-significant
+FAQ loss to a *significant FAQ win* (q = 0.0015). All significant FAQ-lower wins survive at
+q ≤ 0.0015 (PyTKET pair: Grover-N8/N10/N12 synthetic grid, Grover-N10 Brisbane, QAOA-N10/N20
+Brisbane, VQE-N50 both grids, Random 3-regular Brisbane) and q ≤ 0.0003 (SABRE pair: QRAM
+Brisbane + Ripple/QRAM synthetic grid). Where one arm is deterministic the row is labelled, not
+compared as though sampled.
 ## #5 — SWAP delta vs. fidelity-proxy delta
 
+
+> **⚠ Stale w.r.t. regenerated Tables 1–2.** The fidelity-proxy re-run below was executed
+> against the **previous canonical dataset** (Gaussian-era FAQ arms). FAQ arms changed under the
+> regenerated random-init dataset (default arms are identical), so this section's FAQ-arm
+> fidelity numbers and sign-flip rows describe the superseded circuits until the fidelity re-run
+> is repeated under the new canonical data (roadmap item: fidelity-proxy re-derivation).
+>
 Δ = (FAQ mean) − (default mean). A negative SWAP delta and a negative infidelity delta are both
 *improvements*. Across the 37 comparisons with a non-zero SWAP delta (three rows are exact
 ties), the two metrics **disagree in sign on 5** — the headline a fidelity-weighted method must
