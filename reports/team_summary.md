@@ -53,6 +53,7 @@ Wilcoxon and fidelity analyses (review points #2 and #5).
 | `benchmarks/benchmark_soft_sabre.py`, `benchmarks/results/benchmark_soft_sabre_*.json`, `reports/soft_candidate_sabre.md` | FAQ-as-soft-candidate SABRE experiment (FAQ layout = one trial in SABRE's pool) |
 | `benchmarks/benchmark_dependence_a.py`, `benchmarks/results/benchmark_dependence_a_*.json`, `reports/dependence_objective.md` | A2 dependence-weighted objective A/B vs A0 (negative result) |
 | `benchmarks/benchmark_baselines.py`, `benchmarks/results/benchmark_baselines_*.json`, `reports/stronger_baselines.md` | optimization_level 2/3 (+VF2PostLayout) SABRE baselines vs FAQ arms |
+| `benchmarks/exact_ceiling.py`, `benchmarks/results/exact_ceiling.json`, `reports/exact_ceiling.md` | Exact joint layout+routing optimum on tiny cells (N≤6) |
 | `benchmarks/results/benchmark_eval_results.json`, `benchmarks/results/benchmark_eval_raw_seeds.json`, `benchmarks/results/benchmark_ablation_results.json` | Canonical committed results |
 | `benchmarks/results/significance_results.json`, `benchmarks/results/benchmark_fidelity_results.json`, `benchmarks/results/benchmark_fidelity_comparison.json` | Significance + fidelity analysis outputs |
 | `tests/` | Unit/integration tests |

@@ -285,6 +285,14 @@ every SABRE baseline** on the large rows (e.g. Grover-N12 Brisbane 15650 vs 1846
 synthetic grid 0.9 vs 20.8): FAQ's remaining measurable value is as an embedding for PyTKET's
 LexiRoute on large structured circuits — not as a seed for SABRE.
 
+**Exact ceiling (item 8).** For tiny circuits (N ≤ 6, line and 2×3 grid) an exact
+joint layout+routing solver (`benchmarks/exact_ceiling.py`, 0-1 BFS over mapping×gate
+states) gives a ground-truth floor to report "% of theoretical optimum". On those cells the
+optima are 0–3 SWAPs; the only row with headroom (random 3-regular on the 2×3 grid, exact =
+2) is met at 105% by o3, 125% by o1/FAQ-soft and 150% by hard FAQ+SABRE — and line-N5 ripple
+shows hard FAQ+SABRE above the exact 0 floor (+0.6) with FAQ-soft back at 0. See
+[`reports/exact_ceiling.md`](reports/exact_ceiling.md).
+
 ---
 
 ## Limitations & When to Use It
@@ -334,6 +342,7 @@ Canonical paired-seed dataset (this README's Tables 1–2):
 | `benchmarks/results/benchmark_soft_sabre_results.json` / `benchmark_soft_sabre_raw.json` / `benchmark_soft_sabre_significance.json` | FAQ-as-soft-candidate SABRE: per-task means, per-seed logs, merged paired-Wilcoxon + BH (report: `reports/soft_candidate_sabre.md`) | `benchmarks/benchmark_soft_sabre.py` (4 balanced slices, merged) |
 | `benchmarks/results/benchmark_dependence_a_results.json` / `benchmark_dependence_a_raw.json` / `benchmark_dependence_a_significance.json` | A2 (dependence-weighted A) vs A0 arms for FAQ+PyTKET and FAQ-soft-SABRE: means, per-seed logs, per-seed paired-Wilcoxon + BH (report: `reports/dependence_objective.md`) | `benchmarks/benchmark_dependence_a.py` (6 balanced slices, merged) |
 | `benchmarks/results/benchmark_baselines_results.json` / `benchmark_baselines_raw.json` / `benchmark_baselines_significance.json` | optimization_level 2/3 (VF2PostLayout) default SABRE baselines vs committed arms: means, per-seed logs, paired-Wilcoxon + BH (report: `reports/stronger_baselines.md`) | `benchmarks/benchmark_baselines.py` |
+| `benchmarks/results/exact_ceiling.json` | Exact joint layout+routing optimum on tiny cells (N≤6) + arm means (report: `reports/exact_ceiling.md`) | `benchmarks/exact_ceiling.py` |
 
 Running `benchmarks/benchmark_eval.py` (or its CPU-parallel variants),
 `benchmarks/analyze_significance.py` and `benchmarks/benchmark_ablations.py` regenerates these

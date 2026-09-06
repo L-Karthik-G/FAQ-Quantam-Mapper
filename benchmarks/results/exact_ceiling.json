@@ -1,0 +1,90 @@
+[
+  {
+    "topology": "line",
+    "qubits": 4,
+    "kind": "ripple",
+    "cx_gates": 6,
+    "exact_min_swaps": 0,
+    "mean_sabre_def": 0.0,
+    "mean_sabre_o3": 0.0,
+    "mean_faq_sabre": 0.0,
+    "mean_faq_soft": 0.0
+  },
+  {
+    "topology": "line",
+    "qubits": 4,
+    "kind": "qram",
+    "cx_gates": 3,
+    "exact_min_swaps": 0,
+    "mean_sabre_def": 0.0,
+    "mean_sabre_o3": 0.0,
+    "mean_faq_sabre": 0.0,
+    "mean_faq_soft": 0.0
+  },
+  {
+    "topology": "line",
+    "qubits": 4,
+    "kind": "random3",
+    "cx_gates": 12,
+    "exact_min_swaps": 3,
+    "mean_sabre_def": 3.0,
+    "mean_sabre_o3": 3.0,
+    "mean_faq_sabre": 3.0,
+    "mean_faq_soft": 3.0
+  },
+  {
+    "topology": "line",
+    "qubits": 5,
+    "kind": "ripple",
+    "cx_gates": 8,
+    "exact_min_swaps": 0,
+    "mean_sabre_def": 0.0,
+    "mean_sabre_o3": 0.0,
+    "mean_faq_sabre": 0.6,
+    "mean_faq_soft": 0.0
+  },
+  {
+    "topology": "line",
+    "qubits": 5,
+    "kind": "qram",
+    "cx_gates": 4,
+    "exact_min_swaps": 1,
+    "mean_sabre_def": 1.0,
+    "mean_sabre_o3": 1.0,
+    "mean_faq_sabre": 1.0,
+    "mean_faq_soft": 1.0
+  },
+  {
+    "topology": "grid2x3",
+    "qubits": 6,
+    "kind": "ripple",
+    "cx_gates": 10,
+    "exact_min_swaps": 0,
+    "mean_sabre_def": 0.0,
+    "mean_sabre_o3": 0.0,
+    "mean_faq_sabre": 0.0,
+    "mean_faq_soft": 0.0
+  },
+  {
+    "topology": "grid2x3",
+    "qubits": 6,
+    "kind": "qram",
+    "cx_gates": 5,
+    "exact_min_swaps": 1,
+    "mean_sabre_def": 1.0,
+    "mean_sabre_o3": 1.0,
+    "mean_faq_sabre": 1.0,
+    "mean_faq_soft": 1.0
+  },
+  {
+    "topology": "grid2x3",
+    "qubits": 6,
+    "kind": "random3",
+    "cx_gates": 18,
+    "exact_min_swaps": 2,
+    "mean_sabre_def": 2.45,
+    "mean_sabre_o3": 2.1,
+    "mean_faq_sabre": 3.0,
+    "mean_faq_soft": 2.55
+  }
+]
