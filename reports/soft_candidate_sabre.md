@@ -86,8 +86,10 @@ Arch "Bris" = IBM FakeBrisbane (127q); "Grid" = synthetic 8×10 grid (80q). Mean
 
 ## Limitations
 
-* SWAP-count metric only (as throughout this repository so far); the fidelity-loss proxy has not
-  been re-run for the soft arm (it is still stale w.r.t. even the regenerated Tables 1–2).
+* The headline result is on the SWAP-count metric; the fidelity-loss proxy has since been
+  regenerated for the soft arm under the canonical dataset (see
+  `reports/statistical_fidelity_analysis.md` §#5) — it agrees in sign on IBM and shows small
+  opposite-sign effects only on synthetic-grid rows (Grover-N8, QFT-N20).
 * FAQ pre-placement cost is unchanged (~2–29 s/circuit) and the soft arm additionally runs the
   full SabreLayout pool (default `layout_trials` = number of CPUs; the FAQ trial adds ~1 trial's
   routing). The design goal was to test the mechanism, not to reduce overhead.

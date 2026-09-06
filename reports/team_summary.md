@@ -44,7 +44,7 @@ Wilcoxon and fidelity analyses (review points #2 and #5).
 | `benchmarks/benchmark_ablations.py` | QAP-cost ablation study |
 | `benchmarks/analyze_significance.py` | Paired Wilcoxon + BH significance testing (analysis-only) |
 | `benchmarks/render_tables.py` | Renders README Tables 1–2 from the results + significance JSON (incl. per-row † markers) |
-| `benchmarks/benchmark_fidelity.py`, `benchmarks/report_fidelity.py` | Fidelity-loss proxy on routed circuits + delta table (currently describes the previous Gaussian-era canonical circuits) |
+| `benchmarks/benchmark_fidelity.py`, `benchmarks/report_fidelity.py` | Fidelity-loss proxy on routed circuits + delta table (regenerated under the random-init dataset; 5 arms incl. FAQ-soft-SABRE; 0/1600 + 0/400 cross-check) |
 | `benchmarks/benchmark_soft_sabre.py`, `benchmarks/results/benchmark_soft_sabre_*.json`, `reports/soft_candidate_sabre.md` | FAQ-as-soft-candidate SABRE experiment (FAQ layout = one trial in SABRE's pool) |
 | `benchmarks/benchmark_dependence_a.py`, `benchmarks/results/benchmark_dependence_a_*.json`, `reports/dependence_objective.md` | A2 dependence-weighted objective A/B vs A0 (negative result) |
 | `benchmarks/results/benchmark_eval_results.json`, `benchmarks/results/benchmark_eval_raw_seeds.json`, `benchmarks/results/benchmark_ablation_results.json` | Canonical committed results |

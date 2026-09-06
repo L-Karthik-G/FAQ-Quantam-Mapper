@@ -82,9 +82,10 @@ mean for each router pair.*
 > `benchmarks/results/significance_results.json`) and (b) re-checked against an estimated
 > **fidelity-loss proxy** of the routed circuit. A **†** next to a winner in the tables below
 > marks a lower mean that the BH-corrected test does **not** support at q < 0.05 (the marker is
-> the table-level version of the significance caveat). The fidelity-proxy re-check currently
-> still describes the *previous* canonical (Gaussian-era) routed circuits — see the note in the
-> report — and will be re-derived against these regenerated tables when that work is resumed.
+> the table-level version of the significance caveat). The fidelity-loss proxy has been
+> regenerated under these tables, including the FAQ-as-soft-candidate SABRE arm (see the
+> report's §#5); it agrees in sign with the SWAP deltas on IBM and disagrees only on a few
+> synthetic-grid rows.
 
 ### Table 1: IBM FakeBrisbane (127-qubit Heavy-Hex), K=20 paired seeds
 
@@ -162,9 +163,10 @@ in `benchmarks/results/benchmark_eval_raw_seeds.json`.
 > (synthetic grid, q = 0.145). The BH correction removes no row this round — the VQE-N20 Brisbane
 > "default PyTKET lower" claim that BH previously downgraded is now significant (q = 0.018) — but
 > the non-significant rows are marked **†** in the tables. The significant FAQ-lower wins survive
-> at q ≤ 0.0015 (PyTKET pair) and q ≤ 0.0003 (SABRE pair). The fidelity-loss proxy currently
-> still describes the earlier Gaussian-era canonical circuits (see the report) and may disagree
-> with raw SWAP deltas. Read the bullets as directional means, not tested claims, and consult
+> at q ≤ 0.0015 (PyTKET pair) and q ≤ 0.0003 (SABRE pair). The fidelity-loss proxy has been
+> regenerated under these tables (incl. the soft-candidate SABRE arm; cross-checks 0/1600 and
+> 0/400) and can disagree with raw SWAP deltas — sign flips are confined to the synthetic grid.
+> Read the bullets as directional means, not tested claims, and consult
 > [`reports/statistical_fidelity_analysis.md`](reports/statistical_fidelity_analysis.md) before
 > drawing conclusions.
 >
@@ -305,9 +307,9 @@ Canonical paired-seed dataset (this README's Tables 1–2):
 | `benchmarks/results/benchmark_eval_raw_seeds.json` | Raw per-seed SWAP/time/prep logs (all 20 seeds) | `benchmarks/benchmark_eval.py` |
 | `benchmarks/results/benchmark_ablation_results.json` | QAP-cost ablation table | `benchmarks/benchmark_ablations.py` |
 | `benchmarks/results/significance_results.json` | Paired Wilcoxon + BH q per row | `benchmarks/analyze_significance.py` |
-| `benchmarks/results/benchmark_fidelity_raw.json` / `benchmark_fidelity_results.json` | Per-seed SWAP + fidelity-loss proxy per method (**describes the previous Gaussian-era canonical circuits; pending re-derivation under the regenerated Tables 1–2**) | `benchmarks/benchmark_fidelity.py` |
-| `benchmarks/results/benchmark_fidelity_crosscheck.json` | Validates fidelity re-run reproduces canonical data (0/1600 SWAP divergences) | `benchmarks/benchmark_fidelity.py` |
-| `benchmarks/results/benchmark_fidelity_comparison.json` | SWAP-delta vs fidelity-delta per pair | `benchmarks/report_fidelity.py` |
+| `benchmarks/results/benchmark_fidelity_raw.json` / `benchmark_fidelity_results.json` | Per-seed SWAP + fidelity-loss proxy per method (5 arms incl. FAQ-soft-SABRE; regenerated under the random-init dataset) | `benchmarks/benchmark_fidelity.py` |
+| `benchmarks/results/benchmark_fidelity_crosscheck.json` | Validates fidelity re-run reproduces the committed data (0/1600 canonical-arm + 0/400 soft-arm SWAP divergences) | `benchmarks/benchmark_fidelity.py` |
+| `benchmarks/results/benchmark_fidelity_comparison.json` | SWAP-delta vs fidelity-delta per pair (hard-SABRE, soft-SABRE, TKET) | `benchmarks/report_fidelity.py` |
 | `benchmarks/results/benchmark_soft_sabre_results.json` / `benchmark_soft_sabre_raw.json` / `benchmark_soft_sabre_significance.json` | FAQ-as-soft-candidate SABRE: per-task means, per-seed logs, merged paired-Wilcoxon + BH (report: `reports/soft_candidate_sabre.md`) | `benchmarks/benchmark_soft_sabre.py` (4 balanced slices, merged) |
 | `benchmarks/results/benchmark_dependence_a_results.json` / `benchmark_dependence_a_raw.json` / `benchmark_dependence_a_significance.json` | A2 (dependence-weighted A) vs A0 arms for FAQ+PyTKET and FAQ-soft-SABRE: means, per-seed logs, per-seed paired-Wilcoxon + BH (report: `reports/dependence_objective.md`) | `benchmarks/benchmark_dependence_a.py` (6 balanced slices, merged) |
 
@@ -326,8 +328,9 @@ and their generators) used different seeds, topologies, or `optimization_level` 
 three canonical benchmark files (`benchmark_eval_results.json`, `benchmark_eval_raw_seeds.json`,
 `benchmark_ablation_results.json`) as the authoritative dataset — the significance and fidelity
 files in the table are *derived analysis* over that same dataset — and regenerate before drawing
-conclusions. The fidelity files currently describe the *previous* canonical (Gaussian-era)
-dataset and are stale w.r.t. the regenerated Tables 1–2 until the fidelity re-run is repeated.
+conclusions. The fidelity files have been regenerated under the current (random multi-start)
+canonical dataset and cover the soft-candidate SABRE arm as well (cross-checks: 0/1600 + 0/400
+SWAP divergences).
 
 ---
 

@@ -6,15 +6,35 @@
     "sabre": {
       "swaps": {
         "base_mean": 1152.25,
-        "faq_mean": 1263.55,
-        "faq_minus_base": 111.29999999999995,
-        "pct_change": 9.659362117596004
+        "faq_mean": 1264.6,
+        "faq_minus_base": 112.34999999999991,
+        "pct_change": 9.75048817530917
       },
       "infidelity_sum": {
         "base_mean": 68.19499324708002,
-        "faq_mean": 72.22602812120081,
-        "faq_minus_base": 4.031034874120792,
-        "pct_change": 5.911042265985404
+        "faq_mean": 72.26405675208875,
+        "faq_minus_base": 4.069063505008728,
+        "pct_change": 5.966806815664517
+      },
+      "failure_prob": {
+        "base_mean": 1.0,
+        "faq_mean": 1.0,
+        "faq_minus_base": 0.0,
+        "pct_change": 0.0
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 1152.25,
+        "faq_mean": 1153.25,
+        "faq_minus_base": 1.0,
+        "pct_change": 0.08678672163159037
+      },
+      "infidelity_sum": {
+        "base_mean": 68.19499324708002,
+        "faq_mean": 68.23121099078281,
+        "faq_minus_base": 0.036217743702792404,
+        "pct_change": 0.05310909493248345
       },
       "failure_prob": {
         "base_mean": 1.0,
@@ -26,15 +46,15 @@
     "tket": {
       "swaps": {
         "base_mean": 851.0,
-        "faq_mean": 1039.0,
-        "faq_minus_base": 188.0,
-        "pct_change": 22.09165687426557
+        "faq_mean": 1037.0,
+        "faq_minus_base": 186.0,
+        "pct_change": 21.856639247943598
       },
       "infidelity_sum": {
         "base_mean": 63.839809566819156,
-        "faq_mean": 70.21775423288098,
-        "faq_minus_base": 6.377944666061822,
-        "pct_change": 9.990544629344836
+        "faq_mean": 70.15075140703081,
+        "faq_minus_base": 6.310941840211655,
+        "pct_change": 9.885590015124006
       },
       "failure_prob": {
         "base_mean": 1.0,
@@ -51,15 +71,35 @@
     "sabre": {
       "swaps": {
         "base_mean": 5603.15,
-        "faq_mean": 5693.55,
-        "faq_minus_base": 90.40000000000055,
-        "pct_change": 1.6133781890543812
+        "faq_mean": 5705.85,
+        "faq_minus_base": 102.70000000000073,
+        "pct_change": 1.8328975665474017
       },
       "infidelity_sum": {
         "base_mean": 310.06553650131895,
-        "faq_mean": 313.33962053205914,
-        "faq_minus_base": 3.274084030740198,
-        "pct_change": 1.055932906211997
+        "faq_mean": 313.7850987796045,
+        "faq_minus_base": 3.7195622782855366,
+        "pct_change": 1.1996051932297591
+      },
+      "failure_prob": {
+        "base_mean": 1.0,
+        "faq_mean": 1.0,
+        "faq_minus_base": 0.0,
+        "pct_change": 0.0
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 5603.15,
+        "faq_mean": 5642.75,
+        "faq_minus_base": 39.600000000000364,
+        "pct_change": 0.7067453129043549
+      },
+      "infidelity_sum": {
+        "base_mean": 310.06553650131895,
+        "faq_mean": 311.49975915195296,
+        "faq_minus_base": 1.4342226506340126,
+        "pct_change": 0.46255468015482326
       },
       "failure_prob": {
         "base_mean": 1.0,
@@ -71,15 +111,15 @@
     "tket": {
       "swaps": {
         "base_mean": 5035.0,
-        "faq_mean": 4840.45,
-        "faq_minus_base": -194.55000000000018,
-        "pct_change": -3.8639523336643533
+        "faq_mean": 4501.15,
+        "faq_minus_base": -533.8500000000004,
+        "pct_change": -10.602780536246282
       },
       "infidelity_sum": {
         "base_mean": 323.0622738290966,
-        "faq_mean": 314.79014116735937,
-        "faq_minus_base": -8.27213266173726,
-        "pct_change": -2.5605381165964634
+        "faq_mean": 302.7513631605228,
+        "faq_minus_base": -20.310910668573797,
+        "pct_change": -6.286995515706202
       },
       "failure_prob": {
         "base_mean": 1.0,
@@ -96,15 +136,35 @@
     "sabre": {
       "swaps": {
         "base_mean": 18579.0,
-        "faq_mean": 18625.3,
-        "faq_minus_base": 46.29999999999927,
-        "pct_change": 0.24920609290058274
+        "faq_mean": 18641.65,
+        "faq_minus_base": 62.650000000001455,
+        "pct_change": 0.33720867646268077
       },
       "infidelity_sum": {
         "base_mean": 1025.2881064841768,
-        "faq_mean": 1026.964988017598,
-        "faq_minus_base": 1.6768815334212377,
-        "pct_change": 0.16355222720484341
+        "faq_mean": 1027.5571481271384,
+        "faq_minus_base": 2.2690416429616107,
+        "pct_change": 0.22130771132637034
+      },
+      "failure_prob": {
+        "base_mean": 1.0,
+        "faq_mean": 1.0,
+        "faq_minus_base": 0.0,
+        "pct_change": 0.0
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 18579.0,
+        "faq_mean": 18570.55,
+        "faq_minus_base": -8.450000000000728,
+        "pct_change": -0.04548145755961423
+      },
+      "infidelity_sum": {
+        "base_mean": 1025.2881064841768,
+        "faq_mean": 1024.9820665498903,
+        "faq_minus_base": -0.3060399342864457,
+        "pct_change": -0.02984916457637352
       },
       "failure_prob": {
         "base_mean": 1.0,
@@ -116,15 +176,15 @@
     "tket": {
       "swaps": {
         "base_mean": 12610.0,
-        "faq_mean": 15669.15,
-        "faq_minus_base": 3059.1499999999996,
-        "pct_change": 24.25971451229183
+        "faq_mean": 15650.55,
+        "faq_minus_base": 3040.5499999999993,
+        "pct_change": 24.112212529738297
       },
       "infidelity_sum": {
         "base_mean": 897.7654309063595,
-        "faq_mean": 1018.9029182693745,
-        "faq_minus_base": 121.137487363015,
-        "pct_change": 13.493222527037812
+        "faq_mean": 1018.2220246877605,
+        "faq_minus_base": 120.45659378140101,
+        "pct_change": 13.417379377126531
       },
       "failure_prob": {
         "base_mean": 1.0,
@@ -139,6 +199,26 @@
     "qubits": 10,
     "architecture": "IBM_Eagle_127_Brisbane",
     "sabre": {
+      "swaps": {
+        "base_mean": 0.0,
+        "faq_mean": 1.2,
+        "faq_minus_base": 1.2,
+        "pct_change": null
+      },
+      "infidelity_sum": {
+        "base_mean": 0.3259596933252694,
+        "faq_mean": 0.3694209857686387,
+        "faq_minus_base": 0.04346129244336927,
+        "pct_change": 13.33333333333334
+      },
+      "failure_prob": {
+        "base_mean": 0.2781657184150353,
+        "faq_mean": 0.3072558475031187,
+        "faq_minus_base": 0.029090129088083394,
+        "pct_change": 10.457841194032278
+      }
+    },
+    "sabre_soft": {
       "swaps": {
         "base_mean": 0.0,
         "faq_mean": 0.0,
@@ -186,41 +266,61 @@
     "sabre": {
       "swaps": {
         "base_mean": 9.6,
-        "faq_mean": 23.5,
-        "faq_minus_base": 13.9,
-        "pct_change": 144.79166666666669
+        "faq_mean": 24.05,
+        "faq_minus_base": 14.450000000000001,
+        "pct_change": 150.52083333333334
       },
       "infidelity_sum": {
         "base_mean": 1.0358274699003007,
-        "faq_mean": 1.5392541073693278,
-        "faq_minus_base": 0.503426637469027,
-        "pct_change": 48.601398601398586
+        "faq_mean": 1.5591738664058723,
+        "faq_minus_base": 0.5233463965055716,
+        "pct_change": 50.524475524475534
       },
       "failure_prob": {
         "base_mean": 0.6449434081708537,
-        "faq_mean": 0.7746103824147401,
-        "faq_minus_base": 0.1296669742438864,
-        "pct_change": 20.10517087253274
+        "faq_mean": 0.7778878302973304,
+        "faq_minus_base": 0.13294442212647672,
+        "pct_change": 20.613346914192824
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 9.6,
+        "faq_mean": 9.7,
+        "faq_minus_base": 0.09999999999999964,
+        "pct_change": 1.041666666666663
+      },
+      "infidelity_sum": {
+        "base_mean": 1.0358274699003007,
+        "faq_mean": 1.0394492442705816,
+        "faq_minus_base": 0.0036217743702808836,
+        "pct_change": 0.34965034965036046
+      },
+      "failure_prob": {
+        "base_mean": 0.6449434081708537,
+        "faq_mean": 0.6453058506023989,
+        "faq_minus_base": 0.0003624424315451513,
+        "pct_change": 0.05619755577827934
       }
     },
     "tket": {
       "swaps": {
         "base_mean": 0.0,
-        "faq_mean": 0.6,
-        "faq_minus_base": 0.6,
+        "faq_mean": 0.9,
+        "faq_minus_base": 0.9,
         "pct_change": null
       },
       "infidelity_sum": {
         "base_mean": 0.6881371303533468,
-        "faq_mean": 0.731598422796716,
-        "faq_minus_base": 0.04346129244336927,
-        "pct_change": 6.315789473684211
+        "faq_mean": 0.7533290690184007,
+        "faq_minus_base": 0.0651919386650539,
+        "pct_change": 9.473684210526317
       },
       "failure_prob": {
         "base_mean": 0.4974886892531868,
-        "faq_mean": 0.517118456777688,
-        "faq_minus_base": 0.019629767524501185,
-        "pct_change": 3.9457716222591364
+        "faq_mean": 0.5269333405399387,
+        "faq_minus_base": 0.02944465128675189,
+        "pct_change": 5.918657433388728
       }
     }
   },
@@ -231,41 +331,61 @@
     "sabre": {
       "swaps": {
         "base_mean": 30.75,
-        "faq_mean": 158.8,
-        "faq_minus_base": 128.05,
-        "pct_change": 416.42276422764235
+        "faq_mean": 147.75,
+        "faq_minus_base": 117.0,
+        "pct_change": 380.4878048780488
       },
       "infidelity_sum": {
         "base_mean": 2.8883650602988995,
-        "faq_mean": 7.526047141443472,
-        "faq_minus_base": 4.637682081144573,
-        "pct_change": 160.56426332288646
+        "faq_mean": 7.12584107352744,
+        "faq_minus_base": 4.23747601322854,
+        "pct_change": 146.70846394984537
       },
       "failure_prob": {
         "base_mean": 0.94431872506474,
-        "faq_mean": 0.9991262931818408,
-        "faq_minus_base": 0.05480756811710075,
-        "pct_change": 5.80392685884136
+        "faq_mean": 0.9986855602014089,
+        "faq_minus_base": 0.054366835136668845,
+        "pct_change": 5.757254801120416
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 30.75,
+        "faq_mean": 31.1,
+        "faq_minus_base": 0.3500000000000014,
+        "pct_change": 1.1382113821138258
+      },
+      "infidelity_sum": {
+        "base_mean": 2.8883650602988995,
+        "faq_mean": 2.901041270594882,
+        "faq_minus_base": 0.012676210295982315,
+        "pct_change": 0.43887147335422105
+      },
+      "failure_prob": {
+        "base_mean": 0.94431872506474,
+        "faq_mean": 0.9449952848539566,
+        "faq_minus_base": 0.0006765597892165465,
+        "pct_change": 0.07164527942302143
       }
     },
     "tket": {
       "swaps": {
         "base_mean": 12.0,
-        "faq_mean": 12.45,
-        "faq_minus_base": 0.4499999999999993,
-        "pct_change": 3.7499999999999942
+        "faq_mean": 7.9,
+        "faq_minus_base": -4.1,
+        "pct_change": -34.166666666666664
       },
       "infidelity_sum": {
         "base_mean": 2.245500109574074,
-        "faq_mean": 2.393992858755584,
-        "faq_minus_base": 0.1484927491815098,
-        "pct_change": 6.612903225806383
+        "faq_mean": 2.216525914611829,
+        "faq_minus_base": -0.028974194962245292,
+        "pct_change": -1.2903225806451246
       },
       "failure_prob": {
         "base_mean": 0.8941254217590154,
-        "faq_mean": 0.9059119292980234,
-        "faq_minus_base": 0.011786507539008007,
-        "pct_change": 1.3182163544595764
+        "faq_mean": 0.888247758718739,
+        "faq_minus_base": -0.005877663040276482,
+        "pct_change": -0.657364492412411
       }
     }
   },
@@ -276,21 +396,41 @@
     "sabre": {
       "swaps": {
         "base_mean": 12.0,
-        "faq_mean": 58.9,
-        "faq_minus_base": 46.9,
-        "pct_change": 390.8333333333333
+        "faq_mean": 50.65,
+        "faq_minus_base": 38.65,
+        "pct_change": 322.0833333333333
       },
       "infidelity_sum": {
         "base_mean": 1.0261694049128853,
-        "faq_mean": 2.7247815845745547,
-        "faq_minus_base": 1.6986121796616693,
-        "pct_change": 165.52941176470466
+        "faq_mean": 2.425985199026396,
+        "faq_minus_base": 1.3998157941135108,
+        "pct_change": 136.4117647058816
       },
       "failure_prob": {
         "base_mean": 0.6416228677105303,
-        "faq_mean": 0.9222824078556539,
-        "faq_minus_base": 0.2806595401451235,
-        "pct_change": 43.74213486913059
+        "faq_mean": 0.908491944805308,
+        "faq_minus_base": 0.2668690770947777,
+        "pct_change": 41.59282508851856
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 12.0,
+        "faq_mean": 12.0,
+        "faq_minus_base": 0.0,
+        "pct_change": 0.0
+      },
+      "infidelity_sum": {
+        "base_mean": 1.0261694049128853,
+        "faq_mean": 1.0261694049128853,
+        "faq_minus_base": 0.0,
+        "pct_change": 0.0
+      },
+      "failure_prob": {
+        "base_mean": 0.6416228677105303,
+        "faq_mean": 0.6416228677105303,
+        "faq_minus_base": 0.0,
+        "pct_change": 0.0
       }
     },
     "tket": {
@@ -321,41 +461,61 @@
     "sabre": {
       "swaps": {
         "base_mean": 225.0,
-        "faq_mean": 248.25,
-        "faq_minus_base": 23.25,
-        "pct_change": 10.333333333333334
+        "faq_mean": 258.9,
+        "faq_minus_base": 33.89999999999998,
+        "pct_change": 15.066666666666656
       },
       "infidelity_sum": {
         "base_mean": 13.09875063918226,
-        "faq_mean": 13.940813180272553,
-        "faq_minus_base": 0.8420625410902929,
-        "pct_change": 6.428571428571465
+        "faq_mean": 14.326532150707461,
+        "faq_minus_base": 1.227781511525201,
+        "pct_change": 9.373271889400973
       },
       "failure_prob": {
         "base_mean": 0.9999978805305512,
-        "faq_mean": 0.9999990245376458,
-        "faq_minus_base": 1.1440070946111547e-06,
-        "pct_change": 0.00011440095193043802
+        "faq_mean": 0.9999992537160045,
+        "faq_minus_base": 1.3731854533460819e-06,
+        "pct_change": 0.00013731883637768666
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 225.0,
+        "faq_mean": 222.25,
+        "faq_minus_base": -2.75,
+        "pct_change": -1.2222222222222223
+      },
+      "infidelity_sum": {
+        "base_mean": 13.09875063918226,
+        "faq_mean": 12.999151843999533,
+        "faq_minus_base": -0.09959879518272707,
+        "pct_change": -0.7603686635945068
+      },
+      "failure_prob": {
+        "base_mean": 0.9999978805305512,
+        "faq_mean": 0.9999976799628966,
+        "faq_minus_base": -2.0056765459575132e-07,
+        "pct_change": -2.0056807969366866e-05
       }
     },
     "tket": {
       "swaps": {
         "base_mean": 284.0,
-        "faq_mean": 213.6,
-        "faq_minus_base": -70.4,
-        "pct_change": -24.7887323943662
+        "faq_mean": 212.0,
+        "faq_minus_base": -72.0,
+        "pct_change": -25.352112676056336
       },
       "infidelity_sum": {
         "base_mean": 15.23559751764795,
-        "faq_mean": 12.68586836097024,
-        "faq_minus_base": -2.54972915667771,
-        "pct_change": -16.735340729001706
+        "faq_mean": 12.627919971045745,
+        "faq_minus_base": -2.607677546602204,
+        "pct_change": -17.115689381933567
       },
       "failure_prob": {
         "base_mean": 0.9999997583070016,
-        "faq_mean": 0.9999968650512574,
-        "faq_minus_base": -2.8932557442074014e-06,
-        "pct_change": -0.00028932564434872265
+        "faq_mean": 0.9999967208291954,
+        "faq_minus_base": -3.0374778061670327e-06,
+        "pct_change": -0.00030374785403043284
       }
     }
   },
@@ -366,41 +526,61 @@
     "sabre": {
       "swaps": {
         "base_mean": 57.2,
-        "faq_mean": 72.55,
-        "faq_minus_base": 15.349999999999994,
-        "pct_change": 26.835664335664323
+        "faq_mean": 70.3,
+        "faq_minus_base": 13.099999999999994,
+        "pct_change": 22.90209790209789
       },
       "infidelity_sum": {
         "base_mean": 3.327203388164578,
-        "faq_mean": 3.883145754002667,
-        "faq_minus_base": 0.5559423658380886,
-        "pct_change": 16.708998548621015
+        "faq_mean": 3.801655830671352,
+        "faq_minus_base": 0.47445244250677376,
+        "pct_change": 14.259796806966502
       },
       "failure_prob": {
         "base_mean": 0.9637623181304262,
-        "faq_mean": 0.9791038664645784,
-        "faq_minus_base": 0.015341548334152133,
-        "pct_change": 1.59183940329943
+        "faq_mean": 0.9769622470187566,
+        "faq_minus_base": 0.013199928888330326,
+        "pct_change": 1.3696249210009033
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 57.2,
+        "faq_mean": 57.65,
+        "faq_minus_base": 0.44999999999999574,
+        "pct_change": 0.7867132867132791
+      },
+      "infidelity_sum": {
+        "base_mean": 3.327203388164578,
+        "faq_mean": 3.343501372830841,
+        "faq_minus_base": 0.016297984666262977,
+        "pct_change": 0.489840348330903
+      },
+      "failure_prob": {
+        "base_mean": 0.9637623181304262,
+        "faq_mean": 0.9643195267946097,
+        "faq_minus_base": 0.0005572086641835172,
+        "pct_change": 0.05781598364049237
       }
     },
     "tket": {
       "swaps": {
         "base_mean": 79.0,
-        "faq_mean": 73.0,
-        "faq_minus_base": -6.0,
-        "pct_change": -7.59493670886076
+        "faq_mean": 73.9,
+        "faq_minus_base": -5.099999999999994,
+        "pct_change": -6.455696202531638
       },
       "infidelity_sum": {
         "base_mean": 4.116750200885776,
-        "faq_mean": 3.8994437386689307,
-        "faq_minus_base": -0.21730646221684546,
-        "pct_change": -5.278592375366593
+        "faq_mean": 3.932039708001458,
+        "faq_minus_base": -0.18471049288431818,
+        "pct_change": -4.486803519061593
       },
       "failure_prob": {
         "base_mean": 0.9837026082756708,
-        "faq_mean": 0.9797468256293176,
-        "faq_minus_base": -0.003955782646353212,
-        "pct_change": -0.402131966823519
+        "faq_mean": 0.980310199509218,
+        "faq_minus_base": -0.003392408766452748,
+        "pct_change": -0.34486121495593985
       }
     }
   },
@@ -411,41 +591,61 @@
     "sabre": {
       "swaps": {
         "base_mean": 308.65,
-        "faq_mean": 325.95,
-        "faq_minus_base": 17.30000000000001,
-        "pct_change": 5.60505426858902
+        "faq_mean": 327.95,
+        "faq_minus_base": 19.30000000000001,
+        "pct_change": 6.253037421027058
       },
       "infidelity_sum": {
         "base_mean": 15.621316488082858,
-        "faq_mean": 16.247883454141395,
-        "faq_minus_base": 0.6265669660585367,
-        "pct_change": 4.010974148923556
+        "faq_mean": 16.320318941547008,
+        "faq_minus_base": 0.6990024534641499,
+        "pct_change": 4.474670582325137
       },
       "failure_prob": {
         "base_mean": 0.9999998271113334,
-        "faq_mean": 0.9999999010100813,
-        "faq_minus_base": 7.389874789875961e-08,
-        "pct_change": 7.389876067501781e-06
+        "faq_mean": 0.9999999074341079,
+        "faq_minus_base": 8.032277454272929e-08,
+        "pct_change": 8.032278842962909e-06
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 308.65,
+        "faq_mean": 304.2,
+        "faq_minus_base": -4.449999999999989,
+        "pct_change": -1.441762514174628
+      },
+      "infidelity_sum": {
+        "base_mean": 15.621316488082858,
+        "faq_mean": 15.460147528605361,
+        "faq_minus_base": -0.16116895947749654,
+        "pct_change": -1.0317245643185617
+      },
+      "failure_prob": {
+        "base_mean": 0.9999998271113334,
+        "faq_mean": 0.9999997989218133,
+        "faq_minus_base": -2.818952005156916e-08,
+        "pct_change": -2.8189524925218537e-06
       }
     },
     "tket": {
       "swaps": {
         "base_mean": 398.0,
-        "faq_mean": 380.85,
-        "faq_minus_base": -17.149999999999977,
-        "pct_change": -4.309045226130648
+        "faq_mean": 387.1,
+        "faq_minus_base": -10.899999999999977,
+        "pct_change": -2.738693467336678
       },
       "infidelity_sum": {
         "base_mean": 18.85737188792837,
-        "faq_mean": 18.2362375834253,
-        "faq_minus_base": -0.6211343045030695,
-        "pct_change": -3.2938540332902453
+        "faq_mean": 18.462598481567817,
+        "faq_minus_base": -0.394773406360553,
+        "pct_change": -2.093469910371068
       },
       "failure_prob": {
         "base_mean": 0.99999999353829,
-        "faq_mean": 0.9999999871835742,
-        "faq_minus_base": -6.354715864631544e-09,
-        "pct_change": -6.354715905693875e-07
+        "faq_mean": 0.9999999898189893,
+        "faq_minus_base": -3.719300756266364e-09,
+        "pct_change": -3.7193007802994064e-07
       }
     }
   },
@@ -456,15 +656,35 @@
     "sabre": {
       "swaps": {
         "base_mean": 768.25,
-        "faq_mean": 781.8,
-        "faq_minus_base": 13.549999999999955,
-        "pct_change": 1.763748779694104
+        "faq_mean": 791.45,
+        "faq_minus_base": 23.200000000000045,
+        "pct_change": 3.019850309144165
       },
       "infidelity_sum": {
         "base_mean": 82.0036881869007,
-        "faq_mean": 81.92210701938856,
-        "faq_minus_base": -0.08158116751214095,
-        "pct_change": -0.09948475405911407
+        "faq_mean": 83.49732768154742,
+        "faq_minus_base": 1.4936394946467146,
+        "pct_change": 1.821429654776563
+      },
+      "failure_prob": {
+        "base_mean": 1.0,
+        "faq_mean": 1.0,
+        "faq_minus_base": 0.0,
+        "pct_change": 0.0
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 768.25,
+        "faq_mean": 767.9,
+        "faq_minus_base": -0.35000000000002274,
+        "pct_change": -0.045558086560367424
+      },
+      "infidelity_sum": {
+        "base_mean": 82.0036881869007,
+        "faq_mean": 83.77470073373334,
+        "faq_minus_base": 1.7710125468326368,
+        "pct_change": 2.1596742609871282
       },
       "failure_prob": {
         "base_mean": 1.0,
@@ -476,15 +696,15 @@
     "tket": {
       "swaps": {
         "base_mean": 639.0,
-        "faq_mean": 605.5,
-        "faq_minus_base": -33.5,
-        "pct_change": -5.242566510172144
+        "faq_mean": 606.5,
+        "faq_minus_base": -32.5,
+        "pct_change": -5.086071987480438
       },
       "infidelity_sum": {
         "base_mean": 90.71768557211274,
-        "faq_mean": 77.44254197464312,
-        "faq_minus_base": -13.275143597469622,
-        "pct_change": -14.633468120080098
+        "faq_mean": 77.02020812359231,
+        "faq_minus_base": -13.69747744852043,
+        "pct_change": -15.09901554711966
       },
       "failure_prob": {
         "base_mean": 1.0,
@@ -501,15 +721,35 @@
     "sabre": {
       "swaps": {
         "base_mean": 3461.75,
-        "faq_mean": 3513.45,
-        "faq_minus_base": 51.69999999999982,
-        "pct_change": 1.4934642882934879
+        "faq_mean": 3509.2,
+        "faq_minus_base": 47.44999999999982,
+        "pct_change": 1.3706940131436358
       },
       "infidelity_sum": {
         "base_mean": 361.46443600974703,
-        "faq_mean": 353.3953032882659,
-        "faq_minus_base": -8.06913272148114,
-        "pct_change": -2.2323448498993
+        "faq_mean": 350.0406124136373,
+        "faq_minus_base": -11.423823596109742,
+        "pct_change": -3.160428096943317
+      },
+      "failure_prob": {
+        "base_mean": 1.0,
+        "faq_mean": 1.0,
+        "faq_minus_base": 0.0,
+        "pct_change": 0.0
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 3461.75,
+        "faq_mean": 3452.4,
+        "faq_minus_base": -9.349999999999909,
+        "pct_change": -0.27009460532967167
+      },
+      "infidelity_sum": {
+        "base_mean": 361.46443600974703,
+        "faq_mean": 355.14661855008904,
+        "faq_minus_base": -6.317817459657988,
+        "pct_change": -1.747839297664024
       },
       "failure_prob": {
         "base_mean": 1.0,
@@ -521,15 +761,15 @@
     "tket": {
       "swaps": {
         "base_mean": 2669.0,
-        "faq_mean": 2567.0,
-        "faq_minus_base": -102.0,
-        "pct_change": -3.821656050955414
+        "faq_mean": 2540.6,
+        "faq_minus_base": -128.4000000000001,
+        "pct_change": -4.810790558261525
       },
       "infidelity_sum": {
         "base_mean": 329.9212562833917,
-        "faq_mean": 338.14248104159833,
-        "faq_minus_base": 8.221224758206631,
-        "pct_change": 2.491874834261926
+        "faq_mean": 327.9342917165915,
+        "faq_minus_base": -1.986964566800225,
+        "pct_change": -0.6022541830689099
       },
       "failure_prob": {
         "base_mean": 1.0,
@@ -546,15 +786,35 @@
     "sabre": {
       "swaps": {
         "base_mean": 12375.25,
-        "faq_mean": 12390.75,
-        "faq_minus_base": 15.5,
-        "pct_change": 0.12524999494959696
+        "faq_mean": 12428.95,
+        "faq_minus_base": 53.70000000000073,
+        "pct_change": 0.43393062766409346
       },
       "infidelity_sum": {
         "base_mean": 1229.130648419155,
-        "faq_mean": 1213.3336285306273,
-        "faq_minus_base": -15.797019888527757,
-        "pct_change": -1.285218939812873
+        "faq_mean": 1241.4524841760715,
+        "faq_minus_base": 12.321835756916471,
+        "pct_change": 1.0024838102250715
+      },
+      "failure_prob": {
+        "base_mean": 1.0,
+        "faq_mean": 1.0,
+        "faq_minus_base": 0.0,
+        "pct_change": 0.0
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 12375.25,
+        "faq_mean": 12365.85,
+        "faq_minus_base": -9.399999999999636,
+        "pct_change": -0.07595806145330103
+      },
+      "infidelity_sum": {
+        "base_mean": 1229.130648419155,
+        "faq_mean": 1212.402470794491,
+        "faq_minus_base": -16.728177624664113,
+        "pct_change": -1.3609763653830484
       },
       "failure_prob": {
         "base_mean": 1.0,
@@ -566,15 +826,15 @@
     "tket": {
       "swaps": {
         "base_mean": 8828.0,
-        "faq_mean": 8702.3,
-        "faq_minus_base": -125.70000000000073,
-        "pct_change": -1.4238785681921242
+        "faq_mean": 8704.1,
+        "faq_minus_base": -123.89999999999964,
+        "pct_change": -1.4034888989578573
       },
       "infidelity_sum": {
         "base_mean": 1063.7502145579922,
-        "faq_mean": 1102.2433845963883,
-        "faq_minus_base": 38.4931700383961,
-        "pct_change": 3.6186286509366976
+        "faq_mean": 1110.289139331638,
+        "faq_minus_base": 46.538924773645704,
+        "pct_change": 4.374986170318516
       },
       "failure_prob": {
         "base_mean": 1.0,
@@ -591,41 +851,61 @@
     "sabre": {
       "swaps": {
         "base_mean": 45.7,
-        "faq_mean": 64.0,
-        "faq_minus_base": 18.299999999999997,
-        "pct_change": 40.043763676148785
+        "faq_mean": 49.5,
+        "faq_minus_base": 3.799999999999997,
+        "pct_change": 8.315098468271328
       },
       "infidelity_sum": {
         "base_mean": 5.381799946275162,
-        "faq_mean": 6.461311060185747,
-        "faq_minus_base": 1.079511113910585,
-        "pct_change": 20.05855150111504
+        "faq_mean": 5.611977730396186,
+        "faq_minus_base": 0.23017778412102352,
+        "pct_change": 4.276966561723157
       },
       "failure_prob": {
         "base_mean": 0.9943887502279694,
-        "faq_mean": 0.9977449896612933,
-        "faq_minus_base": 0.003356239433323971,
-        "pct_change": 0.33751784023648035
+        "faq_mean": 0.9921279432845687,
+        "faq_minus_base": -0.002260806943400695,
+        "pct_change": -0.2273564481579656
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 45.7,
+        "faq_mean": 39.45,
+        "faq_minus_base": -6.25,
+        "pct_change": -13.676148796498905
+      },
+      "infidelity_sum": {
+        "base_mean": 5.381799946275162,
+        "faq_mean": 5.088950872222883,
+        "faq_minus_base": -0.29284907405227933,
+        "pct_change": -5.441470827152639
+      },
+      "failure_prob": {
+        "base_mean": 0.9943887502279694,
+        "faq_mean": 0.9913130463178232,
+        "faq_minus_base": -0.0030757039101461103,
+        "pct_change": -0.3093059841476472
       }
     },
     "tket": {
       "swaps": {
         "base_mean": 13.0,
-        "faq_mean": 1.1,
-        "faq_minus_base": -11.9,
-        "pct_change": -91.53846153846155
+        "faq_mean": 0.9,
+        "faq_minus_base": -12.1,
+        "pct_change": -93.07692307692308
       },
       "infidelity_sum": {
         "base_mean": 3.4704081968019187,
-        "faq_mean": 3.079034644363877,
-        "faq_minus_base": -0.3913735524380417,
-        "pct_change": -11.27745009358564
+        "faq_mean": 3.062532948317093,
+        "faq_minus_base": -0.4078752484848258,
+        "pct_change": -11.752947358201107
       },
       "failure_prob": {
         "base_mean": 0.9688956686192611,
-        "faq_mean": 0.9538403885408455,
-        "faq_minus_base": -0.015055280078415612,
-        "pct_change": -1.5538597772730636
+        "faq_mean": 0.953074092171669,
+        "faq_minus_base": -0.01582157644759208,
+        "pct_change": -1.6329494454381084
       }
     }
   },
@@ -636,41 +916,61 @@
     "sabre": {
       "swaps": {
         "base_mean": 147.9,
-        "faq_mean": 172.95,
-        "faq_minus_base": 25.049999999999983,
-        "pct_change": 16.937119675456376
+        "faq_mean": 174.35,
+        "faq_minus_base": 26.44999999999999,
+        "pct_change": 17.88370520622041
       },
       "infidelity_sum": {
         "base_mean": 15.815373134266684,
-        "faq_mean": 17.00999314400467,
-        "faq_minus_base": 1.1946200097379869,
-        "pct_change": 7.5535366734385825
+        "faq_mean": 17.14324271873236,
+        "faq_minus_base": 1.3278695844656756,
+        "pct_change": 8.396068642785426
       },
       "failure_prob": {
         "base_mean": 0.9999998232919861,
-        "faq_mean": 0.9999999527363294,
-        "faq_minus_base": 1.2944434324424492e-07,
-        "pct_change": 1.2944436611810176e-05
+        "faq_mean": 0.9999999602541362,
+        "faq_minus_base": 1.3696215006575585e-07,
+        "pct_change": 1.3696217426806965e-05
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 147.9,
+        "faq_mean": 148.55,
+        "faq_minus_base": 0.6500000000000057,
+        "pct_change": 0.4394861392833033
+      },
+      "infidelity_sum": {
+        "base_mean": 15.815373134266684,
+        "faq_mean": 15.686674157373115,
+        "faq_minus_base": -0.12869897689356868,
+        "pct_change": -0.8137587131265374
+      },
+      "failure_prob": {
+        "base_mean": 0.9999998232919861,
+        "faq_mean": 0.9999998183870901,
+        "faq_minus_base": -4.904896044877205e-09,
+        "pct_change": -4.904896911611797e-07
       }
     },
     "tket": {
       "swaps": {
         "base_mean": 148.0,
-        "faq_mean": 142.0,
-        "faq_minus_base": -6.0,
-        "pct_change": -4.054054054054054
+        "faq_mean": 144.5,
+        "faq_minus_base": -3.5,
+        "pct_change": -2.364864864864865
       },
       "infidelity_sum": {
         "base_mean": 17.02716739845916,
-        "faq_mean": 14.724695843364685,
-        "faq_minus_base": -2.302471555094474,
-        "pct_change": -13.522340511568775
+        "faq_mean": 15.066007586979342,
+        "faq_minus_base": -1.961159811479817,
+        "pct_change": -11.517827748949532
       },
       "failure_prob": {
         "base_mean": 0.9999999597101956,
-        "faq_mean": 0.9999995287879754,
-        "faq_minus_base": -4.309222202403262e-07,
-        "pct_change": -4.3092223760209885e-05
+        "faq_mean": 0.9999996417500627,
+        "faq_minus_base": -3.1796013288953873e-07,
+        "pct_change": -3.179601457000908e-05
       }
     }
   },
@@ -681,21 +981,41 @@
     "sabre": {
       "swaps": {
         "base_mean": 5.0,
-        "faq_mean": 5.1,
-        "faq_minus_base": 0.09999999999999964,
-        "pct_change": 1.9999999999999927
+        "faq_mean": 7.35,
+        "faq_minus_base": 2.3499999999999996,
+        "pct_change": 46.99999999999999
       },
       "infidelity_sum": {
         "base_mean": 0.6398468054162696,
-        "faq_mean": 0.6434685797865505,
-        "faq_minus_base": 0.0036217743702808836,
-        "pct_change": 0.5660377358490741
+        "faq_mean": 0.7249585031178678,
+        "faq_minus_base": 0.08511169770159821,
+        "pct_change": 13.301886792452844
       },
       "failure_prob": {
         "base_mean": 0.4726267914258278,
-        "faq_mean": 0.4716903992230147,
-        "faq_minus_base": -0.0009363922028131078,
-        "pct_change": -0.1981250787726581
+        "faq_mean": 0.5091631144229487,
+        "faq_minus_base": 0.036536322997120896,
+        "pct_change": 7.7304807217757485
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 5.0,
+        "faq_mean": 3.9,
+        "faq_minus_base": -1.1,
+        "pct_change": -22.000000000000004
+      },
+      "infidelity_sum": {
+        "base_mean": 0.6398468054162696,
+        "faq_mean": 0.6000072873431812,
+        "faq_minus_base": -0.03983951807308839,
+        "pct_change": -6.2264150943396075
+      },
+      "failure_prob": {
+        "base_mean": 0.4726267914258278,
+        "faq_mean": 0.4500886620748874,
+        "faq_minus_base": -0.022538129350940406,
+        "pct_change": -4.768694826407752
       }
     },
     "tket": {
@@ -713,9 +1033,9 @@
       },
       "failure_prob": {
         "base_mean": 0.3679318680341367,
-        "faq_mean": 0.4272699005342391,
-        "faq_minus_base": 0.05933803250010239,
-        "pct_change": 16.12745120914533
+        "faq_mean": 0.42726990053423897,
+        "faq_minus_base": 0.05933803250010228,
+        "pct_change": 16.127451209145303
       }
     }
   },
@@ -726,41 +1046,61 @@
     "sabre": {
       "swaps": {
         "base_mean": 19.3,
-        "faq_mean": 14.0,
-        "faq_minus_base": -5.300000000000001,
-        "pct_change": -27.46113989637306
+        "faq_mean": 14.15,
+        "faq_minus_base": -5.15,
+        "pct_change": -26.683937823834196
       },
       "infidelity_sum": {
         "base_mean": 0.9283814969153046,
-        "faq_mean": 0.7364274552904235,
-        "faq_minus_base": -0.19195404162488106,
-        "pct_change": -20.67620286085827
+        "faq_mean": 0.7418601168458447,
+        "faq_minus_base": -0.18652138006945984,
+        "pct_change": -20.091027308192466
       },
       "failure_prob": {
         "base_mean": 0.603651154303305,
-        "faq_mean": 0.5182800513961705,
-        "faq_minus_base": -0.08537110290713446,
-        "pct_change": -14.142456665334176
+        "faq_mean": 0.5216537441578898,
+        "faq_minus_base": -0.08199741014541517,
+        "pct_change": -13.583575474157964
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 19.3,
+        "faq_mean": 12.3,
+        "faq_minus_base": -7.0,
+        "pct_change": -36.26943005181347
+      },
+      "infidelity_sum": {
+        "base_mean": 0.9283814969153046,
+        "faq_mean": 0.6748572909956505,
+        "faq_minus_base": -0.2535242059196541,
+        "pct_change": -27.308192457737324
+      },
+      "failure_prob": {
+        "base_mean": 0.603651154303305,
+        "faq_mean": 0.4887296182375236,
+        "faq_minus_base": -0.11492153606578137,
+        "pct_change": -19.037739801627044
       }
     },
     "tket": {
       "swaps": {
         "base_mean": 3.0,
-        "faq_mean": 21.8,
-        "faq_minus_base": 18.8,
-        "pct_change": 626.6666666666666
+        "faq_mean": 22.2,
+        "faq_minus_base": 19.2,
+        "pct_change": 640.0
       },
       "infidelity_sum": {
         "base_mean": 0.5191209930735774,
-        "faq_mean": 1.0189258561723236,
-        "faq_minus_base": 0.49980486309874617,
-        "pct_change": 96.27906976744177
+        "faq_mean": 1.0334129536534467,
+        "faq_minus_base": 0.5142919605798693,
+        "pct_change": 99.06976744186038
       },
       "failure_prob": {
         "base_mean": 0.4049566346038328,
-        "faq_mean": 0.6387913061167265,
-        "faq_minus_base": 0.23383467151289372,
-        "pct_change": 57.74313877871222
+        "faq_mean": 0.6439842856869799,
+        "faq_minus_base": 0.23902765108314705,
+        "pct_change": 59.02549326472616
       }
     }
   },
@@ -771,41 +1111,61 @@
     "sabre": {
       "swaps": {
         "base_mean": 36.65,
-        "faq_mean": 40.65,
-        "faq_minus_base": 4.0,
-        "pct_change": 10.914051841746248
+        "faq_mean": 39.7,
+        "faq_minus_base": 3.0500000000000043,
+        "pct_change": 8.321964529331527
       },
       "infidelity_sum": {
         "base_mean": 2.051735180764056,
-        "faq_mean": 2.1966061555752843,
-        "faq_minus_base": 0.14487097481122824,
-        "pct_change": 7.060900264783636
+        "faq_mean": 2.162199299057618,
+        "faq_minus_base": 0.11046411829356195,
+        "pct_change": 5.383936451897543
       },
       "failure_prob": {
         "base_mean": 0.8710250389084321,
-        "faq_mean": 0.887022622249838,
-        "faq_minus_base": 0.015997583341405885,
-        "pct_change": 1.8366387447890185
+        "faq_mean": 0.8838246396681843,
+        "faq_minus_base": 0.012799600759752172,
+        "pct_change": 1.469487120116848
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 36.65,
+        "faq_mean": 33.0,
+        "faq_minus_base": -3.6499999999999986,
+        "pct_change": -9.959072305593448
+      },
+      "infidelity_sum": {
+        "base_mean": 2.051735180764056,
+        "faq_mean": 1.9195404162488092,
+        "faq_minus_base": -0.1321947645152468,
+        "pct_change": -6.443071491615118
+      },
+      "failure_prob": {
+        "base_mean": 0.8710250389084321,
+        "faq_mean": 0.8521270891302952,
+        "faq_minus_base": -0.018897949778136858,
+        "pct_change": -2.169621874684539
       }
     },
     "tket": {
       "swaps": {
         "base_mean": 55.0,
-        "faq_mean": 50.85,
-        "faq_minus_base": -4.149999999999999,
-        "pct_change": -7.545454545454542
+        "faq_mean": 49.8,
+        "faq_minus_base": -5.200000000000003,
+        "pct_change": -9.45454545454546
       },
       "infidelity_sum": {
         "base_mean": 2.7163307777105663,
-        "faq_mean": 2.566027141343917,
-        "faq_minus_base": -0.15030363636664923,
-        "pct_change": -5.533333333333256
+        "faq_mean": 2.527998510455969,
+        "faq_minus_base": -0.1883322672545975,
+        "pct_change": -6.93333333333327
       },
       "failure_prob": {
         "base_mean": 0.9338830924712449,
-        "faq_mean": 0.922722135419258,
-        "faq_minus_base": -0.011160957051986942,
-        "pct_change": -1.1951128724745166
+        "faq_mean": 0.9193814199987077,
+        "faq_minus_base": -0.014501672472537197,
+        "pct_change": -1.5528359587454161
       }
     }
   },
@@ -816,21 +1176,41 @@
     "sabre": {
       "swaps": {
         "base_mean": 7.85,
-        "faq_mean": 0.75,
-        "faq_minus_base": -7.1,
-        "pct_change": -90.44585987261146
+        "faq_mean": 0.6,
+        "faq_minus_base": -7.25,
+        "pct_change": -92.35668789808918
       },
       "infidelity_sum": {
         "base_mean": 1.172503604649214,
-        "faq_mean": 0.7062038510686481,
-        "faq_minus_base": -0.46629975358056597,
-        "pct_change": -39.76957953319658
+        "faq_mean": 0.6730873356224485,
+        "faq_minus_base": -0.4994162690267656,
+        "pct_change": -42.59400713537076
       },
       "failure_prob": {
         "base_mean": 0.6879897297340578,
-        "faq_mean": 0.5050411803389598,
-        "faq_minus_base": -0.18294854939509797,
-        "pct_change": -26.591755877782752
+        "faq_mean": 0.4891730656220174,
+        "faq_minus_base": -0.1988166641120404,
+        "pct_change": -28.898202330562828
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 7.85,
+        "faq_mean": 0.9,
+        "faq_minus_base": -6.949999999999999,
+        "pct_change": -88.53503184713375
+      },
+      "infidelity_sum": {
+        "base_mean": 1.172503604649214,
+        "faq_mean": 0.6955543507860655,
+        "faq_minus_base": -0.47694925386314857,
+        "pct_change": -40.677849686086105
+      },
+      "failure_prob": {
+        "base_mean": 0.6879897297340578,
+        "faq_mean": 0.4990984846509957,
+        "faq_minus_base": -0.1888912450830621,
+        "pct_change": -27.455532680128513
       }
     },
     "tket": {
@@ -842,15 +1222,15 @@
       },
       "infidelity_sum": {
         "base_mean": 0.6853087367294217,
-        "faq_mean": 0.7866533494307015,
-        "faq_minus_base": 0.10134461270127981,
-        "pct_change": 14.788168787244482
+        "faq_mean": 0.7895612168063526,
+        "faq_minus_base": 0.10425248007693089,
+        "pct_change": 15.212483730247929
       },
       "failure_prob": {
         "base_mean": 0.49606537757193025,
-        "faq_mean": 0.5446222378272851,
-        "faq_minus_base": 0.04855686025535488,
-        "pct_change": 9.788399362403409
+        "faq_mean": 0.5459483206417532,
+        "faq_minus_base": 0.049882943069822994,
+        "pct_change": 10.055719533175823
       }
     }
   },
@@ -861,41 +1241,61 @@
     "sabre": {
       "swaps": {
         "base_mean": 7.55,
-        "faq_mean": 0.6,
-        "faq_minus_base": -6.95,
-        "pct_change": -92.05298013245033
+        "faq_mean": 0.8,
+        "faq_minus_base": -6.75,
+        "pct_change": -89.40397350993378
       },
       "infidelity_sum": {
         "base_mean": 0.7503276167189112,
-        "faq_mean": 0.3593807481124581,
-        "faq_minus_base": -0.3909468686064531,
-        "pct_change": -52.10348918196759
+        "faq_mean": 0.37525131170692233,
+        "faq_minus_base": -0.3750763050119889,
+        "pct_change": -49.9883379812342
       },
       "failure_prob": {
         "base_mean": 0.5265939576027929,
-        "faq_mean": 0.3011651726114988,
-        "faq_minus_base": -0.22542878499129415,
-        "pct_change": -42.80884384194433
+        "faq_mean": 0.3117504139321848,
+        "faq_minus_base": -0.21484354367060815,
+        "pct_change": -40.798710385633306
+      }
+    },
+    "sabre_soft": {
+      "swaps": {
+        "base_mean": 7.55,
+        "faq_mean": 0.7,
+        "faq_minus_base": -6.85,
+        "pct_change": -90.72847682119205
+      },
+      "infidelity_sum": {
+        "base_mean": 0.7503276167189112,
+        "faq_mean": 0.37282093370992053,
+        "faq_minus_base": -0.3775066830089907,
+        "pct_change": -50.31224689020247
+      },
+      "failure_prob": {
+        "base_mean": 0.5265939576027929,
+        "faq_mean": 0.3102743839981956,
+        "faq_minus_base": -0.2163195736045973,
+        "pct_change": -41.07900793038837
       }
     },
     "tket": {
       "swaps": {
         "base_mean": 0.0,
-        "faq_mean": 13.0,
-        "faq_minus_base": 13.0,
+        "faq_mean": 14.0,
+        "faq_minus_base": 14.0,
         "pct_change": null
       },
       "infidelity_sum": {
         "base_mean": 0.3866777857563707,
-        "faq_mean": 0.9911113232722407,
-        "faq_minus_base": 0.60443353751587,
-        "pct_change": 156.31452330098375
+        "faq_mean": 1.038959663238736,
+        "faq_minus_base": 0.6522818774823652,
+        "pct_change": 168.68873814575437
       },
       "failure_prob": {
         "base_mean": 0.3206900569937652,
-        "faq_mean": 0.6271351911639301,
-        "faq_minus_base": 0.30644513417016495,
-        "pct_change": 95.55804038418404
+        "faq_mean": 0.6449218904172043,
+        "faq_minus_base": 0.3242318334234391,
+        "pct_change": 101.10442352434481
       }
     }
   }

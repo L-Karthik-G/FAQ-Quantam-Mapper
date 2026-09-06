@@ -1,6 +1,14 @@
 {
-  "checked": true,
-  "n_checked": 1600,
-  "n_divergent": 0,
-  "samples": []
+  "canonical_arms": {
+    "checked": true,
+    "n_checked": 1600,
+    "n_divergent": 0,
+    "samples": []
+  },
+  "soft_arm": {
+    "checked": true,
+    "n_checked": 400,
+    "n_divergent": 0,
+    "samples": []
+  }
 }
