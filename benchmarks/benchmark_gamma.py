@@ -21,7 +21,8 @@ Cells (authorized A6 list, mirrors the A5 cells):
 Usage:
   smoke:   uv run python benchmarks/benchmark_gamma.py --cells vqe50-grid --gammas 0.7,0.9,1.0 --out benchmarks/results/a6_gamma_smoke_raw.json
   full:    uv run python benchmarks/benchmark_gamma.py --gammas 0.5,0.6,0.7,0.8,0.85,0.9,0.95,0.98,1.0 --out benchmarks/results/a6_gamma_results.json
-  slices:  add --slice K/N to run every Nth condition-slice in a separate process, then merge.
+  slices:  add --slice K/N to run every Nth condition-slice in a separate process, then
+           uv run python benchmarks/benchmark_gamma.py --merge N --out benchmarks/results/a6_gamma_results.json
 """
 from __future__ import annotations
 
@@ -140,13 +141,32 @@ def run_condition(cell_id: str, gamma: float, router: str, seed: int) -> Dict:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--cells", default=",".join(CELLS))
-    ap.add_argument("--gammas", required=True)
+    ap.add_argument("--gammas", default=None, help="comma list (ignored in --merge mode)")
     ap.add_argument("--routers", default="sabre,tket")
     ap.add_argument("--seeds", default=",".join(str(s) for s in SEEDS))
     ap.add_argument("--out", required=True)
     ap.add_argument("--slice", default=None, help="K/N : run slice K (0-based) of N equal chunks over conditions")
+    ap.add_argument("--merge", type=int, default=None,
+                    help="N : merge <out>_slice0..N-1.json into <out> instead of running")
     args = ap.parse_args()
 
+    if args.merge is not None:
+        base, ext = os.path.splitext(args.out)
+        rows, conditions = [], None
+        for k in range(args.merge):
+            p = f"{base}_slice{k}{ext}"
+            with open(p) as f:
+                data = json.load(f)
+            if conditions is None:
+                conditions = data["conditions"]
+            rows.extend(data["rows"])
+        with open(args.out, "w") as f:
+            json.dump({"conditions": conditions, "rows": rows}, f, indent=2)
+        print(f"Merged {len(rows)} rows from {args.merge} slices -> {args.out}")
+        return
+
+    if not args.gammas:
+        ap.error("--gammas is required unless --merge is used")
     cells = [c for c in args.cells.split(",") if c]
     gammas = [float(g) for g in args.gammas.split(",")]
     routers = args.routers.split(",")
