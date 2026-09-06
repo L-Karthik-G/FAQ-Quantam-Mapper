@@ -246,6 +246,27 @@ and a real win on the structural holdout circuits.
 
 ---
 
+## 🧪 Objective-function test: transitive-dependence-weighted interaction matrix A (item 5) — negative
+
+The theoretical review questioned whether the raw time-decayed interaction-frequency matrix A
+has any link to the router's SWAP count. A candidate fix was implemented and A/B tested:
+`DAGInteractionMatrixBuilder.build_matrix_dependence_weighted` (variant **A2**) scales each
+two-qubit gate by `(1 + d(g))`, where `d(g)` is its transitive dependence depth (longest chain
+of earlier two-qubit gates sharing a qubit), i.e. weighting interactions by dependence distance
+instead of raw frequency (no new hyperparameters; `A2 == A0` for dependence-free circuits —
+unit-tested). Holding everything else fixed (same seeds, solver, routers), the FAQ+PyTKET and
+FAQ-soft-SABRE arms were re-run under A2 and compared per-seed against the committed A0 logs
+(paired Wilcoxon, BH over m = 33 cells).
+
+**Result: no improvement.** 32/33 cells are non-significant after FDR; the only significant
+effect is a *regression* (soft SABRE, QRAM synthetic grid, +1.85 SWAPs, q = 0.0036), and the
+directional trend on the FAQ+PyTKET rows where A0 wins most clearly (Grover-N10 Brisbane,
+VQE-N50 Brisbane) is negative. The dependence-depth weighting is **not adopted**; A0 remains the
+shipped objective. Full table:
+[`reports/dependence_objective.md`](reports/dependence_objective.md).
+
+---
+
 ## Limitations & When to Use It
 
 * **Real overhead is seconds, not sub-second.** FAQ pre-placement measured ~2–29 s per
@@ -288,6 +309,7 @@ Canonical paired-seed dataset (this README's Tables 1–2):
 | `benchmarks/results/benchmark_fidelity_crosscheck.json` | Validates fidelity re-run reproduces canonical data (0/1600 SWAP divergences) | `benchmarks/benchmark_fidelity.py` |
 | `benchmarks/results/benchmark_fidelity_comparison.json` | SWAP-delta vs fidelity-delta per pair | `benchmarks/report_fidelity.py` |
 | `benchmarks/results/benchmark_soft_sabre_results.json` / `benchmark_soft_sabre_raw.json` / `benchmark_soft_sabre_significance.json` | FAQ-as-soft-candidate SABRE: per-task means, per-seed logs, merged paired-Wilcoxon + BH (report: `reports/soft_candidate_sabre.md`) | `benchmarks/benchmark_soft_sabre.py` (4 balanced slices, merged) |
+| `benchmarks/results/benchmark_dependence_a_results.json` / `benchmark_dependence_a_raw.json` / `benchmark_dependence_a_significance.json` | A2 (dependence-weighted A) vs A0 arms for FAQ+PyTKET and FAQ-soft-SABRE: means, per-seed logs, per-seed paired-Wilcoxon + BH (report: `reports/dependence_objective.md`) | `benchmarks/benchmark_dependence_a.py` (6 balanced slices, merged) |
 
 Running `benchmarks/benchmark_eval.py` (or its CPU-parallel variants),
 `benchmarks/analyze_significance.py` and `benchmarks/benchmark_ablations.py` regenerates these

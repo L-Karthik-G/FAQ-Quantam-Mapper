@@ -21,6 +21,10 @@ findings reported there (FAQ arms use the random multi-start default):
   grid). Pre-seeding can over-constrain SABRE. **Offering the FAQ layout as one trial inside
   SABRE's own pool instead removes the downside** (0/18 significant losses) while keeping the
   wins (+5 significant improvements) — see `reports/soft_candidate_sabre.md`.
+- **A dependence-weighted objective (item 5) did not help.** Scaling each two-qubit gate by its
+  transitive dependence depth (variant A2) is statistically indistinguishable from the shipped
+  raw-frequency A after FDR on 32/33 cells, with one significant regression; A2 is not adopted.
+  See `reports/dependence_objective.md`.
 - FAQ + PyTKET is **not** uniformly better on IBM (it hurts Grover‑N8/N12 and the QRAM/Ripple
   holdouts).
 - Real FAQ overhead is ~2–29 s/circuit (single-threaded Python solve), so it is only worth it
@@ -42,6 +46,7 @@ Wilcoxon and fidelity analyses (review points #2 and #5).
 | `benchmarks/render_tables.py` | Renders README Tables 1–2 from the results + significance JSON (incl. per-row † markers) |
 | `benchmarks/benchmark_fidelity.py`, `benchmarks/report_fidelity.py` | Fidelity-loss proxy on routed circuits + delta table (currently describes the previous Gaussian-era canonical circuits) |
 | `benchmarks/benchmark_soft_sabre.py`, `benchmarks/results/benchmark_soft_sabre_*.json`, `reports/soft_candidate_sabre.md` | FAQ-as-soft-candidate SABRE experiment (FAQ layout = one trial in SABRE's pool) |
+| `benchmarks/benchmark_dependence_a.py`, `benchmarks/results/benchmark_dependence_a_*.json`, `reports/dependence_objective.md` | A2 dependence-weighted objective A/B vs A0 (negative result) |
 | `benchmarks/results/benchmark_eval_results.json`, `benchmarks/results/benchmark_eval_raw_seeds.json`, `benchmarks/results/benchmark_ablation_results.json` | Canonical committed results |
 | `benchmarks/results/significance_results.json`, `benchmarks/results/benchmark_fidelity_results.json`, `benchmarks/results/benchmark_fidelity_comparison.json` | Significance + fidelity analysis outputs |
 | `tests/` | Unit/integration tests |

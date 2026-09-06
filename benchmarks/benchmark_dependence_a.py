@@ -198,7 +198,7 @@ def _ci(vals: List[int]) -> float:
 
 
 def analyze_a2_vs_a0(a2_logs: List[Dict]) -> Dict:
-    """Paired Wilcoxon (A2 - A0 per seed) per (task, router); A0 values come from the
+    """Paired Wilcoxon (A2 - A0 per seed) per (task, qubits, router); A0 values come from the
     committed canonical logs that share seeds and every other setting."""
     import json as _json
     from collections import defaultdict
@@ -207,23 +207,24 @@ def analyze_a2_vs_a0(a2_logs: List[Dict]) -> Dict:
 
     canon = _json.load(open(os.path.join(_BENCH_DIR, "results", "benchmark_eval_raw_seeds.json")))
     soft = _json.load(open(os.path.join(_BENCH_DIR, "results", "benchmark_soft_sabre_raw.json")))
-    a0_by = defaultdict(dict)  # (method->task->seed)->swaps
+    a0_by = defaultdict(dict)  # (method, task, qubits, arch) -> seed -> swaps
     for e in canon + soft:
         if e.get("method") in ("faq_tket", "faq_soft_sabre") and e.get("status") == "success":
-            a0_by[(e["method"], e["task"], e["arch"])][int(e["seed"])] = int(e["swaps"])
+            a0_by[(e["method"], e["task"], int(e["qubits"]), e["arch"])][int(e["seed"])] = int(e["swaps"])
     a2_by = defaultdict(dict)
     for e in a2_logs:
         if e.get("status") == "success":
-            a2_by[(e["method"], e["task"], e["arch"])][int(e["seed"])] = int(e["swaps"])
+            a2_by[(e["method"], e["task"], int(e["qubits"]), e["arch"])][int(e["seed"])] = int(e["swaps"])
 
     mapping = {"faq_tket_a2": ("faq_tket", "tket"), "faq_soft_a2": ("faq_soft_sabre", "sabre_soft")}
     rows, pvals = [], []
-    for (method, task, arch), seeds in sorted(a2_by.items()):
+    for (method, task, qubits, arch), seeds in sorted(a2_by.items()):
         a0_m, pair = mapping[method]
-        a0 = a0_by.get((a0_m, task, arch), {})
+        a0 = a0_by.get((a0_m, task, qubits, arch), {})
         common = sorted(set(seeds) & set(a0))
-        d = np.asarray([a2_by[(method, task, arch)][s] - a0[s] for s in common], float)
-        rec = {"task": task, "architecture": arch, "pair": pair, "n_paired": len(common),
+        d = np.asarray([a2_by[(method, task, qubits, arch)][s] - a0[s] for s in common], float)
+        rec = {"task": task, "qubits": qubits, "architecture": arch, "pair": pair,
+               "n_paired": len(common),
                "mean_diff_a2_minus_a0": float(np.mean(d)) if len(d) else None}
         if len(d) and float(np.ptp(d)) > 0:
             res = sps.wilcoxon(d, zero_method="wilcox", alternative="two-sided")
