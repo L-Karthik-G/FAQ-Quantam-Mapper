@@ -1,0 +1,3285 @@
+{
+  "conditions": {
+    "cells": [
+      "vqe50-grid"
+    ],
+    "gammas": [
+      0.7,
+      0.9,
+      1.0
+    ],
+    "routers": [
+      "sabre",
+      "tket"
+    ],
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "mapper": {
+      "num_starts": 5,
+      "start_mode": "random",
+      "enable_2opt": true
+    }
+  },
+  "rows": [
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 0,
+      "swaps": 50,
+      "depth": 86,
+      "n2q_ops": 197,
+      "prep_time_sec": 1.8190831880019687,
+      "qap_cost": 1.2426843001351178,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 1,
+      "swaps": 99,
+      "depth": 146,
+      "n2q_ops": 246,
+      "prep_time_sec": 1.6985877660008555,
+      "qap_cost": 1.2481062564156062,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 2,
+      "swaps": 88,
+      "depth": 128,
+      "n2q_ops": 235,
+      "prep_time_sec": 1.7985389489986119,
+      "qap_cost": 1.248551670571338,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 3,
+      "swaps": 45,
+      "depth": 100,
+      "n2q_ops": 192,
+      "prep_time_sec": 1.785787562999758,
+      "qap_cost": 1.242863344345223,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 4,
+      "swaps": 69,
+      "depth": 113,
+      "n2q_ops": 216,
+      "prep_time_sec": 1.8047943720011972,
+      "qap_cost": 1.24223433231319,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 5,
+      "swaps": 66,
+      "depth": 117,
+      "n2q_ops": 213,
+      "prep_time_sec": 1.7844650329971046,
+      "qap_cost": 1.2451603940010425,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 6,
+      "swaps": 58,
+      "depth": 97,
+      "n2q_ops": 205,
+      "prep_time_sec": 1.7507973649990163,
+      "qap_cost": 1.2448169390948622,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 7,
+      "swaps": 52,
+      "depth": 94,
+      "n2q_ops": 199,
+      "prep_time_sec": 1.869200738001382,
+      "qap_cost": 1.2445122689374486,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 8,
+      "swaps": 75,
+      "depth": 121,
+      "n2q_ops": 222,
+      "prep_time_sec": 1.759964935001335,
+      "qap_cost": 1.2474647463444417,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 9,
+      "swaps": 79,
+      "depth": 128,
+      "n2q_ops": 226,
+      "prep_time_sec": 1.7308078679998289,
+      "qap_cost": 1.2423552338132458,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 10,
+      "swaps": 68,
+      "depth": 108,
+      "n2q_ops": 215,
+      "prep_time_sec": 1.821899406000739,
+      "qap_cost": 1.2609737144898912,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 11,
+      "swaps": 90,
+      "depth": 118,
+      "n2q_ops": 237,
+      "prep_time_sec": 1.7201101210011984,
+      "qap_cost": 1.2432035071521548,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 12,
+      "swaps": 92,
+      "depth": 127,
+      "n2q_ops": 239,
+      "prep_time_sec": 1.7160690860000614,
+      "qap_cost": 1.246138249095667,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 13,
+      "swaps": 87,
+      "depth": 119,
+      "n2q_ops": 234,
+      "prep_time_sec": 1.7838344530027825,
+      "qap_cost": 1.242172646424949,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 14,
+      "swaps": 39,
+      "depth": 118,
+      "n2q_ops": 186,
+      "prep_time_sec": 1.735255216000951,
+      "qap_cost": 1.2419725804254926,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 15,
+      "swaps": 54,
+      "depth": 90,
+      "n2q_ops": 201,
+      "prep_time_sec": 1.8453595680002763,
+      "qap_cost": 1.2565763118740538,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 16,
+      "swaps": 90,
+      "depth": 132,
+      "n2q_ops": 237,
+      "prep_time_sec": 1.7457817069989687,
+      "qap_cost": 1.2520721621001858,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 17,
+      "swaps": 57,
+      "depth": 82,
+      "n2q_ops": 204,
+      "prep_time_sec": 1.7787714890000643,
+      "qap_cost": 1.242293510375256,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 18,
+      "swaps": 61,
+      "depth": 117,
+      "n2q_ops": 208,
+      "prep_time_sec": 1.7617250619987317,
+      "qap_cost": 1.2445999580083793,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "sabre",
+      "seed": 19,
+      "swaps": 87,
+      "depth": 131,
+      "n2q_ops": 234,
+      "prep_time_sec": 1.7658620410002186,
+      "qap_cost": 1.2533928318694807,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 0,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.752006947001064,
+      "qap_cost": 1.2426843001351178,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 1,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 2.084857142999681,
+      "qap_cost": 1.2481062564156062,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 2,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 2.2815232150023803,
+      "qap_cost": 1.248551670571338,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 3,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 2.41188754399991,
+      "qap_cost": 1.242863344345223,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 4,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 2.3817649470001925,
+      "qap_cost": 1.24223433231319,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 5,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 2.309169338001084,
+      "qap_cost": 1.2451603940010425,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 6,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 2.0457595289990422,
+      "qap_cost": 1.2448169390948622,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 7,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.9959770779969404,
+      "qap_cost": 1.2445122689374486,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 8,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 2.024915644997236,
+      "qap_cost": 1.2474647463444417,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 9,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.9492800520019955,
+      "qap_cost": 1.2423552338132458,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 10,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 2.1395315609988756,
+      "qap_cost": 1.2609737144898912,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 11,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 2.36464924000029,
+      "qap_cost": 1.2432035071521548,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 12,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 2.204225700999814,
+      "qap_cost": 1.246138249095667,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 13,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.7062095629989926,
+      "qap_cost": 1.242172646424949,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 14,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.7669060339976568,
+      "qap_cost": 1.2419725804254926,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 15,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.7444622410002921,
+      "qap_cost": 1.2565763118740538,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 16,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.6830509140017966,
+      "qap_cost": 1.2520721621001858,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 17,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.7799963670004217,
+      "qap_cost": 1.242293510375256,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 18,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.6816246770031285,
+      "qap_cost": 1.2445999580083793,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.7,
+      "router": "tket",
+      "seed": 19,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.8436324120011705,
+      "qap_cost": 1.2533928318694807,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 1.220341146776806,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 6.718594741746133e-09,
+        "max_nonzero_weight": 0.18305117671953725
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 0,
+      "swaps": 43,
+      "depth": 73,
+      "n2q_ops": 190,
+      "prep_time_sec": 2.069812916997762,
+      "qap_cost": 21.502842821763483,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 1,
+      "swaps": 32,
+      "depth": 73,
+      "n2q_ops": 179,
+      "prep_time_sec": 1.8351193060007063,
+      "qap_cost": 21.71531601225857,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 2,
+      "swaps": 28,
+      "depth": 122,
+      "n2q_ops": 175,
+      "prep_time_sec": 2.014497534997645,
+      "qap_cost": 21.974251288683902,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 3,
+      "swaps": 22,
+      "depth": 77,
+      "n2q_ops": 169,
+      "prep_time_sec": 2.0704573149996577,
+      "qap_cost": 20.631978539516375,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 4,
+      "swaps": 69,
+      "depth": 121,
+      "n2q_ops": 216,
+      "prep_time_sec": 2.0837392039975384,
+      "qap_cost": 22.84917490247729,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 5,
+      "swaps": 50,
+      "depth": 80,
+      "n2q_ops": 197,
+      "prep_time_sec": 2.0618211279979732,
+      "qap_cost": 21.952112327546367,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 6,
+      "swaps": 29,
+      "depth": 87,
+      "n2q_ops": 176,
+      "prep_time_sec": 2.0343422389996704,
+      "qap_cost": 21.8767093522503,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 7,
+      "swaps": 72,
+      "depth": 123,
+      "n2q_ops": 219,
+      "prep_time_sec": 2.0935829029986053,
+      "qap_cost": 23.315669278694916,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 8,
+      "swaps": 60,
+      "depth": 119,
+      "n2q_ops": 207,
+      "prep_time_sec": 2.062264119998872,
+      "qap_cost": 23.863382270735435,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 9,
+      "swaps": 56,
+      "depth": 117,
+      "n2q_ops": 203,
+      "prep_time_sec": 2.0472682830004487,
+      "qap_cost": 22.46794251114218,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 10,
+      "swaps": 41,
+      "depth": 82,
+      "n2q_ops": 188,
+      "prep_time_sec": 2.1320132420005393,
+      "qap_cost": 22.629478158384018,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 11,
+      "swaps": 64,
+      "depth": 125,
+      "n2q_ops": 211,
+      "prep_time_sec": 2.0600856009987183,
+      "qap_cost": 23.054001487923465,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 12,
+      "swaps": 14,
+      "depth": 63,
+      "n2q_ops": 161,
+      "prep_time_sec": 2.0613030010026705,
+      "qap_cost": 20.629716936463826,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 13,
+      "swaps": 74,
+      "depth": 112,
+      "n2q_ops": 221,
+      "prep_time_sec": 2.042999945999327,
+      "qap_cost": 22.353910120774493,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 14,
+      "swaps": 101,
+      "depth": 127,
+      "n2q_ops": 248,
+      "prep_time_sec": 2.065537950002181,
+      "qap_cost": 23.567490554830776,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 15,
+      "swaps": 70,
+      "depth": 97,
+      "n2q_ops": 217,
+      "prep_time_sec": 2.028586863001692,
+      "qap_cost": 22.982637577429625,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 16,
+      "swaps": 40,
+      "depth": 95,
+      "n2q_ops": 187,
+      "prep_time_sec": 1.6622376359991904,
+      "qap_cost": 22.613186087387113,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 17,
+      "swaps": 8,
+      "depth": 63,
+      "n2q_ops": 155,
+      "prep_time_sec": 1.945591350999166,
+      "qap_cost": 22.381860832831997,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 18,
+      "swaps": 73,
+      "depth": 107,
+      "n2q_ops": 220,
+      "prep_time_sec": 2.132312566998735,
+      "qap_cost": 23.06052749439922,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "sabre",
+      "seed": 19,
+      "swaps": 44,
+      "depth": 79,
+      "n2q_ops": 191,
+      "prep_time_sec": 1.9297256130012101,
+      "qap_cost": 21.485251469039866,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 0,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 2.0590258040028857,
+      "qap_cost": 21.502842821763483,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 1,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 2.0269027079993975,
+      "qap_cost": 21.71531601225857,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 2,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 2.063618911000958,
+      "qap_cost": 21.974251288683902,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 3,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 2.06222888299817,
+      "qap_cost": 20.631978539516375,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 4,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 2.00177309600258,
+      "qap_cost": 22.84917490247729,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 5,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 2.055335828998068,
+      "qap_cost": 21.952112327546367,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 6,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 2.108718946998124,
+      "qap_cost": 21.8767093522503,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 7,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 2.074861408000288,
+      "qap_cost": 23.315669278694916,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 8,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 2.1340585489997466,
+      "qap_cost": 23.863382270735435,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 9,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 2.037976791001711,
+      "qap_cost": 22.46794251114218,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 10,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.8448371220001718,
+      "qap_cost": 22.629478158384018,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 11,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 2.001116381998145,
+      "qap_cost": 23.054001487923465,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 12,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 2.3862896829996316,
+      "qap_cost": 20.629716936463826,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 13,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 2.207410704002541,
+      "qap_cost": 22.353910120774493,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 14,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.7818481149988656,
+      "qap_cost": 23.567490554830776,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 15,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.8732343160008895,
+      "qap_cost": 22.982637577429625,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 16,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 2.0824347250018036,
+      "qap_cost": 22.613186087387113,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 17,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.7566606149994186,
+      "qap_cost": 22.381860832831997,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 18,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 2.0855908740013547,
+      "qap_cost": 23.06052749439922,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 0.9,
+      "router": "tket",
+      "seed": 19,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.7660086110008706,
+      "qap_cost": 21.485251469039866,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 20.04464906109417,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 0.006413616881767946,
+        "max_nonzero_weight": 1.0080047082482995
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 0,
+      "swaps": 18,
+      "depth": 79,
+      "n2q_ops": 165,
+      "prep_time_sec": 1.8323173669996322,
+      "qap_cost": 323.72010181324873,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 1,
+      "swaps": 26,
+      "depth": 98,
+      "n2q_ops": 173,
+      "prep_time_sec": 1.929180451999855,
+      "qap_cost": 329.94550917736655,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 2,
+      "swaps": 20,
+      "depth": 84,
+      "n2q_ops": 167,
+      "prep_time_sec": 1.464638945999468,
+      "qap_cost": 330.09109276857316,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 3,
+      "swaps": 25,
+      "depth": 93,
+      "n2q_ops": 172,
+      "prep_time_sec": 1.7184112610011653,
+      "qap_cost": 329.65357923274144,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 4,
+      "swaps": 19,
+      "depth": 78,
+      "n2q_ops": 166,
+      "prep_time_sec": 1.576341459996911,
+      "qap_cost": 335.7899607375961,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 5,
+      "swaps": 29,
+      "depth": 94,
+      "n2q_ops": 176,
+      "prep_time_sec": 1.5115862530001323,
+      "qap_cost": 336.32555269028956,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 6,
+      "swaps": 28,
+      "depth": 87,
+      "n2q_ops": 175,
+      "prep_time_sec": 1.6825759339990327,
+      "qap_cost": 335.9590157212966,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 7,
+      "swaps": 24,
+      "depth": 92,
+      "n2q_ops": 171,
+      "prep_time_sec": 1.7454627719998825,
+      "qap_cost": 329.94876641495506,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 8,
+      "swaps": 32,
+      "depth": 123,
+      "n2q_ops": 179,
+      "prep_time_sec": 1.612032156001078,
+      "qap_cost": 348.37750726955744,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 9,
+      "swaps": 5,
+      "depth": 64,
+      "n2q_ops": 152,
+      "prep_time_sec": 1.853939389999141,
+      "qap_cost": 311.9122271964213,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 10,
+      "swaps": 34,
+      "depth": 99,
+      "n2q_ops": 181,
+      "prep_time_sec": 1.6966584509973472,
+      "qap_cost": 366.458661385294,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 11,
+      "swaps": 47,
+      "depth": 130,
+      "n2q_ops": 194,
+      "prep_time_sec": 1.8104493759965408,
+      "qap_cost": 366.31235308219607,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 12,
+      "swaps": 35,
+      "depth": 113,
+      "n2q_ops": 182,
+      "prep_time_sec": 1.6765203420000034,
+      "qap_cost": 336.03801331476427,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 13,
+      "swaps": 18,
+      "depth": 87,
+      "n2q_ops": 165,
+      "prep_time_sec": 1.5265571380004985,
+      "qap_cost": 329.79528781379923,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 14,
+      "swaps": 37,
+      "depth": 103,
+      "n2q_ops": 184,
+      "prep_time_sec": 1.890502579997701,
+      "qap_cost": 341.7058339555283,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 15,
+      "swaps": 27,
+      "depth": 94,
+      "n2q_ops": 174,
+      "prep_time_sec": 1.8543498979997821,
+      "qap_cost": 348.4079510768555,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 16,
+      "swaps": 21,
+      "depth": 110,
+      "n2q_ops": 168,
+      "prep_time_sec": 1.8560084049968282,
+      "qap_cost": 329.85828737301836,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 17,
+      "swaps": 36,
+      "depth": 110,
+      "n2q_ops": 183,
+      "prep_time_sec": 1.7054707410025003,
+      "qap_cost": 348.13737740160843,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 18,
+      "swaps": 43,
+      "depth": 110,
+      "n2q_ops": 190,
+      "prep_time_sec": 1.6957079890016757,
+      "qap_cost": 341.93171606564295,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "sabre",
+      "seed": 19,
+      "swaps": 30,
+      "depth": 83,
+      "n2q_ops": 177,
+      "prep_time_sec": 1.4996055040028295,
+      "qap_cost": 348.15119022022276,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 0,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.723538305999682,
+      "qap_cost": 323.72010181324873,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 1,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.7725700750015676,
+      "qap_cost": 329.94550917736655,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 2,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.422431757000595,
+      "qap_cost": 330.09109276857316,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 3,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.6729444810007408,
+      "qap_cost": 329.65357923274144,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 4,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.616874112001824,
+      "qap_cost": 335.7899607375961,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 5,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.488923329001409,
+      "qap_cost": 336.32555269028956,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 6,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.573257903000922,
+      "qap_cost": 335.9590157212966,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 7,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.7897620920011832,
+      "qap_cost": 329.94876641495506,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 8,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.528928748000908,
+      "qap_cost": 348.37750726955744,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 9,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.802107445000729,
+      "qap_cost": 311.9122271964213,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 10,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.4258666390014696,
+      "qap_cost": 366.458661385294,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 11,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.6419391839990567,
+      "qap_cost": 366.31235308219607,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 12,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.316700513001706,
+      "qap_cost": 336.03801331476427,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 13,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.5137484220031183,
+      "qap_cost": 329.79528781379923,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 14,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.7478679119994922,
+      "qap_cost": 341.7058339555283,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 15,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.7189510470016103,
+      "qap_cost": 348.4079510768555,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 16,
+      "swaps": 2,
+      "depth": 81,
+      "n2q_ops": 149,
+      "prep_time_sec": 1.7949658609977632,
+      "qap_cost": 329.85828737301836,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 17,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.630587015999481,
+      "qap_cost": 348.13737740160843,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 18,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.671515403999365,
+      "qap_cost": 341.93171606564295,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    },
+    {
+      "cell": "vqe50-grid",
+      "benchmark": "vqe_real_amp",
+      "label": "VQE (RealAmplitudes)",
+      "qubits": 50,
+      "architecture": "Rigetti_Grid_80",
+      "gamma": 1.0,
+      "router": "tket",
+      "seed": 19,
+      "swaps": 0,
+      "depth": 74,
+      "n2q_ops": 147,
+      "prep_time_sec": 1.416860077999445,
+      "qap_cost": 348.15119022022276,
+      "n_layers": 75,
+      "matrix_a": {
+        "total_weight": 294.0,
+        "nonzero_interactions": 98,
+        "min_nonzero_weight": 3.0,
+        "max_nonzero_weight": 3.0
+      },
+      "mapper": {
+        "num_starts": 5,
+        "start_mode": "random",
+        "enable_2opt": true
+      }
+    }
+  ]
+}
