@@ -340,6 +340,7 @@ Canonical paired-seed dataset (this README's Tables 1–2):
 | `benchmarks/results/benchmark_eval_results.json` | Summary (mean, 95% CI, success) per task/method | `benchmarks/benchmark_eval.py` |
 | `benchmarks/results/benchmark_eval_raw_seeds.json` | Raw per-seed SWAP/time/prep logs (all 20 seeds) | `benchmarks/benchmark_eval.py` |
 | `benchmarks/results/benchmark_ablation_results.json` | QAP-cost ablation table | `benchmarks/benchmark_ablations.py` |
+| `benchmarks/results/ablation_multicell_results.json` | A5 multi-cell, K=20 QAP-cost ablation of init rows 1–3 (report: `reports/a5_results.md`) | `benchmarks/ablation_multicell.py` |
 | `benchmarks/results/significance_results.json` | Paired Wilcoxon + BH q per row | `benchmarks/analyze_significance.py` |
 | `benchmarks/results/benchmark_fidelity_raw.json` / `benchmark_fidelity_results.json` | Per-seed SWAP + fidelity-loss proxy per method (5 arms incl. FAQ-soft-SABRE; regenerated under the random-init dataset) | `benchmarks/benchmark_fidelity.py` |
 | `benchmarks/results/benchmark_fidelity_crosscheck.json` | Validates fidelity re-run reproduces the committed data (0/1600 canonical-arm + 0/400 soft-arm SWAP divergences) | `benchmarks/benchmark_fidelity.py` |
